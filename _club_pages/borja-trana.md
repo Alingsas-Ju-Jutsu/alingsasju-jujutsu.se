@@ -8,6 +8,18 @@ description: Börja träna ju-jutsu i Alingsås. Se grupper för barn och vuxna,
   träningstider, terminsstart, adress och information om träningsavgifter.
 ---
 
+## För Barn
+
+Är ditt barn nyfiket på ju-jutsu? Varmt välkommen att prova på hos oss! Barn får träna gratis vid tre tillfällen och kan börja när som helst under terminen. Ingen dräkt behövs för att prova på – vi rekommenderar lediga idrottskläder som är bekväma att röra sig i.
+
+Läs mer om träningen och informationen för vårdnadshavare på sidan [Barnträning](<{{ '/ju-jutsu/barntraning/' | relative_url }}>).
+
+Har du frågor? Fråga gärna någon av instruktörerna på plats eller [kontakta oss](<{{ '/kontakt/' | relative_url }}>) innan ni kommer, så hjälper vi er.
+
+## För Vuxna
+
+Nyfiken på att träna ju-jutsu? Det är bara att komma till ett av våra vuxenpass – du är varmt välkommen! Säg hej till instruktören när du kommer, så hjälper vi dig att komma igång och hitta din plats i gruppen.
+
 ## Aktuella grupper och träningstider
 
 {% include training-schedule.html %}

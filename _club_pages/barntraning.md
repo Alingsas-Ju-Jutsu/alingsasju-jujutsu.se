@@ -5,9 +5,17 @@ permalink: "/ju-jutsu/barntraning/"
 source_date: '2026-11-03'
 source_id: '274'
 maintained_content: true
-description: Läs om barnträning i Ju-jutsu Kai, sho- och monsystemet, bältesgrader
-  och kraven för gradering.
+description: Information för vårdnadshavare om barnträningen samt om Ju-jutsu Kais
+  sho- och monsystem, bältesgrader och kraven för gradering.
 ---
+
+## För vårdnadshavare
+
+Vi vill att alla barn ska känna sig trygga och ha roligt på träningen. De första gångerna är du som vårdnadshavare välkommen att vara med inne i dojon, så att ditt barn får en trygg start. Därefter har vi inte möjlighet att ha föräldrar eller andra vårdnadshavare närvarande i dojon under passen. Det ger instruktörerna arbetsro att leda träningen, ta hand om barnen och hjälpa gruppen att hitta fokus och gemenskap.
+
+Vi uppskattar verkligen ditt engagemang och välkomnar dig som vill bidra till klubben, tyvärr behöver man för att vara med och hjälpa till under träningarna ha gått ledarskapsutbildning och ha kunskaper i ju-jutsu. Prata gärna med oss om du är intresserad av att engagera dig, så berättar vi mer om vad det innebär och hur du kan bidra.
+
+## Bältesgrader
 
 **För de yngsta**
 
