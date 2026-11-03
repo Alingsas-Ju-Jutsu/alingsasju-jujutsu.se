@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'sv-SE' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Hoppa till innehållet</a>
+    <header class="site-header">
+      <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} – startsida">
+        <span class="wordmark__name">Alingsås</span>
+        <span class="wordmark__discipline">Ju-Jutsu</span>
+      </a>
+    </header>
+
+    <main id="main">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <p>{{ site.title }}</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+---
+---
+
+$ink: #17231f;
+$muted: #52615a;
+$paper: #f5f3ed;
+$accent: #c94f2d;
+$line: rgba($ink, 0.18);
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: $paper;
+  color: $ink;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.6rem 0.9rem;
+  transform: translateY(-160%);
+  background: $ink;
+  color: white;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header,
+.site-footer {
+  padding: 1.25rem clamp(1.25rem, 5vw, 5rem);
+}
+
+.site-header {
+  border-bottom: 1px solid $line;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: $ink;
+  font-size: 0.95rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.wordmark__discipline {
+  color: $muted;
+  font-weight: 500;
+}
+
+.hero {
+  display: flex;
+  min-height: min(68vh, 46rem);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5rem clamp(1.25rem, 11vw, 11rem);
+  background:
+    radial-gradient(ellipse at 82% 45%, rgba($accent, 0.14), transparent 35%),
+    $paper;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: $accent;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: -0.085em;
+  line-height: 0.92;
+}
+
+.hero__intro {
+  margin: 1.75rem 0 2rem;
+  color: $muted;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid $ink;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: $ink;
+  color: white;
+}
+
+.information {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 6rem;
+}
+
+.information h2 {
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+}
+
+.information > p:last-child {
+  max-width: 62ch;
+  color: $muted;
+  font-size: 1.05rem;
+}
+
+.site-footer {
+  border-top: 1px solid $line;
+  color: $muted;
+  font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

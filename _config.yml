@@ -1,0 +1,17 @@
+title: Alingsås Ju-Jutsu
+description: Alingsås Ju-Jutsu
+url: https://alingsasju-jutsu.se
+baseurl: ""
+lang: sv-SE
+
+markdown: kramdown
+permalink: pretty
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
