@@ -26,6 +26,55 @@ The site is built and deployed by the GitHub Actions workflow in
 `.github/workflows/pages.yml`. In the repository settings, set Pages' build and
 deployment source to **GitHub Actions**.
 
+The deployment workflow reads the site's origin and base path from GitHub
+Pages, overriding `_config.yml` for that build. The project preview at
+`https://alingsas-ju-jutsu.github.io/alingsasju-jujutsu.se/` therefore uses the
+repository path for assets and links. When ready to launch, configure
+`alingsasju-jutsu.se` as the custom domain in **Settings → Pages**, update DNS,
+and run the deployment workflow again. It will use the custom domain without
+the repository path; no code change is needed. Local Docker preview is unchanged.
+
+## Launching on alingsasju-jutsu.se
+
+1. Keep the existing domain DNS unchanged while reviewing the test site.
+   Ensure the updated deployment workflow has been pushed to `main`.
+2. When ready to switch, open **Settings → Pages**, keep the source set to
+   **GitHub Actions**, and set **Custom domain** to `alingsasju-jutsu.se`.
+   The repository's `CNAME` file already contains this domain; with this
+   Actions-based deployment, configure the domain in Pages settings as well.
+3. At the DNS provider, replace conflicting website A/AAAA records for the
+   apex domain (`@`) with GitHub Pages' A records:
+
+   | Type | Name | Value |
+   | --- | --- | --- |
+   | A | @ | 185.199.108.153 |
+   | A | @ | 185.199.109.153 |
+   | A | @ | 185.199.110.153 |
+   | A | @ | 185.199.111.153 |
+   | CNAME | www | alingsas-ju-jutsu.github.io |
+
+   Use the DNS provider's equivalent of `@` for the root domain. The `www`
+   CNAME is a hostname only, with no repository path. Preserve email/MX
+   records and unrelated TXT records. If IPv6/AAAA records exist, update them
+   to GitHub's documented values or remove stale website AAAA records so
+   IPv6 visitors do not continue reaching the old server. Check the current
+   values in GitHub's [custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+   before changing DNS.
+4. Open **Actions → Deploy Jekyll site to Pages → Run workflow** on `main`
+   after saving the custom domain. The build automatically uses the domain
+   and an empty base path instead of `/alingsasju-jujutsu.se`.
+5. Wait for the Pages DNS check and certificate provisioning, then enable
+   **Enforce HTTPS** in **Settings → Pages** when available.
+6. Verify `https://alingsasju-jutsu.se/` and `https://www.alingsasju-jutsu.se/`,
+   including images, menus, training schedules and a news article. Confirm
+   that links and canonical URLs use the real domain without the repository
+   prefix. The GitHub project URL may redirect to the custom domain afterward.
+
+No changes to `_config.yml`, Markdown links or CSS paths are needed for this
+switch: the workflow derives the deployment URL from GitHub Pages settings.
+DNS changes and certificate provisioning can take time; retain access to the
+old hosting until the new site is confirmed working.
+
 The homepage and local subpages use the archived site's logo, desktop/mobile
 hero photos, club address, contact details, social links, and navigation. All
 club navigation links point to pages on this site. The completed public archive
