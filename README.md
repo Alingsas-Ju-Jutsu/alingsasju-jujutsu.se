@@ -322,6 +322,10 @@ som beskrivning för sökresultat. Nya nyheter ska även ha `date: "YYYY-MM-DD"`
 och `seo: { type: BlogPosting }`. Adresserna anpassas automatiskt till testdomänen eller den egna
 domänen vid publicering.
 
+Klubbens logotyp används som standardbild för delning (`og:image`).
+Inställningen finns under `defaults` i `_config.yml`. En enskild sida kan
+ange en egen delningsbild med `image: /assets/images/bild.jpg` i sin metadata.
+
 Behåll en tydlig rubrikordning: sidmallen skapar huvudrubriken, så börja
 innehållets rubriker med `##`. Skriv beskrivande länktexter och bildalternativ,
 och använd riktiga kolumnrubriker i tabeller. Viktig text i affischer behöver

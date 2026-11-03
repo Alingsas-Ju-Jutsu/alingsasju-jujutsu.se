@@ -19,6 +19,13 @@ files.each do |file|
   errors << "#{file}: missing title" if document.at_css("title")&.text.to_s.strip.empty?
   errors << "#{file}: missing description" if document.at_css('meta[name="description"]')&.[]("content").to_s.strip.empty?
   errors << "#{file}: incorrect canonical" unless document.at_css('link[rel="canonical"]')&.[]("href") == expected_url
+  sharing_image = document.at_css('meta[property="og:image"]')&.[]("content").to_s
+  if sharing_image.start_with?("#{origin}#{base}/")
+    image_path = URI::DEFAULT_PARSER.unescape(sharing_image.delete_prefix("#{origin}#{base}/"))
+    errors << "#{file}: broken sharing image" unless root.join(image_path).file?
+  else
+    errors << "#{file}: missing or incorrect sharing image"
+  end
   document.css("img").each do |image|
     errors << "#{file}: missing image alternative" unless image.key?("alt")
   end

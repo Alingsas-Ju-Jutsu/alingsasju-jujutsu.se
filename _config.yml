@@ -31,6 +31,14 @@ exclude:
 defaults:
   - scope:
       path: ""
+    values:
+      image:
+        path: /assets/images/cropped-test3.png
+        width: 223
+        height: 222
+        alt: Alingsås Ju-Jutsuklubbs logotyp
+  - scope:
+      path: ""
       type: club_pages
     values:
       layout: page
