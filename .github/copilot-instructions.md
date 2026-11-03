@@ -18,16 +18,21 @@ content changes; preserve unrelated content and design.
   focused plain-language question in the issue and do not guess or merge an
   incomplete change. An unanswered question is a blocker, not approval.
 - There is no scheduled publishing or date-effective recurring timetable
-  mechanism. Merging publishes the configured recurring times immediately.
+  mechanism. Merging into `main` publishes the configured recurring times immediately.
   If a request calls for future publication or temporary recurring times,
   explain this limitation and agree on the approach before replacing current
   times. Do not promise automatic activation or reversion.
-- Use a clear Swedish pull request title. Describe the before/after changes
+- Use a clear Swedish change summary. Describe the before/after changes
   and affected groups in everyday language, including dates for exceptions.
   Explain that schedule data is shared by Startsidan, Schema and Börja träna.
   Avoid making the editor inspect a code diff to understand the result.
-- State any remaining decision needed. Do not merge or publish unless explicitly
-  authorized; prepare a pull request for a maintainer to review.
+- Commit and push changes to the task's branch and prepare a pull request
+  targeting `main`. GitHub's Copilot coding agent cannot push directly to
+  `main` or approve and merge its own pull request. Do not retry direct pushes,
+  bypass restrictions, change branch protection or force-push.
+- Explain the remaining publishing step in plain language: a maintainer reviews
+  and merges the pull request; GitHub Actions then publishes the website.
+- State any remaining decision needed before publishing an ambiguous request.
 
 ## Adding news from an issue
 
@@ -57,12 +62,12 @@ content changes; preserve unrelated content and design.
   grading post, also add an appropriate local link to the Graderingar overview
   when it belongs in that gallery list; keep `maintained_content: true` there.
 - Do not add scheduling infrastructure or promise future automatic publication.
-  For a future publication request, prepare the draft pull request and explain
-  that a maintainer must merge it at the intended time.
-- In the pull request, show the proposed headline, publication date, public URL
+  For a future publication request, prepare a
+  draft pull request and explain that a maintainer must merge it at the intended time.
+- In the completion summary, show the headline, publication date, public URL
   and whether images were included. Make it easy to review the Swedish text
-  without reading the raw diff. Build and verify that the article is included
-  in the news index and its links and images resolve.
+  without reading the raw diff. Ensure `news: true` is set so the index includes
+  the article, and check link paths and image filenames in the source files.
 
 ## Content locations
 
@@ -112,23 +117,24 @@ content changes; preserve unrelated content and design.
 - The Börja träna page must show the shared current schedule and link to
   Träningsavgifter, without restoring its old beginner-information section.
 
-## Scope and validation
+## Lightweight content workflow
+
+- For routine news, page text or schedule updates, edit or create the Markdown,
+  shared YAML data and supplied image files, then commit and push to the task's
+  branch/pull request targeting `main`. Commit only files relevant to the
+  request and report that a maintainer must review and merge to publish.
+- Do not run Docker, install dependencies, build Jekyll, start a preview server,
+  or run test suites for routine content edits. GitHub Actions builds and
+  deploys the site after the change reaches `main`.
+- Review the edited source for correct wording, dates, YAML indentation,
+  required frontmatter, existing local paths and the requested scope. This
+  should not require setting up a development environment.
 
 - Never edit generated `_site/` output. Do not run `make import` or `make scrape`
   for routine content edits: imports can overwrite unprotected editorial work,
   and the ignored `_old_site/` archive may not exist on GitHub runners.
-- For site/content changes, run `make build` with Docker. Alternatively, with
-  the repository's Ruby/Bundler dependencies installed, run
-  `bundle exec jekyll build`, as the deployment workflow does.
-- Check the build output for Liquid/YAML errors, not just the exit code.
-  Inspect affected generated pages for the requested wording, links, images
-  and dates. For shared schedule changes, check the homepage, Schema and
-  Börja träna. For layout changes, check mobile and desktop rendering.
-- Run `make import-test` only when the completed source archive is available.
-  It checks original content on unmaintained pages plus local links and shared
-  schedules. Mark intentionally edited imported pages as maintained rather than
-  weakening comparisons to accommodate editorial changes.
-- Run `make scrape-test` if changing the browser archiver. Documentation-only
-  edits do not require a site build.
-- In the pull request, summarize the content changed, list validation actually
-  performed, and plainly report anything that could not be verified.
+- Changes to layouts, components, CSS, workflows or tooling are development
+  tasks, not routine content edits. Use relevant build or tests for those
+  changes; see README.md for available commands.
+- In the completion summary or pull request, summarize the content changed, list validation actually
+  performed, and do not claim a build or tests ran when they did not.

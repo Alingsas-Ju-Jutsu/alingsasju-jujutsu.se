@@ -1,51 +1,210 @@
 # Alingsås Ju-Jutsu
 
-Jekyll site for GitHub Pages, configured for `https://alingsasju-jutsu.se`.
+Jekyll-webbplats för GitHub Pages, konfigurerad för `https://alingsasju-jutsu.se`.
 
-## Local development with Docker
+## Uppdatera träningstider
 
-Install Docker with the Compose plugin and GNU Make, then start the live-reloading
-development server:
+Alla aktuella träningstider finns i **en enda fil**:
+[`_data/training_schedule.yml`](_data/training_schedule.yml).
+Ändringar där visas automatiskt på **startsidan, Schema och Börja träna**.
+Du behöver inte installera något eller ändra dessa sidor var för sig.
+
+### Så redigerar du direkt på GitHub
+
+1. Öppna [schemafilen](_data/training_schedule.yml) och kontrollera att
+   grenen **main** är vald.
+2. Klicka på pennan **Edit this file** ovanför filens innehåll. Du behöver
+   vara inloggad och ha skrivbehörighet. Du kan också använda
+   [direktlänken till redigering](https://github.com/Alingsas-Ju-Jutsu/alingsasju-jujutsu.se/edit/main/_data/training_schedule.yml).
+3. Ändra önskade tider, terminsstart eller avvikelser enligt exemplen nedan.
+   Behåll indrag, bindestreck och citattecken. Ändra bara de uppgifter som
+   ska uppdateras.
+4. Klicka på **Commit changes…** och skriv en kort beskrivning, till exempel
+   ”Uppdatera vuxnas söndagsträning”.
+5. Om GitHub tillåter det kan du välja att spara direkt till **main**.
+   Då startar publiceringen direkt. Om en ny gren eller ett ändringsförslag
+   krävs skapar du det i stället; en ansvarig person behöver sedan granska
+   och slå ihop det till **main**.
+6. Följ publiceringen under **Actions → Deploy Jekyll site to Pages**.
+   När den är klar kontrollerar du tiderna på webbplatsen. Om körningen
+   misslyckas öppnar du den för att se felet; ändringen är då inte publicerad.
+
+### Ändra en grupps träningstider
+
+Leta upp gruppen under `groups`. `name` är gruppnamnet, `ages` är åldrarna
+och varje post under `sessions` är ett träningstillfälle. `day` är veckodagen,
+`start` starttiden och `end` sluttiden.
+
+Exempel på en vuxengrupp med två träningstillfällen:
+
+```yaml
+  - name: Vuxna
+    ages: "14+ år"
+    sessions:
+      - day: Torsdagar
+        start: "19.45"
+        end: "21.00"
+      - day: Söndagar
+        start: "19.45"
+        end: "21.00"
+```
+
+För att ändra söndagstiden redigerar du bara `start` och `end` under
+`Söndagar` i rätt grupp. Tiderna ovan är ett exempel på formatet; ersätt inte
+hela filen med exemplet eftersom andra grupper och inställningar då försvinner.
+
+### Ändra terminsstart
+
+Ändra `date` under `term_start` överst i filen:
+
+```yaml
+term_start:
+  title: Terminsstart
+  date: "2027-01-10"
+```
+
+Datumet visas som det är skrivet. Du kan också skriva exempelvis
+`"10 januari 2027"`. Behåll citattecknen. Med `date: ""` visas
+”Datum meddelas snart.”.
+
+### Lägg till lov eller andra avvikelser
+
+Under `exceptions` kan du ange datum och en kort beskrivning i `reason`.
+Använd datumformatet `YYYY-MM-DD` inom citattecken:
+
+```yaml
+exceptions:
+  - date: "2026-10-22"
+    reason: Höstlov
+  - date: "2026-12-24"
+    reason: Ingen träning på julafton
+```
+
+Lägg till en ny post med samma indrag för varje datum. Beskriv vilka grupper
+som berörs om avvikelsen inte gäller alla. Listan visas i datumordning under
+”Avvikelser i träningsschemat”. Avvikelser är information till besökarna;
+de ändrar inte de återkommande träningstiderna automatiskt.
+
+Ta bort en passerad avvikelses båda rader när den inte längre ska visas.
+För att dölja hela avvikelsesektionen ersätter du listan med:
+
+```yaml
+exceptions: []
+```
+
+**Viktigt:** YAML använder indrag för att koppla ihop uppgifter. Använd
+mellanslag, inte tabbar, och behåll samma indrag som i den befintliga filen.
+Sätt datum och tider inom citattecken. En framtida terminsstart eller avvikelse
+innebär inte tidsinställd publicering: allt du sparar till `main` publiceras
+vid nästa lyckade byggning.
+
+## Redigera sidor
+
+GitHub Copilot-agenter följer
+[`.github/copilot-instructions.md`](.github/copilot-instructions.md) för
+gemensamma redigeringsregler i kodförrådet. Lägg bestående riktlinjer där.
+Exakta formuleringar, datum, berörda sidor och kriterier för att uppgiften är
+klar hör hemma i GitHub-ärendet som tilldelas agenten. Uppdatera instruktionerna
+när webbplatsens innehållsstruktur eller redigeringsflöde ändras.
+Vid vanliga innehållsuppdateringar redigerar agenter Markdown och gemensam
+YAML-data samt sparar och skickar ändringarna till uppgiftens gren och
+ändringsförslag, utan att köra Docker, installera beroenden eller bygga
+webbplatsen lokalt. GitHubs Copilot coding agent kan inte skicka direkt till
+`main` eller godkänna och slå ihop sitt eget ändringsförslag. Instruktioner
+i kodförrådet kan inte ge dessa behörigheter. En ansvarig person granskar och
+slår ihop ändringen, varefter GitHub Actions bygger och publicerar automatiskt.
+Utvecklingsändringar i mallar eller verktyg behöver fortfarande relevanta
+bygg- och testkontroller.
+
+Redigera rätt fil i `_club_pages/`: text, rubriker, länkar, bilder och tabeller
+skrivs i Markdown, inte i separata HTML-innehållsfiler. Behåll YAML-metadata
+(frontmatter) överst; `title` styr rubriken och `permalink` styr sidans URL.
+Nyhetsartiklar finns i `_club_pages/nyheter/` och graderingsinlägg i
+`_club_pages/graderingar/`. Båda använder filnamn som `YYYY-MM-DD-title.md`,
+baserade på publiceringsdatumet. Deras `permalink`-värden behåller befintliga
+offentliga URL:er oförändrade. Nyhets- och dokumentöversikten är `nyheter.md`
+och nås på `/nyheter/`. Alingsåslägrets sidor samlas i
+`_club_pages/alingsaslagret/`, med `index.md` för översikten och årsfiler
+som `2004.md`.
+
+Startsidan är `index.md`: dess YAML-metadata innehåller texter för
+huvudsektionen, navigering och kontakt, medan Markdown-innehållet innehåller
+schemasektionen. Gemensam HTML finns i `_layouts/` och `_includes/` för att
+bevara den responsiva designen. Navigering, scheman, dokumentlistor och
+sponsoruppgifter finns i `_data/`. Kalenderlänken öppnar Google Kalender
+i stället för att bädda in en HTML-iframe.
+
+När du redigerar en importerad sida lägger du till `maintained_content: true`
+i dess metadata så att framtida importer inte skriver över ändringarna.
+`_data/excluded_archive_pages.yml` listar borttagna källsidors ID:n som inte
+får återställas av framtida importer.
+
+Så här upprepar du innehållsöverföringen från ett färdigt arkiv:
+
+```sh
+make import
+# Eller välj ett annat färdigt arkiv:
+make import ARCHIVE=_old_site/<timestamp-directory>
+make build
+make import-test
+```
+
+Importverktyget behåller klubbens befintliga sidadresser och omvandlar
+WordPress-länkar till lokala sidor och resurser. En ny import ersätter
+genererat sidinnehåll och metadata om inte `maintained_content: true` är satt.
+Den återställer inte WordPress-tillägg, inloggning eller det gamla temats skript.
+Importkontrollen jämför originaltext samt antal bilder och tabeller på
+oredigerade sidor, verifierar mediekopior och kontrollerar alla genererade
+lokala länkar och gemensamma schemavisningar. Redigerade sidor som markerats
+med `maintained_content: true` undantas från jämförelser med källinnehållet.
+
+## Lokal utveckling med Docker
+
+Installera Docker med Compose-tillägget och GNU Make. Starta sedan
+utvecklingsservern med automatisk omladdning:
 
 ```sh
 make serve
 ```
 
-Open [http://localhost:4000](http://localhost:4000). The project directory is
-mounted into the container, so changes are picked up automatically. Stop the
-server with `Ctrl+C` or `make stop`.
+Öppna [http://localhost:4000](http://localhost:4000). Projektmappen är monterad
+i containern, så ändringar slår igenom automatiskt. Stoppa servern med
+`Ctrl+C` eller `make stop`.
 
-Build the static site into `_site/` or remove generated output with:
+Bygg den statiska webbplatsen till `_site/` eller ta bort genererade filer med:
 
 ```sh
 make build
 make clean
 ```
 
-The site is built and deployed by the GitHub Actions workflow in
-`.github/workflows/pages.yml`. In the repository settings, set Pages' build and
-deployment source to **GitHub Actions**.
+Webbplatsen byggs och publiceras av GitHub Actions-arbetsflödet i
+`.github/workflows/pages.yml`. Välj **GitHub Actions** som källa för byggning
+och publicering under Pages i kodförrådets inställningar.
 
-The deployment workflow reads the site's origin and base path from GitHub
-Pages, overriding `_config.yml` for that build. The project preview at
-`https://alingsas-ju-jutsu.github.io/alingsasju-jujutsu.se/` therefore uses the
-repository path for assets and links. When ready to launch, configure
-`alingsasju-jutsu.se` as the custom domain in **Settings → Pages**, update DNS,
-and run the deployment workflow again. It will use the custom domain without
-the repository path; no code change is needed. Local Docker preview is unchanged.
+Publiceringsflödet läser webbplatsens domän och bassökväg från GitHub Pages
+och åsidosätter motsvarande värden i `_config.yml` för den byggningen.
+Testwebbplatsen på
+`https://alingsas-ju-jutsu.github.io/alingsasju-jujutsu.se/` använder därför
+kodförrådets sökväg för resurser och länkar. Vid lansering anger du
+`alingsasju-jutsu.se` som egen domän under **Settings → Pages**, uppdaterar DNS
+och kör publiceringsflödet igen. Då används domänen utan kodförrådets sökväg;
+ingen kodändring behövs. Lokal förhandsvisning med Docker påverkas inte.
 
-## Launching on alingsasju-jutsu.se
+## Lansering på alingsasju-jutsu.se
 
-1. Keep the existing domain DNS unchanged while reviewing the test site.
-   Ensure the updated deployment workflow has been pushed to `main`.
-2. When ready to switch, open **Settings → Pages**, keep the source set to
-   **GitHub Actions**, and set **Custom domain** to `alingsasju-jutsu.se`.
-   The repository's `CNAME` file already contains this domain; with this
-   Actions-based deployment, configure the domain in Pages settings as well.
-3. At the DNS provider, replace conflicting website A/AAAA records for the
-   apex domain (`@`) with GitHub Pages' A records:
+1. Låt domänens befintliga DNS-inställningar vara oförändrade medan
+   testwebbplatsen granskas. Se till att det uppdaterade publiceringsflödet
+   har skickats till `main`.
+2. När det är dags att byta öppnar du **Settings → Pages**, behåller
+   **GitHub Actions** som källa och anger `alingsasju-jutsu.se` under
+   **Custom domain**. Kodförrådets `CNAME`-fil innehåller redan domänen,
+   men med denna Actions-baserade publicering måste den även anges i
+   Pages-inställningarna.
+3. Hos DNS-leverantören ersätter du motstridiga A/AAAA-poster för
+   rotdomänens webbplats (`@`) med GitHub Pages A-poster:
 
-   | Type | Name | Value |
+   | Typ | Namn | Värde |
    | --- | --- | --- |
    | A | @ | 185.199.108.153 |
    | A | @ | 185.199.109.153 |
@@ -53,45 +212,50 @@ the repository path; no code change is needed. Local Docker preview is unchanged
    | A | @ | 185.199.111.153 |
    | CNAME | www | alingsas-ju-jutsu.github.io |
 
-   Use the DNS provider's equivalent of `@` for the root domain. The `www`
-   CNAME is a hostname only, with no repository path. Preserve email/MX
-   records and unrelated TXT records. If IPv6/AAAA records exist, update them
-   to GitHub's documented values or remove stale website AAAA records so
-   IPv6 visitors do not continue reaching the old server. Check the current
-   values in GitHub's [custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
-   before changing DNS.
-4. Open **Actions → Deploy Jekyll site to Pages → Run workflow** on `main`
-   after saving the custom domain. The build automatically uses the domain
-   and an empty base path instead of `/alingsasju-jujutsu.se`.
-5. Wait for the Pages DNS check and certificate provisioning, then enable
-   **Enforce HTTPS** in **Settings → Pages** when available.
-6. Verify `https://alingsasju-jutsu.se/` and `https://www.alingsasju-jutsu.se/`,
-   including images, menus, training schedules and a news article. Confirm
-   that links and canonical URLs use the real domain without the repository
-   prefix. The GitHub project URL may redirect to the custom domain afterward.
+   Använd DNS-leverantörens motsvarighet till `@` för rotdomänen.
+   CNAME-värdet för `www` ska endast vara ett värdnamn, utan kodförrådets
+   sökväg. Behåll e-postens MX-poster och andra orelaterade TXT-poster.
+   Om IPv6/AAAA-poster finns ska de uppdateras till GitHubs dokumenterade
+   värden, eller gamla AAAA-poster för webbplatsen tas bort, så att
+   IPv6-besökare inte fortsätter hamna på den gamla servern. Kontrollera
+   aktuella värden i GitHubs [dokumentation för egna domäner](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+   innan DNS ändras.
+4. Öppna **Actions → Deploy Jekyll site to Pages → Run workflow** och välj
+   `main` efter att domänen sparats. Byggningen använder automatiskt domänen
+   och en tom bassökväg i stället för `/alingsasju-jujutsu.se`.
+5. Vänta på Pages DNS-kontroll och att certifikatet utfärdas. Aktivera sedan
+   **Enforce HTTPS** under **Settings → Pages** när valet blir tillgängligt.
+6. Kontrollera `https://alingsasju-jutsu.se/` och
+   `https://www.alingsasju-jutsu.se/`, inklusive bilder, menyer, träningsschema
+   och en nyhetsartikel. Kontrollera att länkar och kanoniska URL:er använder
+   den riktiga domänen utan kodförrådets prefix. GitHubs projektadress kan
+   därefter omdirigeras till den egna domänen.
 
-No changes to `_config.yml`, Markdown links or CSS paths are needed for this
-switch: the workflow derives the deployment URL from GitHub Pages settings.
-DNS changes and certificate provisioning can take time; retain access to the
-old hosting until the new site is confirmed working.
+Du behöver inte ändra `_config.yml`, Markdown-länkar eller CSS-sökvägar vid
+bytet: arbetsflödet hämtar publiceringsadressen från GitHub Pages-inställningarna.
+DNS-ändringar och utfärdande av certifikat kan ta tid. Behåll åtkomsten till
+det gamla webbhotellet tills den nya webbplatsen har bekräftats fungera.
 
-The homepage and local subpages use the archived site's logo, desktop/mobile
-hero photos, club address, contact details, social links, and navigation. All
-club navigation links point to pages on this site. The completed public archive
-has been migrated into 24 club subpages and 60 dated news pages, available from
-`/nyheter/`. Fees, contacts, rules, instructor posters, schedules, statutes,
-camp reports, grading galleries and linked documents are included. Alingsåslägret
-year pages remain nested under Läger → Alingsåslägret.
+Startsidan och undersidorna använder den arkiverade webbplatsens logotyp,
+stora huvudbilder för dator och mobil, klubbadress, kontaktuppgifter,
+sociala länkar och navigering. Alla länkar i klubbens menyer går till sidor på
+denna webbplats. Det offentliga arkivet har överförts till 24 klubbundersidor
+och 60 daterade nyhetssidor som nås via `/nyheter/`. Avgifter, kontaktuppgifter,
+regler, instruktörspresentationer, scheman, stadgar, lägerrapporter,
+graderingsgallerier och länkade dokument ingår. Alingsåslägrets årssidor
+ligger kvar under Läger → Alingsåslägret.
 
-Source information was captured on 2026-11-03, not verified as current. The 2013
-calendar, dated schedule and news are explicitly historical. Instructor-only
-material was password protected and is not available in this static site.
-Grading posts without available photos have been removed. One unavailable
-external camp image is marked rather than hotlinked. Dead source links are also labelled. `_data/import_report.json`
-records unresolved references. The original `_old_site` archive is retained
-locally as a source reference and excluded from Git and the generated site.
-Page content is stored directly in `_club_pages/*.md`, with media in
-`assets/archive/`, so deployment does not depend on the local source archive.
+Källinformationen hämtades 2026-11-03 och har inte verifierats som aktuell.
+Kalendern från 2013, det äldre schemat och nyheterna är historiska.
+Material enbart för instruktörer var lösenordsskyddat och finns inte på denna
+statiska webbplats. Graderingsinlägg utan tillgängliga foton har tagits bort.
+En otillgänglig extern lägerbild har markerats i stället för att länkas in
+från den externa servern. Trasiga källänkar är också markerade.
+`_data/import_report.json` innehåller referenser som inte kunde lösas.
+Originalarkivet `_old_site` behålls lokalt som källreferens och ingår varken
+i Git eller i den genererade webbplatsen. Sidinnehållet lagras direkt i
+`_club_pages/*.md`, med mediefiler i `assets/archive/`, så publiceringen är
+inte beroende av det lokala källarkivet.
 
 ## Publicera en nyhet utan att redigera filer
 
@@ -129,112 +293,42 @@ behöver därför bara beskrivas en gång. Publiceringen sker vid sammanslagning
 inte automatiskt på ett framtida startdatum. Om ändringen ska publiceras senare
 behöver sammanslagningen planeras av en ansvarig person.
 
-## Editing pages
-
-GitHub Copilot agents follow
-[`.github/copilot-instructions.md`](.github/copilot-instructions.md) for
-repository-wide editing rules. Keep enduring conventions there; put the exact
-requested wording, dates, affected pages and acceptance criteria in the GitHub
-issue assigned to the agent. Update these instructions when the site's content
-structure or editing workflow changes.
-
-Edit the relevant file in `_club_pages/`: text, headings, links, images and
-tables use Markdown, not separate HTML content files. Keep the YAML frontmatter
-at the top; `title` controls the heading and `permalink` controls the URL.
-News articles are in `_club_pages/nyheter/` and grading posts are in
-`_club_pages/graderingar/`. Both use `YYYY-MM-DD-title.md` filenames based on
-the publication date. Their `permalink` values keep the existing public URLs
-unchanged. The news/document index is `nyheter.md`, available at `/nyheter/`.
-Alingsåslägret pages are grouped in `_club_pages/alingsaslagret/`, with
-`index.md` for the overview and year filenames such as `2004.md`.
-
-The homepage is `index.md`: its YAML frontmatter contains hero, navigation and
-contact text, and its Markdown body contains the schedule section. Shared
-markup lives in `_layouts/` and `_includes/` to preserve the responsive design.
-Navigation, schedules, document lists and sponsor details live in `_data/`.
-The calendar link opens Google Calendar instead of embedding an HTML iframe.
-
-When maintaining an imported page, add `maintained_content: true` to its
-frontmatter to prevent future imports from overwriting your edits.
-`_data/excluded_archive_pages.yml` lists removed source page IDs that must not be
-restored by future imports.
-
-To repeat the content migration using a completed archive:
-
-```sh
-make import
-# Or choose another completed archive:
-make import ARCHIVE=_old_site/<timestamp-directory>
-make build
-make import-test
-```
-
-The importer preserves the existing club routes and converts WordPress links
-to local pages and assets. Re-importing replaces generated page bodies and
-metadata unless `maintained_content: true` is set. It does not restore WordPress
-plugins, authentication or source theme scripts.
-The import check compares original text, image and table counts on unedited
-pages, verifies media copies, and checks all generated local links and shared
-schedule displays. Maintained pages are excluded from source-content comparisons.
-
-## Updating training times
-
-Set `term_start.date` in `_data/training_schedule.yml` to the term start date
-as quoted display text, for example `"15 januari 2027"`. It appears under
-“Terminsstart” wherever the shared schedule is displayed. An empty date shows
-“Datum meddelas snart.” instead of assuming a date.
-
-Add schedule exceptions under `exceptions` in the same file, with a quoted
-`date` in `YYYY-MM-DD` format and a `reason`, for example `Höstlov`.
-They appear in date order under “Avvikelser i träningsschemat” on every page
-using the schedule. Dates remain visible until removed, including past dates.
-Set `exceptions: []` to hide the section.
-
-Edit `_data/training_schedule.yml` to change group names, ages, weekdays and
-training times. Keep `start` and `end` quoted so YAML treats them as strings.
-`_includes/training-schedule.html` renders this shared data on the homepage,
-Schema and Börja träna pages. To display it elsewhere, use
-`{% include training-schedule.html %}` beneath a suitable heading.
-
-The current schedule is separate from the historical schedule on Schema.
-Börja träna shows the current groups and links to the fee page, without the old
-beginner information. Both pages use `maintained_content: true` so `make import`
-preserves their edited Markdown content.
-
-## Archive the public source site
+## Arkivera den offentliga källwebbplatsen
 
 ```sh
 make scrape
 ```
 
-This builds a separate Playwright container and visits public same-site links
-with ordinary Chromium. It does not access administration pages, authenticate,
-use stealth plugins, solve CAPTCHAs, or retry an ongoing access block. Requests
-are sequential with a two-second pause between pages.
+Detta bygger en separat Playwright-container och besöker offentliga länkar
+på samma webbplats med vanlig Chromium. Verktyget öppnar inte administrationssidor,
+loggar inte in, använder inga tillägg för att dölja automatisering, löser inte
+CAPTCHA och gör inte nya försök vid en pågående åtkomstblockering.
+Anropen sker i följd med två sekunders paus mellan sidorna.
 
-Each run creates a timestamped directory inside `_old_site/`, leaving previous
-archives untouched. It saves rendered HTML, loaded images/backgrounds/fonts/CSS,
-linked same-site documents (including PDFs, Word and Excel files), and
-`manifest.json`. Page and asset links are rewritten
-to local files; external links are retained. Scripts are removed from saved
-HTML, so this is a content archive for migration, not a working WordPress clone.
-Only pages reachable through public links are discovered; unlinked pages and
-private instructor material require an authorized export.
+Varje körning skapar en tidsstämplad mapp i `_old_site/` utan att ändra
+tidigare arkiv. Den sparar renderad HTML, inlästa bilder, bakgrunder,
+typsnitt och CSS, länkade dokument på samma webbplats (inklusive PDF-,
+Word- och Excel-filer) samt `manifest.json`. Sid- och resurslänkar skrivs
+om till lokala filer; externa länkar behålls. Skript tas bort från sparad
+HTML, så detta är ett innehållsarkiv för överföring, inte en fungerande
+WordPress-kopia. Endast sidor som nås via offentliga länkar upptäcks.
+Olänkade sidor och privat instruktörsmaterial kräver en behörig export.
 
-The command exits with an error for blocked pages, failed assets, or a partial
-crawl. Dead source links (404/410) are logged in `brokenLinks` and do not stop
-the crawl. Inspect the manifest and `last-page.html` / `last-page.png` for the
-failure details. If ordinary browser loading still fails, request an export or
-scraper allowlisting from the hosting provider.
+Kommandot avslutas med fel vid blockerade sidor, misslyckad hämtning av
+resurser eller en ofullständig genomsökning. Trasiga källänkar (404/410)
+loggas i `brokenLinks` och stoppar inte genomsökningen. Se manifestfilen
+och `last-page.html` / `last-page.png` för feldetaljer. Om vanlig
+webbläsarinläsning fortfarande misslyckas kan du begära en export eller
+be webbhotellet tillåta arkiveringsverktyget.
 
-To adjust the source or crawl limits:
+Så här ändrar du källadress eller gränser för genomsökningen:
 
 ```sh
 SOURCE_URL=https://alingsasju-jutsu.se/ MAX_PAGES=500 DELAY_MS=2000 make scrape
 make scrape-test
 ```
 
-A partial archive with a saved queue can be resumed in place:
+Ett ofullständigt arkiv med sparad kö kan återupptas i samma mapp:
 
 ```sh
 RESUME_ARCHIVE=/archive/<timestamp-directory> make scrape
