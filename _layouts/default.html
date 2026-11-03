@@ -6,7 +6,9 @@
     {% seo %}
     {% if page.robots %}<meta name="robots" content="{{ page.robots | escape }}">{% endif %}
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <link rel="icon" type="image/png" href="{{ '/assets/images/cropped-test3.png' | relative_url }}">
+    <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32x32.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <script src="{{ '/assets/js/accessibility.js' | relative_url }}" defer></script>
   </head>
