@@ -1,6 +1,6 @@
 ---
 title: Inbjudan till TeamWest-pass
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/469/"
 news: true
 published_label: november 8, 2011

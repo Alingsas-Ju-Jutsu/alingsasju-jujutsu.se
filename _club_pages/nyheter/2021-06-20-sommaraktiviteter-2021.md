@@ -1,6 +1,6 @@
 ---
 title: Sommaraktiviteter, 2021
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2251/"
 news: true
 published_label: juni 20, 2021

@@ -1,6 +1,6 @@
 ---
 title: Alingsåslägret 2013
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/933/"
 news: true
 published_label: september 6, 2013

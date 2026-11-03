@@ -1,7 +1,7 @@
 ---
-title: Nyhetsarkiv
+title: Nyheter
 category: Föreningen
-permalink: /arkiv/
+permalink: /nyheter/
 ---
 
 Tidigare nyheter från Alingsås Ju-Jutsuklubb. Innehållet är historiskt och

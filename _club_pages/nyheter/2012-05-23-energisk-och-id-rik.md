@@ -1,6 +1,6 @@
 ---
 title: "”Energisk och idérik”"
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/611/"
 news: true
 published_label: maj 23, 2012

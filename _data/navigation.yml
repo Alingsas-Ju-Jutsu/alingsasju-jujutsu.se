@@ -6,12 +6,10 @@
       url: "/foreningen/ordningsregler/"
     - title: Graderingar
       url: "/foreningen/graderingar/"
-    - title: Nyhetsarkiv
-      url: "/arkiv/"
+    - title: Nyheter
+      url: "/nyheter/"
     - title: Stadgar
       url: "/foreningen/stadgar/"
-    - title: "Logga in: Instruktörer"
-      url: "/foreningen/instruktorer/logga-in/"
 - title: Träning & praktiskt
   links:
     - title: Träningsavgifter

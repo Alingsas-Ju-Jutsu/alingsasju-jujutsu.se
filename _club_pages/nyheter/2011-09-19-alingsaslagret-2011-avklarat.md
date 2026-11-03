@@ -1,6 +1,6 @@
 ---
 title: Alingsåslägret 2011 avklarat!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/421/"
 news: true
 published_label: september 19, 2011

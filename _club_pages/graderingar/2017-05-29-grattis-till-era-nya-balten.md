@@ -1,6 +1,6 @@
 ---
 title: Grattis till era nya bälten
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1353/"
 news: true
 published_label: maj 29, 2017

@@ -1,6 +1,6 @@
 ---
 title: Nya bälten i barngrupperna
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/999/"
 news: true
 published_label: december 17, 2013

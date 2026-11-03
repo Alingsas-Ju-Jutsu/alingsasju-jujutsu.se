@@ -1,6 +1,6 @@
 ---
 title: Endags Randoriläger 28/10
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/746/"
 news: true
 published_label: oktober 2, 2012

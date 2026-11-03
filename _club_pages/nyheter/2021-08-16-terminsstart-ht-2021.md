@@ -1,6 +1,6 @@
 ---
 title: Terminsstart HT 2021!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2275/"
 news: true
 published_label: augusti 16, 2021

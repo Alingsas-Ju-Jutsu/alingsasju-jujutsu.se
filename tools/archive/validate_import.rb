@@ -42,10 +42,6 @@ manifest["pages"].each do |page|
     errors << "Missing page body #{output}"
     next
   end
-  if id == "3034"
-    errors << "Protected page exposes a form" if target.at_css("form,input")
-    next
-  end
   next if metadata["maintained_content"]
   source = Nokogiri::HTML((root / page["file"]).read)
   body = source.at_css(".colibri-post-content") || source.at_css("#content")
@@ -108,6 +104,7 @@ report = JSON.parse(File.read("_data/import_report.json"))
 excluded.each do |id|
   errors << "Excluded page #{id} still exists" if pages.key?(id) || File.exist?("_site/arkiv/#{id}/index.html")
 end
+errors << "Login page still exists" if File.exist?("_site/foreningen/instruktorer/logga-in/index.html")
 errors << "Incorrect imported page total" unless seen.size == report["pages"]
 abort errors.uniq.join("\n") unless errors.empty?
 puts "Verified #{seen.size} migrated source pages, #{html_files.size} generated routes, text, images, tables and local links."

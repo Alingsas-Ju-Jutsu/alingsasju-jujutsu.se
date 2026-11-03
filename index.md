@@ -28,8 +28,6 @@ contact:
 
 ## Aktuella träningstider
 
-Välkommen till träningen!
-
 {% include training-schedule.html %}
 
 [Börja träna med oss]({{ '/borja-trana/' | relative_url }}){: .button}

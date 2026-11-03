@@ -1,6 +1,6 @@
 ---
 title: Inställda gruppträningar
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1600/"
 news: true
 published_label: april 1, 2020

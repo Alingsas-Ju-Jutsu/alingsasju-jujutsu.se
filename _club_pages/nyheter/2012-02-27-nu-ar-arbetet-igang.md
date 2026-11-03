@@ -1,6 +1,6 @@
 ---
 title: Nu är arbetet igång!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/564/"
 news: true
 published_label: februari 27, 2012

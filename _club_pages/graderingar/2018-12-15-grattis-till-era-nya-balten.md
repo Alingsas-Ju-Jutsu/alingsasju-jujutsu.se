@@ -1,6 +1,6 @@
 ---
 title: Grattis till era nya bälten
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1501/"
 news: true
 published_label: december 15, 2018

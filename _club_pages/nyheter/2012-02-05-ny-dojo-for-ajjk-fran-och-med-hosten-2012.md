@@ -1,6 +1,6 @@
 ---
 title: Ny dojo för AJJK från och med hösten 2012
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/548/"
 news: true
 published_label: februari 5, 2012

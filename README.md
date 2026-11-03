@@ -29,8 +29,8 @@ deployment source to **GitHub Actions**.
 The homepage and local subpages use the archived site's logo, desktop/mobile
 hero photos, club address, contact details, social links, and navigation. All
 club navigation links point to pages on this site. The completed public archive
-has been migrated into 25 club subpages and 60 dated news pages, available from
-`/arkiv/`. Fees, contacts, rules, instructor posters, schedules, statutes,
+has been migrated into 24 club subpages and 60 dated news pages, available from
+`/nyheter/`. Fees, contacts, rules, instructor posters, schedules, statutes,
 camp reports, grading galleries and linked documents are included. Alingsåslägret
 year pages remain nested under Läger → Alingsåslägret.
 
@@ -44,7 +44,50 @@ locally as a source reference and excluded from Git and the generated site.
 Page content is stored directly in `_club_pages/*.md`, with media in
 `assets/archive/`, so deployment does not depend on the local source archive.
 
+## Publicera en nyhet utan att redigera filer
+
+Välj **Issues → New issue → Publicera en nyhet**. Skriv eller klistra in
+texten, eller ge agenten stödord med de fakta som ska vara med. Dra in bilder
+om du vill. Det enda obligatoriska fältet är vad du vill berätta.
+
+En ansvarig person tilldelar ärendet till **Copilot**, som föreslår rubrik,
+formaterar texten och skapar ett ändringsförslag. Nyheten kommer automatiskt
+med på sidan Nyheter. Kontrollera text och bilder, godkänn och slå ihop
+förslaget till **main** för att publicera. Samma krav på Copilot-behörighet och
+granskning som för schemaändringar gäller här.
+
+Lämna publiceringsdatum tomt för publicering så snart förslaget är granskat.
+För ett framtida datum behöver en ansvarig person vänta med sammanslagningen;
+webbplatsen har ingen automatisk tidsinställd publicering.
+
+## Ändra schemat utan att redigera filer
+
+1. Öppna fliken **Issues** på GitHub, välj **New issue** och sedan
+   **Ändra träningsschema**.
+2. Beskriv ändringen med vanliga ord: vilken grupp, vilka tider eller vilket
+   datum och när ändringen ska gälla. Du behöver inte kunna YAML eller kod.
+3. En person med rätt behörighet tilldelar ärendet till **Copilot**.
+   Detta kräver att Copilot coding agent är tillgänglig och aktiverad för
+   kontot/organisationen; formuläret startar inte agenten automatiskt.
+4. Copilot förbereder ett ändringsförslag (pull request) med en sammanfattning.
+   Kontrollera att grupper, tider och datum är rätt. Besvara eventuella frågor
+   i ärendet eller ändringsförslaget.
+5. En ansvarig person godkänner och slår ihop förslaget till **main**.
+   GitHub Actions bygger och publicerar sedan webbplatsen.
+
+Samma schemauppgifter används på startsidan, Schema och Börja träna. Ändringar
+behöver därför bara beskrivas en gång. Publiceringen sker vid sammanslagning,
+inte automatiskt på ett framtida startdatum. Om ändringen ska publiceras senare
+behöver sammanslagningen planeras av en ansvarig person.
+
 ## Editing pages
+
+GitHub Copilot agents follow
+[`.github/copilot-instructions.md`](.github/copilot-instructions.md) for
+repository-wide editing rules. Keep enduring conventions there; put the exact
+requested wording, dates, affected pages and acceptance criteria in the GitHub
+issue assigned to the agent. Update these instructions when the site's content
+structure or editing workflow changes.
 
 Edit the relevant file in `_club_pages/`: text, headings, links, images and
 tables use Markdown, not separate HTML content files. Keep the YAML frontmatter
@@ -52,7 +95,9 @@ at the top; `title` controls the heading and `permalink` controls the URL.
 News articles are in `_club_pages/nyheter/` and grading posts are in
 `_club_pages/graderingar/`. Both use `YYYY-MM-DD-title.md` filenames based on
 the publication date. Their `permalink` values keep the existing public URLs
-unchanged. The news/document index is `nyhetsarkiv.md`.
+unchanged. The news/document index is `nyheter.md`, available at `/nyheter/`.
+Alingsåslägret pages are grouped in `_club_pages/alingsaslagret/`, with
+`index.md` for the overview and year filenames such as `2004.md`.
 
 The homepage is `index.md`: its YAML frontmatter contains hero, navigation and
 contact text, and its Markdown body contains the schedule section. Shared
@@ -62,7 +107,7 @@ The calendar link opens Google Calendar instead of embedding an HTML iframe.
 
 When maintaining an imported page, add `maintained_content: true` to its
 frontmatter to prevent future imports from overwriting your edits.
-`_data/excluded_archive_pages.yml` lists removed news IDs that must not be
+`_data/excluded_archive_pages.yml` lists removed source page IDs that must not be
 restored by future imports.
 
 To repeat the content migration using a completed archive:
@@ -84,6 +129,17 @@ pages, verifies media copies, and checks all generated local links and shared
 schedule displays. Maintained pages are excluded from source-content comparisons.
 
 ## Updating training times
+
+Set `term_start.date` in `_data/training_schedule.yml` to the term start date
+as quoted display text, for example `"15 januari 2027"`. It appears under
+“Terminsstart” wherever the shared schedule is displayed. An empty date shows
+“Datum meddelas snart.” instead of assuming a date.
+
+Add schedule exceptions under `exceptions` in the same file, with a quoted
+`date` in `YYYY-MM-DD` format and a `reason`, for example `Höstlov`.
+They appear in date order under “Avvikelser i träningsschemat” on every page
+using the schedule. Dates remain visible until removed, including past dates.
+Set `exceptions: []` to hide the section.
 
 Edit `_data/training_schedule.yml` to change group names, ages, weekdays and
 training times. Keep `start` and `end` quoted so YAML treats them as strings.

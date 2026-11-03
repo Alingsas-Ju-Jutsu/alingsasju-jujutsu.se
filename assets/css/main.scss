@@ -361,6 +361,42 @@ summary:focus-visible {
   margin: 2rem 0;
 }
 
+.training-schedule__term-start {
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  border-left: 4px solid $accent;
+}
+
+.training-schedule__exceptions {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid currentColor;
+}
+
+.training-schedule__exceptions h3 {
+  margin: 0 0 0.75rem;
+}
+
+.training-schedule__exceptions ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.training-schedule__exceptions time {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.training-schedule__term-start h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.training-schedule__term-start p {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+}
+
 .training-schedule__group {
   min-width: 0;
   padding: 1.5rem;

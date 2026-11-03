@@ -1,6 +1,6 @@
 ---
 title: Combat Camp Sweden
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/769/"
 news: true
 published_label: december 7, 2012

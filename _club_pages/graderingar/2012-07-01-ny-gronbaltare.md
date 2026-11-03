@@ -1,6 +1,6 @@
 ---
 title: Ny grönbältare
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/691/"
 news: true
 published_label: juli 1, 2012

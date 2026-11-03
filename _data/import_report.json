@@ -1,7 +1,17 @@
 {
-  "pages": 85,
+  "pages": 84,
   "assets": 159,
   "issues": [
+    {
+      "page": "/foreningen/graderingar/",
+      "reference": "../70b11ad4606ff6fd92093296/index.html",
+      "kind": "missing_link"
+    },
+    {
+      "page": "/foreningen/graderingar/",
+      "reference": "http://www.alingsasju-jutsu.se/?p=2185&preview=true",
+      "kind": "missing_link"
+    },
     {
       "page": "/foreningen/alingsaslagret-2007/",
       "reference": "https://www.forshaga-jujutsuklubb.com/fotoalbum/fotografier/071118/maxi00.jpg",

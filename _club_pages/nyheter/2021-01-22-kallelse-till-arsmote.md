@@ -1,6 +1,6 @@
 ---
 title: Kallelse till årsmöte!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2212/"
 news: true
 published_label: januari 22, 2021

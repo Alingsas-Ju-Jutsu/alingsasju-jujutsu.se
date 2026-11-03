@@ -1,6 +1,6 @@
 ---
 title: Ödenäs monläger 20-21 april
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/850/"
 news: true
 published_label: mars 6, 2013

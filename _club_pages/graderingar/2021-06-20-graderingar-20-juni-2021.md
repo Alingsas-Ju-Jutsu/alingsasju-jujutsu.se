@@ -1,6 +1,6 @@
 ---
 title: Graderingar 20 juni 2021!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2256/"
 news: true
 published_label: juni 20, 2021

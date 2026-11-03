@@ -1,6 +1,6 @@
 ---
 title: Grattis Malin till 4 dan
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1194/"
 news: true
 published_label: juni 28, 2015

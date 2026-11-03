@@ -1,6 +1,6 @@
 ---
 title: Grattis till era nya grader!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1238/"
 news: true
 published_label: december 12, 2015

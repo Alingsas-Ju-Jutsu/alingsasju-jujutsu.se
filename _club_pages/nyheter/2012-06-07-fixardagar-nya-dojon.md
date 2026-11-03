@@ -1,6 +1,6 @@
 ---
 title: FIXARDAGAR NYA DOJON!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/661/"
 news: true
 published_label: juni 7, 2012

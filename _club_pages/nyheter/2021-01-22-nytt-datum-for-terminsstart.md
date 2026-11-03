@@ -1,6 +1,6 @@
 ---
 title: Nytt datum för terminsstart!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2217/"
 news: true
 published_label: januari 22, 2021

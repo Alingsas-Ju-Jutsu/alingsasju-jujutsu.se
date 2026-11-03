@@ -1,6 +1,6 @@
 ---
 title: Grattis till era nya bälten!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1145/"
 news: true
 published_label: mars 1, 2015

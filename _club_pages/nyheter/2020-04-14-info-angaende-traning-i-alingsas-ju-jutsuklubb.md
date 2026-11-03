@@ -1,6 +1,6 @@
 ---
 title: Info angående träning i Alingsås Ju-jutsuklubb!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1606/"
 news: true
 published_label: april 14, 2020

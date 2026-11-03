@@ -1,6 +1,6 @@
 ---
 title: Nya brunbältare
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/695/"
 news: true
 published_label: juli 6, 2012

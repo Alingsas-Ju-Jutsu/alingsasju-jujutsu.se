@@ -1,6 +1,6 @@
 ---
 title: Alingsåslägret 2012
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/740/"
 news: true
 published_label: september 25, 2012

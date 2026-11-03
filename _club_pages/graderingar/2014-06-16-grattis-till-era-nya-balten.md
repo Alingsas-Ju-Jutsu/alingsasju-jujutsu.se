@@ -1,6 +1,6 @@
 ---
 title: GRATTIS till era nya bälten!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1071/"
 news: true
 published_label: juni 16, 2014

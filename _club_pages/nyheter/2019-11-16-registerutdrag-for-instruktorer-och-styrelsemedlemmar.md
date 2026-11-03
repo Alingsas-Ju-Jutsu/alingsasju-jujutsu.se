@@ -1,6 +1,6 @@
 ---
 title: Registerutdrag för instruktörer och styrelsemedlemmar
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1570/"
 news: true
 published_label: november 16, 2019

@@ -1,6 +1,6 @@
 ---
 title: Glada miner efter gradering till 2:a dan
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1519/"
 news: true
 published_label: juni 2, 2019

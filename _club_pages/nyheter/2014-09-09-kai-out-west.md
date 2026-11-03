@@ -1,6 +1,6 @@
 ---
 title: Kai out West
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1103/"
 news: true
 published_label: september 9, 2014

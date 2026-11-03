@@ -1,6 +1,6 @@
 ---
 title: Grattis till nya bälten!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/993/"
 news: true
 published_label: december 14, 2013

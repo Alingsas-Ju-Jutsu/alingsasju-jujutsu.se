@@ -1,6 +1,6 @@
 ---
 title: Nygraderade jujutsukas!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/654/"
 news: true
 published_label: juni 6, 2012

@@ -1,6 +1,6 @@
 ---
 title: Grattis till nygraderade!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/785/"
 news: true
 published_label: december 16, 2012

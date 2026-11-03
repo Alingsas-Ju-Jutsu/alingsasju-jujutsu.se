@@ -1,6 +1,6 @@
 ---
 title: Invigning av nya dojon 25 augusti
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/641/"
 news: true
 published_label: juni 1, 2012

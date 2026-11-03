@@ -1,6 +1,6 @@
 ---
 title: Terminsstart
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2198/"
 news: true
 published_label: januari 10, 2021

@@ -1,6 +1,6 @@
 ---
 title: Graderingstider lördag 6 juni
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1183/"
 news: true
 published_label: juni 1, 2015

@@ -1,6 +1,6 @@
 ---
 title: Nya bilder!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/590/"
 news: true
 published_label: mars 23, 2012

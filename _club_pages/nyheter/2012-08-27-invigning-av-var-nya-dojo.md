@@ -1,6 +1,6 @@
 ---
 title: Invigning av vår nya dojo
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/719/"
 news: true
 published_label: augusti 27, 2012

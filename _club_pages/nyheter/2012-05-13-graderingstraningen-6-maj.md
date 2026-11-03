@@ -1,6 +1,6 @@
 ---
 title: Graderingsträningen 6 maj
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/607/"
 news: true
 published_label: maj 13, 2012

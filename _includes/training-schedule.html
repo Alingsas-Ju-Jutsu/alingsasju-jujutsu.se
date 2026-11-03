@@ -1,3 +1,12 @@
+<div class="training-schedule__term-start">
+  <h3>{{ site.data.training_schedule.term_start.title | escape }}</h3>
+  {% assign term_start_date = site.data.training_schedule.term_start.date | strip %}
+  {% if term_start_date != "" %}
+    <p>{{ term_start_date | escape }}</p>
+  {% else %}
+    <p>Datum meddelas snart.</p>
+  {% endif %}
+</div>
 <div class="training-schedule__groups">
   {% for group in site.data.training_schedule.groups %}
     <div class="training-schedule__group">
@@ -13,3 +22,14 @@
     </div>
   {% endfor %}
 </div>
+{% if site.data.training_schedule.exceptions.size > 0 %}
+  <div class="training-schedule__exceptions">
+    <h3>Avvikelser i träningsschemat</h3>
+    <ul>
+      {% assign exceptions = site.data.training_schedule.exceptions | sort: "date" %}
+      {% for exception in exceptions %}
+        <li><time datetime="{{ exception.date | escape }}">{{ exception.date | escape }}</time> – {{ exception.reason | escape }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

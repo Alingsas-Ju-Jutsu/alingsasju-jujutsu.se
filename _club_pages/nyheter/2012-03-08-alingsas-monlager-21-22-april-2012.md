@@ -1,6 +1,6 @@
 ---
 title: Alingsås monläger 21-22 april 2012
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/579/"
 news: true
 published_label: mars 8, 2012

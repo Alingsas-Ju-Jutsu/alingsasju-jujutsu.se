@@ -12,6 +12,7 @@ manifest = JSON.parse((root / "manifest.json").read)
 abort "Use a finished archive." unless manifest["complete"]
 captured_date = root.basename.to_s[/\A\d{4}-\d{2}-\d{2}/]
 abort "The archive directory must start with its capture date (YYYY-MM-DD)." unless captured_date
+excluded = YAML.safe_load(File.read("_data/excluded_archive_pages.yml"))
 
 page_files = {
   "1342" => "instruktorer", "404" => "ordningsregler", "2137" => "graderingar",
@@ -20,31 +21,43 @@ page_files = {
   "289" => "alingsaslagret-2007", "295" => "alingsaslagret-2008",
   "297" => "alingsaslagret-2010", "415" => "alingsaslagret-2011",
   "987" => "alingsaslagret-2013", "990" => "alingsaslagret-2012",
-  "1037" => "kai-out-west", "435" => "stadgar", "3034" => "instruktorer-logga-in",
+  "1037" => "kai-out-west", "435" => "stadgar",
   "31" => "traningsavgifter", "1677" => "drakter", "3065" => "schema",
   "1648" => "kontakt", "18" => "kalendarium", "1674" => "ju-jutsu-kai",
   "274" => "barntraning", "272" => "graderingssystem", "2581" => "borja-trana"
 }
+page_files.transform_values! do |name|
+  if name == "alingsaslagret"
+    "alingsaslagret/index"
+  elsif name.start_with?("alingsaslagret-")
+    "alingsaslagret/#{name.delete_prefix('alingsaslagret-')}"
+  else
+    name
+  end
+end
 routes = {}
 page_files.each do |id, name|
   file = Pathname.new("_club_pages/#{name}.md")
   routes[id] = YAML.safe_load(file.read.split("---", 3)[1])["permalink"]
 end
-source_pages = manifest["pages"].select { |p| p["url"].match?(/[?&](page_id|p)=\d+/) }
+source_pages = manifest["pages"].select do |page|
+  id = page["url"][/[?&](?:page_id|p)=(\d+)/, 1]
+  id && !excluded.include?(id)
+end
 source_pages.each do |page|
   id = page["url"][/[?&](?:page_id|p)=(\d+)/, 1]
   routes[id] ||= "/arkiv/#{id}/"
 end
 assets = manifest["assets"].to_h { |asset| [(root / asset["file"]).to_s, asset] }
 url_assets = manifest["assets"].to_h { |asset| [asset["url"].sub(%r{^https?://(?:www\.)?}, ""), asset] }
-source_paths = manifest["pages"].to_h do |page|
+source_paths = manifest["pages"].filter_map do |page|
   id = page["url"][/[?&](?:page_id|p)=(\d+)/, 1]
+  next if excluded.include?(id)
   [(root / page["file"]).to_s, id ? routes.fetch(id) : "/"]
-end
+end.to_h
 copied = {}
 issues = []
 processed = {}
-excluded = YAML.safe_load(File.read("_data/excluded_archive_pages.yml"))
 existing_posts = Dir.glob("_club_pages/**/*.md").to_h do |path|
   metadata = YAML.safe_load(File.read(path).split("---", 3)[1])
   [metadata["source_id"], Pathname.new(path)]
@@ -148,12 +161,9 @@ source_pages.each do |source|
   fragment.css("h2,h3,h4").each do |node|
     node.remove if node.text.strip.casecmp?(display_title.strip)
   end
-  if id == "3034"
-    fragment = Nokogiri::HTML.fragment("<p>Kontakta klubben för åtkomst till instruktörernas interna material.</p>")
-  end
   if id == "2040"
     fragment.add_child('<h2>Tidigare Alingsåsläger</h2>')
-    year_links = page_files.select { |_, name| name.match?(/alingsaslagret-\d+/) }.map do |year_id, name|
+    year_links = page_files.select { |_, name| name.match?(%r{alingsaslagret/\d+}) }.map do |year_id, name|
       "<li><a href=\"#{local_path(routes.fetch(year_id))}\">Alingsåslägret #{name[/\d+$/]}</a></li>"
     end
     list = Nokogiri::XML::Node.new("ul", fragment.document)
@@ -176,7 +186,7 @@ source_pages.each do |source|
     date_link = doc.css(".h-blog-meta a").find { |link| link["href"].to_s.match?(/[?&]m=\d{8}/) }
     date = date_link&.[]("href")&.slice(/[?&]m=(\d{8})/, 1)
     metadata = {
-      "title" => title, "category" => "Nyhetsarkiv", "permalink" => routes.fetch(id),
+      "title" => title, "category" => "Nyheter", "permalink" => routes.fetch(id),
       "news" => true, "published_label" => date_link&.text&.strip,
       "grading" => doc.css(".colibri-post-category").any? { |node| node.text.strip == "Graderingar" },
       "source_author" => doc.css(".h-blog-meta a").find { |link| link["href"].to_s.include?("author=") }&.text&.strip,
@@ -187,7 +197,7 @@ source_pages.each do |source|
   end
   metadata["source_date"] = captured_date
   metadata["source_id"] = id
-  metadata["historical"] = true if !page_files[id] || %w[18 3065 2581 435].include?(id) || page_files[id].match?(/alingsaslagret-\d+/)
+  metadata["historical"] = true if !page_files[id] || %w[18 3065 2581 435].include?(id) || page_files[id].match?(%r{alingsaslagret/\d+})
   metadata["missing_media"] = true if issues.any? { |issue| issue["page"] == routes[id] && issue["kind"] == "missing_image" }
   file.write(metadata.to_yaml + "---\n\n" + ArchiveMarkdown.convert(html))
 end

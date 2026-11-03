@@ -1,6 +1,6 @@
 ---
 title: Grattis till 2 dan
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/948/"
 news: true
 published_label: december 5, 2013

@@ -1,0 +1,39 @@
+name: Ändra träningsschema
+description: Ändra träningstider, terminsstart eller lägg till ett uppehåll.
+title: "Ändra träningsschema: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Beskriv ändringen med vanliga ord. Du behöver inte kunna kod eller ändra några filer.
+
+        När ärendet är skapat kan en person med behörighet tilldela det till
+        Copilot, som förbereder ändringen för granskning. Webbplatsen uppdateras
+        först när ändringen har godkänts och slagits ihop till main.
+  - type: textarea
+    id: change
+    attributes:
+      label: Vad ska ändras?
+      description: Ange vilka grupper, dagar och tider som berörs. Skriv hela datum med årtal för terminsstart och uppehåll.
+      placeholder: |
+        Exempel (ersätt med de riktiga uppgifterna):
+        Vuxnas söndagsträning ska vara 20.00–21.15 i stället för 19.45–21.00.
+        Övriga tider är oförändrade.
+
+        Eller: Lägg till ett uppehåll den 2027-03-28 med texten Påsklov.
+        Eller: Terminsstart är den 2027-01-10.
+    validations:
+      required: true
+  - type: textarea
+    id: timing
+    attributes:
+      label: När ska ändringen gälla?
+      description: Skriv om ändringen gäller direkt, från ett visst datum eller bara under en period. Ange om den ska publiceras senare.
+      placeholder: Gäller direkt och tills vidare.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Övrig information
+      description: Till exempel en rättad formulering eller en bild av det beslutade schemat. Lämna tomt om inget mer behövs.

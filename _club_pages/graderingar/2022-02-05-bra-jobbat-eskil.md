@@ -1,6 +1,6 @@
 ---
 title: Bra jobbat Eskil
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/2468/"
 news: true
 published_label: februari 5, 2022

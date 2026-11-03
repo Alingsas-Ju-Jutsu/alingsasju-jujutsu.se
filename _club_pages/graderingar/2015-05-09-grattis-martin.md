@@ -1,6 +1,6 @@
 ---
 title: Grattis Martin!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1174/"
 news: true
 published_label: maj 9, 2015

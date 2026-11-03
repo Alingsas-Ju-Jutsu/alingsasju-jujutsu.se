@@ -1,6 +1,6 @@
 ---
 title: Grattis till era nya streck
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1498/"
 news: true
 published_label: december 15, 2018

@@ -1,6 +1,6 @@
 ---
 title: Elitinstruktörer i Alingsås AJJK
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/476/"
 news: true
 published_label: november 30, 2011

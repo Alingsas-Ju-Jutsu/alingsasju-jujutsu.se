@@ -1,6 +1,6 @@
 ---
 title: Uppdaterad information kring träning
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1609/"
 news: true
 published_label: maj 3, 2020

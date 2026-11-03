@@ -1,0 +1,33 @@
+name: Publicera en nyhet
+description: Skriv eller klistra in en nyhet. Copilot hjälper till med resten.
+title: "Nyhet: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Skriv som du skulle skriva ett mejl. Du behöver inte kunna kod eller formatering.
+        Det går bra att skriva stödord som Copilot får göra till en lättläst text.
+
+        En ansvarig person tilldelar ärendet till Copilot och granskar förslaget
+        innan det publiceras. Exempeltexterna nedan är bara exempel.
+  - type: textarea
+    id: news
+    attributes:
+      label: Vad vill du berätta?
+      description: Klistra in en färdig text eller skriv stödord. Ta med alla viktiga fakta, som datum, tider, plats och eventuell anmälan.
+      placeholder: |
+        Exempel: Vi vill gratulera alla som graderade i söndags.
+        Här är uppgifterna som ska vara med: ...
+    validations:
+      required: true
+  - type: textarea
+    id: photos
+    attributes:
+      label: Bilder (valfritt)
+      description: Dra in bilder här om du vill ha med dem. Beskriv gärna vad de visar. Lägg bara till bilder som klubben får publicera.
+  - type: input
+    id: publication
+    attributes:
+      label: När vill du publicera? (valfritt)
+      description: Lämna tomt om nyheten ska publiceras så snart den har granskats. Annars ange datum med årtal. Framtida publicering behöver planeras av en ansvarig person.
+      placeholder: Så snart den har granskats.

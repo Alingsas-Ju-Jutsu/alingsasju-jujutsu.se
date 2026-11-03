@@ -1,6 +1,6 @@
 ---
 title: Inställda träningar
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1707/"
 news: true
 published_label: oktober 31, 2020

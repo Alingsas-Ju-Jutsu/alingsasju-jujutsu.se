@@ -1,6 +1,6 @@
 ---
 title: Uppdaterad information angående inställda träningar!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1710/"
 news: true
 published_label: november 22, 2020

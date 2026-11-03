@@ -1,6 +1,6 @@
 ---
 title: Jubileumsläger AJJK 25 år!
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1115/"
 news: true
 published_label: oktober 14, 2014

@@ -1,6 +1,6 @@
 ---
 title: Grattis till alla nygraderade
-category: Nyhetsarkiv
+category: Nyheter
 permalink: "/arkiv/1186/"
 news: true
 published_label: juni 7, 2015
