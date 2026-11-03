@@ -10,6 +10,11 @@ published_sort: '20201122'
 source_date: '2026-11-03'
 source_id: '1710'
 historical: true
+description: Uppdaterad information angående inställda träningar! – Hej medlemmar
+  i AJJK! Styrelsen har beslutat att fortsätta med tidigare beslut angående…
+date: '2020-11-22'
+seo:
+  type: BlogPosting
 ---
 
 Hej medlemmar i AJJK!

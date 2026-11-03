@@ -10,6 +10,11 @@ published_sort: '20110919'
 source_date: '2026-11-03'
 source_id: '421'
 historical: true
+description: Alingsåslägret 2011 avklarat! – Då var årets upplaga av Alingsåslägret
+  avklarat! Och lite blygsamt kan vi nog konstatera att det var det bästa lägret…
+date: '2011-09-19'
+seo:
+  type: BlogPosting
 ---
 
 Då var årets upplaga av Alingsåslägret avklarat! Och lite blygsamt kan vi nog konstatera att det var det bästa lägret någonsin! Både organisatoriskt och träningsmässigt!

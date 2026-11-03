@@ -10,6 +10,10 @@ published_sort: '20210110'
 source_date: '2026-11-03'
 source_id: '2198'
 historical: true
+description: Terminsstart – Terminsstart Nyhetsbrev, AJJK januari 2021
+date: '2021-01-10'
+seo:
+  type: BlogPosting
 ---
 
 Terminsstart

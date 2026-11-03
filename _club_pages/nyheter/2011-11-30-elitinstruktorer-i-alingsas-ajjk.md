@@ -10,6 +10,12 @@ published_sort: '20111130'
 source_date: '2026-11-03'
 source_id: '476'
 historical: true
+description: Elitinstruktörer i Alingsås AJJK – Nu har Alingsås Ju-jutsuklubb fått
+  sina första elitinstruktörer. Under hösten har Malin Bohlin, Claes Alingsjö och
+  Patrik…
+date: '2011-11-30'
+seo:
+  type: BlogPosting
 ---
 
 [![Bild från Elitinstruktörer i Alingsås AJJK](<{{ '/assets/archive/2d49613df9c77f9e93744b86.jpg' | relative_url }}>)](<{{ '/assets/archive/81e6e4c3728538ebfa430a9f.jpg' | relative_url }}>)

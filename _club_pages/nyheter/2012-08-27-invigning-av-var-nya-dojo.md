@@ -10,6 +10,11 @@ published_sort: '20120827'
 source_date: '2026-11-03'
 source_id: '719'
 historical: true
+description: Invigning av vår nya dojo – Ett stort tack till alla som medverkade till
+  att invigningen av vår nya dojo blev så lyckad. Rolig och fartfyllt träning,…
+date: '2012-08-27'
+seo:
+  type: BlogPosting
 ---
 
 Ett stort tack till alla som medverkade till att invigningen av vår nya dojo blev så lyckad. Rolig och fartfyllt träning, välbesökt öppet hus, vacker dukning och underbar mat. Kan det blir bättre? Det här gjorde vi bra!

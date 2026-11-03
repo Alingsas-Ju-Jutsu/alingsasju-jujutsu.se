@@ -10,6 +10,11 @@ published_sort: '20210620'
 source_date: '2026-11-03'
 source_id: '2256'
 historical: true
+description: Graderingar 20 juni 2021! – Så fantastiska graderingar vi har fått bevittna
+  idag STORT GRATTIS till era nya grader!
+date: '2021-06-20'
+seo:
+  type: BlogPosting
 ---
 
 Så fantastiska graderingar vi har fått bevittna idag 

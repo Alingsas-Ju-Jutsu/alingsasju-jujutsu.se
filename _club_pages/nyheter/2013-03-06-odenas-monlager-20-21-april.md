@@ -10,6 +10,11 @@ published_sort: '20130306'
 source_date: '2026-11-03'
 source_id: '850'
 historical: true
+description: Ödenäs monläger 20-21 april – Klicka på bilden för att öppna anmälningsblanketten
+  som pdf!
+date: '2013-03-06'
+seo:
+  type: BlogPosting
 ---
 
 Klicka på bilden för att öppna anmälningsblanketten som pdf!

@@ -10,6 +10,11 @@ published_sort: '20130906'
 source_date: '2026-11-03'
 source_id: '933'
 historical: true
+description: Alingsåslägret 2013 – Nu är anmälningsblankett och matbeställningsblankett
+  till Alingsås Ju-jutsuklubbs höstläger här! I filen som heter ”AJJK…
+date: '2013-09-06'
+seo:
+  type: BlogPosting
 ---
 
 Nu är anmälningsblankett och matbeställningsblankett till Alingsås Ju-jutsuklubbs höstläger här!

@@ -10,6 +10,10 @@ published_sort: '20140616'
 source_date: '2026-11-03'
 source_id: '1071'
 historical: true
+description: 'GRATTIS till era nya bälten! – '
+date: '2014-06-16'
+seo:
+  type: BlogPosting
 ---
 
 [![IMG\_0616](<{{ '/assets/archive/19ae2a833350cecd15181e3f.jpg' | relative_url }}>)](<{{ '/assets/archive/fa29c1d0e079a66ae7b1db37.jpg' | relative_url }}>)

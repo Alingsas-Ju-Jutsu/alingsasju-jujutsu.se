@@ -10,6 +10,11 @@ published_sort: '20151212'
 source_date: '2026-11-03'
 source_id: '1238'
 historical: true
+description: Grattis till era nya grader! – Stort grattis till er efter lördagens
+  gradering.
+date: '2015-12-12'
+seo:
+  type: BlogPosting
 ---
 
 Stort grattis till er efter lördagens gradering.

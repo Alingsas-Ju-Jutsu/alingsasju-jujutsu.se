@@ -1,7 +1,9 @@
 ---
 title: Nyheter
 category: Föreningen
-permalink: /nyheter/
+permalink: "/nyheter/"
+description: 'Nyheter från Alingsås Ju-Jutsuklubb: träning, graderingar, läger och
+  aktiviteter. Läs daterade artiklar och hitta dokument från tidigare arrangemang.'
 ---
 
 Tidigare nyheter från Alingsås Ju-Jutsuklubb. Innehållet är historiskt och

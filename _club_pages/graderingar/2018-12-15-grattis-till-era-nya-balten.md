@@ -10,6 +10,10 @@ published_sort: '20181215'
 source_date: '2026-11-03'
 source_id: '1501'
 historical: true
+description: 'Grattis till era nya bälten – '
+date: '2018-12-15'
+seo:
+  type: BlogPosting
 ---
 
 > [![Bild från Grattis till era nya bälten](<{{ '/assets/archive/3b3b3b8f8cf036a95e12c628.jpg' | relative_url }}>)](<{{ '/assets/archive/3b3b3b8f8cf036a95e12c628.jpg' | relative_url }}>)

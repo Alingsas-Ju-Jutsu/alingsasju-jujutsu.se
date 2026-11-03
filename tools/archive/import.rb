@@ -199,6 +199,14 @@ source_pages.each do |source|
   metadata["source_id"] = id
   metadata["historical"] = true if !page_files[id] || %w[18 3065 2581 435].include?(id) || page_files[id].match?(%r{alingsaslagret/\d+})
   metadata["missing_media"] = true if issues.any? { |issue| issue["page"] == routes[id] && issue["kind"] == "missing_image" }
+  previous = existing_posts[id] && YAML.safe_load(existing_posts[id].read.split("---", 3)[1])
+  summary = "#{metadata.fetch('title')} – #{fragment.text.gsub(/\s+/, ' ').strip}"
+  summary = summary[0, 157].sub(/\s+\S*\z/, "") + "…" if summary.size > 160
+  metadata["description"] ||= previous&.[]("description") || summary
+  if metadata["news"]
+    metadata["date"] = Date.strptime(metadata.fetch("published_sort"), "%Y%m%d").iso8601
+    metadata["seo"] = { "type" => "BlogPosting" }
+  end
   file.write(metadata.to_yaml + "---\n\n" + ArchiveMarkdown.convert(html))
 end
 sponsor_source = source_pages.find { |page| page["url"].include?("?p=") }

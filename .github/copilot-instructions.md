@@ -94,6 +94,14 @@ content changes; preserve unrelated content and design.
 ## Editorial rules
 
 - Write public content in Swedish with correct spelling and diacritics.
+- Add a concise, factual Swedish `description` to new pages for search results.
+  New news posts also need a quoted ISO `date` (`YYYY-MM-DD`) matching the
+  publication date and `seo: { type: BlogPosting }`.
+- Keep heading levels logical: the layout supplies the only `h1`, so start
+  Markdown sections at `##` and do not skip levels. Give Markdown tables
+  meaningful column headers and images useful alt text. Essential text must
+  also be readable outside images; do not publish text-only posters as the
+  sole source of instructions.
 - Use only supplied or verified facts. Do not invent dates, fees, contacts,
   cancellations, qualifications or event details. If a necessary fact is
   missing, request clarification or state the blocker rather than guessing.

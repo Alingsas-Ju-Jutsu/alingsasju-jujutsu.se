@@ -10,6 +10,11 @@ published_sort: '20150628'
 source_date: '2026-11-03'
 source_id: '1194'
 historical: true
+description: Grattis Malin till 4 dan – Tack för all stöttning både före och under
+  min 4:e dans gradering. Tack för all uppvaktning efter! Tack för gratulationskort,…
+date: '2015-06-28'
+seo:
+  type: BlogPosting
 ---
 
 Tack för all stöttning både före och under min 4:e dans gradering. Tack för all uppvaktning efter! Tack för gratulationskort, teceremoniskål, blommor, presentkort, smycken, massagetid, bubbel och choklad!

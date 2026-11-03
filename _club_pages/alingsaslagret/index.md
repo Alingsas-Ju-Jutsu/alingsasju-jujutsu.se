@@ -4,6 +4,8 @@ category: Läger
 permalink: "/foreningen/alingsaslagret/"
 source_date: '2026-11-03'
 source_id: '2040'
+description: Alingsåslägret – År 2014 startade konceptet Kai out West som, istället
+  för Alingsåslägret, kommer fortsätta briljera med strålande instruktörer och grym…
 ---
 
 År 2014 startade konceptet Kai out West som, istället för Alingsåslägret, kommer fortsätta briljera med strålande instruktörer och grym träning under en hel lägerhelg! Håll dig uppdaterad!

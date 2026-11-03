@@ -10,6 +10,11 @@ published_sort: '20150301'
 source_date: '2026-11-03'
 source_id: '1145'
 historical: true
+description: Grattis till era nya bälten! – Grattis Fredrik, Tina, Pontus och Mikael
+  till era nya bälten.
+date: '2015-03-01'
+seo:
+  type: BlogPosting
 ---
 
 [![image](<{{ '/assets/archive/9e7c75acd81f33fe23866046.jpg' | relative_url }}>)](<{{ '/assets/archive/9e7c75acd81f33fe23866046.jpg' | relative_url }}>)

@@ -10,6 +10,11 @@ published_sort: '20210122'
 source_date: '2026-11-03'
 source_id: '2212'
 historical: true
+description: Kallelse till årsmöte! – Välkomna till årsmöte den 23 februari 2021!
+  Viktig information för alla medlemmar i AJJK Under rådande omständigheter har styrelsen…
+date: '2021-01-22'
+seo:
+  type: BlogPosting
 ---
 
 Välkomna till årsmöte den 23 februari 2021!

@@ -1,8 +1,10 @@
 title: Alingsås Ju-Jutsuklubb
-description: Kampsport med självförsvarsinriktning
+description: "Träna ju-jutsu i Alingsås. Träning för barn och vuxna hos Alingsås Ju-Jutsuklubb på Tennisvägen 8. Se grupper, träningstider och kontaktuppgifter."
 url: https://alingsasju-jutsu.se
 baseurl: ""
 lang: sv-SE
+locale: sv_SE
+logo: /assets/images/cropped-test3.png
 
 club:
   address_url: "https://www.google.com/maps/place/Alings%C3%A5s+Ju-Jutsuklubb/@57.9346882,12.5255806,15z/data=!4m5!3m4!1s0x0:0x95ada11212f52a2!8m2!3d57.9346882!4d12.5255806"
@@ -16,6 +18,7 @@ collections:
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 exclude:
   - Gemfile

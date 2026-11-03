@@ -10,6 +10,11 @@ published_sort: '20141014'
 source_date: '2026-11-03'
 source_id: '1115'
 historical: true
+description: Jubileumsläger AJJK 25 år! – Lördag 1:e november kl 13:00-17:00 Var med
+  och träna roliga och crazy old school-tekniker från klubbens ungdomstid tillsammans…
+date: '2014-10-14'
+seo:
+  type: BlogPosting
 ---
 
 Lördag 1:e november kl 13:00-17:00

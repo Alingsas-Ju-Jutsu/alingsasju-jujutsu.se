@@ -4,6 +4,8 @@ category: Träning & praktiskt
 permalink: "/traning/traningsavgifter/"
 source_date: '2026-11-03'
 source_id: '31'
+description: 'Träningsavgifter hos Alingsås Ju-Jutsuklubb: terminsavgifter, familjerabatt,
+  graderingsavgifter och information om betalning.'
 ---
 
 **Terminsavgift:**

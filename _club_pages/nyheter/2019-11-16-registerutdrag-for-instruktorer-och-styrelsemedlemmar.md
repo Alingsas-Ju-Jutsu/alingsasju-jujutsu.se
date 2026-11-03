@@ -10,6 +10,11 @@ published_sort: '20191116'
 source_date: '2026-11-03'
 source_id: '1570'
 historical: true
+description: Registerutdrag för instruktörer och styrelsemedlemmar – Från 1 januari
+  2020 ska alla idrottsföreningar inom RF kontrollera begränsat registerutdrag för…
+date: '2019-11-16'
+seo:
+  type: BlogPosting
 ---
 
 **Från 1 januari 2020 ska alla idrottsföreningar inom RF kontrollera begränsat registerutdrag för ledare som har kontinuerlig kontakt med barn. Beslutet togs vid senaste Riksidrottsmötet.**

@@ -10,6 +10,11 @@ published_sort: '20111108'
 source_date: '2026-11-03'
 source_id: '469'
 historical: true
+description: Inbjudan till TeamWest-pass – Nu på söndag 13 november 2011 så inbjuder
+  Göteborgs JJK till ett TeamWest-pass med tävlingsträning för både barn och vuxna.…
+date: '2011-11-08'
+seo:
+  type: BlogPosting
 ---
 
 Nu på söndag 13 november 2011 så inbjuder Göteborgs JJK till ett TeamWest-pass med tävlingsträning för både barn och vuxna. Det kommer både att vara Shindosar, GJJK:are, folk från Varberg, kanske Herrljunga.

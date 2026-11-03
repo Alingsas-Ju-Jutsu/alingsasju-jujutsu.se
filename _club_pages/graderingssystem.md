@@ -4,6 +4,9 @@ category: Om Ju-Jutsu
 permalink: "/ju-jutsu/graderingssystem/"
 source_date: '2026-11-03'
 source_id: '272'
+maintained_content: true
+description: Så fungerar graderingssystemet för vuxna i Ju-jutsu Kai. Läs om bältesfärger,
+  minimitider och krav för gradering.
 ---
 
 ## För vuxna
@@ -50,7 +53,7 @@ Graderna är uppdelade enligt följande
 
 Till de olika graderna finns följande rekommenderade minimitider:
 
-|  |  |
+| Gradering | Rekommenderad minimitid |
 | --- | --- |
 | 6:e kyu – 5:e kyu | 1 termin med minst 22 träningspass |
 | 5:e kyu – 4:e kyu | 1 termin med minst 22 träningspass |

@@ -10,6 +10,11 @@ published_sort: '20120606'
 source_date: '2026-11-03'
 source_id: '654'
 historical: true
+description: Nygraderade jujutsukas! – Här är dom graderade uppställda med sina nya
+  bälten!
+date: '2012-06-06'
+seo:
+  type: BlogPosting
 ---
 
 Här är dom graderade uppställda med sina nya bälten!

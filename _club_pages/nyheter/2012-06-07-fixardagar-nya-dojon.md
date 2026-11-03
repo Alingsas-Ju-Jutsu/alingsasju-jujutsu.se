@@ -10,6 +10,11 @@ published_sort: '20120607'
 source_date: '2026-11-03'
 source_id: '661'
 historical: true
+description: FIXARDAGAR NYA DOJON! – Inför invigningen av nya dojon kommer AJJK att
+  anordna två fixardagar. På plats finns ett gediget material som ska monteras ihop,…
+date: '2012-06-07'
+seo:
+  type: BlogPosting
 ---
 
 Inför invigningen av nya dojon kommer AJJK att anordna två fixardagar.

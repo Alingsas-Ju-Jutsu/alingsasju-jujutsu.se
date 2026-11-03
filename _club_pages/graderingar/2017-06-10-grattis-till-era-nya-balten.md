@@ -10,6 +10,11 @@ published_sort: '20170610'
 source_date: '2026-11-03'
 source_id: '1390'
 historical: true
+description: Grattis till era nya bälten – Grattis Gustav, Amir, William, André, Dennis
+  och Wille till era nya bälten!
+date: '2017-06-10'
+seo:
+  type: BlogPosting
 ---
 
 ![Bild från Grattis till era nya bälten](<{{ '/assets/archive/1983455f4b56720de26b933a.jpg' | relative_url }}>)

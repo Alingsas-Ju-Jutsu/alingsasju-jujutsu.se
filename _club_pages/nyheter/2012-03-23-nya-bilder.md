@@ -10,6 +10,11 @@ published_sort: '20120323'
 source_date: '2026-11-03'
 source_id: '590'
 historical: true
+description: Nya bilder! – 22/3 2012 Arbetet med nya dojon fortsätter att gå framåt.
+  Väggarna är rivna och man kan tydligare se hur dojon kommer att se ut. Nästa vecka…
+date: '2012-03-23'
+seo:
+  type: BlogPosting
 ---
 
 22/3 2012

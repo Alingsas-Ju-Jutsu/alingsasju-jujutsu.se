@@ -12,6 +12,7 @@ layout: default
     <p class="eyebrow">{{ page.hero.eyebrow | escape }}</p>
     <h1 id="hero-title">{{ page.hero.heading | escape }}</h1>
     <a class="button" href="{{ page.hero.button_url | relative_url }}">{{ page.hero.button_text | escape }}</a>
+    <button class="hero__motion-toggle" type="button" aria-pressed="false" hidden>Pausa bildspelet</button>
   </div>
 </section>
 

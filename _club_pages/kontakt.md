@@ -5,6 +5,9 @@ permalink: "/kontakt/"
 contact_page: true
 source_date: '2026-11-03'
 source_id: '1648'
+maintained_content: true
+description: Kontakta Alingsås Ju-Jutsuklubb. Här hittar du klubbens kontaktpersoner,
+  adress på Tennisvägen 8 i Alingsås och information om träning.
 ---
 
 **Kontaktuppgifter**
@@ -51,7 +54,7 @@ Harald Jörby Stenbäck
 
 **Alingsås Ju-Jutsu Klubb**
 
-|  |  |
+| Uppgift | Information |
 | --- | --- |
 | Föreningsnummer | 26345 |
 | Adress | Tennisvägen 8 |

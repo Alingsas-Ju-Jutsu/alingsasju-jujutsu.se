@@ -10,6 +10,10 @@ published_sort: '20131217'
 source_date: '2026-11-03'
 source_id: '999'
 historical: true
+description: Nya bälten i barngrupperna – Stort grattis, bra jobbat allihop!
+date: '2013-12-17'
+seo:
+  type: BlogPosting
 ---
 
 Stort grattis, bra jobbat allihop!

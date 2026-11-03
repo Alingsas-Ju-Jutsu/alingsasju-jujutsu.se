@@ -10,6 +10,10 @@ published_sort: '20120701'
 source_date: '2026-11-03'
 source_id: '691'
 historical: true
+description: Ny grönbältare – Vi säger GRATTIS till Tina Caverö som tagit grönt bälte.
+date: '2012-07-01'
+seo:
+  type: BlogPosting
 ---
 
 Vi säger GRATTIS till Tina Caverö som tagit grönt bälte.

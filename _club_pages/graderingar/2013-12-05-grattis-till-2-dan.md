@@ -10,6 +10,11 @@ published_sort: '20131205'
 source_date: '2026-11-03'
 source_id: '948'
 historical: true
+description: Grattis till 2 dan – Kalle Ekdahl AJJK graderade till 2 dan den 30 november.
+  Stort grattis!
+date: '2013-12-05'
+seo:
+  type: BlogPosting
 ---
 
 Kalle Ekdahl AJJK graderade till 2 dan den 30 november. Stort grattis!

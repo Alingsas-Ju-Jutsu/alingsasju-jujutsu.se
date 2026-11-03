@@ -10,6 +10,11 @@ published_sort: '20200414'
 source_date: '2026-11-03'
 source_id: '1606'
 historical: true
+description: Info angående träning i Alingsås Ju-jutsuklubb! – AJJK:s styrelse beslutade
+  5 april att förlänga beslutet om inställd gruppträning. Det nya beslutet gäller…
+date: '2020-04-14'
+seo:
+  type: BlogPosting
 ---
 
 ![Bild från Info angående träning i Alingsås Ju-jutsuklubb!](<{{ '/assets/archive/e88bb60b79778630a9712997.png' | relative_url }}>)

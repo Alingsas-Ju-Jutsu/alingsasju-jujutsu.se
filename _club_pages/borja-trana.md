@@ -4,6 +4,8 @@ category: Välkommen
 permalink: "/borja-trana/"
 maintained_content: true
 source_id: '2581'
+description: Börja träna ju-jutsu i Alingsås. Se grupper för barn och vuxna, aktuella
+  träningstider, terminsstart, adress och information om träningsavgifter.
 ---
 
 ## Aktuella grupper och träningstider

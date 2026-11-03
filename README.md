@@ -293,6 +293,46 @@ behöver därför bara beskrivas en gång. Publiceringen sker vid sammanslagning
 inte automatiskt på ett framtida startdatum. Om ändringen ska publiceras senare
 behöver sammanslagningen planeras av en ansvarig person.
 
+## Sökmotorer och tillgänglighet
+
+Webbplatsen genererar sidtitlar, kanoniska URL:er, delningsmetadata,
+`sitemap.xml` och `robots.txt`. Sidornas `description` i YAML-metadata används
+som beskrivning för sökresultat. Nya nyheter ska även ha `date: "YYYY-MM-DD"`
+och `seo: { type: BlogPosting }`. Startsidan har strukturerad information
+om klubben. Adresserna anpassas automatiskt till testdomänen eller den egna
+domänen vid publicering.
+
+Behåll en tydlig rubrikordning: sidmallen skapar huvudrubriken, så börja
+innehållets rubriker med `##`. Skriv beskrivande länktexter och bildalternativ,
+och använd riktiga kolumnrubriker i tabeller. Viktig text i affischer behöver
+också finnas som vanlig text. Startsidan har en knapp för att pausa bildspelet;
+besökarens inställning för minskad rörelse respekteras. Menyerna fungerar med
+tangentbord och kan stängas med Escape.
+
+Förbättringarna riktar sig mot WCAG 2.2 AA men är inte en certifiering eller
+juridisk bedömning. Manuell granskning med skärmläsare, zoom och tangentbord
+behövs även efter automatiska kontroller. Äldre PDF-/Excel-dokument och
+bildgallerier behöver separat bedömas; en automatiserad HTML-kontroll
+bekräftar inte deras tillgänglighet.
+
+Vid utveckling kan du efter `make build` kontrollera metadata, strukturerad
+data, bildalternativ, tabellrubriker, lokala länkar och sökmotorfiler med:
+
+```sh
+docker compose run --rm site ruby tools/validate_site.rb
+```
+
+För en byggning med annan domän och bassökväg kan dessa anges som argument
+till kontrollskriptet. Detta är inte ett krav vid vanliga innehållsuppdateringar.
+
+Webbplatsens egna mallar laddar inga analysverktyg, externa typsnitt eller
+inbäddade sociala flöden. Kartor, kalender och sociala medier öppnas via länkar.
+Detta ersätter inte klubbens ansvar att granska publicering av personuppgifter,
+foton (särskilt på barn), värdtjänstens behandling av besöksdata eller behovet
+av integritetsinformation. Lägg inte till en samtyckesbanner som en kosmetisk
+åtgärd; bedöm faktisk behandling och samtyckesbehov innan nya spårningstjänster
+eller inbäddningar införs.
+
 ## Arkivera den offentliga källwebbplatsen
 
 ```sh

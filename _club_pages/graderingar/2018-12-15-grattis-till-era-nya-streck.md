@@ -10,6 +10,10 @@ published_sort: '20181215'
 source_date: '2026-11-03'
 source_id: '1498'
 historical: true
+description: 'Grattis till era nya streck – '
+date: '2018-12-15'
+seo:
+  type: BlogPosting
 ---
 
 [![Bild från Grattis till era nya streck](<{{ '/assets/archive/db8bbb44980fee20e92c213a.jpg' | relative_url }}>)](<{{ '/assets/archive/db8bbb44980fee20e92c213a.jpg' | relative_url }}>)

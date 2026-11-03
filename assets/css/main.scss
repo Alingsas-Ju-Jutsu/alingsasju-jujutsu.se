@@ -4,7 +4,7 @@
 $ink: #17231f;
 $muted: #52615a;
 $paper: #f5f3ed;
-$accent: #c94f2d;
+$accent: #ad3e20;
 $line: rgba($ink, 0.18);
 $content-width: 76rem;
 
@@ -29,9 +29,41 @@ a {
 }
 
 a:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+button:focus-visible {
   outline: 3px solid $accent;
   outline-offset: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+button {
+  font: inherit;
+}
+
+.nav-link,
+.nav-group > summary,
+.nav-group li a,
+.nav-children summary,
+.contact__social a,
+.site-footer a {
+  min-height: 24px;
+}
+
+button:focus-visible,
+.training-schedule a:focus-visible,
+.club-links a:focus-visible,
+.topbar a:focus-visible,
+.site-footer a:focus-visible {
+  outline-color: #ffb59f;
 }
 
 .skip-link {
@@ -256,7 +288,28 @@ summary:focus-visible {
   background-position: center 45%;
   background-size: cover;
   opacity: 0;
+}
+
+.hero__slide:first-child {
+  opacity: 1;
+}
+
+.hero--animated .hero__slide {
   animation: hero-slideshow 18s linear infinite;
+}
+
+.hero__motion-toggle {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid white;
+  background: $ink;
+  color: white;
+  cursor: pointer;
+}
+
+.hero__motion-toggle[hidden] {
+  display: none;
 }
 
 .hero__slide:nth-child(1) {
@@ -603,6 +656,7 @@ summary:focus-visible {
 
 .page-hero h1 {
   max-width: 20ch;
+  overflow-wrap: anywhere;
   margin: 0;
   font-size: clamp(2.5rem, 7vw, 5rem);
   letter-spacing: -0.06em;
@@ -813,13 +867,19 @@ summary:focus-visible {
   }
 
   .site-nav {
+    position: relative;
     justify-content: flex-start;
     margin-top: 0.8rem;
+  }
+
+  .site-nav > .nav-group {
+    position: static;
   }
 
   .nav-group > ul {
     right: auto;
     left: 0;
+    max-width: 100%;
   }
 
   .hero {
@@ -869,11 +929,4 @@ summary:focus-visible {
     transition-duration: 0.01ms !important;
   }
 
-  .hero__slide {
-    animation: none;
-  }
-
-  .hero__slide:nth-child(1) {
-    opacity: 1;
-  }
 }

@@ -10,6 +10,11 @@ published_sort: '20201031'
 source_date: '2026-11-03'
 source_id: '1707'
 historical: true
+description: Inställda träningar – Hej medlemmar i AJJK! Då FHM kommit med nya riktlinjer
+  för idrottsträning kommer AJJK att ställa in all träning för vuxna från…
+date: '2020-10-31'
+seo:
+  type: BlogPosting
 ---
 
 Hej medlemmar i AJJK!

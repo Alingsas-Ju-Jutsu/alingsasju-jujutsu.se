@@ -10,6 +10,10 @@ published_sort: '20120513'
 source_date: '2026-11-03'
 source_id: '607'
 historical: true
+description: Graderingsträningen 6 maj – Bra kämpat alla som var med på graderingsträningen!
+date: '2012-05-13'
+seo:
+  type: BlogPosting
 ---
 
 Bra kämpat alla som var med på graderingsträningen!

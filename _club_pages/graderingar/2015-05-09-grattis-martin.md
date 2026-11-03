@@ -10,6 +10,11 @@ published_sort: '20150509'
 source_date: '2026-11-03'
 source_id: '1174'
 historical: true
+description: Grattis Martin! – Stort grattis till Martin Abrahamson som idag graderade
+  till första dan! /AJJK
+date: '2015-05-09'
+seo:
+  type: BlogPosting
 ---
 
 Stort grattis till Martin Abrahamson som idag graderade till första dan!

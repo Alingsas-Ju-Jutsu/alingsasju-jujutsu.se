@@ -10,6 +10,11 @@ published_sort: '20120601'
 source_date: '2026-11-03'
 source_id: '641'
 historical: true
+description: Invigning av nya dojon 25 augusti – Den 25 augusti är det invigning av
+  AJJKs nya dojo. Lär mer [Här (länkmål saknas)]
+date: '2012-06-01'
+seo:
+  type: BlogPosting
 ---
 
 Den 25 augusti är det invigning av AJJKs nya dojo.

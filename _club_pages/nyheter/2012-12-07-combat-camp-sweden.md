@@ -10,6 +10,11 @@ published_sort: '20121207'
 source_date: '2026-11-03'
 source_id: '769'
 historical: true
+description: Combat Camp Sweden – AJJK fixar en bil ner till Combat Camp – ett stiloberoende
+  ju-jutsuläger med Duo, Tävlingsju-jutsu och självförsvarsju-jutsu. Läs…
+date: '2012-12-07'
+seo:
+  type: BlogPosting
 ---
 
 AJJK fixar en bil ner till Combat Camp – ett stiloberoende ju-jutsuläger med Duo, Tävlingsju-jutsu och självförsvarsju-jutsu. Läs informationen i bilden och se till att **anmäla er senast före graderingen på lördag 15/12!**

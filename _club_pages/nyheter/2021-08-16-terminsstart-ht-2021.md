@@ -10,6 +10,11 @@ published_sort: '20210816'
 source_date: '2026-11-03'
 source_id: '2275'
 historical: true
+description: Terminsstart HT 2021! – Hej! Nu sätter vi igång inne på mattan igen!
+  Terminsstart för höstterminen från och med den 23 augusti 2021! Nya och bekanta…
+date: '2021-08-16'
+seo:
+  type: BlogPosting
 ---
 
 Hej!

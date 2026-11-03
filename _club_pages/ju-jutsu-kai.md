@@ -4,6 +4,8 @@ category: Om Ju-Jutsu
 permalink: "/ju-jutsu/ju-jutsu-kai/"
 source_date: '2026-11-03'
 source_id: '1674'
+description: Vad är Ju-jutsu Kai? Läs om självförsvar, träning och stilen som utövas
+  hos Alingsås Ju-Jutsuklubb.
 ---
 
 Ju-jutsu är ett samlingsnamn för japansk kampkonst och självförsvar utan vapen och ju-jutsu kan översättas till mjuk eller flexibel teknik. Med mjuk/flexibel avses att man ska försöka nå största möjliga effekt med minsta möjliga kraft genom att utnyttja motståndarens rörelse.

@@ -10,6 +10,10 @@ published_sort: '20121216'
 source_date: '2026-11-03'
 source_id: '785'
 historical: true
+description: Grattis till nygraderade! – Bra kämpat alla!
+date: '2012-12-16'
+seo:
+  type: BlogPosting
 ---
 
 Bra kämpat alla!

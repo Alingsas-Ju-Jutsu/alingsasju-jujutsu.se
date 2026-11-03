@@ -5,6 +5,8 @@ permalink: "/foreningen/graderingar/"
 source_date: '2026-11-03'
 source_id: '2137'
 maintained_content: true
+description: Bilder och berättelser från tidigare graderingar i Alingsås Ju-Jutsuklubb
+  för barn och vuxna.
 ---
 
 Gradering från både barn och vuxna genom åren 2010-2021

@@ -10,6 +10,11 @@ published_sort: '20200503'
 source_date: '2026-11-03'
 source_id: '1609'
 historical: true
+description: Uppdaterad information kring träning – AJJK:s styrelse beslutade 26 april
+  att förlänga beslutet om inställd gruppträning. Det nya beslutet gäller fram till…
+date: '2020-05-03'
+seo:
+  type: BlogPosting
 ---
 
 ![Bild från Uppdaterad information kring träning](<{{ '/assets/archive/e88bb60b79778630a9712997.png' | relative_url }}>)

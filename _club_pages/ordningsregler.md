@@ -5,6 +5,8 @@ permalink: "/foreningen/ordningsregler/"
 source_date: '2026-11-03'
 source_id: '404'
 maintained_content: true
+description: Ordningsregler i Alingsås Ju-Jutsuklubbs dojo. Läs om respekt, förberedelser,
+  träning, kläder, hygien och sjukdom.
 ---
 
 ## Ordningsregler i dojon

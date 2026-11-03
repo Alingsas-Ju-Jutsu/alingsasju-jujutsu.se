@@ -10,6 +10,10 @@ published_sort: '20150607'
 source_date: '2026-11-03'
 source_id: '1186'
 historical: true
+description: 'Grattis till alla nygraderade – '
+date: '2015-06-07'
+seo:
+  type: BlogPosting
 ---
 
 [![MON\_2015-06-06](<{{ '/assets/archive/d0dfc787a7a481d31452c8a2.jpg' | relative_url }}>)](<{{ '/assets/archive/d0dfc787a7a481d31452c8a2.jpg' | relative_url }}>)

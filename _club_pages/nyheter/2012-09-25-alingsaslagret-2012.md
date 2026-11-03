@@ -10,6 +10,12 @@ published_sort: '20120925'
 source_date: '2026-11-03'
 source_id: '740'
 historical: true
+maintained_content: true
+description: Alingsåslägret 2012 – Stort tack till alla som var med och medverkade
+  till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld…
+date: '2012-09-25'
+seo:
+  type: BlogPosting
 ---
 
 Stort tack till alla som var med och medverkade till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld tillställning. Det är ju så att det inte spelar någon roll hur många mattor vi bär eller hur briljanta instruktörer och föreläsare vi tar dit om inte ni är med och skapar den där speciella lägerfestlighetskänslan!
@@ -22,7 +28,7 @@ Det är alltid gästerna som gör festen! Och ni gjorde det kanon! Och jag hoppa
 
 Kram, Malin Bohlin
 
-##### Stort tack till alla som var med och medverkade till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld tillställning. Det är ju så att det inte spelar någon roll hur många mattor vi bär eller hur briljanta instruktörer och föreläsare vi tar dit om inte ni är med och skapar den där speciella lägerfestlighetskänslan!
+## Stort tack till alla som var med och medverkade till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld tillställning. Det är ju så att det inte spelar någon roll hur många mattor vi bär eller hur briljanta instruktörer och föreläsare vi tar dit om inte ni är med och skapar den där speciella lägerfestlighetskänslan!
 
 Särskilt tack till instruktörerna [Anders Bergström](<http://www.facebook.com/anders.bergstrom.146>), Tony Hansson, [Claes Alingsjö](<http://www.facebook.com/alingsjo>), [Johan Osbjer](<http://www.facebook.com/johan.osbjer>), [Dan Isaksson](<http://www.facebook.com/dan.isaksson.9>) och [John Gustavsson](<http://www.facebook.com/john.gustavsson.315>). Ni gjorde att kanonjobb, som jag gissar att vi alla kommer att känna av på ett mer eller mindre smärtsamt sätt under kommande vecka!
 

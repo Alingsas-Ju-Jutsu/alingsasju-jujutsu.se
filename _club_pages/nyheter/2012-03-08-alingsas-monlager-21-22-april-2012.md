@@ -10,6 +10,12 @@ published_sort: '20120308'
 source_date: '2026-11-03'
 source_id: '579'
 historical: true
+description: Alingsås monläger 21-22 april 2012 – Alingsås Ju-jutsuklubb anordnar
+  ett läger för alla mon-grupper (9-14 år) i Tallåsen, Ödenäs. Vi kommer att bjuda
+  in…
+date: '2012-03-08'
+seo:
+  type: BlogPosting
 ---
 
 Alingsås Ju-jutsuklubb anordnar ett läger för alla mon-grupper (9-14 år) i Tallåsen, Ödenäs. Vi kommer att bjuda in barn och ledare från Alingsås Ju-jutsuklubb och Ju-jutsuklubben Shindo.

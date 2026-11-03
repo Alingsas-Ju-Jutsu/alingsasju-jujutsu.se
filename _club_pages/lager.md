@@ -1,7 +1,8 @@
 ---
 title: Läger
 category: Alingsås Ju-Jutsuklubb
-permalink: /lager/
+permalink: "/lager/"
+description: Läs om Alingsås Ju-Jutsuklubbs läger, Kai out West och tidigare Alingsåsläger.
 ---
 
 Här hittar du information om klubbens läger.

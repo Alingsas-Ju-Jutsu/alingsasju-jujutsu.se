@@ -5,11 +5,14 @@ permalink: "/traning/kalendarium/"
 source_date: '2026-11-03'
 historical: true
 source_id: '18'
+maintained_content: true
+description: Kalendarium för Alingsås Ju-Jutsuklubb med länk till klubbens kalender
+  och historiska aktiviteter från 2013.
 ---
 
 [Öppna kalendern](<https://www.google.com/calendar/embed?title=%C2%A0&showTabs=0&showCalendars=0&mode=AGENDA&height=600&wkst=2&bgcolor=%23ffffff&src=0eh4oavi3ebh2lqh9vm29qu0u0%40group.calendar.google.com&color=%232F6309&ctz=Europe%2FStockholm>)
 
-|  |  |  |  |
+| Datum | Veckodag | Tid | Aktivitet |
 | --- | --- | --- | --- |
 | 2013-01-23 | onsdag | 19.00-22.00 | Provgradering 2:a Dan |
 |  |  |  |  |

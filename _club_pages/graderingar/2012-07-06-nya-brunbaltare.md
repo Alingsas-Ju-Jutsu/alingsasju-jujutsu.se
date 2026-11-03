@@ -10,6 +10,11 @@ published_sort: '20120706'
 source_date: '2026-11-03'
 source_id: '695'
 historical: true
+description: Nya brunbältare – Vi säger GRATTIS till Ulf och Tobias till sina bruna
+  bälten.
+date: '2012-07-06'
+seo:
+  type: BlogPosting
 ---
 
 Vi säger GRATTIS till Ulf och Tobias till sina bruna bälten.

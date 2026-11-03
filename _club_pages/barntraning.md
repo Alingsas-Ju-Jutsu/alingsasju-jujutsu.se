@@ -4,6 +4,9 @@ category: Om Ju-Jutsu
 permalink: "/ju-jutsu/barntraning/"
 source_date: '2026-11-03'
 source_id: '274'
+maintained_content: true
+description: Läs om barnträning i Ju-jutsu Kai, sho- och monsystemet, bältesgrader
+  och kraven för gradering.
 ---
 
 **För de yngsta**
@@ -90,7 +93,7 @@ För träning av barn och ungdomar har Svenska Ju-jutsuförbundet ett speciellt 
 
 Till de olika mongraderna finns minimitider och övriga krav:
 
-|  |  |
+| Gradering | Minimitid |
 | --- | --- |
 | 7:e mon – 6:e mon | 1 termin med minst 11 träningspass |
 | 6:e mon – 5:e mon | 1 termin med minst 11 träningspass |
@@ -129,7 +132,7 @@ Monpasset innehåller uppgifter om:
 
 Den som har fyllt 14 år, har ett ju-jutsupass och uppfyller kravet för teknisk färdighet, kan gradera till kyugrad i Ju-jutsu Kai enligt följande.
 
-|  |
+| Övergång till kyugrad |
 | --- |
 | 7:e mon och 6:e mon kan gradera till 5:e kyu, gult bälte, när man uppfyller kravet för teknisk färdighet efter minst 1 termins vuxenträning |
 | 5:e mon kan gradera till 5:e kyu, gult bälte, när man uppfyller kravet för teknisk färdighet. |

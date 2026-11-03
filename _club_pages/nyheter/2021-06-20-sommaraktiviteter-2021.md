@@ -10,6 +10,11 @@ published_sort: '20210620'
 source_date: '2026-11-03'
 source_id: '2251'
 historical: true
+description: Sommaraktiviteter, 2021 – Här kommer lite information gällande sommarens
+  aktiviteter! Hoppas vi alla ses i sommar, nya som mindre nya ansikten!
+date: '2021-06-20'
+seo:
+  type: BlogPosting
 ---
 
 Här kommer lite information gällande sommarens aktiviteter!
