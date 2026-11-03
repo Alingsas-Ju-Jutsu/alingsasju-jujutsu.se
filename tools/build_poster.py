@@ -92,7 +92,6 @@ def build(schedule_path, output, font_style=None):
     rows.extend([
         ("", 14, False),
         ("TENNISVÄGEN 8 · ALINGSÅS", 23, False),
-        ("WWW.ALINGSASJU-JUTSU.SE", 23, False),
     ])
 
     # Measure with the same renderer, then extend the canvas for longer schedules.
