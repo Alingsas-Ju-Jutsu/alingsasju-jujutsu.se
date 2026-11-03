@@ -29,6 +29,12 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
+      - name: Generate training poster
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends python3-pil python3-yaml fonts-dejavu-core
+          /usr/bin/python3 tools/test_build_poster.py
+          /usr/bin/python3 tools/build_poster.py
       - name: Build site
         env:
           JEKYLL_ENV: production

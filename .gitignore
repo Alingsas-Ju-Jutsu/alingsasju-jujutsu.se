@@ -5,3 +5,5 @@
 _site/
 vendor/
 _old_site/
+assets/generated/
+__pycache__/

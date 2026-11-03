@@ -119,6 +119,25 @@ ta bort någon från sidan. Ladda upp nya porträtt i
 `assets/images/instructors/` och ange motsvarande sökväg i `image`.
 Använd en vanlig porträttbild utan inbakad text.
 
+## Träningsaffischen på Schema
+
+GitHub bygger automatiskt en aktuell PNG-affisch från
+[`_data/training_schedule.yml`](_data/training_schedule.yml) vid varje publicering.
+Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
+Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
+Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
+På sidan Schema visas affischen med en nedladdningslänk.
+
+Generatorn finns i `tools/build_poster.py` och återanvänder överdelen av
+originalaffischen med foto, logotyp och rubrik. Originalets gamla tider och
+datum beskärs bort och ersätts med en mörk schemaruta: grupperna visas i
+tre kolumner med terminsstart nedanför. När en bakgrund utan text finns kan
+den ersätta den beskurna originalbilden.
+Genererade bilder i `assets/generated/` ska inte checkas in.
+`make build` och `make serve` genererar också affischen via Docker.
+Starta om förhandsvisningen efter schemaändringar för att uppdatera PNG-filen;
+textschemat uppdateras fortfarande med Jekylls vanliga omladdning.
+
 ## Redigera sidor
 
 GitHub Copilot-agenter följer

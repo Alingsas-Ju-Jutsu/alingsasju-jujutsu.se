@@ -124,6 +124,9 @@ content changes; preserve unrelated content and design.
   `_data/excluded_archive_pages.yml`.
 - The Börja träna page must show the shared current schedule and link to
   Träningsavgifter, without restoring its old beginner-information section.
+- The Schema poster is generated from `_data/training_schedule.yml` during
+  deployment. Do not edit the old poster or commit `assets/generated/`;
+  change the shared YAML to update the poster's date and training times.
 - Edit instructor names, portrait paths and optional descriptions in
   `_data/instructors.yml`. Keep their cards in `_includes/instructors.html`;
   use portrait photos without baked-in names or grades, not poster images.

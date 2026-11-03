@@ -34,14 +34,8 @@ Erik Swärd
 
 Betty Fråst
 
-{% capture historical_content %}
+## Träningsaffisch
 
+![Aktuell träningsaffisch för Alingsås Ju-Jutsuklubb. Terminsstart och träningstider finns även som text ovan.](<{{ '/assets/generated/training-poster.png' | relative_url }}>)
 
-Detta är ett tidigare schema; aktuella träningstider visas ovan.
-Terminsstart 15 Januari
-
-![Bild från SCHEMA](<{{ '/assets/archive/2d416e4f25efdeb4af7b8391.png' | relative_url }}>)
-
-
-{% endcapture %}
-{% include historical-content.html content=historical_content %}
+[Ladda ner träningsaffischen (PNG)](<{{ '/assets/generated/training-poster.png' | relative_url }}>){: download="traningsaffisch.png"}
