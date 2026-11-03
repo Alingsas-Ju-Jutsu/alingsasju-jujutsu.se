@@ -129,6 +129,17 @@ summary:focus-visible {
   gap: clamp(0.75rem, 2vw, 2rem);
 }
 
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link[aria-current="page"] {
+  color: $accent;
+}
+
 .nav-group {
   position: relative;
   font-size: 0.88rem;
@@ -321,9 +332,18 @@ summary:focus-visible {
 }
 
 .club-links {
+  background: $ink;
+  color: white;
+}
+
+.club-links__inner {
   max-width: $content-width;
   margin: 0 auto;
   padding: 5.5rem clamp(1.25rem, 4vw, 3rem) 6rem;
+}
+
+.club-links .eyebrow {
+  color: #ffb59f;
 }
 
 .section-heading {
@@ -464,6 +484,7 @@ summary:focus-visible {
   padding: 1.5rem;
   border-top: 3px solid $accent;
   background: white;
+  color: $ink;
 }
 
 .link-card h3 {
@@ -511,17 +532,27 @@ summary:focus-visible {
 }
 
 .contact {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 3rem;
-  padding: 5rem clamp(1.25rem, 11vw, 11rem);
-  background: $ink;
-  color: white;
+  padding: 5rem clamp(1.25rem, 4vw, 3rem);
+  background: white;
+  color: $ink;
+  text-align: center;
 }
 
-.contact__copy {
-  width: min(100%, 36rem);
+.contact__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+.contact__copy,
+.contact__social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  gap: 0.75rem;
 }
 
 .contact h2 {
@@ -549,17 +580,6 @@ summary:focus-visible {
 .button--light:focus-visible {
   background: white;
   color: $ink;
-}
-
-.contact__social {
-  display: grid;
-  gap: 0.55rem;
-  min-width: 10rem;
-}
-
-.contact__social h3 {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
 }
 
 .contact__social a {
@@ -824,11 +844,12 @@ summary:focus-visible {
   }
 
   .contact {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2.5rem;
     padding-block: 4rem;
-    background-size: auto 8rem;
+  }
+
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: 4rem;
   }
 
   .site-footer__inner {

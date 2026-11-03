@@ -21,7 +21,26 @@ layout: default
   </div>
 </section>
 
+<section class="contact" id="kontakt" aria-labelledby="contact-title">
+  <div class="contact__inner">
+  <div class="contact__copy">
+    <h2 id="contact-title">{{ page.contact.heading | escape }}</h2>
+    <a class="contact__address" href="{{ site.club.address_url }}">
+      {% for line in page.contact.address %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+    </a>
+    <a class="button" href="{{ page.contact.button_url }}">{{ page.contact.button_text | escape }}</a>
+  </div>
+  <div class="contact__social">
+    <h2>{{ page.contact.social_heading | escape }}</h2>
+    {% for link in page.contact.social_links %}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
+    {% endfor %}
+  </div>
+  </div>
+</section>
+
 <section class="club-links" aria-labelledby="club-links-title">
+  <div class="club-links__inner">
   <div class="section-heading">
     <p class="eyebrow">{{ page.navigation.eyebrow | escape }}</p>
     <h2 id="club-links-title">{{ page.navigation.heading | escape }}</h2>
@@ -34,21 +53,5 @@ layout: default
       </section>
     {% endfor %}
   </div>
-</section>
-
-<section class="contact" id="kontakt" aria-labelledby="contact-title">
-  <div class="contact__copy">
-    <p class="eyebrow">{{ page.contact.eyebrow | escape }}</p>
-    <h2 id="contact-title">{{ page.contact.heading | escape }}</h2>
-    <a class="contact__address" href="{{ site.club.address_url }}">
-      {% for line in page.contact.address %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
-    </a>
-    <a class="button button--light" href="{{ page.contact.button_url }}">{{ page.contact.button_text | escape }}</a>
-  </div>
-  <div class="contact__social">
-    <h3>{{ page.contact.social_heading | escape }}</h3>
-    {% for link in page.contact.social_links %}
-      <a href="{{ link.url }}">{{ link.title | escape }}</a>
-    {% endfor %}
-  </div>
+</div>
 </section>
