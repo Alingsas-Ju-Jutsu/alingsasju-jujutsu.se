@@ -1,0 +1,14 @@
+<div class="instructor-grid">
+  {% for instructor in site.data.instructors %}
+  <article class="instructor-card instructor-card--{{ instructor.color | default: 'black' | escape }}">
+    <h2 class="instructor-card__name">{{ instructor.name | escape }}</h2>
+    <img class="instructor-card__portrait" src="{{ instructor.image | relative_url }}" alt="Porträtt av {{ instructor.name | escape }}" width="700" height="989" loading="lazy">
+    {% if instructor.level and instructor.level != "" %}
+    <p class="instructor-card__level">{{ instructor.level | escape }}</p>
+    {% endif %}
+    {% if instructor.description and instructor.description != "" %}
+    <p class="instructor-card__description">{{ instructor.description | escape | newline_to_br }}</p>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>

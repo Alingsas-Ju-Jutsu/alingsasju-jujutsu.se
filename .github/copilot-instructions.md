@@ -124,6 +124,9 @@ content changes; preserve unrelated content and design.
   `_data/excluded_archive_pages.yml`.
 - The Börja träna page must show the shared current schedule and link to
   Träningsavgifter, without restoring its old beginner-information section.
+- Edit instructor names, portrait paths and optional descriptions in
+  `_data/instructors.yml`. Keep their cards in `_includes/instructors.html`;
+  use portrait photos without baked-in names or grades, not poster images.
 
 ## Lightweight content workflow
 

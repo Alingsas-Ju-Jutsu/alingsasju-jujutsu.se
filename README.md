@@ -98,6 +98,27 @@ Sätt datum och tider inom citattecken. En framtida terminsstart eller avvikelse
 innebär inte tidsinställd publicering: allt du sparar till `main` publiceras
 vid nästa lyckade byggning.
 
+## Uppdatera instruktörer
+
+Instruktörssidan byggs av HTML-kort med vanliga porträttbilder.
+Ändra namn, bild och eventuell presentation i
+[`_data/instructors.yml`](_data/instructors.yml). Du behöver inte skapa
+nya affischbilder när texten ändras.
+
+Varje post har `name` (namn), `image` (sökväg till porträttbild),
+`color` (kortets bakgrundsfärg), `level` (grad, till exempel `2 dan`)
+och `description` (valfri presentation). Graden visas under porträttet,
+med samma ju-jutsu-emblem som vid namnet. Med `level: ""` döljs gradfältet.
+Välj `black`, `brown`, `blue`, `orange` eller `green` för `color`, till
+exempel `color: brown`. Färgerna är anpassade för läsbar vit text.
+Utan `color` används svart.
+Med `description: ""` visas ingen
+presentationstext. Ordningen i filen styr ordningen på sidan. Kopiera en
+hel post för att lägga till en instruktör eller ta bort posten för att
+ta bort någon från sidan. Ladda upp nya porträtt i
+`assets/images/instructors/` och ange motsvarande sökväg i `image`.
+Använd en vanlig porträttbild utan inbakad text.
+
 ## Redigera sidor
 
 GitHub Copilot-agenter följer

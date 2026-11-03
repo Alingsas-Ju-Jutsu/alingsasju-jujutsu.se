@@ -23,12 +23,4 @@ layout: default
   <div class="page-content__body">
     {{ content }}
   </div>
-
-  {% unless page.contact_page %}
-    <section class="page-contact" aria-label="Kontakta klubben">
-      <h2>Frågor om {{ page.title | downcase }}?</h2>
-      <p>Kontakta klubben så hjälper vi dig vidare.</p>
-      <a class="button" href="{{ '/kontakt/' | relative_url }}">Kontakta klubben</a>
-    </section>
-  {% endunless %}
 </article>

@@ -1,0 +1,41 @@
+- name: Harald Stenbäck
+  level: 2 dan
+  color: black
+  image: /assets/images/instructors/harald-stenback.jpg
+  description: ""
+
+- name: Erik Dahlman
+  level: 1 kyu
+  color: brown
+  image: /assets/images/instructors/erik-dahlman.jpg
+  description: ""
+
+- name: Jonas Kjell
+  level: 1 kyu
+  color: brown
+  image: /assets/images/instructors/jonas-kjell.jpg
+  description: ""
+
+- name: Tobias Lindström
+  level: 2 kyu
+  color: blue
+  image: /assets/images/instructors/tobias-lindstrom.jpg
+  description: ""
+
+- name: Erik Swärd
+  level: 4 kyu
+  color: orange
+  image: /assets/images/instructors/erik-sward.jpg
+  description: ""
+
+- name: Arvid Sakshaug
+  level: 4 kyu
+  color: orange
+  image: /assets/images/instructors/arvid-sakshaug.jpg
+  description: ""
+
+- name: Betty Fråst
+  level: 1 mon
+  color: green
+  image: /assets/images/instructors/betty-frast.jpg
+  description: ""

@@ -38,3 +38,7 @@ Tennisvägen 8
 
 Läs om terminsavgifter, familjerabatt och betalning på sidan
 [Träningsavgifter]({{ '/traning/traningsavgifter/' | relative_url }}).
+
+## Frågor om att börja träna?
+
+[Kontakta klubben](<{{ '/kontakt/' | relative_url }}>) så hjälper vi dig vidare.

@@ -2,7 +2,6 @@
 title: Kontakt
 category: Träning & praktiskt
 permalink: "/kontakt/"
-contact_page: true
 source_date: '2026-11-03'
 source_id: '1648'
 maintained_content: true
