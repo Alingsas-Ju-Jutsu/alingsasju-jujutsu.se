@@ -298,8 +298,7 @@ behöver sammanslagningen planeras av en ansvarig person.
 Webbplatsen genererar sidtitlar, kanoniska URL:er, delningsmetadata,
 `sitemap.xml` och `robots.txt`. Sidornas `description` i YAML-metadata används
 som beskrivning för sökresultat. Nya nyheter ska även ha `date: "YYYY-MM-DD"`
-och `seo: { type: BlogPosting }`. Startsidan har strukturerad information
-om klubben. Adresserna anpassas automatiskt till testdomänen eller den egna
+och `seo: { type: BlogPosting }`. Adresserna anpassas automatiskt till testdomänen eller den egna
 domänen vid publicering.
 
 Behåll en tydlig rubrikordning: sidmallen skapar huvudrubriken, så börja
