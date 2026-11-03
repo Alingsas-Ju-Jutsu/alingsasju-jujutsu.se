@@ -10,15 +10,9 @@ description: Aktuella träningstider för knattar, barn och vuxna hos Alingsås 
 
 
 ## Aktuella träningstider
+
 {% include training-schedule.html %}
 
-{% capture historical_content %}
-
-
-Detta är ett tidigare schema; aktuella träningstider visas ovan.
-Terminsstart 15 Januari
-
-![Bild från SCHEMA](<{{ '/assets/archive/2d416e4f25efdeb4af7b8391.png' | relative_url }}>)
 
 **Ansvariga instruktörer:**
 
@@ -39,6 +33,14 @@ Tobias Lindström 0793 00 83 26
 Erik Swärd
 
 Betty Fråst
+
+{% capture historical_content %}
+
+
+Detta är ett tidigare schema; aktuella träningstider visas ovan.
+Terminsstart 15 Januari
+
+![Bild från SCHEMA](<{{ '/assets/archive/2d416e4f25efdeb4af7b8391.png' | relative_url }}>)
 
 
 {% endcapture %}
