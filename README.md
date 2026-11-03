@@ -128,6 +128,11 @@ Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affische
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
 På sidan Schema visas affischen med en nedladdningslänk.
 
+Välj typsnitt i [`_data/poster.yml`](_data/poster.yml): `font: condensed`
+för det smala typsnittet eller `font: typewriter` för skrivmaskinsstil.
+Det påverkar bara affischens genererade text, inte webbplatsen eller text
+som redan finns i originalbilden.
+
 Generatorn finns i `tools/build_poster.py` och återanvänder överdelen av
 originalaffischen med foto, logotyp och rubrik. Originalets gamla tider och
 datum beskärs bort och ersätts med en mörk schemaruta: grupperna visas i

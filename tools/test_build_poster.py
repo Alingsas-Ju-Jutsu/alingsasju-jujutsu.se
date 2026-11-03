@@ -10,6 +10,15 @@ from build_poster import ROOT, build
 
 
 class PosterTest(unittest.TestCase):
+    def test_both_font_styles_generate_posters(self):
+        with tempfile.TemporaryDirectory() as directory:
+            for style in ("condensed", "typewriter"):
+                with self.subTest(style=style):
+                    output = Path(directory) / f"{style}.png"
+                    build(ROOT / "_data/training_schedule.yml", output, font_style=style)
+                    with Image.open(output) as image:
+                        image.verify()
+
     def test_schedule_values_are_rendered_and_changes_reach_the_image(self):
         schedule = yaml.safe_load((ROOT / "_data/training_schedule.yml").read_text())
         with tempfile.TemporaryDirectory() as directory:

@@ -7,7 +7,7 @@ ENV BUNDLE_JOBS=4 \
 
 COPY Gemfile Gemfile.lock ./
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential python3-pil python3-yaml fonts-dejavu-core \
+    && apt-get install -y --no-install-recommends build-essential python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra \
     && rm -rf /var/lib/apt/lists/* \
     && bundle install
 

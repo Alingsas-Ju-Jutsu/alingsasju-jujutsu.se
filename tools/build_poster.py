@@ -7,11 +7,20 @@ import yaml
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONTS = {
+    "condensed": ("DejaVuSansCondensed.ttf", "DejaVuSansCondensed-Bold.ttf"),
+    "typewriter": ("DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf"),
+}
 
 
-def build(schedule_path, output):
+def build(schedule_path, output, font_style=None):
+    if font_style is None:
+        with (ROOT / "_data/poster.yml").open(encoding="utf-8") as source:
+            font_style = yaml.safe_load(source)["font"]
+    if font_style not in FONTS:
+        raise ValueError(f"Unknown poster font {font_style!r}; choose condensed or typewriter.")
+    regular, heavy = FONTS[font_style]
+    font_directory = Path("/usr/share/fonts/truetype/dejavu")
     with schedule_path.open(encoding="utf-8") as source:
         schedule = yaml.safe_load(source)
     if not schedule["groups"]:
@@ -31,7 +40,7 @@ def build(schedule_path, output):
 
     def text(value, y, size=34, bold=False, color="white", measure=False,
              center=600, max_width=1080):
-        font = ImageFont.truetype(BOLD if bold else FONT, size)
+        font = ImageFont.truetype(str(font_directory / (heavy if bold else regular)), size)
         lines = []
         line = ""
         for word in str(value).split():
