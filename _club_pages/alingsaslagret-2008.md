@@ -1,0 +1,34 @@
+---
+title: Alingsåslägret 2008
+category: Läger
+permalink: "/foreningen/alingsaslagret-2008/"
+source_date: '2026-11-03'
+historical: true
+source_id: '295'
+---
+
+**Jubileum i Alingsås, ett träningsläger med atmosfär**
+
+Visst är det härligt att komma till ett ställe där man känner sig välkommen, där hela atmosfären känns behaglig och välkomnande. Så var det 18-19 oktober då ett antal från Värö Budoklubb trädde in i dojon efter det att Alingsås kallat till sitt femte läger under ledning av Malin och Claes och lockat med förstklassiga instruktörer i form av Anders Bergström och Stefan Forsman.
+
+Det där med atmosfär är värt några extra rader för begreppet säger mycket samtidigt som det är svårt att säga exakt vad det är. Om man diskuterar skillnaden i atmosfär mellan ett gammalt hus och ett identiskt nybyggt så sägs det att det är dofter från tidigare verksamhet som sitter vi väggarna. Men när det gäller ju-jutsu i en stor anonym gympasal måste det vara något annat. För mig var det alla leenden jag möttes av så snart jag öppnade dörren in till salen, samtidigt som det låg positiv förväntan i luften från den stora mängd deltagare som redan fanns på plats.
+
+Och det var inte svårt att se att åtskilligt arbete lagts ner för att få allt klart och precis så inbjudande som det var. (Visserligen tog det på söndag eftermiddag några få minuter att få ut mattorna men det en viss skillnad mellan ett femtiotal hjälps åt (bråttom hem) och några få!?) Två stora träningsmattor i var sin ända av lokalen och en uppehållszon i mitten med stora mjuka hoppmattor. Arrangemanget gjorde att samtidigt som det kunde vara full fart på träningen på respektive matta fanns det gott om plats i lokalen för de tillfälligt lediga att följa träningen, bättra på vätskebalansen och bränsledepåerna eller bara koppla av och umgås med nya och gamla vänner.
+
+Beträffande träningen vågar jag påstå att alla var helnöjda med omväxlande Anders och Stefan under de sex pass som erbjöds respektive grupp. God modell med två instruktörer som kompletterar varandra och hanterbara grupper med inte alltför stor skillnad på de tränande inom respektive grupp. Den goda atmosfären fanns även på mattan där alla jag tränade med gjorde sitt yttersta för att göra träningen så meningsfull som möjligt. Och det var inga problem att byta partner, bara upp med armen se sig om fånga blicken på någon ledig och vips hade man en ny kamrat att tampas med. Detta gäller tyvärr inte vid alla läger utan ibland verkar vissa (klubbar) verkar vara sig ”själva nok”.
+
+Både Anders och Stefan har onekligen gediget kunnande om hur instruera på ett effektivt och begripligt sätt, men minst lika viktigt är att de har stor förståelse för att man behöver värma upp långsamt och noggrant. De har också en kuslig förmåga att se om/när man fuskar lite men samtidigt ett positivt sätt att komma med påpekande och korrigeringar. På något underligt sätt känns det bra att få dessa kommentarer och bli tillrättavisad, kanske beroende på den underliggande känslan av att de verkligen bryr sig och bara vill att vi skall bli så duktiga som det någonsin är möjligt.
+
+Har man å andra sidan fått problem tar i regel inte många sekunder från det att man sträckt upp handen eller på annat sätt påkallat deras uppmärksamhet förrän de är på plats och rätar ut frågetecken. Och de kan ju som sagt både lära ut samt själva demonstrera en teknik, ingen teoretisk träslöjd här inte!
+
+Själv tillhörde jag svartbältesgruppen och våra pass hade bland annat påk, kniv, randori, grepptekniker samt kast som teman. Systemets tekniker låg självklart som grund för träningen men det blev också tillfällen att testa varianter utanför ”boken”. Genomgående poängterades ”att aldrig slarva med vare sig teknik, kroppshållning, uppsikt eller kamae”. Borde inta vara nödvändigt att påpeka sådana självklarheter men själv kände jag mig tyvärr träffad mer än en gång!
+
+En viktig lärdom från flera pass var att man inte säkert vet hur totala beväpningen ser ut hos en anfallande individ och att det sannerligen gäller att såväl ha ögon i nacken, för i tid upptäcka eventuell kamrat till den omhändertagne. Lika viktigt som att verkligen ha kontroll på densamme så att han/hon inte vid lämpligt tillfälle tar fram den gömda kniven eller annat vapen. Svårt att alltid genomföra i praktiken men också stimulerande och utmanande att försöka, samt förmodligen verklighetstroget.
+
+Vid sista passet var jag trött, inte så mycket fysiskt som i huvudet. Exempelvis hade jag uppenbara svårigheter att erinra mig vilka handgrepp och förflyttningar som en bra utförd kote hineri krävde. Men det kändes faktiskt som en naturlig reaktion på många nya intryck efter två dagars kvalificerad undervisning.
+
+På lördag kväll fanns det tid för frågor till herrar instruktörer och även om jag själv var förhindrad att deltaga hörde jag att det var mycket uppskattat. PÅ motsvarande sätt vet jag att klubbens övriga deltagare, utspridda på andra träningsgrupper, var mycket nöjda och tyckte de lärt sig massor och haft trevligt.
+
+Så ett stort tack från Värö Budo till såväl arrangörer som instruktörer och vi kommer tillbaka nästa år. Och skall trenden hålla i sig med en deltagare från klubben när lägret arrangerades för andra gången och åtta i år lär vi bli många, många när det är dags för nästa jubileum! Bästa klubb?
+
+*/Kurt J.*

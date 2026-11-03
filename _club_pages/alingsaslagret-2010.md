@@ -1,0 +1,16 @@
+---
+title: Alingsåslägret 2010
+category: Läger
+permalink: "/foreningen/alingsaslagret-2010/"
+source_date: '2026-11-03'
+historical: true
+source_id: '297'
+---
+
+Hej, nu är årets upplaga av Alingsåslägret avklarat och det är bara att konstatera att lägret faktiskt blir snäppet bättre för varje år. I år var det sammanlagt 89 personer som kom och tränade och 25 av dessa var svartbältare, vilket nog kan anses vara ett tecken på att såväl lägerarrangemang som instruktörer håller hög klass. Nästa år siktar vi på att bli över hundra deltagare! Med marginal!
+
+Stort tack till alla som med gott humör, träningsiver och stor entusiasm kom och gjorde årets läger till en tillställning att längta tillbaka till. Och ett särskilt tack till alla er medlemmar som hjälpte till med mattbärning, städning, kioskverksamhet, anmälningar och …
+
+TACK!
+
+/Malin

@@ -1,11 +1,18 @@
-title: Alingsås Ju-Jutsu
-description: Alingsås Ju-Jutsu
+title: Alingsås Ju-Jutsuklubb
+description: Kampsport med självförsvarsinriktning
 url: https://alingsasju-jutsu.se
 baseurl: ""
 lang: sv-SE
 
+club:
+  address_url: "https://www.google.com/maps/place/Alings%C3%A5s+Ju-Jutsuklubb/@57.9346882,12.5255806,15z/data=!4m5!3m4!1s0x0:0x95ada11212f52a2!8m2!3d57.9346882!4d12.5255806"
+
 markdown: kramdown
 permalink: pretty
+
+collections:
+  club_pages:
+    output: true
 
 plugins:
   - jekyll-seo-tag
@@ -14,4 +21,13 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - _old_site
   - vendor
+  - tools
+
+defaults:
+  - scope:
+      path: ""
+      type: club_pages
+    values:
+      layout: page

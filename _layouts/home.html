@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__slides" aria-hidden="true">
+    <div class="hero__slide"></div>
+    <div class="hero__slide"></div>
+    <div class="hero__slide"></div>
+  </div>
+  <div class="hero__content">
+    <p class="eyebrow">{{ page.hero.eyebrow | escape }}</p>
+    <h1 id="hero-title">{{ page.hero.heading | escape }}</h1>
+    <a class="button" href="{{ page.hero.button_url | relative_url }}">{{ page.hero.button_text | escape }}</a>
+  </div>
+</section>
+
+<section class="training-schedule" aria-label="{{ page.schedule_label | escape }}">
+  <div class="training-schedule__inner">
+    {{ content }}
+  </div>
+</section>
+
+<section class="club-links" aria-labelledby="club-links-title">
+  <div class="section-heading">
+    <p class="eyebrow">{{ page.navigation.eyebrow | escape }}</p>
+    <h2 id="club-links-title">{{ page.navigation.heading | escape }}</h2>
+  </div>
+  <div class="link-groups">
+    {% for group in site.data.navigation %}
+      <section class="link-card" aria-labelledby="link-group-{{ forloop.index }}">
+        <h3 id="link-group-{{ forloop.index }}">{{ group.title }}</h3>
+        {% include navigation-links.html links=group.links show_arrows=true %}
+      </section>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="contact" id="kontakt" aria-labelledby="contact-title">
+  <div class="contact__copy">
+    <p class="eyebrow">{{ page.contact.eyebrow | escape }}</p>
+    <h2 id="contact-title">{{ page.contact.heading | escape }}</h2>
+    <a class="contact__address" href="{{ site.club.address_url }}">
+      {% for line in page.contact.address %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+    </a>
+    <a class="button button--light" href="{{ page.contact.button_url }}">{{ page.contact.button_text | escape }}</a>
+  </div>
+  <div class="contact__social">
+    <h3>{{ page.contact.social_heading | escape }}</h3>
+    {% for link in page.contact.social_links %}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
+    {% endfor %}
+  </div>
+</section>

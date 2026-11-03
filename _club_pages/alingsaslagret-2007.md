@@ -1,0 +1,25 @@
+---
+title: Alingsåslägret 2007
+category: Läger
+permalink: "/foreningen/alingsaslagret-2007/"
+source_date: '2026-11-03'
+historical: true
+missing_media: true
+source_id: '289'
+---
+
+**Läger med Anders Bergström och Stefan Forsman i Alingsås**
+
+**Bilden är inte tillgänglig.**
+
+I november gick Alingsåslägret av stapeln för fjärde året i rad. I år hade vi dock satsat på ett större läger med två mattor och två instruktörer. Detta resulterade i drygt hundra anmälningar, vilket givetvis var vansinnigt roligt. Vi hade förmånen att kunna dela in de tränande i fyra olika grupper; nybörjare/gult, orange/grönt, blått/ brunt och en grupp med bara svartbälten.
+
+Deltagare kom från elva olika klubbar, allt ifrån Ystad JJK till Lidingö JJK. På lördags kvällen anordnades en tacobuffé på Café Göta och drygt hälften av alla deltagare var med och stämningen var givetvis på topp. Forshaga JJK med Anders Bergström (den andre !) kom som räddande änglar med sina 130 kvadratmeter matta. Vi hoppas kunna återgälda detta i februari då de har sitt läger.
+
+Riksinstruktör Anders Bergström och förbundsinstruktör Stefan Forsman hade fullt upp och instruerade, bokstavligt talat, oavbrutet i två dagar. Träningen var väldigt varierande och fokus låg mycket på rörelse. Vi tackar Anders och Stefan för en fantastisk insats.
+
+Nästa års läger är redan inbokat och kommer att vara 18-19 oktober!!!
+
+MISSA INTE DETTA!
+
+Fler bilder finns [HÄR](<http://www.forshaga-jujutsuklubb.com/fotoalbum/album_071117_alingsas.html>)!

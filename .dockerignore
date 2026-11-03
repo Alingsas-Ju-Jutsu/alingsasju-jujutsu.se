@@ -4,5 +4,6 @@
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
+_old_site/
 _site/
 vendor/

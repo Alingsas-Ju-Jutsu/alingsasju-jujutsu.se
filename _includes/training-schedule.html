@@ -1,0 +1,15 @@
+<div class="training-schedule__groups">
+  {% for group in site.data.training_schedule.groups %}
+    <div class="training-schedule__group">
+      <h3>{{ group.name | escape }} <span>{{ group.ages | escape }}</span></h3>
+      <dl class="training-schedule__sessions">
+        {% for session in group.sessions %}
+          <div>
+            <dt>{{ session.day | escape }}</dt>
+            <dd>{{ session.start | escape }} – {{ session.end | escape }}</dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
+  {% endfor %}
+</div>

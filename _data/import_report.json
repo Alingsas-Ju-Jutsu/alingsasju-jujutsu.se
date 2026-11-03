@@ -1,0 +1,31 @@
+{
+  "pages": 85,
+  "assets": 159,
+  "issues": [
+    {
+      "page": "/foreningen/alingsaslagret-2007/",
+      "reference": "https://www.forshaga-jujutsuklubb.com/fotoalbum/fotografier/071118/maxi00.jpg",
+      "kind": "missing_image"
+    },
+    {
+      "page": "/arkiv/1555/",
+      "reference": "http://www.alingsasju-jutsu.se/?attachment_id=1556",
+      "kind": "missing_link"
+    },
+    {
+      "page": "/arkiv/641/",
+      "reference": "http://www.alingsasju-jutsu.se/?page_id=630",
+      "kind": "missing_link"
+    },
+    {
+      "page": "/arkiv/469/",
+      "reference": "http://www.alingsasju-jutsu.se/?page_id=13",
+      "kind": "missing_link"
+    },
+    {
+      "page": "/arkiv/555/",
+      "reference": "http://www.alingsasju-jutsu.se/?page_id=552",
+      "kind": "missing_link"
+    }
+  ]
+}

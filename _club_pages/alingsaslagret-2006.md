@@ -1,0 +1,31 @@
+---
+title: Alingsåslägret 2006
+category: Läger
+permalink: "/foreningen/alingsaslagret-2006/"
+source_date: '2026-11-03'
+historical: true
+source_id: '287'
+---
+
+![Bild från 2006](<{{ '/assets/archive/f1cd5b48d69a8882e72f488c.jpg' | relative_url }}>)
+
+**Läger med Anders Bergström i Alingsås**
+
+Helgen 4-5 november var det åter dags för läger med riksinstruktör Anders Bergström.
+
+Det var ca 50 deltagare från Alingsås JJK, Lidköpings JJK, Forshaga JJK, Värö Budoklubb samt från Göteborgs JJK.
+
+Som vanligt höll Anders ett roligt och inspirerande läger där deltagarna fick möjlighet att pröva på den spännvidd som Ju.jutsu Kai erbjuder.
+
+Lördagen avslutades med en gemensam måltid på Jasmin där alla, förutom god mat, inte bara fick möjlighet att lära känna varandra lite bättre utan även att utbyta erfarenhet mellan klubbarna.
+
+Detta resulterade i ett gemensamt läger den 20 januari i Lidköping. Lidköpings JJK har bjudit in Stefan Forsman, 4 dan Ju-jutsu Kai, som instruktör. Vi hoppas naturligtvis på att vi blir riktigt många
+som åker från AJJK.
+
+![Bild från 2006](<{{ '/assets/archive/4149d8a1eb7c04ac74d7fb20.jpg' | relative_url }}>)
+
+Det är trevligt att ha ett återkommande läger i Alingsås och det var roligt att se att planeringen och genomförandet fungerade mycket bättre än tidigare år.
+
+Ett stort TACK till alla som hjälpte till under helgen.
+
+Malin

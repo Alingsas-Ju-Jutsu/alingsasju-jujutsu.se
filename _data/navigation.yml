@@ -1,0 +1,61 @@
+- title: Föreningen
+  links:
+    - title: Instruktörer
+      url: "/foreningen/instruktorer/"
+    - title: Ordningsregler
+      url: "/foreningen/ordningsregler/"
+    - title: Graderingar
+      url: "/foreningen/graderingar/"
+    - title: Nyhetsarkiv
+      url: "/arkiv/"
+    - title: Stadgar
+      url: "/foreningen/stadgar/"
+    - title: "Logga in: Instruktörer"
+      url: "/foreningen/instruktorer/logga-in/"
+- title: Träning & praktiskt
+  links:
+    - title: Träningsavgifter
+      url: "/traning/traningsavgifter/"
+    - title: Dräkter
+      url: "/traning/drakter/"
+    - title: Schema
+      url: "/traning/schema/"
+    - title: Kontakt
+      url: "/kontakt/"
+    - title: Kalendarium
+      url: "/traning/kalendarium/"
+- title: Om Ju-Jutsu
+  links:
+    - title: Ju-Jutsu Kai
+      url: "/ju-jutsu/ju-jutsu-kai/"
+    - title: Barnträning
+      url: "/ju-jutsu/barntraning/"
+    - title: Graderingssystem
+      url: "/ju-jutsu/graderingssystem/"
+- title: Läger
+  links:
+    - title: Lägeröversikt
+      url: "/lager/"
+    - title: Alingsåslägret
+      url: "/foreningen/alingsaslagret/"
+      children:
+        - title: 2004
+          url: "/foreningen/alingsaslagret-2004/"
+        - title: 2005
+          url: "/foreningen/alingsaslagret-2005/"
+        - title: 2006
+          url: "/foreningen/alingsaslagret-2006/"
+        - title: 2007
+          url: "/foreningen/alingsaslagret-2007/"
+        - title: 2008
+          url: "/foreningen/alingsaslagret-2008/"
+        - title: 2010
+          url: "/foreningen/alingsaslagret-2010/"
+        - title: 2011
+          url: "/foreningen/alingsaslagret-2011/"
+        - title: 2012
+          url: "/foreningen/alingsaslagret-2012/"
+        - title: 2013
+          url: "/foreningen/alingsaslagret-2013/"
+    - title: Kai out West
+      url: "/foreningen/kai-out-west/"

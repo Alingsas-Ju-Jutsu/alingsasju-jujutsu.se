@@ -8,3 +8,16 @@ services:
       - .:/app
     environment:
       JEKYLL_ENV: development
+  scraper:
+    profiles: ["archive"]
+    build: ./tools/archive
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    init: true
+    ipc: host
+    volumes:
+      - ./_old_site:/archive
+    environment:
+      SOURCE_URL: "${SOURCE_URL:-https://alingsasju-jutsu.se/}"
+      MAX_PAGES: "${MAX_PAGES:-500}"
+      DELAY_MS: "${DELAY_MS:-2000}"
+      RESUME_ARCHIVE: "${RESUME_ARCHIVE:-}"

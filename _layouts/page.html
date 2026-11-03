@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="eyebrow">{{ page.category | default: "Alingsås Ju-Jutsuklubb" }}</p>
+    <h1>{{ page.title }}</h1>
+  </div>
+</section>
+
+<article class="page-content">
+  <nav class="breadcrumbs" aria-label="Brödsmulor">
+    <a href="{{ '/' | relative_url }}">Startsida</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
+
+  {% if page.published_label %}
+    <p class="source-note">Publicerad {{ page.published_label }}{% if page.source_author %} av {{ page.source_author }}{% endif %}</p>
+  {% endif %}
+
+  <div class="page-content__body">
+    {{ content }}
+  </div>
+
+  {% unless page.contact_page %}
+    <aside class="page-contact">
+      <h2>Frågor om {{ page.title | downcase }}?</h2>
+      <p>Kontakta klubben så hjälper vi dig vidare.</p>
+      <a class="button" href="{{ '/kontakt/' | relative_url }}">Kontakta klubben</a>
+    </aside>
+  {% endunless %}
+</article>

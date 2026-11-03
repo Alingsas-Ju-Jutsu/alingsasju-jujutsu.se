@@ -1,0 +1,17 @@
+---
+title: Ny grönbältare
+category: Nyhetsarkiv
+permalink: "/arkiv/691/"
+news: true
+published_label: juli 1, 2012
+grading: true
+source_author: Mattias
+published_sort: '20120701'
+source_date: '2026-11-03'
+source_id: '691'
+historical: true
+---
+
+Vi säger GRATTIS till Tina Caverö som tagit grönt bälte.
+
+[![Bild från Ny grönbältare](<{{ '/assets/archive/b55a8e5bcfa762f0edf6bc4c.jpg' | relative_url }}>)](<{{ '/assets/archive/e7d1ab8bb8cbc9eeb3335428.jpg' | relative_url }}>)

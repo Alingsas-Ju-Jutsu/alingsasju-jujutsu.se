@@ -1,0 +1,7 @@
+---
+- name: 1. Sparbanken i Alingsås
+  url: https://www.sparbankenalingsas.se/
+  image: "/assets/archive/d1a0b24e52b7474d246d6880.png"
+- name: 5. Statoil Kristineholm
+  url: http://www.statoil.se/FrontServlet?s=sdh&state=station_home_page&stat_id=26407
+  image: "/assets/archive/168a95fc15ac72a1a7d92857.png"

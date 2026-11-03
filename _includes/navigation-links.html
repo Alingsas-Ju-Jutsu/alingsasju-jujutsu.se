@@ -1,0 +1,13 @@
+<ul>
+  {% for link in include.links %}
+    <li>
+      <a href="{{ link.url | relative_url }}">{{ link.title }}{% if include.show_arrows %}<span aria-hidden="true">↗</span>{% endif %}</a>
+      {% if link.children %}
+        <details class="nav-children">
+          <summary>Visa undersidor</summary>
+          {% include navigation-links.html links=link.children show_arrows=include.show_arrows %}
+        </details>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
