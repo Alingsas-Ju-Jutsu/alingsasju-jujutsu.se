@@ -10,7 +10,7 @@ description: Ladda ner affischer för Alingsås Ju-Jutsuklubb i olika storlekar.
 {% for poster in site.data.poster.posters %}
   {% assign poster_name = poster[0] %}
   {% assign poster_settings = poster[1] %}
-  {% assign preview_path = poster_name | prepend: "-preview.png" | prepend: "assets/generated/" %}
+  {% assign preview_path = poster_name | append: "-preview.png" | prepend: "assets/generated/" %}
   {% assign base_path = poster_name | append: "-poster.png" | prepend: "assets/generated/" %}
 ### {{ poster_settings.title | default: poster_name | capitalize | escape }}
 
