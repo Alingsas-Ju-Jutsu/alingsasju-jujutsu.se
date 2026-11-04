@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FONTS = {
     "condensed": ("DejaVuSansCondensed.ttf", "DejaVuSansCondensed-Bold.ttf"),
     "typewriter": ("DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf"),
-    "antonio": ("Antonio[wght].ttf", "Antonio[wght].ttf"),
+    "antonio": ("Antonio.ttf", "Antonio.ttf"),
 }
 
 
@@ -43,8 +43,9 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
     if font_style not in FONTS:
         raise ValueError(f"Unknown poster font {font_style!r}; choose condensed or typewriter.")
     regular, heavy = FONTS[font_style]
-    font_directory = Path("/usr/share/fonts/truetype/antonio" if font_style == "antonio"
-                          else "/usr/share/fonts/truetype/dejavu")
+    font_directory = ROOT / "assets/fonts" if font_style == "antonio" else Path(
+        "/usr/share/fonts/truetype/dejavu"
+    )
     background_path = ROOT / config["background"]
     sizes = config["sizes"]
     if not sizes or any(not isinstance(size, int) or size <= 0 for size in sizes):
