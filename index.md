@@ -3,7 +3,7 @@ layout: home
 title: Alingsås Ju-Jutsuklubb
 hero:
   eyebrow: Alingsås Ju-Jutsuklubb
-  heading: Kampsport med självförsvars&shy;inriktning
+  heading: Kampsport med självförsvarsinriktning
   button_text: Börja träna nu!
   button_url: /borja-trana/
 schedule_label: Aktuella träningstider
