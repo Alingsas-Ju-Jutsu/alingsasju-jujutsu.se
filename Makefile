@@ -18,8 +18,12 @@ help:
 serve:
 	docker compose up --build
 
+
 build:
-	docker compose run --build --rm site sh -c 'python3 tools/build_poster.py && bundle exec jekyll build'
+	docker compose run --build --rm site sh -c 'bundle exec jekyll build'
+
+generate_poster:
+	docker compose run --build --rm poster_generator sh -c 'python3 tools/build_poster.py'
 
 stop:
 	docker compose down

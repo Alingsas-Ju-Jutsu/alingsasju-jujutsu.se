@@ -11,6 +11,13 @@ services:
       - .:/app
     environment:
       JEKYLL_ENV: development
+  poster_generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh -c 'python3 tools/build_poster.py'
+    volumes:
+      - .:/app
   scraper:
     profiles: ["archive"]
     build: ./tools/archive

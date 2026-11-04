@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FONTS = {
     "condensed": ("DejaVuSansCondensed.ttf", "DejaVuSansCondensed-Bold.ttf"),
     "typewriter": ("DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf"),
+    "antonio": ("Antonio[wght].ttf", "Antonio[wght].ttf"),
 }
 
 
@@ -21,15 +22,37 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         raise ValueError(f"Unknown poster {poster_name!r}; choose from {', '.join(posters)}.")
     config = posters[poster_name]
     preview_output = preview_output or output.with_name(f"{poster_name}-preview.png")
+    font_color = config.get("font_color", "#ffffff")
+    if not isinstance(font_color, str) or len(font_color) != 7 or font_color[0] != "#":
+        raise ValueError("Poster font_color must be a hex color in #RRGGBB format.")
+    try:
+        int(font_color[1:], 16)
+    except ValueError as error:
+        raise ValueError("Poster font_color must be a hex color in #RRGGBB format.") from error
+    font_size = config.get("font_size", 25)
+    line_spacing = config.get("line_spacing", 14)
+    term_start_font_size = config.get("term_start_font_size", 45)
+    term_start_spacing = config.get("term_start_spacing", 45)
+    for name, value in (("font_size", font_size), ("line_spacing", line_spacing),
+                        ("term_start_font_size", term_start_font_size),
+                        ("term_start_spacing", term_start_spacing)):
+        if not isinstance(value, int) or value < 0 or (name.endswith("font_size") and value == 0):
+            qualifier = "positive" if name.endswith("font_size") else "non-negative"
+            raise ValueError(f"Poster {name} must be a {qualifier} integer.")
     font_style = config["font"]
     if font_style not in FONTS:
         raise ValueError(f"Unknown poster font {font_style!r}; choose condensed or typewriter.")
     regular, heavy = FONTS[font_style]
-    font_directory = Path("/usr/share/fonts/truetype/dejavu")
+    font_directory = Path("/usr/share/fonts/truetype/antonio" if font_style == "antonio"
+                          else "/usr/share/fonts/truetype/dejavu")
     background_path = ROOT / config["background"]
     sizes = config["sizes"]
     if not sizes or any(not isinstance(size, int) or size <= 0 for size in sizes):
         raise ValueError("Poster sizes must be a non-empty list of positive pixel widths.")
+    with Image.open(background_path) as background:
+        original_width = background.width
+    if original_width not in sizes:
+        sizes = [*sizes, original_width]
     margin_percent = config["bottom_margin_percent"]
     if not 0 <= margin_percent <= 100:
         raise ValueError("Poster bottom_margin_percent must be between 0 and 100.")
@@ -48,9 +71,10 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
             )
         draw = ImageDraw.Draw(image)
 
-        def text(value, y, size=34, bold=False, color="white", measure=False,
+        def text(value, y, size=34, bold=False, color=None, measure=False,
                  center=None, max_width=None):
             size = round(size * scale)
+            color = font_color if color is None else color
             center = width / 2 if center is None else center * scale
             max_width = (base_width - 120) if max_width is None else max_width
             max_width *= scale
@@ -71,13 +95,13 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
             for line in lines:
                 if not measure:
                     draw.text((center, round(y)), line, font=font, fill=color, anchor="mt")
-                y += size + round(14 * scale)
+                y += size + round(line_spacing * scale)
             return y
 
         columns = min(3, len(schedule["groups"]))
         column_width = (base_width - 100) / columns
 
-        def group_rows(y, measure=False):
+        def group_rows(y, measure=False, bottom_spacing=45):
             for offset in range(0, len(schedule["groups"]), columns):
                 bottom = y
                 for column, group in enumerate(schedule["groups"][offset:offset + columns]):
@@ -87,28 +111,28 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
                         "measure": measure,
                     }
                     end = text(f'{group["name"]} {group["ages"]}'.upper(), y,
-                               size=30, bold=True, **options)
+                               size=round(font_size * 1.2), bold=True, **options)
                     end += round(12 * scale)
                     for session in group["sessions"]:
                         end = text(
                             f'{session["day"]} {session["start"]}–{session["end"]}'.upper(),
-                            end, size=25, **options,
+                            end, size=font_size, **options,
                         )
                     bottom = max(bottom, end)
                 y = bottom + round(45 * scale)
-            return y
+            return y - round(45 * scale) + round(bottom_spacing * scale)
 
         rows = []
         start = schedule["term_start"]
         date = str(start["date"]).strip() or "Datum meddelas snart."
-        rows.append((f'{start["title"]} {date}'.upper(), 45, False))
+        rows.append((f'{start["title"]} {date}'.upper(), term_start_font_size, False))
         if config["include_address"]:
             rows.extend([("", 14, False), ("TENNISVÄGEN 8 · ALINGSÅS", 23, False)])
         if config["include_website"]:
             rows.extend([("", 14, False), ("ALINGSASJU-JUTSU.SE", 23, False)])
 
     # Measure the schedule first so it can be anchored to the image's bottom.
-        groups_end = group_rows(0, measure=True)
+        groups_end = group_rows(0, measure=True, bottom_spacing=term_start_spacing)
         end = groups_end
         for value, size, bold in rows:
             end = text(value, end, size, bold, measure=True) if value else end + round(size * scale)
@@ -119,7 +143,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
                 f"Schedule does not fit the {width}px-wide background with "
                 f"a {margin_percent}% bottom margin."
             )
-        group_rows(y)
+        group_rows(y, bottom_spacing=term_start_spacing)
         y += groups_end
         for value, size, bold in rows:
             y = text(value, y, size, bold) if value else y + round(size * scale)

@@ -7,7 +7,9 @@ ENV BUNDLE_JOBS=4 \
 
 COPY Gemfile Gemfile.lock ./
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential python3 python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra \
+    && apt-get install -y --no-install-recommends build-essential ca-certificates curl python3 python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra \
+    && mkdir -p /usr/share/fonts/truetype/antonio \
+    && curl -fsSL 'https://raw.githubusercontent.com/google/fonts/main/ofl/antonio/Antonio%5Bwght%5D.ttf' -o /usr/share/fonts/truetype/antonio/Antonio\[wght\].ttf \
     && rm -rf /var/lib/apt/lists/* \
     && bundle install
 

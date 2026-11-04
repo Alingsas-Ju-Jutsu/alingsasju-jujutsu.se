@@ -6,4 +6,22 @@ posters:
     include_website: false
     include_address: false
     bottom_margin_percent: 5
-    font: condensed
+    font: antonio
+    font_color: "#ffffff"
+    font_size: 25
+    line_spacing: 14
+    term_start_font_size: 45
+    term_start_spacing: 45
+  tattoo:
+    background: assets/source/tattoo_poster.jpg
+    sizes: [1200]
+    include_website: false
+    include_address: false
+    bottom_margin_percent: 1
+    font: typewriter
+    font_color: "#000000"
+    font_size: 22
+    line_spacing: 10
+    term_start_font_size: 35
+    term_start_spacing: 15
+
