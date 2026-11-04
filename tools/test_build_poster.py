@@ -24,13 +24,15 @@ class PosterTest(unittest.TestCase):
                     build(ROOT / "_data/training_schedule.yml", output, "test", config)
                     with Image.open(output) as image:
                         image.verify()
+                    with Image.open(Path(directory) / "test-preview.png") as preview:
+                        preview.verify()
 
     def test_build_generates_a_proportional_preview(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
             output = directory / "poster.png"
-            preview = directory / "poster-preview.png"
-            build(ROOT / "_data/training_schedule.yml", output, preview_output=preview)
+            preview = directory / "training-preview.png"
+            build(ROOT / "_data/training_schedule.yml", output)
             with Image.open(output) as image, Image.open(preview) as thumbnail:
                 self.assertEqual(thumbnail.size, (480, 600))
                 self.assertEqual(image.width / image.height, thumbnail.width / thumbnail.height)

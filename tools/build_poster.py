@@ -20,6 +20,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
     if poster_name not in posters:
         raise ValueError(f"Unknown poster {poster_name!r}; choose from {', '.join(posters)}.")
     config = posters[poster_name]
+    preview_output = preview_output or output.with_name(f"{poster_name}-preview.png")
     font_style = config["font"]
     if font_style not in FONTS:
         raise ValueError(f"Unknown poster font {font_style!r}; choose condensed or typewriter.")
@@ -124,7 +125,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
             y = text(value, y, size, bold) if value else y + round(size * scale)
         destination.parent.mkdir(parents=True, exist_ok=True)
         image.convert("RGB").save(destination, optimize=True)
-        if preview_output and width == sizes[0]:
+        if width == sizes[0]:
             preview = image.convert("RGB")
             preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
             preview_output.parent.mkdir(parents=True, exist_ok=True)
@@ -152,5 +153,9 @@ if __name__ == "__main__":
             poster_names = yaml.safe_load(source)["posters"]
         for poster_name in poster_names:
             output = ROOT / "assets/generated" / f"{poster_name}-poster.png"
-            build(args.schedule, output, poster_name,
-                  preview_output=output.with_name(f"{poster_name}-preview.png"))
+            build(
+            	args.schedule,
+            	output,
+            	poster_name,
+                preview_output=output.with_name(f"{poster_name}-preview.png")
+            )
