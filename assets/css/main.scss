@@ -956,6 +956,10 @@ button:focus-visible,
     padding-block: 4rem;
   }
 
+  .hero h1 {
+    font-size: clamp(2.25rem, 10vw, 2.75rem);
+  }
+
   .hero__slide:nth-child(1) {
     background-image: url("../images/cropped-cropped-Harald-scaled-2.jpg");
   }
