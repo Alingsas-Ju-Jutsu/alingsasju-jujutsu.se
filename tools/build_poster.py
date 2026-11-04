@@ -13,7 +13,7 @@ FONTS = {
 }
 
 
-def build(schedule_path, output, poster_name="training", config_path=None):
+def build(schedule_path, output, poster_name="training", config_path=None, preview_output=None):
     config_path = config_path or ROOT / "_data/poster.yml"
     with config_path.open(encoding="utf-8") as source:
         posters = yaml.safe_load(source)["posters"]
@@ -124,6 +124,11 @@ def build(schedule_path, output, poster_name="training", config_path=None):
             y = text(value, y, size, bold) if value else y + round(size * scale)
         destination.parent.mkdir(parents=True, exist_ok=True)
         image.convert("RGB").save(destination, optimize=True)
+        if preview_output and width == sizes[0]:
+            preview = image.convert("RGB")
+            preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
+            preview_output.parent.mkdir(parents=True, exist_ok=True)
+            preview.save(preview_output, optimize=True)
         print(f"Generated {destination}: {width}×{image.height}, {len(schedule['groups'])} groups")
 
     for index, width in enumerate(sizes):
@@ -137,6 +142,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--schedule", type=Path, default=ROOT / "_data/training_schedule.yml")
     parser.add_argument("--output", type=Path, default=ROOT / "assets/generated/training-poster.png")
-    parser.add_argument("--poster", default="training", help="Poster name from _data/poster.yml")
+    parser.add_argument("--poster", help="Poster name from _data/poster.yml (defaults to all posters)")
     args = parser.parse_args()
-    build(args.schedule, args.output, args.poster)
+    if args.poster:
+        build(args.schedule, args.output, args.poster,
+              preview_output=args.output.with_name(f"{args.poster}-preview.png"))
+    else:
+        with (ROOT / "_data/poster.yml").open(encoding="utf-8") as source:
+            poster_names = yaml.safe_load(source)["posters"]
+        for poster_name in poster_names:
+            output = ROOT / "assets/generated" / f"{poster_name}-poster.png"
+            build(args.schedule, output, poster_name,
+                  preview_output=output.with_name(f"{poster_name}-preview.png"))
