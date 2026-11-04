@@ -1,2 +1,9 @@
-# Choose condensed or typewriter for generated poster text.
-font: condensed
+# Poster-specific settings. Background paths are relative to the project root.
+posters:
+  training:
+    background: assets/source/poster_blackbelt_blank.png
+    sizes: [1200, 2500]
+    include_website: false
+    include_address: false
+    bottom_margin_percent: 5
+    font: condensed

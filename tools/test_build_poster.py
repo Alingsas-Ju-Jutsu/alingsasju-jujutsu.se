@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import yaml
-from PIL import Image, ImageChops, ImageDraw
+from PIL import Image, ImageDraw
 
 from build_poster import ROOT, build
 
@@ -15,9 +15,55 @@ class PosterTest(unittest.TestCase):
             for style in ("condensed", "typewriter"):
                 with self.subTest(style=style):
                     output = Path(directory) / f"{style}.png"
-                    build(ROOT / "_data/training_schedule.yml", output, font_style=style)
+                    config = Path(directory) / "poster.yml"
+                    config.write_text(yaml.safe_dump({"posters": {"test": {
+                        "background": "assets/source/poster_blackbelt_blank.png",
+                        "sizes": [1200], "include_website": False,
+                        "include_address": True, "bottom_margin_percent": 5, "font": style,
+                    }}}))
+                    build(ROOT / "_data/training_schedule.yml", output, "test", config)
                     with Image.open(output) as image:
                         image.verify()
+
+    def test_settings_control_background_optional_text_margin_and_exports(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            background = directory / "background.png"
+            Image.new("RGB", (300, 400), "navy").save(background)
+            config = directory / "poster.yml"
+            config.write_text(yaml.safe_dump({"posters": {"alternate": {
+                "background": str(background), "sizes": [600, 900],
+                "include_website": True, "include_address": False,
+                "bottom_margin_percent": 5, "font": "condensed",
+            }}}))
+            output = directory / "alternate.png"
+            rendered = []
+            original_text = ImageDraw.ImageDraw.text
+
+            def capture(draw, position, value, **kwargs):
+                rendered.append((value, position))
+                return original_text(draw, position, value, **kwargs)
+
+            with patch.object(ImageDraw.ImageDraw, "text", capture):
+                build(ROOT / "_data/training_schedule.yml", output, "alternate", config)
+            self.assertIn("ALINGSASJU-JUTSU.SE", [value for value, _ in rendered])
+            self.assertNotIn("TENNISVÄGEN 8 · ALINGSÅS", [value for value, _ in rendered])
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (600, 800))
+                self.assertEqual(image.getpixel((0, 0)), (0, 0, 128))
+            first_y = next(position[1] for value, position in rendered if value.startswith("TERMINSSTART"))
+            with Image.open(directory / "alternate-900.png") as image:
+                self.assertEqual(image.size[0], 900)
+            settings = yaml.safe_load(config.read_text())
+            settings["posters"]["alternate"]["bottom_margin_percent"] = 10
+            config.write_text(yaml.safe_dump(settings))
+            rendered.clear()
+            with patch.object(ImageDraw.ImageDraw, "text", capture):
+                build(ROOT / "_data/training_schedule.yml", output, "alternate", config)
+            second_y = next(position[1] for value, position in rendered if value.startswith("TERMINSSTART"))
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (600, 800))
+            self.assertEqual(second_y, first_y - 40)
 
     def test_schedule_values_are_rendered_and_changes_reach_the_image(self):
         schedule = yaml.safe_load((ROOT / "_data/training_schedule.yml").read_text())
@@ -54,22 +100,11 @@ class PosterTest(unittest.TestCase):
                 with Image.open(output) as image:
                     self.assertEqual(image.format, "PNG")
                     self.assertEqual(image.width, 1200)
-                    with Image.open(ROOT / "assets/archive/2d416e4f25efdeb4af7b8391.png") as original:
-                        artwork = original.crop(
-                            (0, 0, original.width, round(original.height * 0.72))
-                        )
-                        artwork = artwork.resize(
-                            (1200, round(artwork.height * 1200 / artwork.width)),
-                            Image.Resampling.LANCZOS,
-                        ).convert("RGB")
-                        self.assertIsNone(ImageChops.difference(
-                            image.crop((0, 0, artwork.width, artwork.height)),
-                            artwork,
-                        ).getbbox())
+                    self.assertEqual(image.height, 1500)
                 with Image.open(output) as image:
                     image.verify()
 
-    def test_long_schedule_expands_and_blank_start_is_explicit(self):
+    def test_long_schedule_uses_original_background_size_and_blank_start_is_explicit(self):
         schedule = yaml.safe_load((ROOT / "_data/training_schedule.yml").read_text())
         schedule["term_start"]["date"] = ""
         schedule["groups"] *= 4
@@ -79,7 +114,7 @@ class PosterTest(unittest.TestCase):
             source.write_text(yaml.safe_dump(schedule, allow_unicode=True))
             build(source, output)
             with Image.open(output) as image:
-                self.assertGreater(image.height, 2000)
+                self.assertEqual(image.size, (1200, 1500))
 
 
 if __name__ == "__main__":

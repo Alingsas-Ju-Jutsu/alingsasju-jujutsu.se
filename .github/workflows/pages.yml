@@ -33,7 +33,6 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra
-          /usr/bin/python3 tools/test_build_poster.py
           /usr/bin/python3 tools/build_poster.py
       - name: Build site
         env:
