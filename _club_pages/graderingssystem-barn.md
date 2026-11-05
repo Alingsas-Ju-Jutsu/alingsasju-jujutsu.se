@@ -13,6 +13,9 @@ description: Läs om Ju-jutsu Kais sho- och monsystem för barn, bältesgrader,
 
 **För de yngsta**
 
+{% assign knattar = site.data.groups.groups.toddlers %}
+I vår klubb tränar **{{ knattar.name }} ({{ knattar.ages }})** enligt shosystemet.
+
 Svenska Ju-jutsuförbundet har ett träningsupplägg för barn i åldern 5-8 år som kallas Shosystemet. Träningen är framför allt inriktad på koordination och rörelser som utvecklar barnens motoriska färdigheter. I shosystemet bär man ett rött streck på bältet för varje termin man tränat för att visa hur länge man tränat.
 
 ![Bild från Barnträning](<{{ '/assets/archive/477a857c4c3d3d4eef3c1abf.png' | relative_url }}>)

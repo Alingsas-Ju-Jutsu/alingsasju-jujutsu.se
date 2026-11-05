@@ -1,5 +1,5 @@
 - name: Harald Stenbäck
-  groups: [Vuxna]
+  groups: [adults]
   phone: "0763 38 96 13"
   level: 2 dan
   color: black
@@ -7,7 +7,7 @@
   description: ""
 
 - name: Erik Dahlman
-  groups: [Vuxna]
+  groups: [adults]
   phone: "0703 14 84 05"
   level: 1 kyu
   color: brown
@@ -15,7 +15,7 @@
   description: ""
 
 - name: Jonas Kjell
-  groups: [Barn]
+  groups: [children1]
   phone: "0731 62 11 55"
   level: 1 kyu
   color: brown
@@ -23,7 +23,7 @@
   description: ""
 
 - name: Tobias Lindström
-  groups: [Barn]
+  groups: [children1]
   phone: "0793 00 83 26"
   level: 2 kyu
   color: blue
@@ -31,7 +31,7 @@
   description: ""
 
 - name: Erik Swärd
-  groups: [Knattar]
+  groups: [toddlers]
   phone: ""
   level: 4 kyu
   color: orange
@@ -47,7 +47,7 @@
   description: ""
 
 - name: Betty Fråst
-  groups: [Knattar]
+  groups: [toddlers]
   phone: ""
   level: 1 mon
   color: green

@@ -5,17 +5,17 @@ Jekyll-webbplats för GitHub Pages, konfigurerad för `https://alingsasju-jutsu.
 ## Uppdatera träningstider
 
 Alla aktuella träningstider finns i **en enda fil**:
-[`_data/training_schedule.yml`](_data/training_schedule.yml).
+[`_data/groups.yml`](_data/groups.yml).
 Ändringar där visas automatiskt på **startsidan, Schema och Börja träna**.
 Du behöver inte installera något eller ändra dessa sidor var för sig.
 
 ### Så redigerar du direkt på GitHub
 
-1. Öppna [schemafilen](_data/training_schedule.yml) och kontrollera att
+1. Öppna [schemafilen](_data/groups.yml) och kontrollera att
    grenen **main** är vald.
 2. Klicka på pennan **Edit this file** ovanför filens innehåll. Du behöver
    vara inloggad och ha skrivbehörighet. Du kan också använda
-   [direktlänken till redigering](https://github.com/Alingsas-Ju-Jutsu/alingsasju-jujutsu.se/edit/main/_data/training_schedule.yml).
+   [direktlänken till redigering](https://github.com/Alingsas-Ju-Jutsu/alingsasju-jujutsu.se/edit/main/_data/groups.yml).
 3. Ändra önskade tider, terminsstart eller avvikelser enligt exemplen nedan.
    Behåll indrag, bindestreck och citattecken. Ändra bara de uppgifter som
    ska uppdateras.
@@ -31,15 +31,19 @@ Du behöver inte installera något eller ändra dessa sidor var för sig.
 
 ### Ändra en grupps träningstider
 
-Leta upp gruppen under `groups`. `name` är gruppnamnet, `ages` är åldrarna
-och varje post under `sessions` är ett träningstillfälle. `day` är veckodagen,
+Gemensamma namn, åldrar och typer finns under `groups`. En grupp
+kan också ha en graderingsbenämning: `grading_name: Mon` anger
+att åldersgruppen Barn kallas Mon i avgiftstabellerna.
+Varje träningsgrupp
+under `schedule` har ett unikt `id` och hänvisar till en definition med `group`.
+Varje post under `sessions` är ett träningstillfälle. `day` är veckodagen,
 `start` starttiden och `end` sluttiden.
 
 Exempel på en vuxengrupp med två träningstillfällen:
 
 ```yaml
-  - name: Vuxna
-    ages: "14+ år"
+  - id: adults
+    group: adults
     sessions:
       - day: Torsdagar
         start: "19.45"
@@ -52,6 +56,15 @@ Exempel på en vuxengrupp med två träningstillfällen:
 För att ändra söndagstiden redigerar du bara `start` och `end` under
 `Söndagar` i rätt grupp. Tiderna ovan är ett exempel på formatet; ersätt inte
 hela filen med exemplet eftersom andra grupper och inställningar då försvinner.
+
+Flera schemaposter kan använda samma `group`, exempelvis `children`,
+och får då samma namn och åldersspann. Ge varje grupp ett eget `id` och
+eventuellt `label: Grupp 2` för att skilja dem åt i schemat.
+Du kan också ange ett valfritt `name: Barn nybörjare` på träningsgruppen.
+Det namnet används i schemat, på Barnträning, i instruktörslistan och på
+affischen. Utelämna `name` eller ange `name: ""` för att använda
+åldersgruppens gemensamma namn. Ålder och avgiftstabeller påverkas inte.
+Instruktörernas ansvar kopplas till träningsgruppens unika `id`.
 
 ### Ändra terminsstart
 
@@ -120,8 +133,8 @@ ta bort någon från sidan. Ladda upp nya porträtt i
 Använd en vanlig porträttbild utan inbakad text.
 
 Schemat hämtar också ansvariga instruktörer från samma fil.
-Ange `groups: [Barn]` eller exempelvis `groups: [Barn, Vuxna]`.
-Gruppnamnen måste stämma exakt med `name` i `_data/training_schedule.yml`.
+Ange `groups: [children1]` eller exempelvis `groups: [children1, adults]`.
+Värdena måste stämma exakt med träningsgruppernas `id` i `_data/groups.yml`.
 Med `groups: []` visas instruktören inte i schemats kontaktlista.
 Ange telefonnummer inom citattecken, exempelvis `phone: "0703 14 84 05"`.
 Med `phone: ""` visas bara namnet. Telefonnummer visas som klickbara
@@ -130,7 +143,7 @@ telefonlänkar på Schema, inte på instruktörskorten.
 ## Träningsaffischen på Schema
 
 GitHub bygger automatiskt en aktuell PNG-affisch från
-[`_data/training_schedule.yml`](_data/training_schedule.yml) vid varje publicering.
+[`_data/groups.yml`](_data/groups.yml) vid varje publicering.
 Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
 Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.

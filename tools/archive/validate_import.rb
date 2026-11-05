@@ -78,14 +78,20 @@ html_files.each do |file|
     end
   end
 end
-expected_schedule = YAML.safe_load(File.read("_data/training_schedule.yml")).fetch("groups")
+schedule_data = YAML.safe_load(File.read("_data/groups.yml"))
+expected_schedule = schedule_data.fetch("schedule").map do |group|
+  age_group = schedule_data.fetch("groups").fetch(group.fetch("group"))
+  age_group.merge(group).merge("name" => group["name"].to_s.empty? ? age_group["name"] : group["name"])
+end
 %w[_site/index.html _site/traning/schema/index.html _site/borja-trana/index.html].each do |file|
   document = Nokogiri::HTML(File.read(file))
   groups = document.css(".training-schedule__group")
   errors << "Incorrect group count in #{file}" unless groups.size == expected_schedule.size
   expected_schedule.zip(groups).each do |expected, group|
     next unless group
-    errors << "Incorrect group heading in #{file}" unless normalize(group.at_css("h3").text) == normalize("#{expected['name']} #{expected['ages']}")
+    heading = "#{expected['name']} #{expected['ages']}"
+    heading += " · #{expected['label']}" if expected["label"]
+    errors << "Incorrect group heading in #{file}" unless normalize(group.at_css("h3").text) == normalize(heading)
     expected_days = expected["sessions"].map { |session| session.fetch("day") }
     expected_times = expected["sessions"].map { |session| "#{session.fetch('start')} – #{session.fetch('end')}" }
     errors << "Incorrect schedule in #{file}" unless group.css("dt").map(&:text) == expected_days && group.css("dd").map { |node| node.text.strip } == expected_times

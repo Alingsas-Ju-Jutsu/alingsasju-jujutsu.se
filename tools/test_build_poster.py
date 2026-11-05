@@ -21,7 +21,7 @@ class PosterTest(unittest.TestCase):
                         "sizes": [1200], "include_website": False,
                         "include_address": True, "bottom_margin_percent": 5, "font": style,
                     }}}))
-                    build(ROOT / "_data/training_schedule.yml", output, "test", config)
+                    build(ROOT / "_data/groups.yml", output, "test", config)
                     with Image.open(output) as image:
                         image.verify()
                     with Image.open(Path(directory) / "test-preview.png") as preview:
@@ -32,7 +32,7 @@ class PosterTest(unittest.TestCase):
             directory = Path(directory)
             output = directory / "poster.png"
             preview = directory / "training-preview.png"
-            build(ROOT / "_data/training_schedule.yml", output)
+            build(ROOT / "_data/groups.yml", output)
             with Image.open(output) as image, Image.open(preview) as thumbnail:
                 self.assertEqual(thumbnail.size, (480, 600))
                 self.assertEqual(image.width / image.height, thumbnail.width / thumbnail.height)
@@ -59,7 +59,7 @@ class PosterTest(unittest.TestCase):
                 return original_text(draw, position, value, **kwargs)
 
             with patch.object(ImageDraw.ImageDraw, "text", capture):
-                build(ROOT / "_data/training_schedule.yml", output, "alternate", config)
+                build(ROOT / "_data/groups.yml", output, "alternate", config)
             self.assertIn("ALINGSASJU-JUTSU.SE", [value for value, _, _, _ in rendered])
             self.assertNotIn("TENNISVÄGEN 8 · ALINGSÅS", [value for value, _, _, _ in rendered])
             self.assertTrue(all(color == "#12ab34" for _, _, color, _ in rendered))
@@ -78,14 +78,14 @@ class PosterTest(unittest.TestCase):
             config.write_text(yaml.safe_dump(settings))
             rendered.clear()
             with patch.object(ImageDraw.ImageDraw, "text", capture):
-                build(ROOT / "_data/training_schedule.yml", output, "alternate", config)
+                build(ROOT / "_data/groups.yml", output, "alternate", config)
             second_y = next(position[1] for value, position, _, _ in rendered if value.startswith("TERMINSSTART"))
             with Image.open(output) as image:
                 self.assertEqual(image.size, (600, 800))
             self.assertEqual(second_y, first_y - 40)
 
     def test_schedule_values_are_rendered_and_changes_reach_the_image(self):
-        schedule = yaml.safe_load((ROOT / "_data/training_schedule.yml").read_text())
+        schedule = yaml.safe_load((ROOT / "_data/groups.yml").read_text())
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "schedule.yml"
             output = Path(directory) / "poster.png"
@@ -97,8 +97,9 @@ class PosterTest(unittest.TestCase):
                 return original_text(draw, position, value, **kwargs)
 
             for date, time in [("2027-01-10", "17.15"), ("15 februari 2028", "16.30")]:
+                schedule["schedule"][0]["name"] = "Knattar nybörjare" if time == "16.30" else ""
                 schedule["term_start"]["date"] = date
-                schedule["groups"][0]["sessions"][0]["start"] = time
+                schedule["schedule"][0]["sessions"][0]["start"] = time
                 source.write_text(yaml.safe_dump(schedule, allow_unicode=True))
                 rendered.clear()
                 with patch.object(ImageDraw.ImageDraw, "text", capture):
@@ -106,9 +107,10 @@ class PosterTest(unittest.TestCase):
                 text = " ".join(rendered).upper()
                 self.assertIn(date.upper(), text)
                 self.assertIn(time, text)
-                for group in schedule["groups"]:
-                    self.assertIn(group["name"].upper(), text)
-                    self.assertIn(group["ages"].upper(), text)
+                for group in schedule["schedule"]:
+                    age_group = schedule["groups"][group["group"]]
+                    self.assertIn((group.get("name") or age_group["name"]).upper(), text)
+                    self.assertIn(age_group["ages"].upper(), text)
                     for session in group["sessions"]:
                         self.assertIn(session["day"].upper(), text)
                         self.assertIn(session["end"], text)
@@ -124,9 +126,9 @@ class PosterTest(unittest.TestCase):
                     image.verify()
 
     def test_long_schedule_uses_original_background_size_and_blank_start_is_explicit(self):
-        schedule = yaml.safe_load((ROOT / "_data/training_schedule.yml").read_text())
+        schedule = yaml.safe_load((ROOT / "_data/groups.yml").read_text())
         schedule["term_start"]["date"] = ""
-        schedule["groups"] *= 4
+        schedule["schedule"] *= 4
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "schedule.yml"
             output = Path(directory) / "poster.png"

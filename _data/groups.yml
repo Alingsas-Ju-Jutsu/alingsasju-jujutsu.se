@@ -4,17 +4,34 @@ term_start:
 exceptions:
   - date: "2026-10-22"
     reason: Höstlov
+
 groups:
-  - name: Knattar
+  toddlers:
+    name: Knattar
+    grading_name: Knattar
     type: barn
     ages: "7–8 år"
+  children:
+    name: Barn
+    grading_name: Mon
+    type: barn
+    ages: "9–14 år"
+  adults:
+    name: Vuxna
+    grading_name: Vuxna
+    type: vuxen
+    ages: "14+ år"
+
+# Optional "name" can be used to override the name of the group in the schedule, e.g. for differentieting between groups of the same age group.
+schedule:
+  - id: toddlers
+    group: toddlers
     sessions:
       - day: Söndagar
         start: "17.15"
         end: "18.15"
-  - name: Barn
-    ages: "9–14 år"
-    type: barn
+  - id: children1
+    group: children
     sessions:
       - day: Torsdagar
         start: "18.30"
@@ -22,9 +39,8 @@ groups:
       - day: Söndagar
         start: "18.30"
         end: "19.30"
-  - name: Vuxna
-    ages: "14+ år"
-    type: vuxen
+  - id: adults
+    group: adults
     sessions:
       - day: Torsdagar
         start: "19.45"

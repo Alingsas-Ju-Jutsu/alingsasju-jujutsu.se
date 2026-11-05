@@ -59,8 +59,16 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         raise ValueError("Poster bottom_margin_percent must be between 0 and 100.")
     with schedule_path.open(encoding="utf-8") as source:
         schedule = yaml.safe_load(source)
-    if not schedule["groups"]:
+    if not schedule["schedule"]:
         raise ValueError("The poster requires at least one training group.")
+    schedule["schedule"] = [
+        {
+            **schedule["groups"][group["group"]],
+            **group,
+            "name": group.get("name") or schedule["groups"][group["group"]]["name"],
+        }
+        for group in schedule["schedule"]
+    ]
 
     base_width = 1200
 
@@ -99,13 +107,13 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
                 y += size + round(line_spacing * scale)
             return y
 
-        columns = min(3, len(schedule["groups"]))
+        columns = min(3, len(schedule["schedule"]))
         column_width = (base_width - 100) / columns
 
         def group_rows(y, measure=False, bottom_spacing=45):
-            for offset in range(0, len(schedule["groups"]), columns):
+            for offset in range(0, len(schedule["schedule"]), columns):
                 bottom = y
-                for column, group in enumerate(schedule["groups"][offset:offset + columns]):
+                for column, group in enumerate(schedule["schedule"][offset:offset + columns]):
                     options = {
                         "center": 50 + column_width * (column + 0.5),
                         "max_width": column_width - 35,
@@ -155,7 +163,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
             preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
             preview_output.parent.mkdir(parents=True, exist_ok=True)
             preview.save(preview_output, optimize=True)
-        print(f"Generated {destination}: {width}×{image.height}, {len(schedule['groups'])} groups")
+        print(f"Generated {destination}: {width}×{image.height}, {len(schedule['schedule'])} groups")
 
     for index, width in enumerate(sizes):
         destination = output if index == 0 else output.with_name(
@@ -166,7 +174,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--schedule", type=Path, default=ROOT / "_data/training_schedule.yml")
+    parser.add_argument("--schedule", type=Path, default=ROOT / "_data/groups.yml")
     parser.add_argument("--output", type=Path, default=ROOT / "assets/generated/training-poster.png")
     parser.add_argument("--poster", help="Poster name from _data/poster.yml (defaults to all posters)")
     args = parser.parse_args()

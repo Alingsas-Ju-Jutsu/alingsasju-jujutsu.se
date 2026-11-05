@@ -1,6 +1,6 @@
 <div class="training-schedule__term-start">
-  <h3>{{ site.data.training_schedule.term_start.title | escape }}</h3>
-  {% assign term_start_date = site.data.training_schedule.term_start.date | strip %}
+  <h3>{{ site.data.groups.term_start.title | escape }}</h3>
+  {% assign term_start_date = site.data.groups.term_start.date | strip %}
   {% if term_start_date != "" %}
     <p>{{ term_start_date | escape }}</p>
   {% else %}
@@ -8,9 +8,10 @@
   {% endif %}
 </div>
 <div class="training-schedule__groups">
-  {% for group in site.data.training_schedule.groups %}
+  {% for group in site.data.groups.schedule %}
+    {% assign age_group = site.data.groups.groups[group.group] %}
     <div class="training-schedule__group">
-      <h3>{{ group.name | escape }} <span>{{ group.ages | escape }}</span></h3>
+      <h3>{{ group.name | default: age_group.name | escape }} <span>{{ age_group.ages | escape }}{% if group.label %} · {{ group.label | escape }}{% endif %}</span></h3>
       <dl class="training-schedule__sessions">
         {% for session in group.sessions %}
           <div>
@@ -22,11 +23,11 @@
     </div>
   {% endfor %}
 </div>
-{% if site.data.training_schedule.exceptions.size > 0 %}
+{% if site.data.groups.exceptions.size > 0 %}
   <div class="training-schedule__exceptions">
     <h3>Avvikelser i träningsschemat</h3>
     <ul>
-      {% assign exceptions = site.data.training_schedule.exceptions | sort: "date" %}
+      {% assign exceptions = site.data.groups.exceptions | sort: "date" %}
       {% for exception in exceptions %}
         <li><time datetime="{{ exception.date | escape }}">{{ exception.date | escape }}</time> – {{ exception.reason | escape }}</li>
       {% endfor %}
