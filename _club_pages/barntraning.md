@@ -15,7 +15,7 @@ description: Information för vårdnadshavare om barnträningen samt om Ju-jutsu
 Vi vill att alla barn ska känna sig trygga och ha roligt på träningen. De första gångerna är du som vårdnadshavare välkommen att vara med inne i dojon, så att ditt barn får en trygg start. Därefter har vi inte möjlighet att ha föräldrar eller andra vårdnadshavare närvarande i dojon under passen. Det ger instruktörerna arbetsro att leda träningen, ta hand om barnen och hjälpa gruppen att hitta fokus och gemenskap.
 
 ### Engagemang
-Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men för att vara med och hjälpa till under träningarna behöver man ha gått ledarskapsutbildning och ha kunskaper i ju-jutsu vilket våra instruktörer har. Om du är intresserad av att engagera dig, kontakta oss så berättar vi mer om det finns sätt att bidra till klubben.
+Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men för att vara med och hjälpa till under träningarna behöver man, som våra instruktörer, ha gått ledarskapsutbildning och ha kunskaper i ju-jutsu något vi **inte** förutsätter att vårdnadshavare har möjlighet att skaffa sig. Om du är intresserad av att engagera dig, kontakta oss så berättar vi mer om det finns sätt att bidra till klubben.
 
 ### Tävlingar och läger
 Alingsås Ju-Jutsuklubb arrangerar inte tävlingar eller läger för barn, men vi uppmuntrar äldre barn att delta i läger och andra aktiviteter som arrangeras av Svenska Ju-jutsuförbundet. Det är ett roligt sätt att träffa andra barn som tränar ju-jutsu, lära sig nya tekniker och utveckla sin träning.
