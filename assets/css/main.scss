@@ -700,20 +700,24 @@ button:focus-visible,
   color: white;
 }
 
+.instructor-card--black {
+  --instructor-color: #000000;
+}
+
 .instructor-card--brown {
-  --instructor-color: #514332;
+  --instructor-color: #322820;
 }
 
 .instructor-card--blue {
-  --instructor-color: #2621a6;
+  --instructor-color: #1e00ac;
 }
 
 .instructor-card--orange {
-  --instructor-color: #ad3e20;
+  --instructor-color: #ff7424;
 }
 
 .instructor-card--green {
-  --instructor-color: #146b35;
+  --instructor-color: #007f3a;
 }
 
 .page-content__body .instructor-card__name,
