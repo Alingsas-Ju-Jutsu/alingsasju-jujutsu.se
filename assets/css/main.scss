@@ -288,8 +288,8 @@ button:focus-visible,
   display: block;
   margin-top: 1.5rem;
   padding: 0.6rem 1rem;
-  border: 1px solid white;
-  background: $ink;
+  border: 1px solid gray;
+  background: $ink;,
   color: white;
   cursor: pointer;
 }
@@ -341,7 +341,7 @@ button:focus-visible,
 .hero h1 {
   max-width: 13ch;
   margin: 0 0 2rem;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2rem, 6vw, 4rem);
   letter-spacing: -0.07em;
   line-height: 0.98;
 }
@@ -955,7 +955,7 @@ button:focus-visible,
   }
 
   .hero h1 {
-    font-size: clamp(2.25rem, 10vw, 2.75rem);
+    font-size: clamp(2rem, 9vw, 2.5rem);
   }
 
   .hero__slide:nth-child(1) {
