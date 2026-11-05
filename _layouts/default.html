@@ -15,24 +15,20 @@
   <body>
     <a class="skip-link" href="#main">Hoppa till innehållet</a>
     <header class="site-header">
-      <div class="topbar">
-        <a href="{{ site.club.address_url }}">Tennisvägen 8, 441 55 Alingsås</a>
-        <a href="mailto:info@alingsasju-jutsu.se">info@alingsasju-jutsu.se</a>
-        <div class="social-links" aria-label="Följ klubben">
-          <a href="https://www.facebook.com/groups/4828404098/">Facebook</a>
-          <a href="https://www.instagram.com/alingsas.jujutsu/">Instagram</a>
-        </div>
-      </div>
-
       <div class="site-header__main">
         <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} – startsida">
-          <img src="{{ '/assets/images/cropped-test3.png' | relative_url }}" alt="Alingsås Ju-Jutsuklubbs logotyp" width="56" height="56">
+          <img src="{{ '/assets/images/cropped-test3.png' | relative_url }}" alt="Alingsås Ju-Jutsuklubbs logotyp" width="40" height="40">
           <span>
             <span class="wordmark__name">Alingsås</span>
             <span class="wordmark__discipline">Ju-Jutsuklubb</span>
           </span>
         </a>
-        <nav class="site-nav" aria-label="Huvudmeny">
+        <button class="nav-toggle" type="button" aria-label="Meny" aria-controls="main-navigation" aria-expanded="false" hidden>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </button>
+        <nav class="site-nav" id="main-navigation" aria-label="Huvudmeny">
           <a class="nav-link" href="{{ '/borja-trana/' | relative_url }}"{% if page.url == '/borja-trana/' %} aria-current="page"{% endif %}>Börja träna</a>
           {% for group in site.data.navigation %}
             <details class="nav-group" name="main-navigation">

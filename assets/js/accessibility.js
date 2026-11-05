@@ -17,7 +17,30 @@ if (hero && motionToggle) {
   reducedMotion.addEventListener("change", (event) => setPaused(event.matches));
 }
 
-document.querySelector(".site-nav")?.addEventListener("keydown", (event) => {
+const navigation = document.querySelector(".site-nav");
+const navToggle = document.querySelector(".nav-toggle");
+const mobileNavigation = window.matchMedia("(max-width: 900px)");
+
+const setNavigationExpanded = (expanded) => {
+  navigation.classList.toggle("is-collapsed", !expanded);
+  navToggle.setAttribute("aria-expanded", String(expanded));
+};
+
+if (navigation && navToggle) {
+  navToggle.hidden = false;
+  setNavigationExpanded(!mobileNavigation.matches);
+  navToggle.addEventListener("click", () => {
+    setNavigationExpanded(navToggle.getAttribute("aria-expanded") !== "true");
+  });
+  mobileNavigation.addEventListener("change", () => {
+    if (navigation.contains(document.activeElement) && mobileNavigation.matches) {
+      navToggle.focus();
+    }
+    setNavigationExpanded(!mobileNavigation.matches);
+  });
+}
+
+navigation?.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
   const openMenu = event.target.closest("details[open]");
   if (openMenu) {
@@ -25,5 +48,9 @@ document.querySelector(".site-nav")?.addEventListener("keydown", (event) => {
     openMenu.querySelector("summary").focus();
     event.preventDefault();
     event.stopPropagation();
+  } else if (navToggle && mobileNavigation.matches) {
+    setNavigationExpanded(false);
+    navToggle.focus();
+    event.preventDefault();
   }
 });

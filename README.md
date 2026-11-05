@@ -361,7 +361,9 @@ innehållets rubriker med `##`. Skriv beskrivande länktexter och bildalternativ
 och använd riktiga kolumnrubriker i tabeller. Viktig text i affischer behöver
 också finnas som vanlig text. Startsidan har en knapp för att pausa bildspelet;
 besökarens inställning för minskad rörelse respekteras. Menyerna fungerar med
-tangentbord och kan stängas med Escape.
+tangentbord och kan stängas med Escape. På mobil och surfplatta öppnas
+huvudmenyn med knappen ”Meny”; på dator visas den direkt. Utan JavaScript
+visas navigeringen alltid så att länkarna fortfarande går att använda.
 
 Förbättringarna riktar sig mot WCAG 2.2 AA men är inte en certifiering eller
 juridisk bedömning. Manuell granskning med skärmläsare, zoom och tangentbord

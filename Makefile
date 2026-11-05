@@ -1,12 +1,12 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help build serve stop clean scrape scrape-test import import-test
+.PHONY: help build up stop clean scrape scrape-test import import-test
 
 ARCHIVE ?= _old_site/2026-11-03T09-40-05-601Z
 
 help:
 	@printf '%s\n' \
-	  'make serve  Start the local site at http://localhost:4000' \
+	  'make up     Start the local site at http://localhost:4000' \
 	  'make build  Build the static site into _site/' \
 	  'make stop   Stop the local site' \
 	  'make clean  Remove the generated site' \
@@ -15,9 +15,8 @@ help:
 	  'make import Import the completed public archive into Jekyll' \
 	  'make import-test Verify imported content against the archive (after make build)'
 
-serve:
-	docker compose up --build
-
+up:
+	docker compose up site --build
 
 build:
 	docker compose run --build --rm site sh -c 'bundle exec jekyll build'
