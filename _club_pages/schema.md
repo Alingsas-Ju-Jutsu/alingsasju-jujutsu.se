@@ -14,23 +14,6 @@ description: Aktuella träningstider för knattar, barn och vuxna hos Alingsås 
 {% include training-schedule.html %}
 
 
-**Ansvariga instruktörer:**
+## Ansvariga instruktörer
 
-**Vuxna**
-
-Harald Jörby Stenbäck 0763 38 96 13
-
-Erik Dahlman 0703 14 84 05
-
-**Barn**
-
-Jonas Kjell 0731 62 11 55
-
-Tobias Lindström 0793 00 83 26
-
-**Knattar**
-
-Erik Swärd
-
-Betty Fråst
-
+{% include schedule-instructors.html %}

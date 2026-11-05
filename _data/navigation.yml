@@ -12,6 +12,8 @@
       url: "/foreningen/stadgar/"
 - title: Träning & praktiskt
   links:
+    - title: Barnträning
+      url: "/ju-jutsu/barntraning/"
     - title: Träningsavgifter
       url: "/traning/traningsavgifter/"
     - title: Dräkter
@@ -26,8 +28,8 @@
   links:
     - title: Ju-Jutsu Kai
       url: "/ju-jutsu/ju-jutsu-kai/"
-    - title: Barnträning
-      url: "/ju-jutsu/barntraning/"
+    - title: Graderingssystem för barn
+      url: "/ju-jutsu/graderingssystem-barn/"
     - title: Graderingssystem
       url: "/ju-jutsu/graderingssystem/"
 - title: Läger

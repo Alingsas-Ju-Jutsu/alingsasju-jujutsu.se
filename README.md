@@ -119,6 +119,14 @@ ta bort någon från sidan. Ladda upp nya porträtt i
 `assets/images/instructors/` och ange motsvarande sökväg i `image`.
 Använd en vanlig porträttbild utan inbakad text.
 
+Schemat hämtar också ansvariga instruktörer från samma fil.
+Ange `groups: [Barn]` eller exempelvis `groups: [Barn, Vuxna]`.
+Gruppnamnen måste stämma exakt med `name` i `_data/training_schedule.yml`.
+Med `groups: []` visas instruktören inte i schemats kontaktlista.
+Ange telefonnummer inom citattecken, exempelvis `phone: "0703 14 84 05"`.
+Med `phone: ""` visas bara namnet. Telefonnummer visas som klickbara
+telefonlänkar på Schema, inte på instruktörskorten.
+
 ## Träningsaffischen på Schema
 
 GitHub bygger automatiskt en aktuell PNG-affisch från

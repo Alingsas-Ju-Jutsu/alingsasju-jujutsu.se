@@ -4,6 +4,7 @@ category: Träning & praktiskt
 permalink: "/traning/traningsavgifter/"
 source_date: '2026-11-03'
 source_id: '31'
+maintained_content: true
 description: 'Träningsavgifter hos Alingsås Ju-Jutsuklubb: terminsavgifter, familjerabatt,
   graderingsavgifter och information om betalning.'
 ---
@@ -13,7 +14,7 @@ description: 'Träningsavgifter hos Alingsås Ju-Jutsuklubb: terminsavgifter, fa
 | Grupp | Pris |
 | --- | --- |
 | Knatte 7-8 år | 500 kr |
-| Mon 9-13 år | 650 kr |
+| Mon 9-14 år | 650 kr |
 | Vuxna 14-20 år | 800 kr |
 | Vuxna 21+ år | 1050 kr |
 
@@ -48,7 +49,7 @@ I medlemsavgiften ingår medlemsavgift till Svenska Ju-Jutsu Kai, Svenska Budo o
 | Grupp | Pris |
 | --- | --- |
 | Knatte 7-8 år | 120 kr |
-| Mon 9-13 år | 200 kr |
+| Mon 9-14 år | 200 kr |
 | Vuxna 14+ år | 300 kr |
 
 Mon och knattepass medföljer i kostnaden vid ens första graderingstillfälle (1 sträck / mon gult). Vid nyinköp av ytterligare mon eller knattepass (senare grader / vid borttappat pass) tillkommer en kostnad på 50 kr.

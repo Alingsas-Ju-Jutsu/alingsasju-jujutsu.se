@@ -6,6 +6,7 @@ exceptions:
     reason: Höstlov
 groups:
   - name: Knattar
+    type: barn
     ages: "7–8 år"
     sessions:
       - day: Söndagar
@@ -13,6 +14,7 @@ groups:
         end: "18.15"
   - name: Barn
     ages: "9–14 år"
+    type: barn
     sessions:
       - day: Torsdagar
         start: "18.30"
@@ -22,6 +24,7 @@ groups:
         end: "19.30"
   - name: Vuxna
     ages: "14+ år"
+    type: vuxen
     sessions:
       - day: Torsdagar
         start: "19.45"

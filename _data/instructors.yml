@@ -1,40 +1,54 @@
 - name: Harald Stenbäck
+  groups: [Vuxna]
+  phone: "0763 38 96 13"
   level: 2 dan
   color: black
   image: /assets/images/instructors/harald-stenback.jpg
   description: ""
 
 - name: Erik Dahlman
+  groups: [Vuxna]
+  phone: "0703 14 84 05"
   level: 1 kyu
   color: brown
   image: /assets/images/instructors/erik-dahlman.jpg
   description: ""
 
 - name: Jonas Kjell
+  groups: [Barn]
+  phone: "0731 62 11 55"
   level: 1 kyu
   color: brown
   image: /assets/images/instructors/jonas-kjell.jpg
   description: ""
 
 - name: Tobias Lindström
+  groups: [Barn]
+  phone: "0793 00 83 26"
   level: 2 kyu
   color: blue
   image: /assets/images/instructors/tobias-lindstrom.jpg
   description: ""
 
 - name: Erik Swärd
+  groups: [Knattar]
+  phone: ""
   level: 4 kyu
   color: orange
   image: /assets/images/instructors/erik-sward.jpg
   description: ""
 
 - name: Arvid Sakshaug
+  groups: []
+  phone: ""
   level: 4 kyu
   color: orange
   image: /assets/images/instructors/arvid-sakshaug.jpg
   description: ""
 
 - name: Betty Fråst
+  groups: [Knattar]
+  phone: ""
   level: 1 mon
   color: green
   image: /assets/images/instructors/betty-frast.jpg

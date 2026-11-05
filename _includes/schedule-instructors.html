@@ -1,0 +1,14 @@
+{% for group in site.data.training_schedule.groups %}
+  {% assign responsible_instructors = site.data.instructors | where_exp: "instructor", "instructor.groups contains group.name" %}
+  {% unless responsible_instructors == empty %}
+<h3>{{ group.name | escape }}</h3>
+<ul>
+    {% for instructor in responsible_instructors %}
+  <li>
+    {{ instructor.name | escape }}{% if instructor.phone and instructor.phone != "" %}
+    – <a href="tel:{{ instructor.phone | remove: ' ' | escape }}">{{ instructor.phone | escape }}</a>{% endif %}
+  </li>
+    {% endfor %}
+</ul>
+  {% endunless %}
+{% endfor %}
