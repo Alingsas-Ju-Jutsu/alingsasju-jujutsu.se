@@ -46,7 +46,7 @@ med att barnet klarar nästa gradering. Om de inte rekommenderar gradering
 beror det på att de ännu inte är säkra på det, eller på att barnet inte
 uppfyller något av minimikraven: att ha en gi, att terminsavgiften är betald
 samt att ha tränat tillräckligt länge och deltagit i tillräckligt många
-träningspass inför nästa gradering.
+träningspass inför kommande gradering.
 
 Läs om bältesfärger, sho- och monsystemet samt kraven för gradering på sidan
 [Graderingssystem för barn]({{ '/ju-jutsu/graderingssystem-barn/' | relative_url }}).
