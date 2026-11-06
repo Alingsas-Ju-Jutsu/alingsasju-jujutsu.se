@@ -835,6 +835,11 @@ button:focus-visible,
   font-size: 0.95rem;
 }
 
+.page-content__body table.poster-downloads {
+  width: fit-content;
+  margin-inline: auto;
+}
+
 .page-content__body th,
 .page-content__body td {
   padding: 0.6rem 0.8rem;

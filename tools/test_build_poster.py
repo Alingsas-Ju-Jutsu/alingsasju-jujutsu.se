@@ -1,15 +1,26 @@
+import re
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 import yaml
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 
 from build_poster import ROOT, build
 
 
 class PosterTest(unittest.TestCase):
+    def assert_pdf(self, path, width, height):
+        content = path.read_bytes()
+        self.assertTrue(content.startswith(b"%PDF-"))
+        self.assertTrue(content.rstrip().endswith(b"%%EOF"))
+        self.assertEqual(len(re.findall(rb"/Type\s*/Page\b", content)), 1)
+        box = re.search(rb"/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)\s*\]", content)
+        self.assertIsNotNone(box)
+        self.assertAlmostEqual(float(box[1]), width * 72 / 25.4)
+        self.assertAlmostEqual(float(box[2]), height * 72 / 25.4)
+
     def test_both_font_styles_generate_posters(self):
         with tempfile.TemporaryDirectory() as directory:
             for style in ("condensed", "typewriter"):
@@ -24,6 +35,10 @@ class PosterTest(unittest.TestCase):
                     build(ROOT / "_data/groups.yml", output, "test", config)
                     with Image.open(output) as image:
                         image.verify()
+                    for suffix in ("", "-cropped"):
+                        self.assert_pdf(output.with_name(f"{style}-a4{suffix}.pdf"), 210, 297)
+                        self.assert_pdf(output.with_name(f"{style}-a3{suffix}.pdf"), 297, 420)
+                    self.assertEqual(len(list(Path(directory).glob(f"{style}*.pdf"))), 4)
                     with Image.open(Path(directory) / "test-preview.png") as preview:
                         preview.verify()
 
@@ -58,8 +73,15 @@ class PosterTest(unittest.TestCase):
                 rendered.append((value, position, kwargs["fill"], kwargs["font"].size))
                 return original_text(draw, position, value, **kwargs)
 
-            with patch.object(ImageDraw.ImageDraw, "text", capture):
+            with patch.object(ImageDraw.ImageDraw, "text", capture), patch(
+                "build_poster.ImageOps.fit", wraps=ImageOps.fit
+            ) as fit:
                 build(ROOT / "_data/groups.yml", output, "alternate", config)
+            self.assertEqual(fit.call_count, 2)
+            self.assertEqual([call.args[1] for call in fit.call_args_list],
+                             [(1240, 1754), (1754, 2480)])
+            for call in fit.call_args_list:
+                self.assertEqual(call.kwargs["centering"], (0.5, 0.5))
             self.assertIn("ALINGSASJU-JUTSU.SE", [value for value, _, _, _ in rendered])
             self.assertNotIn("TENNISVÄGEN 8 · ALINGSÅS", [value for value, _, _, _ in rendered])
             self.assertTrue(all(color == "#12ab34" for _, _, color, _ in rendered))
@@ -73,6 +95,14 @@ class PosterTest(unittest.TestCase):
                 self.assertEqual(image.size[0], 900)
             with Image.open(directory / "alternate-300.png") as image:
                 self.assertEqual(image.size, (300, 400))
+            with Image.open(directory / "alternate-original.png") as image:
+                self.assertEqual(image.size, (300, 400))
+                with Image.open(directory / "alternate-300.png") as native:
+                    self.assertEqual(image.tobytes(), native.tobytes())
+            for suffix in ("", "-cropped"):
+                self.assert_pdf(directory / f"alternate-a4{suffix}.pdf", 210, 297)
+                self.assert_pdf(directory / f"alternate-a3{suffix}.pdf", 297, 420)
+            self.assertEqual(len(list(directory.glob("*.pdf"))), 4)
             settings = yaml.safe_load(config.read_text())
             settings["posters"]["alternate"]["bottom_margin_percent"] = 10
             config.write_text(yaml.safe_dump(settings))

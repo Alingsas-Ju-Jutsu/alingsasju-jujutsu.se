@@ -183,12 +183,13 @@ telefonlänkar på Schema, inte på instruktörskorten.
 
 ## Träningsaffischen på Schema
 
-GitHub bygger automatiskt en aktuell PNG-affisch från
+GitHub bygger automatiskt aktuella affischer som PNG och PDF från
 [`_data/groups.yml`](_data/groups.yml) vid varje publicering.
 Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
 Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
-På sidan Schema visas affischen med en nedladdningslänk.
+På sidan [Grafik](/grafik/) finns förhandsvisningar och nedladdningslänkar
+för båda formaten.
 
 Affischer konfigureras separat i [`_data/poster.yml`](_data/poster.yml), under
 `posters:`. Varje affisch anger `background` (sökväg från projektroten),
@@ -200,13 +201,24 @@ för ett smalt typsnitt eller `typewriter` för skrivmaskinsstil. Lägg till en
 ny nyckel under `posters:` för en ny affisch; bygg den med
 `python tools/build_poster.py --poster <namn>`. Den första storleken skrivs
 till standardfilnamnet och följande storlekar får bredden tillagd.
+Affischen i bakgrundsbildens ursprungliga pixelstorlek finns även som
+`<namn>-poster-original.png` och länkas från Grafik.
+Varje affischtyp får fyra ensidiga PDF-filer, i stående A4 och A3, med
+filnamn som `training-poster-a4.pdf` och `training-poster-a3.pdf`.
+De använder den största genererade bildstorleken. Standardversionerna visar
+hela affischen centrerad med vita marginaler när proportionerna skiljer sig.
+Versionerna med `-cropped` i filnamnet fyller hela pappersytan och beskär lika
+mycket från vänster och höger, eller från över- och underkant. Innehåll nära
+kanterna kan därför försvinna i de beskurna versionerna.
+Alla versioner behåller bildförhållandet utan förvrängning.
+PDF-filerna innehåller affischen som bild med 150 dpi.
 
 Generatorn finns i `tools/build_poster.py` och återanvänder överdelen av
 originalaffischen med foto, logotyp och rubrik. Originalets gamla tider och
 datum beskärs bort och ersätts med en mörk schemaruta: grupperna visas i
 tre kolumner med terminsstart nedanför. När en bakgrund utan text finns kan
 den ersätta den beskurna originalbilden.
-Genererade bilder i `assets/generated/` ska inte checkas in.
+Genererade bilder och PDF-filer i `assets/generated/` ska inte checkas in.
 `make build` och `make serve` genererar också affischen via Docker.
 Starta om förhandsvisningen efter schemaändringar för att uppdatera PNG-filen;
 textschemat uppdateras fortfarande med Jekylls vanliga omladdning.

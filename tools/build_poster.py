@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 FONTS = {
@@ -156,9 +156,29 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         for value, size, bold in rows:
             y = text(value, y, size, bold) if value else y + round(size * scale)
         destination.parent.mkdir(parents=True, exist_ok=True)
-        image.convert("RGB").save(destination, optimize=True)
+        poster = image.convert("RGB")
+        poster.save(destination, optimize=True)
+        if width == original_width:
+            poster.save(output.with_name(f"{output.stem}-original.png"), optimize=True)
+        if width == max(sizes):
+            for paper, millimeters in (("a4", (210, 297)), ("a3", (297, 420))):
+                page_size = tuple(round(length / 25.4 * 150) for length in millimeters)
+                fitted = ImageOps.contain(poster, page_size, Image.Resampling.LANCZOS)
+                page = Image.new("RGB", page_size, "white")
+                page.paste(fitted, ((page.width - fitted.width) // 2,
+                                    (page.height - fitted.height) // 2))
+                cropped = ImageOps.fit(
+                    poster, page_size, method=Image.Resampling.LANCZOS,
+                    centering=(0.5, 0.5),
+                )
+                for suffix, version in (("", page), ("-cropped", cropped)):
+                    version.save(
+                        output.with_name(f"{output.stem}-{paper}{suffix}.pdf"),
+                        "PDF", dpi=(page.width * 25.4 / millimeters[0],
+                                    page.height * 25.4 / millimeters[1]), quality=95,
+                    )
         if width == sizes[0]:
-            preview = image.convert("RGB")
+            preview = poster.copy()
             preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
             preview_output.parent.mkdir(parents=True, exist_ok=True)
             preview.save(preview_output, optimize=True)
