@@ -426,6 +426,20 @@ button:focus-visible,
   border-left: 4px solid $accent;
 }
 
+.training-schedule__grading {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid currentColor;
+}
+
+.training-schedule__grading h3 {
+  margin: 0 0 0.75rem;
+}
+
+.training-schedule__grading > :last-child {
+  margin-bottom: 0;
+}
+
 .training-schedule__exceptions {
   margin: 2rem 0;
   padding: 1.25rem;
@@ -466,7 +480,7 @@ button:focus-visible,
 }
 
 .training-schedule__group h3 {
-  margin: 0 0 1.5rem;
+  margin: 0;
   font-size: 1.8rem;
   line-height: 1.2;
 }
@@ -477,6 +491,17 @@ button:focus-visible,
   color: $muted;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.training-schedule__group-intro {
+  margin-bottom: 1.5rem;
+}
+
+.training-schedule__group-description {
+  margin: 0.5rem 0 0;
+  color: $muted;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .training-schedule__sessions {

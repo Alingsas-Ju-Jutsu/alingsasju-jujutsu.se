@@ -79,10 +79,7 @@ html_files.each do |file|
   end
 end
 schedule_data = YAML.safe_load(File.read("_data/groups.yml"))
-expected_schedule = schedule_data.fetch("schedule").map do |group|
-  age_group = schedule_data.fetch("groups").fetch(group.fetch("group"))
-  age_group.merge(group).merge("name" => group["name"].to_s.empty? ? age_group["name"] : group["name"])
-end
+expected_schedule = schedule_data.fetch("groups").values
 %w[_site/index.html _site/traning/schema/index.html _site/borja-trana/index.html].each do |file|
   document = Nokogiri::HTML(File.read(file))
   groups = document.css(".training-schedule__group")

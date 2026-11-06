@@ -11,7 +11,7 @@ description: Aktuella träningstider för knattar, barn och vuxna hos Alingsås 
 
 ## Aktuella träningstider
 
-{% include training-schedule.html %}
+{% include training-schedule.html show_grading=true %}
 
 
 ## Ansvariga instruktörer

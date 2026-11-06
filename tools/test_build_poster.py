@@ -97,9 +97,11 @@ class PosterTest(unittest.TestCase):
                 return original_text(draw, position, value, **kwargs)
 
             for date, time in [("2027-01-10", "17.15"), ("15 februari 2028", "16.30")]:
-                schedule["schedule"][0]["name"] = "Knattar nybörjare" if time == "16.30" else ""
+                schedule["groups"]["toddlers"]["name"] = (
+                    "Knattar nybörjare" if time == "16.30" else "Knattar"
+                )
                 schedule["term_start"]["date"] = date
-                schedule["schedule"][0]["sessions"][0]["start"] = time
+                schedule["groups"]["toddlers"]["sessions"][0]["start"] = time
                 source.write_text(yaml.safe_dump(schedule, allow_unicode=True))
                 rendered.clear()
                 with patch.object(ImageDraw.ImageDraw, "text", capture):
@@ -107,10 +109,9 @@ class PosterTest(unittest.TestCase):
                 text = " ".join(rendered).upper()
                 self.assertIn(date.upper(), text)
                 self.assertIn(time, text)
-                for group in schedule["schedule"]:
-                    age_group = schedule["groups"][group["group"]]
-                    self.assertIn((group.get("name") or age_group["name"]).upper(), text)
-                    self.assertIn(age_group["ages"].upper(), text)
+                for group in schedule["groups"].values():
+                    self.assertIn(group["name"].upper(), text)
+                    self.assertIn(group["ages"].upper(), text)
                     for session in group["sessions"]:
                         self.assertIn(session["day"].upper(), text)
                         self.assertIn(session["end"], text)
@@ -128,7 +129,12 @@ class PosterTest(unittest.TestCase):
     def test_long_schedule_uses_original_background_size_and_blank_start_is_explicit(self):
         schedule = yaml.safe_load((ROOT / "_data/groups.yml").read_text())
         schedule["term_start"]["date"] = ""
-        schedule["schedule"] *= 4
+        original_groups = list(schedule["groups"].items())
+        schedule["groups"] = {
+            f"{group_id}_{index}": {**group, "id": f"{group['id']}_{index}"}
+            for index in range(4)
+            for group_id, group in original_groups
+        }
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "schedule.yml"
             output = Path(directory) / "poster.png"

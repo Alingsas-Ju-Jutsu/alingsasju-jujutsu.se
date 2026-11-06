@@ -59,15 +59,14 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         raise ValueError("Poster bottom_margin_percent must be between 0 and 100.")
     with schedule_path.open(encoding="utf-8") as source:
         schedule = yaml.safe_load(source)
-    if not schedule["schedule"]:
+    if not schedule["groups"]:
         raise ValueError("The poster requires at least one training group.")
     schedule["schedule"] = [
         {
-            **schedule["groups"][group["group"]],
             **group,
-            "name": group.get("name") or schedule["groups"][group["group"]]["name"],
+            "name": group.get("name") or group_id,
         }
-        for group in schedule["schedule"]
+        for group_id, group in schedule["groups"].items()
     ]
 
     base_width = 1200

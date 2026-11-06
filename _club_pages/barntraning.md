@@ -20,10 +20,14 @@ Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men fö
 ### Grupper
  Vi rekommenderar att barn börjar träna i den grupp som passar deras ålder, men det är också möjligt att byta grupp och träna med en annan grupp om det passar bättre pga t.ex. erfarenhet, kompisar eller andra skäl. Detta kan du diskutera med instruktörerna på plats eller kontakta klubben om du vill ha hjälp att hitta rätt grupp.
 
-{% for group in site.data.groups.schedule %}
-{% assign age_group = site.data.groups.groups[group.group] %}
-{% if age_group.type == "barn" %}
-**{{ group.name | default: age_group.name }}** – {{ age_group.ages }}{% if group.label %} · {{ group.label }}{% endif %}
+{% for group_entry in site.data.groups.groups %}
+{% assign group = group_entry[1] %}
+{% if group.type == "barn" %}
+**{{ group.name }}** – {{ group.ages }}{% if group.label %} · {{ group.label }}{% endif %}
+{% if group.description and group.description != "" %}
+
+{{ group.description | escape }}
+{% endif %}
 {% for session in group.sessions %}
   - {{ session.day }} kl. {{ session.start }}–{{ session.end }}
 {% endfor %}
@@ -35,7 +39,14 @@ Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men fö
 ### Tävlingar och läger
 Alingsås Ju-Jutsuklubb arrangerar inte tävlingar eller läger för barn, men vi uppmuntrar äldre barn att delta i läger och andra aktiviteter som arrangeras av Svenska Ju-jutsuförbundet. Det är ett roligt sätt att träffa andra barn som tränar ju-jutsu, lära sig nya tekniker och utveckla sin träning.
 
-## Bälten och gradering
+## Barngraderingar
+
+Om instruktörerna rekommenderar gradering betyder det att de känner sig trygga
+med att barnet klarar nästa gradering. Om de inte rekommenderar gradering
+beror det på att de ännu inte är säkra på det, eller på att barnet inte
+uppfyller något av minimikraven: att ha en gi, att terminsavgiften är betald
+samt att ha tränat tillräckligt länge och deltagit i tillräckligt många
+träningspass inför nästa gradering.
 
 Läs om bältesfärger, sho- och monsystemet samt kraven för gradering på sidan
 [Graderingssystem för barn]({{ '/ju-jutsu/graderingssystem-barn/' | relative_url }}).
