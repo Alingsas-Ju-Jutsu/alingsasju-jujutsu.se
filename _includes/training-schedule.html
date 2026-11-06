@@ -7,11 +7,51 @@
     <p>Datum meddelas snart.</p>
   {% endif %}
 </div>
+{% if include.show_grading == true %}
+  {% assign has_grading_times = false %}
+  {% for group_entry in site.data.groups.groups %}
+    {% assign grading_group = group_entry[1] %}
+    {% assign grading_date = grading_group.grading.date | default: "" | strip %}
+    {% assign grading_time = grading_group.grading.time | default: "" | strip %}
+    {% if grading_date != "" or grading_time != "" %}
+      {% assign has_grading_times = true %}
+    {% endif %}
+  {% endfor %}
+  {% if has_grading_times %}
+<section class="training-schedule__gradings" aria-labelledby="grading-times-title">
+<h2 id="grading-times-title">Graderingstider</h2>
+<p>Se också <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">rekommendationer och minimikrav inför barngradering</a>.</p>
+  {% for group_entry in site.data.groups.groups %}
+    {% assign grading_group = group_entry[1] %}
+    {% assign grading_date = grading_group.grading.date | default: "" | strip %}
+    {% assign grading_time = grading_group.grading.time | default: "" | strip %}
+    {% assign grading_is_preliminary = grading_group.grading.is_preliminary %}
+    {% if grading_date != "" or grading_time != "" %}
+<div class="training-schedule__grading" data-grading-date="{{ grading_date | escape }}">
+  <h3>{{ grading_group.name | escape }} – {% if grading_is_preliminary %}preliminär {% endif %}graderingstid</h3>
+  <p>
+    {% if grading_date != "" %}{{ grading_date | escape }}{% endif %}
+    {% if grading_time == "" %}
+      (Tid kommer snart.)
+    {% endif %}
+    {% if grading_time != "" %}{% if grading_date != "" %} kl. {% else %}Kl. {% endif %}{{ grading_time | escape }}{% endif %}
+  </p>
+</div>
+    {% endif %}
+  {% endfor %}
+</section>
+  {% endif %}
+{% endif %}
 <div class="training-schedule__groups">
-  {% for group in site.data.groups.schedule %}
-    {% assign age_group = site.data.groups.groups[group.group] %}
+  {% for group_entry in site.data.groups.groups %}
+    {% assign group = group_entry[1] %}
     <div class="training-schedule__group">
-      <h3>{{ group.name | default: age_group.name | escape }} <span>{{ age_group.ages | escape }}{% if group.label %} · {{ group.label | escape }}{% endif %}</span></h3>
+      <div class="training-schedule__group-intro">
+        <h3>{{ group.name | escape }} <span>{{ group.ages | escape }}{% if group.label %} · {{ group.label | escape }}{% endif %}</span></h3>
+        {% if group.description and group.description != "" %}
+          <p class="training-schedule__group-description">{{ group.description | escape }}</p>
+        {% endif %}
+      </div>
       <dl class="training-schedule__sessions">
         {% for session in group.sessions %}
           <div>

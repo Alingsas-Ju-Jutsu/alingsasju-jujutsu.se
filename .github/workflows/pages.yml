@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "17 4 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -21,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Test grading visibility
+        run: node --test tools/test_grading_times.cjs
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

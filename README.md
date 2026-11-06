@@ -29,21 +29,31 @@ Du behöver inte installera något eller ändra dessa sidor var för sig.
    När den är klar kontrollerar du tiderna på webbplatsen. Om körningen
    misslyckas öppnar du den för att se felet; ändringen är då inte publicerad.
 
+Webbplatsen byggs också om automatiskt varje måndag kl. 04.17 UTC
+(05.17 svensk vintertid eller 06.17 sommartid). GitHub kan fördröja
+schemalagda körningar och inaktivera dem efter 60 dagars inaktivitet i
+publika kodförråd. Graderingstider döljs dagen efter sitt datum oberoende
+av veckobyggningen, enligt beskrivningen nedan.
+
 ### Ändra en grupps träningstider
 
-Gemensamma namn, åldrar och typer finns under `groups`. En grupp
-kan också ha en graderingsbenämning: `grading_name: Mon` anger
-att åldersgruppen Barn kallas Mon i avgiftstabellerna.
-Varje träningsgrupp
-under `schedule` har ett unikt `id` och hänvisar till en definition med `group`.
-Varje post under `sessions` är ett träningstillfälle. `day` är veckodagen,
-`start` starttiden och `end` sluttiden.
+Varje grupp under `groups` innehåller namn, ålder, typ, återkommande
+träningstillfällen och graderingsinformation. `grading_name: Mon` anger att
+åldersgruppen Barn kallas Mon i avgiftstabellerna. Gruppens unika `id` kopplar
+den till instruktörerna i `_data/instructors.yml`. Varje post under `sessions`
+är ett träningstillfälle: `day` är veckodagen, `start` starttiden och `end`
+sluttiden.
 
 Exempel på en vuxengrupp med två träningstillfällen:
 
 ```yaml
-  - id: adults
-    group: adults
+groups:
+  adults:
+    id: adults
+    name: Vuxna
+    type: vuxen
+    ages: "14+ år"
+    grading_name: Vuxna
     sessions:
       - day: Torsdagar
         start: "19.45"
@@ -54,17 +64,26 @@ Exempel på en vuxengrupp med två träningstillfällen:
 ```
 
 För att ändra söndagstiden redigerar du bara `start` och `end` under
-`Söndagar` i rätt grupp. Tiderna ovan är ett exempel på formatet; ersätt inte
+`Söndagar` i den gruppen. Tiderna ovan är ett exempel på formatet; ersätt inte
 hela filen med exemplet eftersom andra grupper och inställningar då försvinner.
 
-Flera schemaposter kan använda samma `group`, exempelvis `children`,
-och får då samma namn och åldersspann. Ge varje grupp ett eget `id` och
-eventuellt `label: Grupp 2` för att skilja dem åt i schemat.
-Du kan också ange ett valfritt `name: Barn nybörjare` på träningsgruppen.
-Det namnet används i schemat, på Barnträning, i instruktörslistan och på
-affischen. Utelämna `name` eller ange `name: ""` för att använda
-åldersgruppens gemensamma namn. Ålder och avgiftstabeller påverkas inte.
-Instruktörernas ansvar kopplas till träningsgruppens unika `id`.
+Om det behövs flera träningsgrupper för samma ålder lägger du till en egen
+grupp under `groups` med unikt nyckelnamn och `id`, samt egna `sessions`.
+Ange `label: Grupp 2` om grupperna behöver skiljas åt i schemat. `name` och
+`label` visas också på Barnträning och i instruktörslistan; gruppnamnet används
+även på affischen.
+Behåll gruppnycklar som `children`, eftersom andra sidor använder dem för
+åldersgruppens uppgifter.
+
+Du kan lägga till en valfri `description` i vanlig text under gruppen. Den
+visas under gruppnamnet på startsidan, Schema, Börja träna och Barnträning.
+Exempel:
+
+```yaml
+groups:
+  children:
+    description: "För barn med gult monbälte eller högre"
+```
 
 ### Ändra terminsstart
 
@@ -79,6 +98,31 @@ term_start:
 Datumet visas som det är skrivet. Du kan också skriva exempelvis
 `"10 januari 2027"`. Behåll citattecknen. Med `date: ""` visas
 ”Datum meddelas snart.”.
+
+### Visa preliminär graderingstid
+
+Varje åldersgrupp (`toddlers`, `children` och `adults`) kan ha egna värden
+under sin `grading`-nyckel i [`_data/groups.yml`](_data/groups.yml). Fyll i
+`date` och `time` för den gruppen. `is_preliminary` är ett booleskt värde:
+`true` visar att tiden är preliminär och `false` visar en fastställd
+graderingstid. Skriv datum som `"YYYY-MM-DD"` och tiden inom citattecken.
+Graderingstiden döljs dagen efter datumet, enligt svensk tid, utan att
+YAML-filen behöver ändras eller webbplatsen byggas om. Detta kräver JavaScript
+och rätt inställd klocka hos besökaren. En tid utan datum döljs inte automatiskt.
+När både datum och tid är tomma visas ingen graderingstid för gruppen.
+Rubriken ”Graderingstider” döljs när inga graderingstider återstår.
+Informationen visas på startsidan och sidan Schema, inte på Börja träna.
+
+Exempel på hur inställningarna är uppbyggda:
+
+```yaml
+groups:
+  children:
+    grading:
+      date: ""
+      time: ""
+      is_preliminary: true
+```
 
 ### Lägg till lov eller andra avvikelser
 

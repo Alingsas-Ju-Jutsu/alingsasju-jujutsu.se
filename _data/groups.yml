@@ -7,31 +7,25 @@ exceptions:
 
 groups:
   toddlers:
+    id: toddlers
     name: Knattar
     grading_name: Knattar
     type: barn
     ages: "7–8 år"
-  children:
-    name: Barn
-    grading_name: Mon
-    type: barn
-    ages: "9–14 år"
-  adults:
-    name: Vuxna
-    grading_name: Vuxna
-    type: vuxen
-    ages: "14+ år"
-
-# Optional "name" can be used to override the name of the group in the schedule, e.g. for differentieting between groups of the same age group.
-schedule:
-  - id: toddlers
-    group: toddlers
     sessions:
       - day: Söndagar
         start: "17.15"
         end: "18.15"
-  - id: children1
-    group: children
+    grading:
+      date: "2026-11-22"
+      time: "10:00"
+      is_preliminary: true
+  children:
+    id: children1
+    name: Barn
+    grading_name: Mon
+    type: barn
+    ages: "9–14 år"
     sessions:
       - day: Torsdagar
         start: "18.30"
@@ -39,8 +33,16 @@ schedule:
       - day: Söndagar
         start: "18.30"
         end: "19.30"
-  - id: adults
-    group: adults
+    grading:
+      date: "2026-11-22"
+      time: "14:00"
+      is_preliminary: true
+  adults:
+    id: adults
+    name: Vuxna
+    grading_name: Vuxna
+    type: vuxen
+    ages: "14+ år"
     sessions:
       - day: Torsdagar
         start: "19.45"
@@ -48,3 +50,7 @@ schedule:
       - day: Söndagar
         start: "19.45"
         end: "21.00"
+    grading:
+      date: "2026-11-25"
+      time: "14:00"
+      is_preliminary: true
