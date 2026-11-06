@@ -191,20 +191,20 @@ Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affische
 På sidan [Grafik](/grafik/) finns förhandsvisningar och nedladdningslänkar
 för båda formaten.
 
-Affischer konfigureras separat i [`_data/poster.yml`](_data/poster.yml), under
-`posters:`. Varje affisch anger `background` (sökväg från projektroten),
+Grafik konfigureras separat i [`_data/graphics.yml`](_data/graphics.yml), under
+`graphics:`. Varje affisch anger `background` (sökväg från projektroten),
 `sizes` (exportbredder i pixlar), `include_website`, `include_address`,
 `bottom_margin_percent` (marginal från bildens nederkant i procent av bildhöjden)
 och `font`. Bakgrundsbilden behåller sitt bildförhållande; schemat läggs
 ovanpå bildens nedre del. Välj `condensed`
 för ett smalt typsnitt eller `typewriter` för skrivmaskinsstil. Lägg till en
-ny nyckel under `posters:` för en ny affisch; bygg den med
-`python tools/build_poster.py --poster <namn>`. Den första storleken skrivs
+ny nyckel under `graphics:` för en ny affisch; bygg den med
+`python tools/build_graphics.py --graphic <namn>`. Den första storleken skrivs
 till standardfilnamnet och följande storlekar får bredden tillagd.
 Affischen i bakgrundsbildens ursprungliga pixelstorlek finns även som
-`<namn>-poster-original.png` och länkas från Grafik.
+`<namn>-graphic-original.png` och länkas från Grafik.
 Varje affischtyp får fyra ensidiga PDF-filer, i stående A4 och A3, med
-filnamn som `training-poster-a4.pdf` och `training-poster-a3.pdf`.
+filnamn som `training-graphic-a4.pdf` och `training-graphic-a3.pdf`.
 De använder den största genererade bildstorleken. Standardversionerna visar
 hela affischen centrerad med vita marginaler när proportionerna skiljer sig.
 Versionerna med `-cropped` i filnamnet fyller hela pappersytan och beskär lika
@@ -213,13 +213,43 @@ kanterna kan därför försvinna i de beskurna versionerna.
 Alla versioner behåller bildförhållandet utan förvrängning.
 PDF-filerna innehåller affischen som bild med 150 dpi.
 
-Generatorn finns i `tools/build_poster.py` och återanvänder överdelen av
+`include_schedule` styr om schemat läggs till (standard: `true`).
+Utelämna `sizes` eller ange `sizes: []` för enbart originalet och en
+förhandsvisning, utan storleksvarianter eller PDF. För SVG länkas då bara
+SVG-originalet; ingen nedladdningsbar PNG skapas.
+Ange `include_schedule: false` för fristående grafik, som logotypen.
+Den behöver bara `background` och `sizes` samt en valfri `title`; inställningar
+för schematext behövs inte. SVG konverteras med `rsvg-convert` (paketet `librsvg2-bin`)
+direkt till PNG i varje angiven bredd, med bibehållna proportioner och
+transparens. En förhandsvisning genereras också. PNG i originalstorlek genereras bara
+för rasterbilder; för SVG används enbart de angivna pixelbredderna.
+Ingen schematext eller PDF läggs till när `include_schedule: false`.
+Även rasterbilder stöds utan schema. SVG kräver `include_schedule: false`,
+och Grafik länkar också till den oförändrade SVG-filen.
+
+SVG-bilder kan ange bakgrundsvarianter med `background_colors`, till exempel:
+
+```yaml
+background_colors:
+  transparent: transparent
+  white: "#ffffff"
+```
+
+Varje angiven bredd får då en PNG per bakgrund. Logotypens filer heter
+exempelvis `logo-graphic-transparent.png`, `logo-graphic-white.png`,
+`logo-graphic-2500-transparent.png` och `logo-graphic-2500-white.png`.
+Förhandsvisningen använder den första bakgrundsvarianten. SVG-originalet
+ändras inte. Namnen ska bestå av små ASCII-bokstäver, siffror och bindestreck;
+färger anges som `transparent` eller citerad `#RRGGBB`.
+
+Generatorn finns i `tools/build_graphics.py` och återanvänder överdelen av
 originalaffischen med foto, logotyp och rubrik. Originalets gamla tider och
 datum beskärs bort och ersätts med en mörk schemaruta: grupperna visas i
 tre kolumner med terminsstart nedanför. När en bakgrund utan text finns kan
 den ersätta den beskurna originalbilden.
 Genererade bilder och PDF-filer i `assets/generated/` ska inte checkas in.
-`make build` och `make serve` genererar också affischen via Docker.
+`make generate_graphics` genererar alla filer via Docker-tjänsten
+`graphics_generator`. `make up` genererar dem innan förhandsvisningen startar.
 Starta om förhandsvisningen efter schemaändringar för att uppdatera PNG-filen;
 textschemat uppdateras fortfarande med Jekylls vanliga omladdning.
 
@@ -326,8 +356,8 @@ ingen kodändring behövs. Lokal förhandsvisning med Docker påverkas inte.
    **Custom domain**. Kodförrådets `CNAME`-fil innehåller redan domänen,
    men med denna Actions-baserade publicering måste den även anges i
    Pages-inställningarna.
-3. Hos DNS-leverantören ersätter du motstridiga A/AAAA-poster för
-   rotdomänens webbplats (`@`) med GitHub Pages A-poster:
+3. Hos DNS-leverantören ersätter du motstridiga A/AAAA-graphic för
+   rotdomänens webbplats (`@`) med GitHub Pages A-graphic:
 
    | Typ | Namn | Värde |
    | --- | --- | --- |
@@ -339,9 +369,9 @@ ingen kodändring behövs. Lokal förhandsvisning med Docker påverkas inte.
 
    Använd DNS-leverantörens motsvarighet till `@` för rotdomänen.
    CNAME-värdet för `www` ska endast vara ett värdnamn, utan kodförrådets
-   sökväg. Behåll e-postens MX-poster och andra orelaterade TXT-poster.
-   Om IPv6/AAAA-poster finns ska de uppdateras till GitHubs dokumenterade
-   värden, eller gamla AAAA-poster för webbplatsen tas bort, så att
+   sökväg. Behåll e-postens MX-graphic och andra orelaterade TXT-graphic.
+   Om IPv6/AAAA-graphic finns ska de uppdateras till GitHubs dokumenterade
+   värden, eller gamla AAAA-graphic för webbplatsen tas bort, så att
    IPv6-besökare inte fortsätter hamna på den gamla servern. Kontrollera
    aktuella värden i GitHubs [dokumentation för egna domäner](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
    innan DNS ändras.

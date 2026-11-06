@@ -835,9 +835,20 @@ button:focus-visible,
   font-size: 0.95rem;
 }
 
-.page-content__body table.poster-downloads {
+.page-content__body table.graphics-downloads {
   width: fit-content;
   margin-inline: auto;
+}
+
+.graphics-downloads .button {
+  padding: 0.35rem 0.65rem;
+  white-space: nowrap;
+}
+
+.graphics-downloads .button:hover,
+.graphics-downloads .button:focus-visible {
+  background: $ink;
+  color: white;
 }
 
 .page-content__body th,

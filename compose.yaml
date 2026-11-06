@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.site
-    command: sh -c 'python3 tools/build_poster.py && bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling'
+    command: sh -c 'python3 tools/build_graphics.py && bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling'
     ports:
       - "4000:4000"
       - "35729:35729"
@@ -11,11 +11,11 @@ services:
       - .:/app
     environment:
       JEKYLL_ENV: development
-  poster_generator:
+  graphics_generator:
     build:
       context: .
       dockerfile: Dockerfile
-    command: sh -c 'python3 tools/build_poster.py'
+    command: sh -c 'python3 tools/build_graphics.py'
     volumes:
       - .:/app
   scraper:

@@ -1,6 +1,8 @@
-# Poster-specific settings. Background paths are relative to the project root.
-posters:
+# Graphic-specific settings. Background paths are relative to the project root.
+graphics:
   training:
+    title: Blackbelt
+    include_schedule: true
     background: assets/source/poster_blackbelt_blank.png
     sizes: [1200, 2500]
     include_website: false
@@ -13,6 +15,8 @@ posters:
     term_start_font_size: 45
     term_start_spacing: 45
   tattoo:
+    title: Tattoo
+    include_schedule: true
     background: assets/source/tattoo_poster.jpg
     sizes: [1200]
     include_website: false
@@ -24,4 +28,7 @@ posters:
     line_spacing: 10
     term_start_font_size: 35
     term_start_spacing: 15
-
+  logo:
+    title: Logotyp
+    include_schedule: false
+    background: assets/source/logotype.png

@@ -1,6 +1,8 @@
-"""Render the downloadable training poster from the site's shared schedule."""
+"""Generate downloadable graphics, optionally with the shared training schedule."""
 
 import argparse
+import re
+import subprocess
 from pathlib import Path
 
 import yaml
@@ -14,21 +16,108 @@ FONTS = {
 }
 
 
-def build(schedule_path, output, poster_name="training", config_path=None, preview_output=None):
-    config_path = config_path or ROOT / "_data/poster.yml"
+def build_graphic(background, output, preview_output, sizes, background_colors=None):
+    output.parent.mkdir(parents=True, exist_ok=True)
+    original_output = output.with_name(f"{output.stem}-original.png")
+    is_svg = background.suffix.lower() == ".svg"
+
+    def render(destination, width=None, color="transparent"):
+        if is_svg:
+            command = ["rsvg-convert", "--output", str(destination)]
+            if width is not None:
+                command.extend(["--width", str(width)])
+            if color != "transparent":
+                command.extend(["--background-color", color])
+            subprocess.run([*command, str(background)], check=True)
+        else:
+            with Image.open(background) as source:
+                image = source.convert("RGBA")
+                if width is not None:
+                    image = image.resize(
+                        (width, round(image.height * width / image.width)),
+                        Image.Resampling.LANCZOS,
+                    )
+                image.save(destination, optimize=True)
+
+    widths = sizes
+    if not sizes:
+        destination = preview_output if is_svg else original_output
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        render(destination)
+        with Image.open(destination) as image:
+            image.thumbnail((600, 600), Image.Resampling.LANCZOS)
+            preview_output.parent.mkdir(parents=True, exist_ok=True)
+            image.save(preview_output, optimize=True)
+        return
+    if not is_svg:
+        render(original_output)
+        with Image.open(original_output) as original:
+            original_width = original.width
+        if original_width not in sizes:
+            widths = [*sizes, original_width]
+    for index, width in enumerate(widths):
+        destination = output if index == 0 else output.with_name(
+            f"{output.stem}-{width}{output.suffix}"
+        )
+        for variant_index, (name, color) in enumerate(
+            (background_colors or {"": "transparent"}).items()
+        ):
+            variant_output = destination.with_name(
+                f"{destination.stem}-{name}.png"
+            ) if name else destination
+            render(variant_output, width, color)
+            if index == 0 and variant_index == 0:
+                with Image.open(variant_output) as image:
+                    image.thumbnail((600, 600), Image.Resampling.LANCZOS)
+                    preview_output.parent.mkdir(parents=True, exist_ok=True)
+                    image.save(preview_output, optimize=True)
+            print(f"Generated {variant_output}: {width}px wide")
+
+
+def build(schedule_path, output, graphic_name="training", config_path=None, preview_output=None):
+    config_path = config_path or ROOT / "_data/graphics.yml"
     with config_path.open(encoding="utf-8") as source:
-        posters = yaml.safe_load(source)["posters"]
-    if poster_name not in posters:
-        raise ValueError(f"Unknown poster {poster_name!r}; choose from {', '.join(posters)}.")
-    config = posters[poster_name]
-    preview_output = preview_output or output.with_name(f"{poster_name}-preview.png")
+        graphics = yaml.safe_load(source)["graphics"]
+    if graphic_name not in graphics:
+        raise ValueError(f"Unknown graphic {graphic_name!r}; choose from {', '.join(graphics)}.")
+    config = graphics[graphic_name]
+    preview_output = preview_output or output.with_name(f"{graphic_name}-preview.png")
+    background_path = ROOT / config["background"]
+    sizes = config.get("sizes", [])
+    if not isinstance(sizes, list) or any(
+        not isinstance(size, int) or isinstance(size, bool) or size <= 0 for size in sizes
+    ):
+        raise ValueError("Graphic sizes must be a list of positive pixel widths.")
+    export_sizes = bool(sizes)
+    include_schedule = config.get("include_schedule", True)
+    if not isinstance(include_schedule, bool):
+        raise ValueError("Graphic include_schedule must be true or false.")
+    background_colors = config.get("background_colors")
+    if background_colors is not None:
+        if include_schedule or background_path.suffix.lower() != ".svg":
+            raise ValueError("background_colors requires SVG graphics without a schedule.")
+        if not isinstance(background_colors, dict) or not background_colors:
+            raise ValueError("background_colors must be a non-empty mapping of names to colors.")
+        for name, color in background_colors.items():
+            if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
+                raise ValueError("Background names must use lowercase letters, digits and hyphens.")
+            if not isinstance(color, str):
+                raise ValueError("Background colors must be transparent or hex colors (#RRGGBB).")
+            if color != "transparent":
+                if not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+                    raise ValueError("Background colors must be transparent or hex colors (#RRGGBB).")
+    if not include_schedule:
+        build_graphic(background_path, output, preview_output, sizes, background_colors)
+        return
+    if background_path.suffix.lower() == ".svg":
+        raise ValueError("SVG graphics require include_schedule: false.")
     font_color = config.get("font_color", "#ffffff")
     if not isinstance(font_color, str) or len(font_color) != 7 or font_color[0] != "#":
-        raise ValueError("Poster font_color must be a hex color in #RRGGBB format.")
+        raise ValueError("Graphic font_color must be a hex color in #RRGGBB format.")
     try:
         int(font_color[1:], 16)
     except ValueError as error:
-        raise ValueError("Poster font_color must be a hex color in #RRGGBB format.") from error
+        raise ValueError("Graphic font_color must be a hex color in #RRGGBB format.") from error
     font_size = config.get("font_size", 25)
     line_spacing = config.get("line_spacing", 14)
     term_start_font_size = config.get("term_start_font_size", 45)
@@ -38,29 +127,25 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
                         ("term_start_spacing", term_start_spacing)):
         if not isinstance(value, int) or value < 0 or (name.endswith("font_size") and value == 0):
             qualifier = "positive" if name.endswith("font_size") else "non-negative"
-            raise ValueError(f"Poster {name} must be a {qualifier} integer.")
+            raise ValueError(f"Graphic {name} must be a {qualifier} integer.")
     font_style = config["font"]
     if font_style not in FONTS:
-        raise ValueError(f"Unknown poster font {font_style!r}; choose condensed or typewriter.")
+        raise ValueError(f"Unknown graphic font {font_style!r}; choose condensed or typewriter.")
     regular, heavy = FONTS[font_style]
     font_directory = ROOT / "assets/fonts" if font_style == "antonio" else Path(
         "/usr/share/fonts/truetype/dejavu"
     )
-    background_path = ROOT / config["background"]
-    sizes = config["sizes"]
-    if not sizes or any(not isinstance(size, int) or size <= 0 for size in sizes):
-        raise ValueError("Poster sizes must be a non-empty list of positive pixel widths.")
     with Image.open(background_path) as background:
         original_width = background.width
     if original_width not in sizes:
         sizes = [*sizes, original_width]
     margin_percent = config["bottom_margin_percent"]
     if not 0 <= margin_percent <= 100:
-        raise ValueError("Poster bottom_margin_percent must be between 0 and 100.")
+        raise ValueError("Graphic bottom_margin_percent must be between 0 and 100.")
     with schedule_path.open(encoding="utf-8") as source:
         schedule = yaml.safe_load(source)
     if not schedule["groups"]:
-        raise ValueError("The poster requires at least one training group.")
+        raise ValueError("The graphic requires at least one training group.")
     schedule["schedule"] = [
         {
             **group,
@@ -92,7 +177,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
             for word in str(value).split():
                 candidate = f"{line} {word}".strip()
                 if draw.textlength(word, font=font) > max_width:
-                    raise ValueError(f"Poster word is too wide: {word}")
+                    raise ValueError(f"Graphic word is too wide: {word}")
                 if line and draw.textlength(candidate, font=font) > max_width:
                     lines.append(line)
                     line = word
@@ -156,19 +241,19 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         for value, size, bold in rows:
             y = text(value, y, size, bold) if value else y + round(size * scale)
         destination.parent.mkdir(parents=True, exist_ok=True)
-        poster = image.convert("RGB")
-        poster.save(destination, optimize=True)
+        graphic = image.convert("RGB")
+        graphic.save(destination, optimize=True)
         if width == original_width:
-            poster.save(output.with_name(f"{output.stem}-original.png"), optimize=True)
-        if width == max(sizes):
+            graphic.save(output.with_name(f"{output.stem}-original.png"), optimize=True)
+        if export_sizes and width == max(sizes):
             for paper, millimeters in (("a4", (210, 297)), ("a3", (297, 420))):
                 page_size = tuple(round(length / 25.4 * 150) for length in millimeters)
-                fitted = ImageOps.contain(poster, page_size, Image.Resampling.LANCZOS)
+                fitted = ImageOps.contain(graphic, page_size, Image.Resampling.LANCZOS)
                 page = Image.new("RGB", page_size, "white")
                 page.paste(fitted, ((page.width - fitted.width) // 2,
                                     (page.height - fitted.height) // 2))
                 cropped = ImageOps.fit(
-                    poster, page_size, method=Image.Resampling.LANCZOS,
+                    graphic, page_size, method=Image.Resampling.LANCZOS,
                     centering=(0.5, 0.5),
                 )
                 for suffix, version in (("", page), ("-cropped", cropped)):
@@ -178,7 +263,7 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
                                     page.height * 25.4 / millimeters[1]), quality=95,
                     )
         if width == sizes[0]:
-            preview = poster.copy()
+            preview = graphic.copy()
             preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
             preview_output.parent.mkdir(parents=True, exist_ok=True)
             preview.save(preview_output, optimize=True)
@@ -188,26 +273,25 @@ def build(schedule_path, output, poster_name="training", config_path=None, previ
         destination = output if index == 0 else output.with_name(
             f"{output.stem}-{width}{output.suffix}"
         )
+        if not export_sizes:
+            destination = output.with_name(f"{output.stem}-original.png")
         render(width, destination)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--schedule", type=Path, default=ROOT / "_data/groups.yml")
-    parser.add_argument("--output", type=Path, default=ROOT / "assets/generated/training-poster.png")
-    parser.add_argument("--poster", help="Poster name from _data/poster.yml (defaults to all posters)")
+    parser.add_argument("--output", type=Path, help="PNG path (requires --graphic)")
+    parser.add_argument("--graphic", help="Graphic name from _data/graphics.yml (defaults to all graphics)")
     args = parser.parse_args()
-    if args.poster:
-        build(args.schedule, args.output, args.poster,
-              preview_output=args.output.with_name(f"{args.poster}-preview.png"))
+    if args.output and not args.graphic:
+        parser.error("--output requires --graphic")
+    if args.graphic:
+        output = args.output or ROOT / "assets/generated" / f"{args.graphic}-graphic.png"
+        build(args.schedule, output, args.graphic)
     else:
-        with (ROOT / "_data/poster.yml").open(encoding="utf-8") as source:
-            poster_names = yaml.safe_load(source)["posters"]
-        for poster_name in poster_names:
-            output = ROOT / "assets/generated" / f"{poster_name}-poster.png"
-            build(
-            	args.schedule,
-            	output,
-            	poster_name,
-                preview_output=output.with_name(f"{poster_name}-preview.png")
-            )
+        with (ROOT / "_data/graphics.yml").open(encoding="utf-8") as source:
+            graphic_names = yaml.safe_load(source)["graphics"]
+        for graphic_name in graphic_names:
+            output = ROOT / "assets/generated" / f"{graphic_name}-graphic.png"
+            build(args.schedule, output, graphic_name)

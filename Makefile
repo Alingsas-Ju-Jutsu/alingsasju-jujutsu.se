@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help build up stop clean scrape scrape-test import import-test
+.PHONY: help build up stop clean scrape scrape-test import import-test generate_graphics
 
 ARCHIVE ?= _old_site/2026-11-03T09-40-05-601Z
 
@@ -8,6 +8,7 @@ help:
 	@printf '%s\n' \
 	  'make up     Start the local site at http://localhost:4000' \
 	  'make build  Build the static site into _site/' \
+	  'make generate_graphics Generate downloadable graphics' \
 	  'make stop   Stop the local site' \
 	  'make clean  Remove the generated site' \
 	  'make scrape Archive public pages into _old_site/' \
@@ -21,8 +22,8 @@ up:
 build:
 	docker compose run --build --rm site sh -c 'bundle exec jekyll build'
 
-generate_poster:
-	docker compose run --build --rm poster_generator sh -c 'python3 tools/build_poster.py'
+generate_graphics:
+	docker compose run --build --rm graphics_generator sh -c 'python3 tools/build_graphics.py'
 
 stop:
 	docker compose down

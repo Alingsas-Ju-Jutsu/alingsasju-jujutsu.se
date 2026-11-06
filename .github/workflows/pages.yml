@@ -31,11 +31,11 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
-      - name: Generate training poster
+      - name: Generate graphics
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra
-          /usr/bin/python3 tools/build_poster.py
+          sudo apt-get install -y --no-install-recommends python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra librsvg2-bin
+          /usr/bin/python3 tools/build_graphics.py
       - name: Build site
         env:
           JEKYLL_ENV: production

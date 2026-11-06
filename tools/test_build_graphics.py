@@ -7,10 +7,127 @@ from unittest.mock import patch
 import yaml
 from PIL import Image, ImageDraw, ImageOps
 
-from build_poster import ROOT, build
+from build_graphics import ROOT, build
 
 
-class PosterTest(unittest.TestCase):
+class GraphicTest(unittest.TestCase):
+    def test_missing_or_empty_sizes_export_only_original_and_preview(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            for extension in ("png", "svg"):
+                source = directory / f"source.{extension}"
+                if extension == "png":
+                    Image.new("RGBA", (100, 50), (255, 0, 0, 128)).save(source)
+                else:
+                    source.write_text(
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50">'
+                        '<rect width="50" height="50" fill="red"/></svg>'
+                    )
+                for empty_sizes in (False, True):
+                    folder = directory / f"{extension}-{empty_sizes}"
+                    folder.mkdir()
+                    settings = {"background": str(source), "include_schedule": False}
+                    if empty_sizes:
+                        settings["sizes"] = []
+                    config = folder / "graphics.yml"
+                    config.write_text(yaml.safe_dump({"graphics": {"test": settings}}))
+                    build(folder / "unused.yml", folder / "test-graphic.png", "test", config)
+                    expected = {"test-preview.png"}
+                    if extension == "png":
+                        expected.add("test-graphic-original.png")
+                        with Image.open(folder / "test-graphic-original.png") as original:
+                            self.assertEqual(original.size, (100, 50))
+                    self.assertEqual({p.name for p in folder.glob("*.png")}, expected)
+                    self.assertEqual(list(folder.glob("*.pdf")), [])
+
+    def test_svg_exports_preserve_dimensions_transparency_and_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "logo.svg"
+            svg = (
+                '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50">'
+                '<rect width="50" height="50" fill="#ff0000"/></svg>'
+            )
+            source.write_text(svg)
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"logo": {
+                "background": str(source), "sizes": [1200, 2500],
+                "include_schedule": False,
+            }}}))
+            output = directory / "logo-graphic.png"
+            build(directory / "unused-schedule.yml", output, "logo", config)
+            for name, dimensions in (
+                ("logo-graphic.png", (1200, 600)),
+                ("logo-graphic-2500.png", (2500, 1250)),
+                ("logo-preview.png", (600, 300)),
+            ):
+                with Image.open(directory / name) as image:
+                    self.assertEqual(image.size, dimensions)
+                    self.assertEqual(image.getpixel((0, 0)), (255, 0, 0, 255))
+                    self.assertEqual(image.getpixel((image.width - 1, 0))[3], 0)
+            self.assertEqual(source.read_text(), svg)
+            self.assertFalse((directory / "logo-graphic-original.png").exists())
+            self.assertEqual(
+                {path.name for path in directory.glob("*.png")},
+                {"logo-graphic.png", "logo-graphic-2500.png", "logo-preview.png"},
+            )
+            self.assertEqual(list(directory.glob("*.pdf")), [])
+
+    def test_raster_without_schedule_exports_only_the_artwork(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "artwork.png"
+            Image.new("RGBA", (100, 50), (255, 0, 0, 128)).save(source)
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"artwork": {
+                "background": str(source), "sizes": [200], "include_schedule": False,
+            }}}))
+            output = directory / "generated" / "artwork.png"
+            build(directory / "unused-schedule.yml", output, "artwork", config)
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (200, 100))
+                self.assertEqual(image.getpixel((0, 0)), (255, 0, 0, 128))
+            self.assertEqual(list(output.parent.glob("*.pdf")), [])
+
+    def test_svg_background_variants(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "logo.svg"
+            svg = (
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">'
+                '<rect width="50" height="50" fill="#ff0000"/></svg>'
+            )
+            source.write_text(svg)
+            config = directory / "graphics.yml"
+            settings = {"graphics": {"logo": {
+                "background": str(source), "sizes": [120, 250],
+                "include_schedule": False,
+                "background_colors": {"transparent": "transparent", "white": "#ffffff"},
+            }}}
+            config.write_text(yaml.safe_dump(settings, sort_keys=False))
+            build(directory / "unused.yml", directory / "logo-graphic.png", "logo", config)
+            for suffix, width in (("", 120), ("-250", 250)):
+                for color in ("transparent", "white"):
+                    with Image.open(directory / f"logo-graphic{suffix}-{color}.png") as image:
+                        self.assertEqual(image.size, (width, width // 2))
+                        rgba = image.convert("RGBA")
+                        self.assertEqual(rgba.getpixel((0, 0)), (255, 0, 0, 255))
+                        right = rgba.getpixel((width - 1, 0))
+                        if color == "transparent":
+                            self.assertEqual(right[3], 0)
+                        else:
+                            self.assertEqual(right, (255, 255, 255, 255))
+            self.assertEqual(source.read_text(), svg)
+            self.assertFalse((directory / "logo-graphic-original.png").exists())
+            self.assertFalse((directory / "logo-graphic.png").exists())
+            with Image.open(directory / "logo-preview.png") as preview:
+                self.assertEqual(preview.convert("RGBA").getpixel((119, 0))[3], 0)
+            for colors in ({}, {"../white": "#ffffff"}, {"white": "invalid"}, ["white"]):
+                settings["graphics"]["logo"]["background_colors"] = colors
+                config.write_text(yaml.safe_dump(settings))
+                with self.subTest(colors=colors), self.assertRaises(ValueError):
+                    build(directory / "unused.yml", directory / "logo-graphic.png", "logo", config)
+
     def assert_pdf(self, path, width, height):
         content = path.read_bytes()
         self.assertTrue(content.startswith(b"%PDF-"))
@@ -21,13 +138,13 @@ class PosterTest(unittest.TestCase):
         self.assertAlmostEqual(float(box[1]), width * 72 / 25.4)
         self.assertAlmostEqual(float(box[2]), height * 72 / 25.4)
 
-    def test_both_font_styles_generate_posters(self):
+    def test_both_font_styles_generate_graphics(self):
         with tempfile.TemporaryDirectory() as directory:
             for style in ("condensed", "typewriter"):
                 with self.subTest(style=style):
                     output = Path(directory) / f"{style}.png"
-                    config = Path(directory) / "poster.yml"
-                    config.write_text(yaml.safe_dump({"posters": {"test": {
+                    config = Path(directory) / "graphics.yml"
+                    config.write_text(yaml.safe_dump({"graphics": {"test": {
                         "background": "assets/source/poster_blackbelt_blank.png",
                         "sizes": [1200], "include_website": False,
                         "include_address": True, "bottom_margin_percent": 5, "font": style,
@@ -45,7 +162,7 @@ class PosterTest(unittest.TestCase):
     def test_build_generates_a_proportional_preview(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
-            output = directory / "poster.png"
+            output = directory / "graphic.png"
             preview = directory / "training-preview.png"
             build(ROOT / "_data/groups.yml", output)
             with Image.open(output) as image, Image.open(preview) as thumbnail:
@@ -57,8 +174,8 @@ class PosterTest(unittest.TestCase):
             directory = Path(directory)
             background = directory / "background.png"
             Image.new("RGB", (300, 400), "navy").save(background)
-            config = directory / "poster.yml"
-            config.write_text(yaml.safe_dump({"posters": {"alternate": {
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"alternate": {
                 "background": str(background), "sizes": [600, 900],
                 "include_website": True, "include_address": False,
                 "bottom_margin_percent": 5, "font": "condensed",
@@ -74,7 +191,7 @@ class PosterTest(unittest.TestCase):
                 return original_text(draw, position, value, **kwargs)
 
             with patch.object(ImageDraw.ImageDraw, "text", capture), patch(
-                "build_poster.ImageOps.fit", wraps=ImageOps.fit
+                "build_graphics.ImageOps.fit", wraps=ImageOps.fit
             ) as fit:
                 build(ROOT / "_data/groups.yml", output, "alternate", config)
             self.assertEqual(fit.call_count, 2)
@@ -104,7 +221,7 @@ class PosterTest(unittest.TestCase):
                 self.assert_pdf(directory / f"alternate-a3{suffix}.pdf", 297, 420)
             self.assertEqual(len(list(directory.glob("*.pdf"))), 4)
             settings = yaml.safe_load(config.read_text())
-            settings["posters"]["alternate"]["bottom_margin_percent"] = 10
+            settings["graphics"]["alternate"]["bottom_margin_percent"] = 10
             config.write_text(yaml.safe_dump(settings))
             rendered.clear()
             with patch.object(ImageDraw.ImageDraw, "text", capture):
@@ -118,7 +235,7 @@ class PosterTest(unittest.TestCase):
         schedule = yaml.safe_load((ROOT / "_data/groups.yml").read_text())
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "schedule.yml"
-            output = Path(directory) / "poster.png"
+            output = Path(directory) / "graphic.png"
             original_text = ImageDraw.ImageDraw.text
             rendered = []
 
@@ -167,7 +284,7 @@ class PosterTest(unittest.TestCase):
         }
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "schedule.yml"
-            output = Path(directory) / "poster.png"
+            output = Path(directory) / "graphic.png"
             source.write_text(yaml.safe_dump(schedule, allow_unicode=True))
             build(source, output)
             with Image.open(output) as image:
