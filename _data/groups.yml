@@ -5,12 +5,28 @@ exceptions:
   - date: "2026-12-22"
     reason: Höstlov
 
+fees:
+  term:
+    toddlers: 500
+    children: 650
+    adults:
+      - ages: "14-20 år"
+        fee: 800
+      - ages: "21+ år"
+        fee: 1050
+  family_discount:
+    fee: 200
+    minimum_people: 3
+  supporting_membership: 100
+  grading:
+    toddlers: 120
+    children: 200
+    adults: 300
+  replacement_grading_pass: 50
 
 groups:
   toddlers:
-    id: toddlers
     name: Knattar
-    grading_name: Knattar
     type: barn
     ages: "7–8 år"
     sessions:
@@ -22,9 +38,7 @@ groups:
       time: "10:00"
       is_preliminary: true
   children:
-    id: children1
     name: Barn
-    grading_name: Mon
     type: barn
     ages: "9–14 år"
     sessions:
@@ -39,9 +53,7 @@ groups:
       time: "14:00"
       is_preliminary: true
   adults:
-    id: adults
     name: Vuxna
-    grading_name: Vuxna
     type: vuxen
     ages: "14+ år"
     sessions:

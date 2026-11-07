@@ -11,17 +11,20 @@ description: 'Träningsavgifter hos Alingsås Ju-Jutsuklubb: terminsavgifter, fa
 
 {% assign knattar = site.data.groups.groups.toddlers %}
 {% assign barn = site.data.groups.groups.children %}
+{% assign vuxna = site.data.groups.groups.adults %}
+{% assign fees = site.data.groups.fees %}
 
 **Terminsavgift:**
 
 | Grupp | Pris |
 | --- | --- |
-| {{ knattar.grading_name }} {{ knattar.ages }} | 500 kr |
-| {{ barn.name }} ({{ barn.grading_name }}) {{ barn.ages }} | 650 kr |
-| Vuxna 14-20 år | 800 kr |
-| Vuxna 21+ år | 1050 kr |
+| {{ knattar.name }} {{ knattar.ages }} | {{ fees.term.toddlers }} kr |
+| {{ barn.name }} {{ barn.ages }} | {{ fees.term.children }} kr |
+{% for rate in fees.term.adults -%}
+| {{ vuxna.name }} {{ rate.ages }} | {{ rate.fee }} kr |
+{% endfor %}
 
-På träningsavgiften lämnas **familjerabatt** om 200 kr / termin vid minst tre personer.
+På träningsavgiften lämnas **familjerabatt** om {{ fees.family_discount.fee }} kr / termin vid minst {{ fees.family_discount.minimum_people }} personer.
 
 **Bankgiro 5017-5173**
 
@@ -45,14 +48,14 @@ I medlemsavgiften ingår medlemsavgift till Svenska Ju-Jutsu Kai, Svenska Budo o
 
 **Stödmedlemskap:**
 
-*Möjlighet att vara stödmedlem för 100 kr / år*
+*Möjlighet att vara stödmedlem för {{ fees.supporting_membership }} kr / år*
 
 **Graderingsavgift:**
 
 | Grupp | Pris |
 | --- | --- |
-| {{ knattar.grading_name }} {{ knattar.ages }} | 120 kr |
-| {{ barn.name }} ({{ barn.grading_name }}) {{ barn.ages }} | 200 kr |
-| Vuxna 14+ år | 300 kr |
+| {{ knattar.name }} {{ knattar.ages }} | {{ fees.grading.toddlers }} kr |
+| {{ barn.name }} {{ barn.ages }} | {{ fees.grading.children }} kr |
+| {{ vuxna.name }} {{ vuxna.ages }} | {{ fees.grading.adults }} kr |
 
-Mon och knattepass medföljer i kostnaden vid ens första graderingstillfälle (1 sträck / mon gult). Vid nyinköp av ytterligare mon eller knattepass (senare grader / vid borttappat pass) tillkommer en kostnad på 50 kr.
+Mon och knattepass medföljer i kostnaden vid ens första graderingstillfälle (1 sträck / mon gult). Vid nyinköp av ytterligare mon eller knattepass (senare grader / vid borttappat pass) tillkommer en kostnad på {{ fees.replacement_grading_pass }} kr.

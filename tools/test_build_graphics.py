@@ -278,7 +278,7 @@ class GraphicTest(unittest.TestCase):
         schedule["term_start"]["date"] = ""
         original_groups = list(schedule["groups"].items())
         schedule["groups"] = {
-            f"{group_id}_{index}": {**group, "id": f"{group['id']}_{index}"}
+            f"{group_id}_{index}": {**group}
             for index in range(4)
             for group_id, group in original_groups
         }

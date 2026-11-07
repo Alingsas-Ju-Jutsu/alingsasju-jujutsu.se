@@ -32,9 +32,8 @@ Du behöver inte installera något eller ändra dessa sidor var för sig.
 ### Ändra en grupps träningstider
 
 Varje grupp under `groups` innehåller namn, ålder, typ, återkommande
-träningstillfällen och graderingsinformation. `grading_name: Mon` anger att
-åldersgruppen Barn kallas Mon i avgiftstabellerna. Gruppens unika `id` kopplar
-den till instruktörerna i `_data/instructors.yml`. Varje post under `sessions`
+träningstillfällen och graderingsinformation. Gruppnyckeln kopplar
+gruppen till instruktörerna i `_data/instructors.yml`. Varje post under `sessions`
 är ett träningstillfälle: `day` är veckodagen, `start` starttiden och `end`
 sluttiden.
 
@@ -43,11 +42,9 @@ Exempel på en vuxengrupp med två träningstillfällen:
 ```yaml
 groups:
   adults:
-    id: adults
     name: Vuxna
     type: vuxen
     ages: "14+ år"
-    grading_name: Vuxna
     sessions:
       - day: Torsdagar
         start: "19.45"
@@ -62,7 +59,7 @@ För att ändra söndagstiden redigerar du bara `start` och `end` under
 hela filen med exemplet eftersom andra grupper och inställningar då försvinner.
 
 Om det behövs flera träningsgrupper för samma ålder lägger du till en egen
-grupp under `groups` med unikt nyckelnamn och `id`, samt egna `sessions`.
+grupp under `groups` med unikt nyckelnamn och egna `sessions`.
 Ange `label: Grupp 2` om grupperna behöver skiljas åt i schemat. `name` och
 `label` visas också på Barnträning och i instruktörslistan; gruppnamnet används
 även på affischen.
@@ -173,9 +170,15 @@ ta bort någon från sidan. Ladda upp nya porträtt i
 `assets/images/instructors/` och ange motsvarande sökväg i `image`.
 Använd en vanlig porträttbild utan inbakad text.
 
+Avgifterna på Träningsavgifter hämtas från `fees` i `_data/groups.yml`.
+Här anges terminsavgifter (inklusive vuxnas åldersintervall), familjerabatt,
+stödmedlemskap, graderingsavgifter och kostnad för ytterligare graderingspass.
+Betalningsuppgifter och betalningsvillkor finns kvar i
+`_club_pages/traningsavgifter.md`.
+
 Schemat hämtar också ansvariga instruktörer från samma fil.
-Ange `groups: [children1]` eller exempelvis `groups: [children1, adults]`.
-Värdena måste stämma exakt med träningsgruppernas `id` i `_data/groups.yml`.
+Ange `groups: [children]` eller exempelvis `groups: [children, adults]`.
+Värdena måste stämma exakt med gruppnycklarna under `groups` i `_data/groups.yml`.
 Med `groups: []` visas instruktören inte i schemats kontaktlista.
 Ange telefonnummer inom citattecken, exempelvis `phone: "0703 14 84 05"`.
 Med `phone: ""` visas bara namnet. Telefonnummer visas som klickbara

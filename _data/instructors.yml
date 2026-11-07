@@ -15,7 +15,7 @@
   description: ""
 
 - name: Jonas Kjell
-  groups: [children1]
+  groups: [children]
   phone: "0731 62 11 55"
   level: 1 kyu
   color: brown
@@ -23,7 +23,7 @@
   description: ""
 
 - name: Tobias Lindström
-  groups: [children1]
+  groups: [children]
   phone: "0793 00 83 26"
   level: 2 kyu
   color: blue
