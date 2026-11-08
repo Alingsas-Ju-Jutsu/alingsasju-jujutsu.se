@@ -229,6 +229,12 @@ för rasterbilder; för SVG används enbart de angivna pixelbredderna.
 Ingen schematext eller PDF läggs till när `include_schedule: false`.
 Även rasterbilder stöds utan schema. SVG kräver `include_schedule: false`,
 och Grafik länkar också till den oförändrade SVG-filen.
+Ange dessutom `include_grading_times: true` för att skapa en separat grafik
+med varje grupps graderingsdatum och tid från `grading` i `_data/groups.yml`.
+Graderingsgrafikens rubrik och textstorlekar styrs av
+`grading_title_font_size`, `grading_group_font_size` och
+`grading_detail_font_size`. Ett `bottom_text`-objekt kan ange `text`, `font`,
+`font_size`, `line_spacing` och `font_color` för en valfri rad längst ned.
 
 SVG-bilder kan ange bakgrundsvarianter med `background_colors`, till exempel:
 

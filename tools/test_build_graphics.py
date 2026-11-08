@@ -11,6 +11,58 @@ from build_graphics import ROOT, build
 
 
 class GraphicTest(unittest.TestCase):
+    def test_grading_time_graphic_includes_each_group_and_styled_bottom_text(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            background = directory / "background.png"
+            Image.new("RGB", (300, 400), "navy").save(background)
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"grading": {
+                "background": str(background), "sizes": [600],
+                "include_schedule": False, "include_grading_times": True,
+                "font": "condensed", "font_color": "#12ab34",
+                "grading_title_font_size": 48, "grading_group_font_size": 30,
+                "grading_detail_font_size": 24, "line_spacing": 10,
+                "bottom_text": {
+                    "text": "CONTACT THE CLUB", "font_size": 28,
+                    "line_spacing": 6, "font_color": "#abcdef",
+                },
+            }}}))
+            rendered = []
+            original_text = ImageDraw.ImageDraw.text
+
+            def capture(draw, position, value, **kwargs):
+                rendered.append((value, position, kwargs["fill"], kwargs["font"].size,
+                                 draw._image.width))
+                return original_text(draw, position, value, **kwargs)
+
+            output = directory / "grading.png"
+            with patch.object(ImageDraw.ImageDraw, "text", capture):
+                build(ROOT / "_data/groups.yml", output, "grading", config)
+            rendered_text = [value for value, _, _, _, _ in rendered]
+            self.assertIn("GRADERINGSTIDER", rendered_text)
+            self.assertIn("KNATTAR (PREL)", rendered_text)
+            self.assertIn("2026-11-22 · 10:00", rendered_text)
+            self.assertIn("BARN (PREL)", rendered_text)
+            self.assertIn("VUXNA (PREL)", rendered_text)
+            self.assertIn("CONTACT THE CLUB", rendered_text)
+            self.assertTrue(any(
+                value == "CONTACT THE CLUB" and color == "#abcdef" and size == 14
+                for value, _, color, size, _ in rendered
+            ))
+            for width in {600, 300}:
+                group_positions = [position[1] for value, position, _, _, image_width in rendered
+                                   if value in {"KNATTAR (PREL)", "BARN (PREL)", "VUXNA (PREL)"}
+                                   and image_width == width]
+                self.assertEqual(len(group_positions), 3)
+                self.assertEqual(len(set(group_positions)), 1)
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (600, 800))
+            with Image.open(directory / "grading-preview.png") as preview:
+                self.assertEqual(preview.size, (450, 600))
+            with Image.open(directory / "grading-original.png") as original:
+                self.assertEqual(original.size, (300, 400))
+
     def test_missing_or_empty_sizes_export_only_original_and_preview(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)

@@ -74,6 +74,141 @@ def build_graphic(background, output, preview_output, sizes, background_colors=N
             print(f"Generated {variant_output}: {width}px wide")
 
 
+def build_grading_times(background, output, preview_output, sizes, schedule, config):
+    if background.suffix.lower() == ".svg":
+        raise ValueError("Grading-time graphics require a raster background.")
+    grading_groups = [
+        (group.get("name") or group_id, group["grading"])
+        for group_id, group in schedule["groups"].items()
+        if group.get("grading", {}).get("date") or group.get("grading", {}).get("time")
+    ]
+    if not grading_groups:
+        raise ValueError("The schedule has no grading dates or times to render.")
+    font_style = config.get("font", "antonio")
+    if font_style not in FONTS:
+        raise ValueError(f"Unknown graphic font {font_style!r}; choose from {', '.join(FONTS)}.")
+    color = config.get("font_color", "#ffffff")
+    if not isinstance(color, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+        raise ValueError("Graphic font_color must be a hex color in #RRGGBB format.")
+    bottom_text = config.get("bottom_text", {})
+    if isinstance(bottom_text, str):
+        bottom_text = {"text": bottom_text}
+    if not isinstance(bottom_text, dict):
+        raise ValueError("Graphic bottom_text must be a string or mapping of text settings.")
+    footer = bottom_text.get("text", "")
+    if not isinstance(footer, str):
+        raise ValueError("Graphic bottom_text.text must be a string.")
+    footer_size = bottom_text.get("font_size", 24)
+    footer_spacing = bottom_text.get("line_spacing", 8)
+    footer_color = bottom_text.get("font_color", color)
+    for name, value in (("font_size", footer_size), ("line_spacing", footer_spacing)):
+        if not isinstance(value, int) or value < 0 or (name == "font_size" and value == 0):
+            raise ValueError(f"Graphic bottom_text.{name} must be a positive font size or non-negative spacing.")
+    if not isinstance(footer_color, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", footer_color):
+        raise ValueError("Graphic bottom_text.font_color must be a hex color in #RRGGBB format.")
+    footer_font_style = bottom_text.get("font", font_style)
+    if footer_font_style not in FONTS:
+        raise ValueError(f"Unknown bottom text font {footer_font_style!r}; choose from {', '.join(FONTS)}.")
+    margin_percent = config.get("bottom_margin_percent", 5)
+    if not isinstance(margin_percent, (int, float)) or not 0 <= margin_percent <= 100:
+        raise ValueError("Graphic bottom_margin_percent must be between 0 and 100.")
+    title = config.get("grading_title", "GRADERINGSTIDER")
+    title_size = config.get("grading_title_font_size", 48)
+    group_size = config.get("grading_group_font_size", 32)
+    detail_size = config.get("grading_detail_font_size", 28)
+    spacing = config.get("line_spacing", 12)
+    for name, value in (("grading_title_font_size", title_size),
+                        ("grading_group_font_size", group_size),
+                        ("grading_detail_font_size", detail_size), ("line_spacing", spacing)):
+        if not isinstance(value, int) or value < 0 or (name.endswith("font_size") and value == 0):
+            raise ValueError(f"Graphic {name} must be a positive font size or non-negative spacing.")
+    with Image.open(background) as source:
+        original_width = source.width
+    requested_sizes = list(sizes)
+    render_sizes = requested_sizes or [original_width]
+    if original_width not in render_sizes:
+        render_sizes.append(original_width)
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    def render(width, destination):
+        scale = width / 1200
+        with Image.open(background) as source:
+            image = source.convert("RGBA").resize(
+                (width, round(source.height * width / source.width)), Image.Resampling.LANCZOS
+            )
+        draw = ImageDraw.Draw(image)
+
+        def draw_text(value, y, size, style, text_color, center=width / 2,
+                      line_spacing=spacing):
+            font_file = FONTS[style][1]
+            directory = ROOT / "assets/fonts" if style == "antonio" else Path(
+                "/usr/share/fonts/truetype/dejavu"
+            )
+            font = ImageFont.truetype(str(directory / font_file), max(1, round(size * scale)))
+            draw.text((center, round(y)), value, font=font, fill=text_color, anchor="mt")
+            return y + font.size + round(line_spacing * scale)
+
+        title_end = title_size + spacing
+        group_height = group_size + spacing + detail_size + spacing
+        columns = min(3, len(grading_groups))
+        group_rows = [grading_groups[index:index + columns]
+                      for index in range(0, len(grading_groups), columns)]
+        footer_height = 0
+        if footer:
+            footer_lines = footer.splitlines()
+            footer_height = len(footer_lines) * (footer_size + footer_spacing)
+        total_height = round((title_end + len(group_rows) * group_height + footer_height) * scale)
+        margin = round(image.height * margin_percent / 100)
+        y = image.height - margin - total_height
+        if y < 0:
+            raise ValueError(f"Grading times do not fit the {width}px-wide background.")
+        y = draw_text(str(title).upper(), y, title_size, font_style, color)
+        column_width = width / columns
+        for row in group_rows:
+            row_bottom = y
+            for column, (group_name, grading) in enumerate(row):
+                center = column_width * (column + 0.5)
+                display_name = str(group_name)
+                if grading.get("is_preliminary"):
+                    display_name = f"{display_name} (prel)"
+                group_y = draw_text(
+                    display_name.upper(), y, group_size, font_style, color, center
+                )
+                date = str(grading.get("date", "")).strip()
+                time = str(grading.get("time", "")).strip()
+                details = " · ".join(value for value in (date, time) if value)
+                row_bottom = max(row_bottom, draw_text(
+                    details, group_y, detail_size, font_style, color, center
+                ))
+            y = row_bottom + round(spacing * scale)
+        if footer:
+            y += round(spacing * scale)
+            for line in footer.splitlines():
+                y = draw_text(
+                    line, y, footer_size, footer_font_style, footer_color,
+                    line_spacing=footer_spacing,
+                )
+        image.convert("RGB").save(destination, optimize=True)
+        if width == original_width:
+            image.convert("RGB").save(
+                output.with_name(f"{output.stem}-original.png"), optimize=True
+            )
+        if width == render_sizes[0]:
+            preview = image.convert("RGB")
+            preview.thumbnail((600, 600), Image.Resampling.LANCZOS)
+            preview_output.parent.mkdir(parents=True, exist_ok=True)
+            preview.save(preview_output, optimize=True)
+        print(f"Generated {destination}: {width}×{image.height}, {len(grading_groups)} grading groups")
+
+    for index, width in enumerate(render_sizes):
+        destination = output if index == 0 else output.with_name(
+            f"{output.stem}-{width}{output.suffix}"
+        )
+        if not requested_sizes:
+            destination = output.with_name(f"{output.stem}-original{output.suffix}")
+        render(width, destination)
+
+
 def build(schedule_path, output, graphic_name="training", config_path=None, preview_output=None):
     config_path = config_path or ROOT / "_data/graphics.yml"
     with config_path.open(encoding="utf-8") as source:
@@ -92,6 +227,16 @@ def build(schedule_path, output, graphic_name="training", config_path=None, prev
     include_schedule = config.get("include_schedule", True)
     if not isinstance(include_schedule, bool):
         raise ValueError("Graphic include_schedule must be true or false.")
+    include_grading_times = config.get("include_grading_times", False)
+    if not isinstance(include_grading_times, bool):
+        raise ValueError("Graphic include_grading_times must be true or false.")
+    if include_grading_times:
+        if include_schedule:
+            raise ValueError("include_grading_times requires include_schedule: false.")
+        with schedule_path.open(encoding="utf-8") as source:
+            schedule = yaml.safe_load(source)
+        build_grading_times(background_path, output, preview_output, sizes, schedule, config)
+        return
     background_colors = config.get("background_colors")
     if background_colors is not None:
         if include_schedule or background_path.suffix.lower() != ".svg":

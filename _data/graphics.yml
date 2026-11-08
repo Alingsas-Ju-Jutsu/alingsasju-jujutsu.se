@@ -32,3 +32,29 @@ graphics:
     title: Logotyp
     include_schedule: false
     background: assets/source/logotype.png
+  grading_blackbelt:
+    title: Graderingstider
+    include_schedule: false
+    include_grading_times: true
+    background: assets/source/poster_blackbelt_blank.png
+    sizes: [1200, 2500]
+    bottom_margin_percent: 5
+    font: antonio
+    font_color: "#ffffff"
+    grading_title_font_size: 52
+    grading_group_font_size: 36
+    grading_detail_font_size: 30
+    line_spacing: 12
+  grading_tattoo:
+    title: Graderingstider – Tattoo
+    include_schedule: false
+    include_grading_times: true
+    background: assets/source/tattoo_poster.jpg
+    sizes: [1200]
+    bottom_margin_percent: 1
+    font: typewriter
+    font_color: "#000000"
+    grading_title_font_size: 44
+    grading_group_font_size: 30
+    grading_detail_font_size: 24
+    line_spacing: 10
