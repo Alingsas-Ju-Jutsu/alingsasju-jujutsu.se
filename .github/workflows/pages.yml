@@ -31,7 +31,14 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
+      - name: Restore generated graphics
+        id: graphics-cache
+        uses: actions/cache@v4
+        with:
+          path: assets/generated/
+          key: graphics-${{ runner.os }}-${{ hashFiles('_data/graphics.yml', '_data/groups.yml') }}
       - name: Generate graphics
+        if: steps.graphics-cache.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends python3-pil python3-yaml fonts-dejavu-core fonts-dejavu-extra librsvg2-bin

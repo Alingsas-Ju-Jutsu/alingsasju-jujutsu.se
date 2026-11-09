@@ -186,8 +186,13 @@ telefonlänkar på Schema, inte på instruktörskorten.
 
 ## Träningsaffischen på Schema
 
-GitHub bygger automatiskt aktuella affischer som PNG och PDF från
-[`_data/groups.yml`](_data/groups.yml) vid varje publicering.
+GitHub genererar affischer som PNG och PDF när innehållet i
+[`_data/graphics.yml`](_data/graphics.yml) eller
+[`_data/groups.yml`](_data/groups.yml) ändras. Filerna återanvänds från
+GitHub Actions cache vid andra publiceringar. Om cachen saknas eller har
+rensats genereras filerna på nytt även utan en YAML-ändring.
+Ändringar i källbilder, typsnitt eller generatorn uppdaterar inte cache-nyckeln;
+rensa då grafikens cache i GitHub Actions för att generera nya filer.
 Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
 Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
