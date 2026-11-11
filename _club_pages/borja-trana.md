@@ -8,6 +8,10 @@ description: Börja träna ju-jutsu i Alingsås. Se grupper för barn och vuxna,
   träningstider, terminsstart, adress och information om träningsavgifter.
 ---
 
+## Allmänt
+
+Ju-jutsu är en traditionell japansk självförsvarskonst med historiska rötter som sträcker sig hundratals år tillbaka. Det är en allsidig och givande träningsform som passar alla – oavsett ålder eller tidigare erfarenhet. Hos oss tränar vi tillsammans och var och en utvecklas utifrån sina egna förutsättningar och ambitioner. Du behöver inte vara vältränad eller ha kampsportsbakgrund för att börja lära dig självförsvar.
+
 ## För Barn
 
 Är ditt barn nyfiket på ju-jutsu? Varmt välkommen att prova på hos oss! Barn får träna gratis vid tre tillfällen, för att få en bra grupp vill vi att man börjar sin träning i början av terminen. Ingen dräkt behövs för att prova på – vi rekommenderar lediga idrottskläder som är bekväma att röra sig i.
