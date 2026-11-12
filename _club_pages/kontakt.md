@@ -9,10 +9,10 @@ description: Kontakta Alingsås Ju-Jutsuklubb. Här hittar du klubbens kontaktpe
   adress på Tennisvägen 8 i Alingsås och information om träning.
 ---
 
-**Kontaktuppgifter**
+## Kontaktuppgifter
 
 {% for person in site.data.contacts.contact_persons %}
-**{{ person.role }}:**
+**{{ person.role }}**
 <div style="padding-left: 1.5rem; margin-bottom: 1rem;" markdown="1">
 {{ person.name }}<br>
 {%- if person.email %}
@@ -24,13 +24,13 @@ description: Kontakta Alingsås Ju-Jutsuklubb. Här hittar du klubbens kontaktpe
 {%- endif %}
 </div>
 {% endfor %}
-**Alingsås Ju-Jutsu Klubb**
 
-| Uppgift | Information |
-| --- | --- |
-| Föreningsnummer | {{ site.data.club.organization_number | default: site.data.contacts.club_info.organization_number }} |
-| Adress | {{ site.data.club.address | default: site.data.contacts.club_info.address }} |
-| Postadress | {{ site.data.club.postal_address | default: site.data.contacts.club_info.postal_address }} |
-| Öppettider | [{{ site.data.club.opening_hours | default: site.data.contacts.club_info.opening_hours }}]({{ site.data.club.opening_hours_url | default: site.data.contacts.club_info.opening_hours_url | relative_url }}) |
-| Bankgiro | {{ site.data.club.bankgiro | default: site.data.contacts.club_info.bankgiro }} |
-| Swish | {{ site.data.club.swish | default: site.data.contacts.club_info.swish }} |
+**Alingsås Ju-Jutsu Klubb**
+<div style="padding-left: 1.5rem; margin-bottom: 1rem;" markdown="1">
+**Föreningsnummer:** {{ site.data.club.organization_number | default: site.data.contacts.club_info.organization_number }}<br />
+**Adress:** {{ site.data.club.address | default: site.data.contacts.club_info.address }}<br />
+**Postadress:** {{ site.data.club.postal_address | default: site.data.contacts.club_info.postal_address }}<br />
+**Öppettider:** [{{ site.data.club.opening_hours | default: site.data.contacts.club_info.opening_hours }}]({{ site.data.club.opening_hours_url | default: site.data.contacts.club_info.opening_hours_url | relative_url }})<br />
+**Bankgiro:** {{ site.data.club.bankgiro | default: site.data.contacts.club_info.bankgiro }}<br />
+**Swish:** {{ site.data.club.swish | default: site.data.contacts.club_info.swish }}<br />
+</div>
