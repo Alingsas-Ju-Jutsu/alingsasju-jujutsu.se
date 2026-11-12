@@ -49,8 +49,8 @@
       <div class="site-footer__inner">
         <a class="site-footer__brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
         <p>© {{ 'now' | date: '%Y' }} Alingsås Ju-Jutsuklubb</p>
-        <a href="{{ site.club.address_url }}">Tennisvägen 8, 441 55 Alingsås</a>
-        <a href="mailto:info@alingsasju-jutsu.se">info@alingsasju-jutsu.se</a>
+        <a href="{{ site.data.club.maps_url | default: site.club.address_url }}">{{ site.data.club.address }}, {{ site.data.club.postal_address }}</a>
+        <a href="mailto:{{ site.data.club.email | default: 'info@alingsasju-jutsu.se' }}">{{ site.data.club.email | default: 'info@alingsasju-jutsu.se' }}</a>
       </div>
     </footer>
   </body>

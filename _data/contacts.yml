@@ -1,0 +1,36 @@
+contact_persons:
+  - role: Ordförande
+    name: Jonas Kjell
+    email: jonaskjell@hotmail.com
+    phone: "0731-62 11 55"
+
+  - role: Kassör
+    name: Viveca Jörby
+    email: Jviveca@hotmail.com
+    phone: "0705-418515"
+
+  - role: Barnansvarig
+    name: Erik Dahlman
+    phone: "0703-14 84 05"
+
+  - role: Webbansvarig
+    name: Helmer Sundquist
+    email: helmer.sundquist@gmail.com
+
+  - role: Vid frågor gällande klubben
+    name: Harald Jörby Stenbäck
+    phone: "0763-38 96 13"
+
+  - role: Beställning och materialansvarig
+    name: Harald Jörby Stenbäck
+    email: ajjk.bestallningar@gmail.com
+    email_label: Beställning av dräkter
+
+club_info:
+  organization_number: "26345"
+  address: Tennisvägen 8
+  postal_address: 441 55 Alingsås
+  opening_hours: Schema
+  opening_hours_url: "/traning/schema/"
+  bankgiro: "5017-5173"
+  swish: "123 120 93 60"

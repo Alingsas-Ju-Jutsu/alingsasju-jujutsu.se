@@ -11,53 +11,26 @@ description: Kontakta Alingsås Ju-Jutsuklubb. Här hittar du klubbens kontaktpe
 
 **Kontaktuppgifter**
 
-**Ordförande:**
-
-Jonas Kjell
-
-**Email:** [jonaskjell@hotmail.com](<mailto:jonaskjell@hotmail.com>)
-
-**Tel:** 0731-62 11 55
-
-**Kassör:**
-
-Viveca Jörby
-
-**Email:** Jviveca@hotmail.com
-
-**Tel:** 0705-418515
-
-**Barnansvarig:**
-
-Erik Dahlman
-
-**Tel:** 0703-14 84 05
-
-**Webbansvarig:**
-
-Helmer Sundquist
-
-**Email:** [helmer.sundquist@gmail.com](<mailto:helmer.sundquist@gmail.com>)
-
-**Vid frågor gällande klubben:**
-
-Harald Jörby Stenbäck
-
-**Tel:** 0763-38 96 13
-
-**Beställning och materialansvarig:**
-
-Harald Jörby Stenbäck
-
-**För beställning av dräkter:** [ajjk.bestallningar@gmail.com](<mailto:ajjk.bestallningar@gmail.com>)
-
+{% for person in site.data.contacts.contact_persons %}
+**{{ person.role }}:**
+<div style="padding-left: 1.5rem; margin-bottom: 1rem;" markdown="1">
+{{ person.name }}<br>
+{%- if person.email %}
+{%- assign email_label = person.email_label | default: "Email" %}
+**{{ email_label }}:** [{{ person.email }}](mailto:{{ person.email }})<br>
+{%- endif %}
+{%- if person.phone %}
+**Tel:** {{ person.phone }}<br>
+{%- endif %}
+</div>
+{% endfor %}
 **Alingsås Ju-Jutsu Klubb**
 
 | Uppgift | Information |
 | --- | --- |
-| Föreningsnummer | 26345 |
-| Adress | Tennisvägen 8 |
-| Postadress | 441 55 Alingsås |
-| Öppettider | [Schema](<{{ '/traning/schema/' | relative_url }}>) |
-| Bankgiro | 5017-5173 |
-| Swish | 123 120 93 60 |
+| Föreningsnummer | {{ site.data.club.organization_number | default: site.data.contacts.club_info.organization_number }} |
+| Adress | {{ site.data.club.address | default: site.data.contacts.club_info.address }} |
+| Postadress | {{ site.data.club.postal_address | default: site.data.contacts.club_info.postal_address }} |
+| Öppettider | [{{ site.data.club.opening_hours | default: site.data.contacts.club_info.opening_hours }}]({{ site.data.club.opening_hours_url | default: site.data.contacts.club_info.opening_hours_url | relative_url }}) |
+| Bankgiro | {{ site.data.club.bankgiro | default: site.data.contacts.club_info.bankgiro }} |
+| Swish | {{ site.data.club.swish | default: site.data.contacts.club_info.swish }} |

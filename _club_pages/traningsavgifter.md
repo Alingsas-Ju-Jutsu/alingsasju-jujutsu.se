@@ -26,9 +26,9 @@ description: 'Träningsavgifter hos Alingsås Ju-Jutsuklubb: terminsavgifter, fa
 
 På träningsavgiften lämnas **familjerabatt** om {{ fees.family_discount.fee }} kr / termin vid minst {{ fees.family_discount.minimum_people }} personer.
 
-**Bankgiro 5017-5173**
+**Bankgiro {{ site.data.club.bankgiro }}**
 
-**Swish 123 120 93 60**
+**Swish {{ site.data.club.swish }}**
 
 Ange **namn** och **träningsgrupp** som meddelande på inbetalningen.
 

@@ -26,8 +26,12 @@ layout: default
   <div class="contact__inner">
   <div class="contact__copy">
     <h2 id="contact-title">{{ page.contact.heading | escape }}</h2>
-    <a class="contact__address" href="{{ site.club.address_url }}">
-      {% for line in page.contact.address %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+    <a class="contact__address" href="{{ site.data.club.maps_url | default: site.club.address_url }}">
+      {% if page.contact.address %}
+        {% for line in page.contact.address %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+      {% else %}
+        {{ site.data.club.address }}<br>{{ site.data.club.postal_address }}
+      {% endif %}
     </a>
     <a class="button" href="{{ page.contact.button_url }}">{{ page.contact.button_text | escape }}</a>
   </div>
