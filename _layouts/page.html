@@ -13,6 +13,10 @@ layout: default
   <nav class="breadcrumbs" aria-label="Brödsmulor">
     <a href="{{ '/' | relative_url }}">Startsida</a>
     <span aria-hidden="true">/</span>
+    {% if page.news %}
+    <a href="{{ '/nyheter/' | relative_url }}">Nyheter</a>
+    <span aria-hidden="true">/</span>
+    {% endif %}
     <span aria-current="page">{{ page.title }}</span>
   </nav>
 
@@ -22,5 +26,6 @@ layout: default
 
   <div class="page-content__body">
     {{ content }}
+    {% include article-images.html %}
   </div>
 </article>

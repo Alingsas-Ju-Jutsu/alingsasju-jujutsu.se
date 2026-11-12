@@ -41,7 +41,10 @@ content changes; preserve unrelated content and design.
   Markdown without asking the editor about filenames, frontmatter or slugs.
   Preserve the facts and intent; do not invent quotes, results or event details.
 - Create one Markdown page in `_club_pages/nyheter/`, or
-  `_club_pages/graderingar/` for grading news. News without images is allowed;
+  `_club_pages/graderingar/` for grading news. New articles use their own
+  `YYYY-MM-DD-slug/` folder containing one dated Markdown file and optional images;
+  copy `_mall.md` from the relevant section (news or grading).
+  The templates are excluded from publication. News without images is allowed;
   grading photo galleries require available photos. A text-only grading
   announcement is not a photo gallery.
 - Use the explicitly supplied publication date, or the current date when the
@@ -53,8 +56,12 @@ content changes; preserve unrelated content and design.
   `published_label` (for example `3 november 2026`) and `published_sort`
   (for example `"20261103"`). Do not assign a made-up author; omit
   `source_author` unless supplied. New content needs no legacy source metadata.
-- Download supplied issue images into `assets/images/nyheter/<date>-<slug>/`
-  using descriptive filenames and Markdown alt text. Only retrieve images
+- Download supplied issue images into the article's own folder
+  using descriptive filenames and `image_descriptions` metadata for alt text.
+  Folder images appear automatically after the article text in filename order;
+  do not duplicate them with Markdown image links.
+  JPEG, PNG and WebP images are resized at build time to at most 1600 px
+  on the longest side; source files remain unchanged. Only retrieve images
   explicitly supplied for publication; never use external upload services or
   commit credentials. If an attachment cannot be retrieved, report that and
   request an accessible copy rather than silently dropping it.

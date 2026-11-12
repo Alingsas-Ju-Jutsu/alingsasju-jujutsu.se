@@ -1,0 +1,7 @@
+{% if page.article_images and page.article_images != empty %}
+<div class="article-images">
+  {% for image in page.article_images %}
+  <img src="{{ image.url | relative_url | escape }}" alt="{{ image.alt | escape }}" loading="lazy">
+  {% endfor %}
+</div>
+{% endif %}

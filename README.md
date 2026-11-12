@@ -289,12 +289,74 @@ Redigera rätt fil i `_club_pages/`: text, rubriker, länkar, bilder och tabelle
 skrivs i Markdown, inte i separata HTML-innehållsfiler. Behåll YAML-metadata
 (frontmatter) överst; `title` styr rubriken och `permalink` styr sidans URL.
 Nyhetsartiklar finns i `_club_pages/nyheter/` och graderingsinlägg i
-`_club_pages/graderingar/`. Båda använder filnamn som `YYYY-MM-DD-title.md`,
-baserade på publiceringsdatumet. Deras `permalink`-värden behåller befintliga
+`_club_pages/graderingar/`. Varje artikel har en egen `YYYY-MM-DD-title/`-mapp
+med en daterad Markdown-fil och eventuella bilder, baserade på
+publiceringsdatumet. Även äldre nyheter och graderingar använder denna struktur.
+Deras `permalink`-värden behåller befintliga
 offentliga URL:er oförändrade. Nyhets- och dokumentöversikten är `nyheter.md`
 och nås på `/nyheter/`. Alingsåslägrets sidor samlas i
 `_club_pages/alingsaslagret/`, med `index.md` för översikten och årsfiler
 som `2004.md`.
+
+### Ny artikel med bilder i samma mapp
+
+Kopiera mallen i rätt avdelning till en egen mapp:
+[`_club_pages/nyheter/_mall.md`](_club_pages/nyheter/_mall.md) eller
+[`_club_pages/graderingar/_mall.md`](_club_pages/graderingar/_mall.md).
+Byt namn på kopian till artikelns daterade filnamn:
+
+```text
+_club_pages/nyheter/2026-11-12-rubrik/
+  2026-11-12-rubrik.md
+  gruppbild.jpg
+  traning.png
+```
+
+För graderingsnyheter används samma struktur under `_club_pages/graderingar/`
+och `grading: true` i artikelns metadata. Ha exakt en Markdown-artikel per
+mapp. Fyll i rubrik, beskrivning, publiceringsdatum och en unik `permalink`
+som slutar med `/`. Behåll befintliga artiklars URL:er.
+`news: true` gör att artikeln automatiskt visas på Nyheter.
+Lägg även en lokal länk på Graderingar om inlägget ska ingå i dess gallerilista.
+
+Bilder är valfria. Lägg JPG-, PNG- eller WebP-filer direkt i artikelns mapp
+så visas alla bilder automatiskt längst ned i artikeln, i filnamnsordning.
+Inga bildrader behövs i Markdown-texten. Använd exempelvis `01-gruppbild.jpg`
+och `02-traning.jpg` för att styra ordningen. Ange gärna användbara
+bildbeskrivningar i artikelns metadata:
+
+```yaml
+image_descriptions:
+  01-gruppbild.jpg: "Träningsgruppen samlad efter graderingen"
+```
+
+Utan en egen beskrivning används ”Bild till” följt av artikelns rubrik.
+Lägg inte in samma bild manuellt i texten om du vill undvika dubbletter.
+
+Vid varje Jekyll-byggnad, även lokal förhandsvisning, skapar
+`_plugins/article_images.rb` webbkopior med högst **1600 pixlar på längsta
+sidan**, bibehållna proportioner och rättvänd EXIF-orientering.
+Små bilder förstoras inte. JPEG/WebP komprimeras med kvalitet 85 och
+PNG behåller transparens. Animerade bilder stöds inte.
+Originalfilerna i artikelmappen ändras inte och publiceras inte separat;
+webbkopiorna publiceras bredvid artikelns URL, exempelvis
+`/nyheter/2026-11-12-rubrik/gruppbild.jpg`.
+Detta är fristående från grafikens cache och kräver Python 3 med Pillow
+(`python3-pil`, finns redan i Docker-miljön).
+`github-pages` används för beroendeversionerna men laddas inte automatiskt
+(`require: false` i Gemfile), eftersom gemens inbyggda safe-läge stänger av
+lokala Jekyll-pluginer. Publiceringen sker via vår egen Actions-byggnad.
+Arkivbilder under `assets/` finns kvar för andra sidor och befintliga direktlänkar.
+Äldre bildlänkar till PDF-dokument bevaras som textlänkar i artikeln;
+bildförhandsvisningen visas i bildavsnittet längst ned.
+Mallen publiceras inte.
+
+Kontrollera bildhanteringen med:
+
+```sh
+docker compose run --rm site python3 tools/test_resize_article_images.py
+docker compose run --rm site bundle exec ruby tools/test_article_images.rb
+```
 
 Startsidan är `index.md`: dess YAML-metadata innehåller texter för
 huvudsektionen, navigering och kontakt, medan Markdown-innehållet innehåller

@@ -1,0 +1,35 @@
+---
+title: Alingsåslägret 2011 avklarat!
+category: Nyheter
+permalink: "/arkiv/421/"
+news: true
+published_label: september 19, 2011
+grading: false
+source_author: Mattias
+published_sort: '20110919'
+source_date: '2026-11-03'
+source_id: '421'
+historical: true
+description: Alingsåslägret 2011 avklarat! – Då var årets upplaga av Alingsåslägret
+  avklarat! Och lite blygsamt kan vi nog konstatera att det var det bästa lägret…
+date: '2011-09-19'
+seo:
+  type: BlogPosting
+maintained_content: true
+image_descriptions:
+  01-bild.jpg: Bild från Alingsåslägret 2011 avklarat!
+---
+
+Då var årets upplaga av Alingsåslägret avklarat! Och lite blygsamt kan vi nog konstatera att det var det bästa lägret någonsin! Både organisatoriskt och träningsmässigt!
+
+Den magiska gränsen på över hundra deltagare är fortfarande inom räckhåll! Vi fortsätter att vara snubblande nära! Men vi ska vara oerhört nöjda över att 86st deltagare från tjugotre av Sveriges åttiotvå klubbar fanns representerade på lägret, att vi prickat in en fullträff vad det gäller instruktörsstaben och att vi enligt utvärderingarna kring lägret låg i topp!
+
+Håll utkik på vår hemsida för lägerfoton är på gång!
+
+Stort tack till er alla – och ett extra stor tack till Claes, Kalle, Björn och Mattias som gjort ett kanonjobb hela helgen!
+
+Tack för allt stöd! Och för all den energi och glädje ni sprider runt er!
+
+Kram, Malin
+
+*fotograf: Dan från Shindo budoklubb*

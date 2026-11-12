@@ -27,6 +27,8 @@ exclude:
   - _old_site
   - vendor
   - tools
+  - _club_pages/nyheter/_mall.md
+  - _club_pages/graderingar/_mall.md
 
 defaults:
   - scope:

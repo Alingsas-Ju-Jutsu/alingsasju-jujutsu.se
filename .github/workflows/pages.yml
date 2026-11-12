@@ -49,6 +49,10 @@ jobs:
           PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends python3-pil
+          /usr/bin/python3 tools/test_resize_article_images.py
+          bundle exec ruby tools/test_article_images.rb
           ruby -ryaml -e 'File.write(File.join(ENV.fetch("RUNNER_TEMP"), "pages-config.yml"), { "url" => ENV.fetch("PAGES_ORIGIN"), "baseurl" => ENV.fetch("PAGES_BASE_PATH") }.to_yaml)'
           bundle exec jekyll build --config "_config.yml,$RUNNER_TEMP/pages-config.yml"
       - name: Upload artifact
