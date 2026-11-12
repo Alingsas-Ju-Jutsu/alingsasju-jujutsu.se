@@ -300,6 +300,13 @@ som `2004.md`.
 
 ### Ny artikel med bilder i samma mapp
 
+Nyheter och graderingsartiklar använder bara `date: "YYYY-MM-DD"` som
+publiceringsdatum. Sortering och svensk datumtext skapas automatiskt från
+detta fält. Separata visningsdatum, sorteringsdatum och gamla importfält
+(`source_date`, `source_id`, `historical`) behövs inte.
+Inte heller `category` eller `maintained_content` behövs i dessa artiklar;
+nyhetskategorin hämtas från mappstrukturen.
+
 Kopiera mallen i rätt avdelning till en egen mapp:
 [`_club_pages/nyheter/_mall.md`](_club_pages/nyheter/_mall.md) eller
 [`_club_pages/graderingar/_mall.md`](_club_pages/graderingar/_mall.md).
@@ -313,10 +320,14 @@ _club_pages/nyheter/2026-11-12-rubrik/
 ```
 
 För graderingsnyheter används samma struktur under `_club_pages/graderingar/`
-och `grading: true` i artikelns metadata. Ha exakt en Markdown-artikel per
-mapp. Fyll i rubrik, beskrivning, publiceringsdatum och en unik `permalink`
-som slutar med `/`. Behåll befintliga artiklars URL:er.
-`news: true` gör att artikeln automatiskt visas på Nyheter.
+utan särskilda nyhets- eller graderingsflaggor i metadata. Ha exakt en Markdown-artikel per
+mapp. Fyll i rubrik, beskrivning och publiceringsdatum, samt valfri `author`.
+Adressen blir automatiskt `/nyheter/<mappnamn>/` för båda artikeltyperna.
+`permalink` är en valfri möjlighet att ange en egen adress, men utelämnas
+i våra nyhets- och graderingsartiklar samt mallarna för att undvika förvirring.
+Även äldre artiklar använder mappbaserade adresser;
+gamla `/arkiv/`-adresser omdirigeras inte. Interna länkar är uppdaterade.
+Artiklar i båda mapparna visas automatiskt på Nyheter.
 Lägg även en lokal länk på Graderingar om inlägget ska ingå i dess gallerilista.
 
 Bilder är valfria. Lägg JPG-, PNG- eller WebP-filer direkt i artikelns mapp
@@ -365,8 +376,10 @@ bevara den responsiva designen. Navigering, scheman, dokumentlistor och
 sponsoruppgifter finns i `_data/`. Kalenderlänken öppnar Google Kalender
 i stället för att bädda in en HTML-iframe.
 
-När du redigerar en importerad sida lägger du till `maintained_content: true`
-i dess metadata så att framtida importer inte skriver över ändringarna.
+När du redigerar en importerad sida utanför nyhets- och graderingsmapparna
+lägger du till `maintained_content: true` i dess metadata så att framtida
+importer inte skriver över ändringarna. Nyheter och graderingsartiklar behöver
+inte fältet: importören importerar inte längre gamla nyhets- och graderingsartiklar.
 `_data/excluded_archive_pages.yml` listar borttagna källsidors ID:n som inte
 får återställas av framtida importer.
 
@@ -529,7 +542,8 @@ behöver sammanslagningen planeras av en ansvarig person.
 Webbplatsen genererar sidtitlar, kanoniska URL:er, delningsmetadata,
 `sitemap.xml` och `robots.txt`. Sidornas `description` i YAML-metadata används
 som beskrivning för sökresultat. Nya nyheter ska även ha `date: "YYYY-MM-DD"`
-och `seo: { type: BlogPosting }`. Adresserna anpassas automatiskt till testdomänen eller den egna
+för publiceringsdatumet. SEO-typen `BlogPosting` anges gemensamt i `_config.yml`,
+inte i varje artikel. Adresserna anpassas automatiskt till testdomänen eller den egna
 domänen vid publicering.
 
 Klubbens logotyp används som standardbild för delning (`og:image`).

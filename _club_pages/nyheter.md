@@ -9,9 +9,11 @@ description: 'Nyheter från Alingsås Ju-Jutsuklubb: träning, graderingar, läg
 Tidigare nyheter från Alingsås Ju-Jutsuklubb. Innehållet är historiskt och
 uppgifter om datum, tider och arrangemang kan vara inaktuella.
 
-{% assign news = site.club_pages | where: "news", true | sort: "published_sort" | reverse %}
+{% assign news = site.club_pages | where_exp: "article", "article.path contains '_club_pages/nyheter/'" %}
+{% assign gradings = site.club_pages | where_exp: "article", "article.path contains '_club_pages/graderingar/'" %}
+{% assign news = news | concat: gradings | sort: "date" | reverse %}
 {% for article in news %}
-- [{{ article.title }}]({{ article.url | relative_url }}){% if article.published_label %} — {{ article.published_label }}{% endif %}
+- [{{ article.title }}]({{ article.url | relative_url }}){% if article.date %} — {% include swedish-date.html date=article.date %}{% endif %}
 {% endfor %}
 
 ## Dokumentarkiv

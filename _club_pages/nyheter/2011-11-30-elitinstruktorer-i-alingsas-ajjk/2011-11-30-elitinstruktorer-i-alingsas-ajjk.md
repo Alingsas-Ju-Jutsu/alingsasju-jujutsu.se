@@ -1,22 +1,10 @@
 ---
 title: Elitinstruktörer i Alingsås AJJK
-category: Nyheter
-permalink: "/arkiv/476/"
-news: true
-published_label: november 30, 2011
-grading: false
-source_author: Mattias
-published_sort: '20111130'
-source_date: '2026-11-03'
-source_id: '476'
-historical: true
+author: Mattias
 description: Elitinstruktörer i Alingsås AJJK – Nu har Alingsås Ju-jutsuklubb fått
   sina första elitinstruktörer. Under hösten har Malin Bohlin, Claes Alingsjö och
   Patrik…
 date: '2011-11-30'
-seo:
-  type: BlogPosting
-maintained_content: true
 image_descriptions:
   01-bild.jpg: Bild från Elitinstruktörer i Alingsås AJJK
 ---

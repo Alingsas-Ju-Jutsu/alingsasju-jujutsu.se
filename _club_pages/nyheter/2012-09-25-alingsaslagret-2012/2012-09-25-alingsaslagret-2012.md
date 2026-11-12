@@ -1,21 +1,9 @@
 ---
 title: Alingsåslägret 2012
-category: Nyheter
-permalink: "/arkiv/740/"
-news: true
-published_label: september 25, 2012
-grading: false
-source_author: Malin Bohlin
-published_sort: '20120925'
-source_date: '2026-11-03'
-source_id: '740'
-historical: true
-maintained_content: true
+author: Malin Bohlin
 description: Alingsåslägret 2012 – Stort tack till alla som var med och medverkade
   till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld…
 date: '2012-09-25'
-seo:
-  type: BlogPosting
 ---
 
 Stort tack till alla som var med och medverkade till att årets upplaga av Alingsåslägret blev en så glädjefylld och fartfylld tillställning. Det är ju så att det inte spelar någon roll hur många mattor vi bär eller hur briljanta instruktörer och föreläsare vi tar dit om inte ni är med och skapar den där speciella lägerfestlighetskänslan!

@@ -1,21 +1,9 @@
 ---
 title: Info angående träning i Alingsås Ju-jutsuklubb!
-category: Nyheter
-permalink: "/arkiv/1606/"
-news: true
-published_label: april 14, 2020
-grading: false
-source_author: Magnus Haggren
-published_sort: '20200414'
-source_date: '2026-11-03'
-source_id: '1606'
-historical: true
+author: Magnus Haggren
 description: Info angående träning i Alingsås Ju-jutsuklubb! – AJJK:s styrelse beslutade
   5 april att förlänga beslutet om inställd gruppträning. Det nya beslutet gäller…
 date: '2020-04-14'
-seo:
-  type: BlogPosting
-maintained_content: true
 image_descriptions:
   01-bild.png: Bild från Info angående träning i Alingsås Ju-jutsuklubb!
 ---

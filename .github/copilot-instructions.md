@@ -51,11 +51,12 @@ content changes; preserve unrelated content and design.
   editor asks to publish as soon as reviewed. Do not confuse an event date in
   the body with the publication date. Use `YYYY-MM-DD-title.md` filenames with
   a lowercase ASCII slug (å/ä → a, ö → o). Use `/nyheter/YYYY-MM-DD-slug/`
-  as the permalink for new articles; preserve URLs of existing articles.
-- Set `title`, `category: Nyheter`, `news: true`, `grading` (boolean),
-  `published_label` (for example `3 november 2026`) and `published_sort`
-  (for example `"20261103"`). Do not assign a made-up author; omit
-  `source_author` unless supplied. New content needs no legacy source metadata.
+  as the automatic URL for new article folders; omit `permalink` in new
+  articles. Existing news and grading articles also use folder-based URLs.
+- Set `title`,
+  and one quoted ISO `date` (for example `"20261103"` is not valid;
+  use `"2026-11-03"`). Do not assign a made-up author; omit
+  `author` unless supplied. New content needs no legacy source metadata.
 - Download supplied issue images into the article's own folder
   using descriptive filenames and `image_descriptions` metadata for alt text.
   Folder images appear automatically after the article text in filename order;
@@ -65,7 +66,7 @@ content changes; preserve unrelated content and design.
   explicitly supplied for publication; never use external upload services or
   commit credentials. If an attachment cannot be retrieved, report that and
   request an accessible copy rather than silently dropping it.
-- The `/nyheter/` index updates automatically through `news: true`. For a
+- The `/nyheter/` index automatically includes articles in both folders. For a
   grading post, also add an appropriate local link to the Graderingar overview
   when it belongs in that gallery list; keep `maintained_content: true` there.
 - Do not add scheduling infrastructure or promise future automatic publication.
@@ -73,8 +74,8 @@ content changes; preserve unrelated content and design.
   draft pull request and explain that a maintainer must merge it at the intended time.
 - In the completion summary, show the headline, publication date, public URL
   and whether images were included. Make it easy to review the Swedish text
-  without reading the raw diff. Ensure `news: true` is set so the index includes
-  the article, and check link paths and image filenames in the source files.
+  without reading the raw diff. Check the article's folder, link paths and
+  image filenames in the source files.
 
 ## Content locations
 
@@ -88,7 +89,7 @@ content changes; preserve unrelated content and design.
 - `_club_pages/alingsaslagret/`: `index.md` for the camp overview and year files
   such as `2004.md`. Preserve the Läger → Alingsåslägret → year navigation.
 - `_club_pages/nyheter.md`: the `/nyheter/` index. It automatically lists pages
-  with `news: true`; do not maintain a second manual list.
+  in the news and grading folders; do not maintain a second manual list.
 - `_data/navigation.yml`: shared menus.
 - `_data/groups.yml`: the single source for training group names,
   ages, recurring sessions, term start and exceptions. Never duplicate current
@@ -103,7 +104,8 @@ content changes; preserve unrelated content and design.
 - Write public content in Swedish with correct spelling and diacritics.
 - Add a concise, factual Swedish `description` to new pages for search results.
   New news posts also need a quoted ISO `date` (`YYYY-MM-DD`) matching the
-  publication date and `seo: { type: BlogPosting }`.
+  publication date. Do not add a per-article `seo` parameter; folder-scoped
+  defaults in `_config.yml` provide the BlogPosting type.
 - Keep heading levels logical: the layout supplies the only `h1`, so start
   Markdown sections at `##` and do not skip levels. Give Markdown tables
   meaningful column headers and images useful alt text. Essential text must
@@ -112,15 +114,17 @@ content changes; preserve unrelated content and design.
 - Use only supplied or verified facts. Do not invent dates, fees, contacts,
   cancellations, qualifications or event details. If a necessary fact is
   missing, request clarification or state the blocker rather than guessing.
-- Preserve existing `permalink` values when moving or renaming files. Article
-  URLs under `/arkiv/<id>/` are still intentional even though the index is
-  called Nyheter. Do not silently change URLs.
-- Preserve relevant frontmatter. New news posts need `news: true`,
-  `published_label` (Swedish display date), `published_sort` (quoted `YYYYMMDD`)
-  and a unique `permalink`. Set `grading: true` for grading posts and `false`
-  for other news. Do not invent legacy `source_id` or `source_date` values.
-- Mark edited imported pages with `maintained_content: true`, including news
-  posts, so future imports do not overwrite editorial changes.
+- News and grading article URLs are generated from their folder names.
+  `permalink` remains an optional override, but omit it in our articles and
+  templates. Preserve explicit permalinks on other site pages.
+- Preserve relevant frontmatter. New news posts need
+  a quoted ISO `date` (`YYYY-MM-DD`)
+  and a unique folder name. The folder determines article type and URL; do not add
+  `news` or `grading` flags. Do not add `published_label`, `published_sort`, `source_id`,
+  `source_date` or `historical` to news or grading articles.
+- Mark edited imported pages outside the news and grading folders with
+  `maintained_content: true`. News and grading articles do not need this field:
+  the importer always preserves existing articles in those folders.
 - Keep old news dated and historical events distinct from current schedules.
   Do not add visitor-facing scraping or migration notices.
 - Keep internal links local, using `relative_url`, for example

@@ -1,21 +1,9 @@
 ---
 title: Alingsåslägret 2011 avklarat!
-category: Nyheter
-permalink: "/arkiv/421/"
-news: true
-published_label: september 19, 2011
-grading: false
-source_author: Mattias
-published_sort: '20110919'
-source_date: '2026-11-03'
-source_id: '421'
-historical: true
+author: Mattias
 description: Alingsåslägret 2011 avklarat! – Då var årets upplaga av Alingsåslägret
   avklarat! Och lite blygsamt kan vi nog konstatera att det var det bästa lägret…
 date: '2011-09-19'
-seo:
-  type: BlogPosting
-maintained_content: true
 image_descriptions:
   01-bild.jpg: Bild från Alingsåslägret 2011 avklarat!
 ---

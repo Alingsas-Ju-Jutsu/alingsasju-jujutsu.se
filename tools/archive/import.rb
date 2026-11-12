@@ -60,7 +60,7 @@ issues = []
 processed = {}
 existing_posts = Dir.glob("_club_pages/**/*.md").to_h do |path|
   metadata = YAML.safe_load(File.read(path).split("---", 3)[1])
-  [metadata["source_id"], Pathname.new(path)]
+  [metadata["source_id"] || metadata["permalink"].to_s[%r{\A/arkiv/(\d+)/\z}, 1], Pathname.new(path)]
 end
 FileUtils.mkdir_p("assets/archive")
 
@@ -91,6 +91,8 @@ end
 
 source_pages.each do |source|
   id = source["url"][/[?&](?:page_id|p)=(\d+)/, 1]
+  # Articles now use folder-based URLs and are maintained outside the legacy import.
+  next unless page_files.key?(id)
   next if excluded.include?(id)
   next if processed[id]
   processed[id] = true
@@ -182,6 +184,7 @@ source_pages.each do |source|
     next if metadata["maintained_content"]
   else
     existing = existing_posts[id]
+    next if existing && existing.to_s.match?(%r{\A_club_pages/(nyheter|graderingar)/})
     next if existing && YAML.safe_load(existing.read.split("---", 3)[1])["maintained_content"]
     date_link = doc.css(".h-blog-meta a").find { |link| link["href"].to_s.match?(/[?&]m=\d{8}/) }
     date = date_link&.[]("href")&.slice(/[?&]m=(\d{8})/, 1)
@@ -189,7 +192,7 @@ source_pages.each do |source|
       "title" => title, "category" => "Nyheter", "permalink" => routes.fetch(id),
       "news" => true, "published_label" => date_link&.text&.strip,
       "grading" => doc.css(".colibri-post-category").any? { |node| node.text.strip == "Graderingar" },
-      "source_author" => doc.css(".h-blog-meta a").find { |link| link["href"].to_s.include?("author=") }&.text&.strip,
+      "author" => doc.css(".h-blog-meta a").find { |link| link["href"].to_s.include?("author=") }&.text&.strip,
       "published_sort" => date || "00000000"
     }
     file = existing || ArchivePostPath.for(metadata)

@@ -1,15 +1,7 @@
 ---
 title: "Skriv rubriken här"
 description: "Skriv en kort, saklig sammanfattning."
-category: Nyheter
-news: true
-grading: false
 date: "YYYY-MM-DD"
-published_label: "DAG MÅNAD ÅR"
-published_sort: "YYYYMMDD"
-permalink: "/nyheter/YYYY-MM-DD-rubrik/"
-seo:
-  type: BlogPosting
 ---
 
 Skriv nyheten här. Använd `##` för eventuella underrubriker.

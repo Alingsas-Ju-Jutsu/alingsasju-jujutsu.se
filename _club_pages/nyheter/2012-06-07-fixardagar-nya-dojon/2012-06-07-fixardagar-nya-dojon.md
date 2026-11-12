@@ -1,21 +1,9 @@
 ---
 title: FIXARDAGAR NYA DOJON!
-category: Nyheter
-permalink: "/arkiv/661/"
-news: true
-published_label: juni 7, 2012
-grading: false
-source_author: Mattias
-published_sort: '20120607'
-source_date: '2026-11-03'
-source_id: '661'
-historical: true
+author: Mattias
 description: FIXARDAGAR NYA DOJON! – Inför invigningen av nya dojon kommer AJJK att
   anordna två fixardagar. På plats finns ett gediget material som ska monteras ihop,…
 date: '2012-06-07'
-seo:
-  type: BlogPosting
-maintained_content: true
 ---
 
 Inför invigningen av nya dojon kommer AJJK att anordna två fixardagar.

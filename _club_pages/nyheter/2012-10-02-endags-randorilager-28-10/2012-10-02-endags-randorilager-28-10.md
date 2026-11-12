@@ -1,21 +1,9 @@
 ---
 title: Endags Randoriläger 28/10
-category: Nyheter
-permalink: "/arkiv/746/"
-news: true
-published_label: oktober 2, 2012
-grading: false
-source_author: Mattias
-published_sort: '20121002'
-source_date: '2026-11-03'
-source_id: '746'
-historical: true
-maintained_content: true
+author: Mattias
 description: 'Endags Randoriläger 28/10 – Söndagen 28:e Oktober kl 09:30-15:45 Instruktör:
   John Gustavsson, 2 Dan. John, från budoklubben Shindo, är aktiv på elitnivå och…'
 date: '2012-10-02'
-seo:
-  type: BlogPosting
 ---
 
 ## Söndagen 28:e Oktober kl 09:30-15:45

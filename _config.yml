@@ -44,3 +44,15 @@ defaults:
       type: club_pages
     values:
       layout: page
+  - scope:
+      path: "_club_pages/nyheter"
+      type: club_pages
+    values:
+      seo:
+        type: BlogPosting
+  - scope:
+      path: "_club_pages/graderingar"
+      type: club_pages
+    values:
+      seo:
+        type: BlogPosting

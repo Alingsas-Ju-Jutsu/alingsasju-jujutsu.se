@@ -1,21 +1,9 @@
 ---
 title: Inställda träningar
-category: Nyheter
-permalink: "/arkiv/1707/"
-news: true
-published_label: oktober 31, 2020
-grading: false
-source_author: Anna Gustafsson
-published_sort: '20201031'
-source_date: '2026-11-03'
-source_id: '1707'
-historical: true
+author: Anna Gustafsson
 description: Inställda träningar – Hej medlemmar i AJJK! Då FHM kommit med nya riktlinjer
   för idrottsträning kommer AJJK att ställa in all träning för vuxna från…
 date: '2020-10-31'
-seo:
-  type: BlogPosting
-maintained_content: true
 ---
 
 Hej medlemmar i AJJK!

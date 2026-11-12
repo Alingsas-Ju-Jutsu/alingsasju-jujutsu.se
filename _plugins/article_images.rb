@@ -16,6 +16,7 @@ module ArticleImages
 
   class Generator < Jekyll::Generator
     safe true
+    priority :highest
 
     def generate(site)
       collection = site.collections["club_pages"]
@@ -31,6 +32,7 @@ module ArticleImages
         next unless relative.match?(%r{\A_club_pages/(nyheter|graderingar)/[^/]+/[^/]+\.md\z})
 
         folder = File.dirname(article.path)
+        article.data["permalink"] ||= "/nyheter/#{File.basename(folder)}/"
         if folders.key?(folder)
           raise Jekyll::Errors::FatalException, "Only one Markdown article is allowed in #{folder}"
         end

@@ -1,21 +1,9 @@
 ---
 title: Uppdaterad information angående inställda träningar!
-category: Nyheter
-permalink: "/arkiv/1710/"
-news: true
-published_label: november 22, 2020
-grading: false
-source_author: Anna Gustafsson
-published_sort: '20201122'
-source_date: '2026-11-03'
-source_id: '1710'
-historical: true
+author: Anna Gustafsson
 description: Uppdaterad information angående inställda träningar! – Hej medlemmar
   i AJJK! Styrelsen har beslutat att fortsätta med tidigare beslut angående…
 date: '2020-11-22'
-seo:
-  type: BlogPosting
-maintained_content: true
 ---
 
 Hej medlemmar i AJJK!

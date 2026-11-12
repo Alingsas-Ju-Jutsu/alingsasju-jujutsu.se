@@ -1,21 +1,9 @@
 ---
 title: Alingsåslägret 2013
-category: Nyheter
-permalink: "/arkiv/933/"
-news: true
-published_label: september 6, 2013
-grading: false
-source_author: Mattias
-published_sort: '20130906'
-source_date: '2026-11-03'
-source_id: '933'
-historical: true
+author: Mattias
 description: Alingsåslägret 2013 – Nu är anmälningsblankett och matbeställningsblankett
   till Alingsås Ju-jutsuklubbs höstläger här! I filen som heter ”AJJK…
 date: '2013-09-06'
-seo:
-  type: BlogPosting
-maintained_content: true
 ---
 
 Nu är anmälningsblankett och matbeställningsblankett till Alingsås Ju-jutsuklubbs höstläger här!

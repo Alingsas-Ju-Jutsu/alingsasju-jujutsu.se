@@ -1,22 +1,10 @@
 ---
 title: Ny dojo för AJJK från och med hösten 2012
-category: Nyheter
-permalink: "/arkiv/548/"
-news: true
-published_label: februari 5, 2012
-grading: false
-source_author: Mattias
-published_sort: '20120205'
-source_date: '2026-11-03'
-source_id: '548'
-historical: true
+author: Mattias
 description: Ny dojo för AJJK från och med hösten 2012 – Med anledning av kommunens
   ombyggnad av nuvarande lokaler i Kabomhuset kommer Alingsås Ju-jutsuklubb (AJJK)
   från…
 date: '2012-02-05'
-seo:
-  type: BlogPosting
-maintained_content: true
 ---
 
 Med anledning av kommunens ombyggnad av nuvarande lokaler i Kabomhuset kommer Alingsås Ju-jutsuklubb (AJJK) från och med hösten 2012 att flytta sin verksamhet till idrottshuset på Tennisvägen, gamla Tennishallen. Sedan 2000 har AJJK delat lokal med Alingsås Karateklubb. När styrelsen hösten 2010 fick besked om eventuell uppsägning, startades ett intensivt arbete med att hitta alternativ lokal. Önskemålet var förstahandskontrakt på centralt belägen dojo och med en hyra som endast marginellt överskrider den nuvarande. För att möjliggöra dessa önskemål har vi fått minska på kraven vad det gäller både träningsyta och gemensamhetsyta.

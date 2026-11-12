@@ -1,22 +1,10 @@
 ---
 title: Alingsås monläger 21-22 april 2012
-category: Nyheter
-permalink: "/arkiv/579/"
-news: true
-published_label: mars 8, 2012
-grading: false
-source_author: Mattias
-published_sort: '20120308'
-source_date: '2026-11-03'
-source_id: '579'
-historical: true
+author: Mattias
 description: Alingsås monläger 21-22 april 2012 – Alingsås Ju-jutsuklubb anordnar
   ett läger för alla mon-grupper (9-14 år) i Tallåsen, Ödenäs. Vi kommer att bjuda
   in…
 date: '2012-03-08'
-seo:
-  type: BlogPosting
-maintained_content: true
 image_descriptions:
   01-bild.png: Bild från Alingsås monläger 21-22 april 2012
 ---

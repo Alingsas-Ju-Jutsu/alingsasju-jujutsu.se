@@ -17,16 +17,14 @@ class ArticleImagesIntegrationTest < Minitest::Test
       File.write(File.join(source, "_layouts/test.html"),
                  "---\n---\n{{ content }}{% include article-images.html %}")
       %w[nyheter graderingar].each do |section|
-        folder = File.join(source, "_club_pages", section, "2026-11-12-test")
+        folder = File.join(source, "_club_pages", section, "2026-11-12-#{section}-test")
         FileUtils.mkdir_p(folder)
         File.write(File.join(folder, "2026-11-12-test.md"), <<~MARKDOWN)
           ---
           title: Test
-          news: true
           layout: test
           image_descriptions:
             photo.jpg: Gruppbild efter graderingen
-          permalink: /nyheter/#{section}-test/
           ---
           Artikeltext.
         MARKDOWN
@@ -51,11 +49,11 @@ class ArticleImagesIntegrationTest < Minitest::Test
       assert_equal "test", site.collections["club_pages"].docs.first.data["layout"]
       refute_empty site.collections["club_pages"].docs.find { |d| d.data["title"] == "Test" }.data["article_images"]
       %w[nyheter graderingar].each do |section|
-        output_folder = File.join(destination, "nyheter", "#{section}-test")
+        output_folder = File.join(destination, "nyheter", "2026-11-12-#{section}-test")
         assert File.file?(File.join(output_folder, "photo.jpg"))
         html = Nokogiri::HTML(File.read(File.join(output_folder, "index.html")))
         refute_nil html.at_css("img"), html.to_html
-        assert_equal "/test/nyheter/#{section}-test/photo.jpg", html.at_css("img")["src"]
+        assert_equal "/test/nyheter/2026-11-12-#{section}-test/photo.jpg", html.at_css("img")["src"]
         assert_equal "Gruppbild efter graderingen", html.at_css("img")["alt"]
         assert_equal 1, html.css("img").length
         assert_operator html.to_html.index("Artikeltext."), :<, html.to_html.index("<img")
@@ -66,7 +64,7 @@ class ArticleImagesIntegrationTest < Minitest::Test
               assert image.size == (1600, 1200), image.size
         PYTHON
         assert success
-        original = File.join(source, "_club_pages", section, "2026-11-12-test", "photo.jpg")
+        original = File.join(source, "_club_pages", section, "2026-11-12-#{section}-test", "photo.jpg")
         assert system("python3", "-c",
                       "from PIL import Image; import sys; assert Image.open(sys.argv[1]).size == (3200,2400)",
                       original)

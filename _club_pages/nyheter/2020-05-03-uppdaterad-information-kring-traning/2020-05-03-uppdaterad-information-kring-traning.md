@@ -1,21 +1,9 @@
 ---
 title: Uppdaterad information kring träning
-category: Nyheter
-permalink: "/arkiv/1609/"
-news: true
-published_label: maj 3, 2020
-grading: false
-source_author: Magnus Haggren
-published_sort: '20200503'
-source_date: '2026-11-03'
-source_id: '1609'
-historical: true
+author: Magnus Haggren
 description: Uppdaterad information kring träning – AJJK:s styrelse beslutade 26 april
   att förlänga beslutet om inställd gruppträning. Det nya beslutet gäller fram till…
 date: '2020-05-03'
-seo:
-  type: BlogPosting
-maintained_content: true
 image_descriptions:
   01-bild.png: Bild från Uppdaterad information kring träning
 ---
