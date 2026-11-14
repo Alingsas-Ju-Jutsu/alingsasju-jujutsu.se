@@ -1,7 +1,7 @@
 {% for group_entry in site.data.groups.groups %}
   {% assign group_key = group_entry[0] %}
   {% assign group = group_entry[1] %}
-  {% assign responsible_instructors = site.data.instructors | where_exp: "instructor", "instructor.groups contains group_key" %}
+  {% assign responsible_instructors = site.data.instructors.instructors | where_exp: "instructor", "instructor.groups contains group_key" %}
   {% unless responsible_instructors == empty %}
 <h3>{{ group.name | escape }}{% if group.label %} · {{ group.label | escape }}{% endif %}</h3>
 <ul>

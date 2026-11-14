@@ -1,0 +1,189 @@
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: schedule
+    label: Träningstider och avgifter
+    type: file
+    path: _data/groups.yml
+    format: yaml
+    fields:
+      - name: term_start
+        label: Terminsstart
+        type: object
+        fields:
+          - { name: title, label: Rubrik, type: string }
+          - { name: date, label: Datum (text, t.ex. "1 januari"), type: string }
+      - name: exceptions
+        label: Avvikelser (visas tills de tas bort)
+        type: object
+        list: true
+        fields:
+          - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
+          - { name: reason, label: Orsak, type: string }
+      - name: fees
+        label: Avgifter
+        type: object
+        fields:
+          - name: term
+            label: Terminsavgift
+            type: object
+            fields:
+              - { name: toddlers, label: Knattar, type: number }
+              - { name: children, label: Barn, type: number }
+              - name: adults
+                label: Vuxna
+                type: object
+                list: true
+                fields:
+                  - { name: ages, label: Ålder, type: string }
+                  - { name: fee, label: Avgift, type: number }
+          - name: family_discount
+            label: Familjerabatt
+            type: object
+            fields:
+              - { name: fee, label: Avgift, type: number }
+              - { name: minimum_people, label: Minsta antal personer, type: number }
+          - { name: supporting_membership, label: Stödmedlemskap, type: number }
+          - name: grading
+            label: Graderingsavgift
+            type: object
+            fields:
+              - { name: toddlers, label: Knattar, type: number }
+              - { name: children, label: Barn, type: number }
+              - { name: adults, label: Vuxna, type: number }
+          - { name: replacement_grading_pass, label: Ersättningsgraderingspass, type: number }
+      - name: groups
+        label: Grupper
+        type: object
+        fields:
+          - name: toddlers
+            label: Knattar
+            type: object
+            fields: &group_fields
+              - { name: name, label: Namn, type: string }
+              - { name: type, label: Typ, type: string, description: "barn eller vuxen" }
+              - { name: ages, label: Ålder, type: string }
+              - name: sessions
+                label: Träningstillfällen
+                type: object
+                list: true
+                fields:
+                  - { name: day, label: Dag, type: string, description: "T.ex. Söndagar" }
+                  - { name: start, label: Start, type: string, description: "Format 18.30" }
+                  - { name: end, label: Slut, type: string, description: "Format 19.30" }
+              - name: grading
+                label: Gradering
+                type: object
+                fields:
+                  - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
+                  - { name: time, label: Tid, type: string, description: "Format 10:00" }
+                  - { name: is_preliminary, label: Preliminärt, type: boolean }
+          - name: children
+            label: Barn
+            type: object
+            fields: *group_fields
+          - name: adults
+            label: Vuxna
+            type: object
+            fields: *group_fields
+
+  - name: news
+    label: Nyheter
+    type: collection
+    path: _club_pages/nyheter
+    format: yaml-frontmatter
+    subfolders: true
+    exclude: ["_mall.md"]
+    filename: "{primary}/{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: &article_fields
+      - { name: title, label: Rubrik, type: string, required: true }
+      - { name: description, label: Kort sammanfattning, type: text, required: true }
+      - { name: date, label: Publiceringsdatum, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - name: image_descriptions
+        label: Bildbeskrivningar (alt-text)
+        type: object
+        description: "Filnamn på bilden i samma mapp och dess beskrivning."
+      - { name: body, label: Text, type: rich-text }
+
+  - name: gradings
+    label: Graderingar
+    type: collection
+    path: _club_pages/graderingar
+    format: yaml-frontmatter
+    subfolders: true
+    exclude: ["_mall.md"]
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *article_fields
+
+  - name: pages
+    label: Sidor
+    type: collection
+    path: _club_pages
+    format: yaml-frontmatter
+    subfolders: false
+    exclude: ["nyheter.md", "graderingar.md", "schema.md", "lager.md"]
+    view:
+      fields: [title]
+      primary: title
+    fields:
+      - { name: title, label: Rubrik, type: string, required: true }
+      - { name: description, label: Kort sammanfattning, type: text }
+      - { name: body, label: Text, type: rich-text }
+
+  - name: instructors
+    label: Instruktörer
+    type: file
+    path: _data/instructors.yml
+    format: yaml
+    fields:
+      - name: instructors
+        label: Instruktörer
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Namn, type: string }
+          - { name: groups, label: Grupper, type: select, multiple: true, options: { values: [toddlers, children, adults] } }
+          - { name: phone, label: Telefon, type: string }
+          - { name: level, label: Grad, type: string }
+          - { name: color, label: Bältesfärg, type: string }
+          - { name: image, label: Porträtt, type: image }
+          - { name: description, label: Beskrivning, type: text }
+
+  - name: home
+    label: Startsidan
+    type: file
+    path: index.md
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Titel, type: string }
+      - name: hero
+        label: Huvudbild
+        type: object
+        fields:
+          - { name: eyebrow, label: Överrubrik, type: string }
+          - { name: heading, label: Rubrik, type: string }
+          - { name: button_text, label: Knapptext, type: string }
+          - { name: button_url, label: Knapplänk, type: string }
+      - { name: schedule_label, label: Rubrik för träningstider, type: string }
+      - name: navigation
+        label: Navigering
+        type: object
+        fields:
+          - { name: eyebrow, label: Överrubrik, type: string }
+          - { name: heading, label: Rubrik, type: string }
+      - { name: body, label: Text, type: rich-text }

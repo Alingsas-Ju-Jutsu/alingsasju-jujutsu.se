@@ -1,5 +1,5 @@
 <div class="instructor-grid">
-  {% for instructor in site.data.instructors %}
+  {% for instructor in site.data.instructors.instructors %}
   <article class="instructor-card instructor-card--{{ instructor.color | default: 'black' | escape }}">
     <h2 class="instructor-card__name">{{ instructor.name | escape }}</h2>
     <img class="instructor-card__portrait" src="{{ instructor.image | relative_url }}" alt="Porträtt av {{ instructor.name | escape }}" width="700" height="989" loading="lazy">
