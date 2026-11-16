@@ -62,6 +62,4 @@ groups:
         start: "19.45"
         end: "21.00"
     grading:
-      date: 2026-11-25
-      time: 14:00
       is_preliminary: true
