@@ -33,7 +33,7 @@ groups:
         end: "18.15"
     grading:
       date: 2026-12-19
-      time: 14:00
+      time: "14:00"
       is_preliminary: true
   children:
     name: Barn
@@ -48,7 +48,7 @@ groups:
         end: "19.30"
     grading:
       date: 2026-12-19
-      time: 15:00
+      time: "15:00"
       is_preliminary: true
   adults:
     name: Vuxna

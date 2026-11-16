@@ -42,7 +42,8 @@ class GraphicTest(unittest.TestCase):
             rendered_text = [value for value, _, _, _, _ in rendered]
             self.assertIn("GRADERINGSTIDER", rendered_text)
             self.assertIn("KNATTAR (PREL)", rendered_text)
-            self.assertIn("2026-11-22 · 10:00", rendered_text)
+            self.assertIn("2026-12-19 · 14:00", rendered_text)
+            self.assertIn("2026-12-19 · 15:00", rendered_text)
             self.assertIn("BARN (PREL)", rendered_text)
             self.assertIn("VUXNA (PREL)", rendered_text)
             self.assertIn("CONTACT THE CLUB", rendered_text)
