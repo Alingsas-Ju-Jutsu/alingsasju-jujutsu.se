@@ -1,23 +1,20 @@
 ---
 title: Barnträning
-category: Träning & praktiskt
-permalink: "/ju-jutsu/barntraning/"
-source_date: '2026-11-03'
-source_id: '274'
-maintained_content: true
 description: Praktisk information för vårdnadshavare om barnträningen i Alingsås
   Ju-Jutsuklubb, grupper, engagemang och läger.
 ---
-
 ## För vårdnadshavare
 
 ### Trygghet
+
 Vi vill att alla barn ska känna sig trygga och ha roligt på träningen. De första gångerna är du som vårdnadshavare välkommen att vara med inne i dojon, så att ditt barn får en trygg start. Därefter har vi inte möjlighet att ha föräldrar eller andra vårdnadshavare närvarande i dojon under passen. Det ger instruktörerna arbetsro att leda träningen, ta hand om barnen och hjälpa gruppen att hitta fokus och gemenskap.
 
 ### Engagemang
+
 Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men för att vara med och hjälpa till under träningarna behöver man, som våra instruktörer, ha gått ledarskapsutbildning och ha kunskaper i ju-jutsu något vi **inte** förutsätter att vårdnadshavare har möjlighet att skaffa sig. Om du är intresserad av att engagera dig, kontakta oss så berättar vi mer om det finns sätt att bidra till klubben.
 
 ### Grupper
+
  Vi rekommenderar att barn börjar träna i den grupp som passar deras ålder, men det är också möjligt att byta grupp och träna med en annan grupp om det passar bättre pga t.ex. erfarenhet, kompisar eller andra skäl. Detta kan du diskutera med instruktörerna på plats eller kontakta klubben om du vill ha hjälp att hitta rätt grupp.
 
 {% for group_entry in site.data.groups.groups %}
@@ -29,7 +26,8 @@ Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men fö
 {{ group.description | escape }}
 {% endif %}
 {% for session in group.sessions %}
-  - {{ session.day }} kl. {{ session.start }}–{{ session.end }}
+
+- {{ session.day }} kl. {{ session.start }}–{{ session.end }}
 {% endfor %}
 {% endif %}
 {% endfor %}
@@ -37,16 +35,12 @@ Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men fö
 [Se träningsschemat]({{ '/traning/schema/' | relative_url }}){: .button}
 
 ### Tävlingar och läger
+
 Alingsås Ju-Jutsuklubb arrangerar inte tävlingar eller läger för barn, men vi uppmuntrar äldre barn att delta i läger och andra aktiviteter som arrangeras av Svenska Ju-jutsuförbundet. Det är ett roligt sätt att träffa andra barn som tränar ju-jutsu, lära sig nya tekniker och utveckla sin träning.
 
 ## Barngraderingar
 
-Om instruktörerna rekommenderar gradering betyder det att de känner sig trygga
-med att barnet klarar nästa gradering. Om de inte rekommenderar gradering
-beror det på att de ännu inte är säkra på det, eller på att barnet inte
-uppfyller något av minimikraven: att ha en gi, att terminsavgiften är betald
-samt att ha tränat tillräckligt länge och deltagit i tillräckligt många
-träningspass inför kommande gradering.
+Om instruktörerna rekommenderar gradering betyder det att de känner sig trygga med att barnet klarar nästa gradering. Om de inte rekommenderar gradering beror det på att de ännu inte är säkra på det, eller på att barnet inte uppfyller något av minimikraven: att ha en gi, att terminsavgiften är betald samt att ha tränat tillräckligt länge och deltagit i tillräckligt många träningspass inför kommande gradering.
 
 Läs om bältesfärger, sho- och monsystemet samt kraven för gradering på sidan
 [Graderingssystem för barn]({{ '/ju-jutsu/graderingssystem-barn/' | relative_url }}).
