@@ -32,7 +32,7 @@ groups:
         start: "17.15"
         end: "18.15"
     grading:
-      date: 2026-12-14
+      date: 2026-12-19
       time: 14:00
       is_preliminary: true
   children:
@@ -47,7 +47,7 @@ groups:
         start: "18.30"
         end: "19.30"
     grading:
-      date: 2026-12-14
+      date: 2026-12-19
       time: 15:00
       is_preliminary: true
   adults:
