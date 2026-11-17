@@ -1,4 +1,5 @@
 ---
+layout: page
 title: Grafik
 category: Träning & praktiskt
 permalink: "/grafik/"

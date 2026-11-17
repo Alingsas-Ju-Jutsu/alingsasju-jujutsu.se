@@ -369,7 +369,7 @@ docker compose run --rm site python3 tools/test_resize_article_images.py
 docker compose run --rm site bundle exec ruby tools/test_article_images.rb
 ```
 
-Startsidan är `index.md`: dess YAML-metadata innehåller texter för
+Startsidan är `_club_pages/index.md`: dess YAML-metadata innehåller texter för
 huvudsektionen, navigering och kontakt, medan Markdown-innehållet innehåller
 schemasektionen. Gemensam HTML finns i `_layouts/` och `_includes/` för att
 bevara den responsiva designen. Navigering, scheman, dokumentlistor och

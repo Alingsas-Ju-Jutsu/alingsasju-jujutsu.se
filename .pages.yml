@@ -136,7 +136,7 @@ content:
     path: _club_pages
     format: yaml-frontmatter
     subfolders: false
-    exclude: ["nyheter.md", "graderingar.md", "schema.md", "lager.md"]
+    exclude: ["nyheter.md", "graderingar.md", "schema.md", "lager.md", "index.md", "grafik.md"]
     view:
       fields: [title]
       primary: title
@@ -167,7 +167,7 @@ content:
   - name: home
     label: Startsidan
     type: file
-    path: index.md
+    path: _club_pages/index.md
     format: yaml-frontmatter
     fields:
       - { name: title, label: Titel, type: string }

@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Alingsås Ju-Jutsuklubb
+permalink: "/"
 hero:
   eyebrow: Alingsås Ju-Jutsuklubb
   heading: Kampsport med självförsvarsinriktning
