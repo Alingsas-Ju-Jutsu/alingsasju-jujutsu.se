@@ -199,7 +199,7 @@ Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affische
 På sidan [Grafik](/grafik/) finns förhandsvisningar och nedladdningslänkar
 för båda formaten.
 
-Grafik konfigureras separat i [`_data/graphics.yml`](_data/graphics.yml), under
+Grafik konfigureras separat i [`_data/graphics.yml`](_data/graphics.yml) (som även kan redigeras via `.pages.yml`), under
 `graphics:`. Varje affisch anger `background` (sökväg från projektroten),
 `sizes` (exportbredder i pixlar), `include_website`, `include_address`,
 `bottom_margin_percent` (marginal från bildens nederkant i procent av bildhöjden)
@@ -238,8 +238,7 @@ Ange dessutom `include_grading_times: true` för att skapa en separat grafik
 med varje grupps graderingsdatum och tid från `grading` i `_data/groups.yml`.
 Graderingsgrafikens rubrik och textstorlekar styrs av
 `grading_title_font_size`, `grading_group_font_size` och
-`grading_detail_font_size`. Ett `bottom_text`-objekt kan ange `text`, `font`,
-`font_size`, `line_spacing` och `font_color` för en valfri rad längst ned.
+`grading_detail_font_size`. En valfri textrad längst ned under tiderna kan anges med fältet `info` (som sträng eller objekt) eller `bottom_text`. För objekt kan `text`, `font`, `font_size`, `line_spacing` och `font_color` anges.
 
 SVG-bilder kan ange bakgrundsvarianter med `background_colors`, till exempel:
 

@@ -90,25 +90,31 @@ def build_grading_times(background, output, preview_output, sizes, schedule, con
     color = config.get("font_color", "#ffffff")
     if not isinstance(color, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
         raise ValueError("Graphic font_color must be a hex color in #RRGGBB format.")
-    bottom_text = config.get("bottom_text", {})
+    bottom_text = config.get("info")
+    if bottom_text is None:
+        bottom_text = config.get("bottom_text", {})
+    if bottom_text is None:
+        bottom_text = {}
     if isinstance(bottom_text, str):
         bottom_text = {"text": bottom_text}
     if not isinstance(bottom_text, dict):
-        raise ValueError("Graphic bottom_text must be a string or mapping of text settings.")
+        raise ValueError("Graphic info must be a string or mapping of text settings.")
     footer = bottom_text.get("text", "")
+    if footer is None:
+        footer = ""
     if not isinstance(footer, str):
-        raise ValueError("Graphic bottom_text.text must be a string.")
+        raise ValueError("Graphic info.text must be a string.")
     footer_size = bottom_text.get("font_size", 24)
     footer_spacing = bottom_text.get("line_spacing", 8)
     footer_color = bottom_text.get("font_color", color)
     for name, value in (("font_size", footer_size), ("line_spacing", footer_spacing)):
         if not isinstance(value, int) or value < 0 or (name == "font_size" and value == 0):
-            raise ValueError(f"Graphic bottom_text.{name} must be a positive font size or non-negative spacing.")
+            raise ValueError(f"Graphic info.{name} must be a positive font size or non-negative spacing.")
     if not isinstance(footer_color, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", footer_color):
-        raise ValueError("Graphic bottom_text.font_color must be a hex color in #RRGGBB format.")
+        raise ValueError("Graphic info.font_color must be a hex color in #RRGGBB format.")
     footer_font_style = bottom_text.get("font", font_style)
     if footer_font_style not in FONTS:
-        raise ValueError(f"Unknown bottom text font {footer_font_style!r}; choose from {', '.join(FONTS)}.")
+        raise ValueError(f"Unknown info font {footer_font_style!r}; choose from {', '.join(FONTS)}.")
     margin_percent = config.get("bottom_margin_percent", 5)
     if not isinstance(margin_percent, (int, float)) or not 0 <= margin_percent <= 100:
         raise ValueError("Graphic bottom_margin_percent must be between 0 and 100.")
@@ -154,8 +160,8 @@ def build_grading_times(background, output, preview_output, sizes, schedule, con
         group_rows = [grading_groups[index:index + columns]
                       for index in range(0, len(grading_groups), columns)]
         footer_height = 0
-        if footer:
-            footer_lines = footer.splitlines()
+        if footer.strip():
+            footer_lines = footer.strip().splitlines()
             footer_height = len(footer_lines) * (footer_size + footer_spacing)
         total_height = round((title_end + len(group_rows) * group_height + footer_height) * scale)
         margin = round(image.height * margin_percent / 100)
@@ -181,9 +187,9 @@ def build_grading_times(background, output, preview_output, sizes, schedule, con
                     details, group_y, detail_size, font_style, color, center
                 ))
             y = row_bottom + round(spacing * scale)
-        if footer:
+        if footer.strip():
             y += round(spacing * scale)
-            for line in footer.splitlines():
+            for line in footer.strip().splitlines():
                 y = draw_text(
                     line, y, footer_size, footer_font_style, footer_color,
                     line_spacing=footer_spacing,

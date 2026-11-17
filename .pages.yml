@@ -164,6 +164,67 @@ content:
           - { name: image, label: Porträtt, type: image }
           - { name: description, label: Beskrivning, type: text }
 
+  - name: graphics
+    label: Grafik
+    type: file
+    path: _data/graphics.yml
+    format: yaml
+    fields:
+      - name: graphics
+        label: Grafik och affischer
+        type: object
+        fields:
+          - name: training
+            label: Träningsaffisch (Blackbelt)
+            type: object
+            fields: &training_graphic_fields
+              - { name: title, label: Titel, type: string }
+              - { name: include_schedule, label: Inkludera schema, type: boolean }
+              - { name: background, label: Bakgrundsbild, type: image }
+              - { name: sizes, label: Storlekar (px), type: number, list: true }
+              - { name: include_website, label: Inkludera webbadress, type: boolean }
+              - { name: include_address, label: Inkludera adress, type: boolean }
+              - { name: bottom_margin_percent, label: Bottenmarginal (%), type: number }
+              - { name: font, label: Typsnitt, type: select, options: { values: [antonio, typewriter, condensed] } }
+              - { name: font_color, label: Textfärg (hex), type: string }
+              - { name: font_size, label: Textstorlek, type: number }
+              - { name: line_spacing, label: Radavstånd, type: number }
+              - { name: term_start_font_size, label: Textstorlek terminsstart, type: number }
+              - { name: term_start_spacing, label: Radavstånd terminsstart, type: number }
+          - name: tattoo
+            label: Träningsaffisch (Tattoo)
+            type: object
+            fields: *training_graphic_fields
+          - name: logo
+            label: Logotyp
+            type: object
+            fields:
+              - { name: title, label: Titel, type: string }
+              - { name: include_schedule, label: Inkludera schema, type: boolean }
+              - { name: background, label: Bildfil, type: image }
+          - name: grading_blackbelt
+            label: Graderingsaffisch (Blackbelt)
+            type: object
+            fields: &grading_graphic_fields
+              - { name: title, label: Titel, type: string }
+              - { name: include_schedule, label: Inkludera schema, type: boolean }
+              - { name: include_grading_times, label: Inkludera graderingstider, type: boolean }
+              - { name: background, label: Bakgrundsbild, type: image }
+              - { name: sizes, label: Storlekar (px), type: number, list: true }
+              - { name: bottom_margin_percent, label: Bottenmarginal (%), type: number }
+              - { name: font, label: Typsnitt, type: select, options: { values: [antonio, typewriter, condensed] } }
+              - { name: font_color, label: Textfärg (hex), type: string }
+              - { name: grading_title, label: Rubrik, type: string }
+              - { name: grading_title_font_size, label: Rubrikstorlek, type: number }
+              - { name: grading_group_font_size, label: Gruppnamnstorlek, type: number }
+              - { name: grading_detail_font_size, label: Datum/tidstorlek, type: number }
+              - { name: line_spacing, label: Radavstånd, type: number }
+              - { name: info, label: Informationstext under tiderna, type: text }
+          - name: grading_tattoo
+            label: Graderingsaffisch (Tattoo)
+            type: object
+            fields: *grading_graphic_fields
+
   - name: home
     label: Startsidan
     type: file

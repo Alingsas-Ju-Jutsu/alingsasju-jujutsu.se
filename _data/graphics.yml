@@ -45,6 +45,7 @@ graphics:
     grading_group_font_size: 36
     grading_detail_font_size: 30
     line_spacing: 12
+    info: "Vi avslutar graderingen med en filmkväll. Välkomna!"
   grading_tattoo:
     title: Graderingstider – Tattoo
     include_schedule: false
@@ -58,3 +59,4 @@ graphics:
     grading_group_font_size: 30
     grading_detail_font_size: 24
     line_spacing: 10
+    info: "Vi avslutar graderingen med en filmkväll. Välkomna!"

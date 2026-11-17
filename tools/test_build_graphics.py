@@ -23,11 +23,17 @@ class GraphicTest(unittest.TestCase):
                 "font": "condensed", "font_color": "#12ab34",
                 "grading_title_font_size": 48, "grading_group_font_size": 30,
                 "grading_detail_font_size": 24, "line_spacing": 10,
-                "bottom_text": {
+                "info": {
                     "text": "CONTACT THE CLUB", "font_size": 28,
                     "line_spacing": 6, "font_color": "#abcdef",
                 },
             }}}))
+            schedule_file = directory / "groups.yml"
+            schedule_file.write_text(yaml.safe_dump({"groups": {
+                "toddlers": {"name": "Knattar", "grading": {"date": "2026-12-19", "time": "14:00", "is_preliminary": True}},
+                "children": {"name": "Barn", "grading": {"date": "2026-12-19", "time": "15:00", "is_preliminary": True}},
+                "adults": {"name": "Vuxna", "grading": {"date": "2026-12-19", "time": "16:00", "is_preliminary": True}},
+            }}))
             rendered = []
             original_text = ImageDraw.ImageDraw.text
 
@@ -38,7 +44,7 @@ class GraphicTest(unittest.TestCase):
 
             output = directory / "grading.png"
             with patch.object(ImageDraw.ImageDraw, "text", capture):
-                build(ROOT / "_data/groups.yml", output, "grading", config)
+                build(schedule_file, output, "grading", config)
             rendered_text = [value for value, _, _, _, _ in rendered]
             self.assertIn("GRADERINGSTIDER", rendered_text)
             self.assertIn("KNATTAR (PREL)", rendered_text)
@@ -63,6 +69,69 @@ class GraphicTest(unittest.TestCase):
                 self.assertEqual(preview.size, (450, 600))
             with Image.open(directory / "grading-original.png") as original:
                 self.assertEqual(original.size, (300, 400))
+
+    def test_grading_time_graphic_renders_optional_info_string(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            background = directory / "background.png"
+            Image.new("RGB", (300, 400), "navy").save(background)
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"grading": {
+                "background": str(background), "sizes": [600],
+                "include_schedule": False, "include_grading_times": True,
+                "font": "condensed", "font_color": "#12ab34",
+                "info": "ANMÄLAN KRÄVS\nINFO PÅ HEMSIDAN",
+            }}}))
+            schedule_file = directory / "groups.yml"
+            schedule_file.write_text(yaml.safe_dump({"groups": {
+                "toddlers": {"name": "Knattar", "grading": {"date": "2026-12-19", "time": "14:00"}},
+            }}))
+            rendered = []
+            original_text = ImageDraw.ImageDraw.text
+
+            def capture(draw, position, value, **kwargs):
+                rendered.append((value, position, kwargs["fill"], kwargs["font"].size,
+                                 draw._image.width))
+                return original_text(draw, position, value, **kwargs)
+
+            output = directory / "grading.png"
+            with patch.object(ImageDraw.ImageDraw, "text", capture):
+                build(schedule_file, output, "grading", config)
+            rendered_text = [value for value, _, _, _, _ in rendered]
+            self.assertIn("ANMÄLAN KRÄVS", rendered_text)
+            self.assertIn("INFO PÅ HEMSIDAN", rendered_text)
+
+    def test_grading_time_graphic_empty_info_is_skipped(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            background = directory / "background.png"
+            Image.new("RGB", (300, 400), "navy").save(background)
+            config = directory / "graphics.yml"
+            config.write_text(yaml.safe_dump({"graphics": {"grading": {
+                "background": str(background), "sizes": [600],
+                "include_schedule": False, "include_grading_times": True,
+                "font": "condensed", "font_color": "#12ab34",
+                "info": "",
+            }}}))
+            schedule_file = directory / "groups.yml"
+            schedule_file.write_text(yaml.safe_dump({"groups": {
+                "toddlers": {"name": "Knattar", "grading": {"date": "2026-12-19", "time": "14:00"}},
+            }}))
+            rendered = []
+            original_text = ImageDraw.ImageDraw.text
+
+            def capture(draw, position, value, **kwargs):
+                rendered.append((value, position, kwargs["fill"], kwargs["font"].size,
+                                 draw._image.width))
+                return original_text(draw, position, value, **kwargs)
+
+            output = directory / "grading.png"
+            with patch.object(ImageDraw.ImageDraw, "text", capture):
+                build(schedule_file, output, "grading", config)
+            rendered_text = [value for value, _, _, _, _ in rendered]
+            self.assertIn("GRADERINGSTIDER", rendered_text)
+            self.assertIn("KNATTAR", rendered_text)
+            self.assertEqual(len(rendered_text), 6)  # Title, group, time for each size (600 and 300)
 
     def test_missing_or_empty_sizes_export_only_original_and_preview(self):
         with tempfile.TemporaryDirectory() as directory:
