@@ -2,7 +2,7 @@ term_start:
   title: Terminsstart
   date: 1 januari
 exceptions:
-  - date: 2026-12-22
+  - date: 2026-11-22
     reason: Höstlov
 fees:
   term:
