@@ -34,7 +34,7 @@ groups:
     grading:
       date: "2026-12-19"
       time: "13:00"
-      is_preliminary: true
+      is_preliminary: false
   children:
     name: Barn
     type: barn
@@ -49,7 +49,7 @@ groups:
     grading:
       date: "2026-12-19"
       time: "15:00"
-      is_preliminary: true
+      is_preliminary: false
   adults:
     name: Vuxna
     type: vuxen
@@ -64,4 +64,4 @@ groups:
     grading:
       date: "2026-12-19"
       time: "14:00"
-      is_preliminary: true
+      is_preliminary: false
