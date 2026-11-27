@@ -33,3 +33,4 @@ contact:
 {% include training-schedule.html %}
 
 [Börja träna med oss]({{ '/borja-trana/' | relative_url }}){: .button}
+[Schema]({{ '/traning-praktiskt/schema/' | relative_url }}){: .button}
