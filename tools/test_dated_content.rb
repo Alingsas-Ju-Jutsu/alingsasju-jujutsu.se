@@ -133,16 +133,17 @@ class DatedContentTest < Minitest::Test
       refute_empty field["description"], field["name"]
     end
 
-    def test_board_exceptions_include_today_and_day_28_but_not_past_or_day_29
-      exceptions = %w[2026-12-26 2026-11-26 2026-12-25 2026-11-27].map do |date|
-        { "date" => date, "reason" => "Ingen träning" }
-      end
-      result = generate(exceptions: exceptions)
-      assert_equal %w[2026-11-27 2026-12-25], result["board_entries"].map { |entry| entry["date"] }
-      assert result["board_entries"].all? { |entry| entry["exception"]["reason"] == "Ingen träning" }
-      assert_equal 3, result["exceptions"].length
-      assert_empty result["upcoming_entries"]
+  end
+
+  def test_board_exceptions_include_today_and_day_28_but_not_past_or_day_29
+    exceptions = %w[2026-12-26 2026-11-26 2026-12-25 2026-11-27].map do |date|
+      { "date" => date, "reason" => "Ingen träning" }
     end
+    result = generate(exceptions: exceptions)
+    assert_equal %w[2026-11-27 2026-12-25], result["board_entries"].map { |entry| entry["date"] }
+    assert result["board_entries"].all? { |entry| entry["exception"]["reason"] == "Ingen träning" }
+    assert_equal 3, result["exceptions"].length
+    assert_empty result["upcoming_entries"]
   end
 
   def test_real_templates_render_filtered_content_and_hide_empty_schedule_sections
