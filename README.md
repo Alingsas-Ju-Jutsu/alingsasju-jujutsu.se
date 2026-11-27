@@ -336,6 +336,31 @@ textschemat uppdateras fortfarande med Jekylls vanliga omladdning.
 
 ## Redigera sidor
 
+### Arkiv under Föreningen
+
+Menyn **Föreningen → Arkiv** samlar tidigare graderingar, äldre nyheter och
+hela lägeravdelningen, inklusive Alingsåslägrets årssidor och Kai out West.
+Arkivöversikten finns i `_club_pages/arkiv.md`. Äldre källfiler och deras
+artikelbilder ligger samlade i `_club_pages/archive/`. Arkivsidorna har
+adresser under `/foreningen/arkiv/`; tidigare adresser omdirigeras inte.
+Alla artiklar och bilder bevaras, och interna länkar pekar på arkivadresserna.
+Läger är inte längre en egen huvudmeny.
+Arkivsidorna visar en tydlig historikmarkering och en länk tillbaka till Arkiv.
+Markeringen styrs av `archived: true` i sidans metadata eller av mappreglerna
+i `_config.yml`. Aktuella graderingstider hämtas fortfarande från schemat
+och visas på anslagstavlan och Schema, inte i graderingsarkivet.
+
+I CMS finns det äldre materialet under **Arkiv – äldre innehåll**.
+De gamla mapparna `_club_pages/nyheter/` och `_club_pages/graderingar/`
+är borttagna och kan skapas igen för nya artiklar vid behov.
+Artikelmallarna finns separat under `_templates/`. Även de tidigare
+översiktsfilerna och adresserna `/nyheter/`, `/foreningen/graderingar/` och
+`/lager/` är lediga för framtida sidor. Nya översiktssidor skapas vid behov;
+de äldre visas bara via Arkiv.
+
+Kontrollera arkivmenyn, interna länkar och historikmarkeringarna med
+`docker compose run --rm site bundle exec ruby tools/test_archive_navigation.rb`.
+
 GitHub Copilot-agenter följer
 [`.github/copilot-instructions.md`](.github/copilot-instructions.md) för
 gemensamma redigeringsregler i kodförrådet. Lägg bestående riktlinjer där.
@@ -358,12 +383,12 @@ skrivs i Markdown, inte i separata HTML-innehållsfiler. Behåll YAML-metadata
 Nyhetsartiklar finns i `_club_pages/nyheter/` och graderingsinlägg i
 `_club_pages/graderingar/`. Varje artikel har en egen `YYYY-MM-DD-title/`-mapp
 med en daterad Markdown-fil och eventuella bilder, baserade på
-publiceringsdatumet. Även äldre nyheter och graderingar använder denna struktur.
-Deras `permalink`-värden behåller befintliga
-offentliga URL:er oförändrade. Nyhets- och dokumentöversikten är `nyheter.md`
-och nås på `/nyheter/`. Alingsåslägrets sidor samlas i
-`_club_pages/alingsaslagret/`, med `index.md` för översikten och årsfiler
-som `2004.md`.
+publiceringsdatumet. Äldre artiklar har samma struktur under
+`_club_pages/archive/nyheter/` och `_club_pages/archive/graderingar/`.
+Arkivets nyhets- och dokumentöversikt är `_club_pages/archive/nyheter.md`
+på `/foreningen/arkiv/nyheter/`. Alingsåslägrets sidor samlas i
+`_club_pages/archive/alingsaslagret/`, med `index.md` för översikten och
+årsfiler som `2004.md`.
 
 ### Ny artikel med bilder i samma mapp
 
@@ -375,8 +400,8 @@ Inte heller `category` eller `maintained_content` behövs i dessa artiklar;
 nyhetskategorin hämtas från mappstrukturen.
 
 Kopiera mallen i rätt avdelning till en egen mapp:
-[`_club_pages/nyheter/_mall.md`](_club_pages/nyheter/_mall.md) eller
-[`_club_pages/graderingar/_mall.md`](_club_pages/graderingar/_mall.md).
+[`_templates/nyhet.md`](_templates/nyhet.md) eller
+[`_templates/gradering.md`](_templates/gradering.md).
 Byt namn på kopian till artikelns daterade filnamn:
 
 ```text
@@ -392,10 +417,9 @@ mapp. Fyll i rubrik, beskrivning och publiceringsdatum, samt valfri `author`.
 Adressen blir automatiskt `/nyheter/<mappnamn>/` för båda artikeltyperna.
 `permalink` är en valfri möjlighet att ange en egen adress, men utelämnas
 i våra nyhets- och graderingsartiklar samt mallarna för att undvika förvirring.
-Även äldre artiklar använder mappbaserade adresser;
-gamla `/arkiv/`-adresser omdirigeras inte. Interna länkar är uppdaterade.
-Artiklar i båda mapparna visas automatiskt på Nyheter.
-Lägg även en lokal länk på Graderingar om inlägget ska ingå i dess gallerilista.
+Arkiverade artiklar använder i stället `/foreningen/arkiv/nyheter/<mappnamn>/`.
+Arkivets nyhetsindex listar bara artiklar från arkivmapparna. Nya artiklar
+publiceras inte i arkivlistan; en ny nyhetsöversikt kan skapas separat.
 
 Bilder är valfria. Lägg JPG-, PNG- eller WebP-filer direkt i artikelns mapp
 så visas alla bilder automatiskt längst ned i artikeln, i filnamnsordning.

@@ -1,16 +1,18 @@
 ---
-title: Nyheter
-category: Föreningen
-permalink: "/nyheter/"
-description: 'Nyheter från Alingsås Ju-Jutsuklubb: träning, graderingar, läger och
-  aktiviteter. Läs daterade artiklar och hitta dokument från tidigare arrangemang.'
+title: Äldre nyheter
+category: Arkiv
+archived: true
+maintained_content: true
+permalink: "/foreningen/arkiv/nyheter/"
+description: 'Arkiv med äldre nyheter, graderingar, läger och dokument från
+  Alingsås Ju-Jutsuklubb.'
 ---
 
 Tidigare nyheter från Alingsås Ju-Jutsuklubb. Innehållet är historiskt och
 uppgifter om datum, tider och arrangemang kan vara inaktuella.
 
-{% assign news = site.club_pages | where_exp: "article", "article.path contains '_club_pages/nyheter/'" %}
-{% assign gradings = site.club_pages | where_exp: "article", "article.path contains '_club_pages/graderingar/'" %}
+{% assign news = site.club_pages | where_exp: "article", "article.path contains '_club_pages/foreningen/arkiv/nyheter/'" %}
+{% assign gradings = site.club_pages | where_exp: "article", "article.path contains '_club_pages/archive/graderingar/'" %}
 {% assign news = news | concat: gradings | sort: "date" | reverse %}
 {% for article in news %}
 - [{{ article.title }}]({{ article.url | relative_url }}){% if article.date %} — {% include swedish-date.html date=article.date %}{% endif %}

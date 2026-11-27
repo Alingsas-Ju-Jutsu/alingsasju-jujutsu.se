@@ -135,7 +135,6 @@ content:
     path: _club_pages/nyheter
     format: yaml-frontmatter
     subfolders: true
-    exclude: ["_mall.md"]
     filename: "{primary}/{primary}.md"
     view:
       fields: [title, date]
@@ -160,7 +159,6 @@ content:
     path: _club_pages/graderingar
     format: yaml-frontmatter
     subfolders: true
-    exclude: ["_mall.md"]
     view:
       fields: [title, date]
       primary: title
@@ -176,7 +174,7 @@ content:
     path: _club_pages
     format: yaml-frontmatter
     subfolders: false
-    exclude: ["nyheter.md", "graderingar.md", "schema.md", "lager.md", "index.md", "grafik.md"]
+    exclude: ["schema.md", "index.md", "grafik.md"]
     view:
       fields: [title]
       primary: title
@@ -184,6 +182,39 @@ content:
       - { name: title, label: Rubrik, type: string, required: true }
       - { name: description, label: Kort sammanfattning, type: text }
       - { name: body, label: Text, type: rich-text }
+
+  - name: archive
+    label: Arkiv – äldre innehåll
+    type: group
+    items:
+      - name: archived_news
+        label: Arkiverade nyheter
+        type: collection
+        path: _club_pages/archive/nyheter
+        format: yaml-frontmatter
+        subfolders: true
+        operations: { create: false }
+        fields: *article_fields
+      - name: archived_gradings
+        label: Arkiverade graderingar
+        type: collection
+        path: _club_pages/archive/graderingar
+        format: yaml-frontmatter
+        subfolders: true
+        operations: { create: false }
+        fields: *article_fields
+      - name: archived_pages
+        label: Arkivöversikter och läger
+        type: collection
+        path: _club_pages/archive
+        format: yaml-frontmatter
+        subfolders: true
+        exclude: ["nyheter/**", "graderingar/**"]
+        operations: { create: false }
+        fields:
+          - { name: title, label: Rubrik, type: string, required: true }
+          - { name: description, label: Kort sammanfattning, type: text }
+          - { name: body, label: Text, type: rich-text, description: "Historiskt innehåll. Aktuella händelser läggs till under Aktiviteter – anslagstavla." }
 
   - name: instructors
     label: Instruktörer

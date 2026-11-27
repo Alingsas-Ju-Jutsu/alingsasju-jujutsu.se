@@ -6,7 +6,7 @@ description: Kai out West – Klicka här för att komma till info om Kai out We
 date: '2014-09-09'
 ---
 
-Klicka **[här](<{{ '/foreningen/kai-out-west/' | relative_url }}>)** för att komma till info om Kai out West!
+Klicka **[här](<{{ '/foreningen/arkiv/lager/kai-out-west/' | relative_url }}>)** för att komma till info om Kai out West!
 
 Klicka på en länk nedan för att komma direkt till inbjudan eller anmälningsformulär.
 

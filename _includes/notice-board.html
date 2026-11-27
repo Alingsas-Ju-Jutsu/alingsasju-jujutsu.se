@@ -16,7 +16,7 @@
             {% else %}
             <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
             {% include grading-time.html group=entry.grading_group show_date=false %}
-            <p><a href="{{ '/schema/' | relative_url }}">Se träningsschemat</a> · <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a></p>
+            <p><a href="{{ '/traning/schema/' | relative_url }}">Se träningsschemat</a> · <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a></p>
             {% endif %}
           </article>
         {% endfor %}

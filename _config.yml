@@ -30,8 +30,7 @@ exclude:
   - _old_site
   - vendor
   - tools
-  - _club_pages/nyheter/_mall.md
-  - _club_pages/graderingar/_mall.md
+  - _templates
 
 defaults:
   - scope:
@@ -61,6 +60,23 @@ defaults:
         type: BlogPosting
   - scope:
       path: "_club_pages/graderingar"
+      type: club_pages
+    values:
+      seo:
+        type: BlogPosting
+  - scope:
+      path: "_club_pages/archive"
+      type: club_pages
+    values:
+      archived: true
+  - scope:
+      path: "_club_pages/archive/nyheter"
+      type: club_pages
+    values:
+      seo:
+        type: BlogPosting
+  - scope:
+      path: "_club_pages/archive/graderingar"
       type: club_pages
     values:
       seo:

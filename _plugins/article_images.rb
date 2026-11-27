@@ -29,10 +29,11 @@ module ArticleImages
       destinations = {}
       collection.docs.each do |article|
         relative = Pathname.new(article.path).relative_path_from(Pathname.new(site.source)).to_s
-        next unless relative.match?(%r{\A_club_pages/(nyheter|graderingar)/[^/]+/[^/]+\.md\z})
+        next unless relative.match?(%r{\A_club_pages/(archive/)?(nyheter|graderingar)/[^/]+/[^/]+\.md\z})
 
         folder = File.dirname(article.path)
-        article.data["permalink"] ||= "/nyheter/#{File.basename(folder)}/"
+        prefix = relative.start_with?("_club_pages/archive/") ? "/foreningen/arkiv/nyheter" : "/nyheter"
+        article.data["permalink"] ||= "#{prefix}/#{File.basename(folder)}/"
         if folders.key?(folder)
           raise Jekyll::Errors::FatalException, "Only one Markdown article is allowed in #{folder}"
         end

@@ -43,7 +43,7 @@ content changes; preserve unrelated content and design.
 - Create one Markdown page in `_club_pages/nyheter/`, or
   `_club_pages/graderingar/` for grading news. New articles use their own
   `YYYY-MM-DD-slug/` folder containing one dated Markdown file and optional images;
-  copy `_mall.md` from the relevant section (news or grading).
+  copy `_templates/nyhet.md` or `_templates/gradering.md` as appropriate.
   The templates are excluded from publication. News without images is allowed;
   grading photo galleries require available photos. A text-only grading
   announcement is not a photo gallery.
@@ -66,9 +66,9 @@ content changes; preserve unrelated content and design.
   explicitly supplied for publication; never use external upload services or
   commit credentials. If an attachment cannot be retrieved, report that and
   request an accessible copy rather than silently dropping it.
-- The `/nyheter/` index automatically includes articles in both folders. For a
-  grading post, also add an appropriate local link to the Graderingar overview
-  when it belongs in that gallery list; keep `maintained_content: true` there.
+- The archived news index only lists articles in `_club_pages/archive/`.
+  New articles must not be added to archived overviews. New current overview
+  pages can be created separately when requested.
 - Do not add scheduling infrastructure or promise future automatic publication.
   For a future publication request, prepare a
   draft pull request and explain that a maintainer must merge it at the intended time.
@@ -86,11 +86,18 @@ content changes; preserve unrelated content and design.
   reuse Liquid includes for shared components.
 - `_club_pages/nyheter/`: news posts named `YYYY-MM-DD-title.md`.
 - `_club_pages/graderingar/`: grading posts with the same dated filename format.
-- `_club_pages/alingsaslagret/`: `index.md` for the camp overview and year files
+- `_club_pages/archive/alingsaslagret/`: `index.md` for the camp overview and year files
   such as `2004.md`. Preserve the Läger → Alingsåslägret → year navigation.
-- `_club_pages/nyheter.md`: the `/nyheter/` index. It automatically lists pages
-  in the news and grading folders; do not maintain a second manual list.
+- `_club_pages/archive/nyheter.md`: the `/foreningen/arkiv/nyheter/` index.
+  It automatically lists archived news and grading articles only.
 - `_data/navigation.yml`: shared menus.
+- Föreningen → Arkiv contains old grading galleries, news and all camp pages.
+  Historical source files live under `_club_pages/archive/`, and their URLs
+  under `/foreningen/arkiv/`. Preserve images and keep internal links updated.
+  The former source paths and URLs are free for future current pages.
+  `archived: true` adds the historical notice and archive breadcrumb;
+  folder defaults apply only to the archive.
+  Do not restore Läger as a top-level menu or old news as current information.
 - `_data/groups.yml`: the single source for training group names,
   ages, recurring sessions, term start and exceptions. Never duplicate current
   schedule values in page text. Keep dates and times quoted. Exceptions use
