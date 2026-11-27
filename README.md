@@ -155,7 +155,7 @@ vid nästa lyckade byggning.
 ## Anslagstavla på startsidan
 
 Anslagstavlan visas direkt under startsidans huvudbild. Lägg till, redigera
-och ta bort aktiviteter i **Aktiviteter – anslagstavla** i Pages CMS om det
+och ta bort aktiviteter i **Händelser och aktiviteter** i Pages CMS om det
 är anslutet till kodförrådet, eller redigera Markdown-filer i
 [`_activities/`](_activities/). CMS-fälten har svenska hjälptexter.
 Redigeringen sker i GitHub eller Pages CMS, inte direkt på den publika webbplatsen.
@@ -167,6 +167,25 @@ Varje aktivitet får en egen sida med rubrik (`title`), händelsedatum
 Anslagstavlan visar datum, rubrik och sammanfattning och länkar till den egna
 sidan. Använd `event_date`, inte `date`: händelsedatumet är inte ett
 publiceringsdatum och framtida aktiviteter ska gå att läsa redan nu.
+
+**Kommande händelser** på `/aktiviteter/` listar alla framtida aktiviteter
+och daterade graderingar i datumordning, även längre än sex veckor framåt.
+Sidan nås från Föreningen i menyn. Varje aktivitet visas med datum, rubrik,
+sammanfattning och länk till hela texten. Samma aktivitet visas automatiskt
+på startsidans anslagstavla när den är högst sex veckor bort.
+Efter händelsedagen försvinner den från båda listorna vid nästa bygge,
+men detaljsidan finns kvar.
+
+I CMS kan du lägga till valfritt antal **Bilder** med bildbeskrivningar.
+Bilderna visas efter texten på aktivitetens egen sida, i vald ordning.
+Använd lokala bilder under `assets/images/` och publicera bara bilder som
+klubben får använda. I Markdown-filens metadata ser det ut så här:
+
+```yaml
+images:
+  - image: "/assets/images/aktivitet.jpg"
+    alt: "Beskrivning av vad bilden visar"
+```
 
 CMS namnger filerna som `rubrik-YYYY-MM-DD.md`. Låt datumet stå sist:
 Jekyll kan tolka ett datum först i filnamnet som ett framtida publiceringsdatum.
@@ -345,6 +364,8 @@ artikelbilder ligger samlade i `_club_pages/archive/`. Arkivsidorna har
 adresser under `/foreningen/arkiv/`; tidigare adresser omdirigeras inte.
 Alla artiklar och bilder bevaras, och interna länkar pekar på arkivadresserna.
 Läger är inte längre en egen huvudmeny.
+Arkiv är en vanlig menylänk utan undermeny. Dess avdelningar nås via
+arkivöversikten, och lägerår nås via Alingsåslägrets sida.
 Arkivsidorna visar en tydlig historikmarkering och en länk tillbaka till Arkiv.
 Markeringen styrs av `archived: true` i sidans metadata eller av mappreglerna
 i `_config.yml`. Aktuella graderingstider hämtas fortfarande från schemat

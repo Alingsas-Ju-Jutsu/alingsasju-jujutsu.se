@@ -30,6 +30,7 @@ class DatedContentTest < Minitest::Test
     original = Marshal.dump(activities)
     result = generate(activities: activities)
     assert_equal %w[2026-11-27 2026-12-01 2027-01-08], result["activities"].map { |item| item.data["event_date"] }
+    assert_equal %w[2026-11-27 2026-12-01 2027-01-08 2027-01-09], result["upcoming_entries"].map { |entry| entry["date"] }
     assert_equal original, Marshal.dump(activities), "Filtering must not delete or change source entries"
   end
 
@@ -102,7 +103,7 @@ class DatedContentTest < Minitest::Test
   def test_absent_data_produces_empty_sections
     site = Struct.new(:data, :time, :collections).new({}, Time.iso8601("2026-11-27T12:00:00Z"), {})
     DatedContent::Generator.new.generate(site)
-    assert_equal({ "board_entries" => [], "activities" => [], "grading_groups" => [], "exceptions" => [] }, site.data["dated_content"])
+    assert_equal({ "board_entries" => [], "upcoming_entries" => [], "activities" => [], "grading_groups" => [], "exceptions" => [] }, site.data["dated_content"])
   end
 
   def test_board_includes_gradings_without_activities_and_uses_the_same_date_window
@@ -125,8 +126,8 @@ class DatedContentTest < Minitest::Test
     activities = cms.fetch("content").find { |entry| entry["name"] == "activities" }
     assert_equal "_activities", activities["path"]
     assert_equal "{primary}-{fields.event_date}.md", activities["filename"]
-    assert_equal %w[title event_date description body], activities["fields"].map { |field| field["name"] }
-    activities["fields"].each do |field|
+    assert_equal %w[title event_date description body images], activities["fields"].map { |field| field["name"] }
+    activities["fields"].reject { |field| field["name"] == "images" }.each do |field|
       assert field["required"], field["name"]
       refute_empty field["description"], field["name"]
     end
@@ -136,7 +137,7 @@ class DatedContentTest < Minitest::Test
     Dir.mktmpdir do |source|
       root = File.expand_path("..", __dir__)
       %w[_includes _layouts _data _activities].each { |dir| FileUtils.mkdir_p(File.join(source, dir)) }
-      %w[training-schedule grading-time notice-board navigation-links article-images swedish-date].each do |name|
+      %w[training-schedule grading-time notice-board upcoming-events navigation-links article-images swedish-date].each do |name|
         FileUtils.cp(File.join(root, "_includes/#{name}.html"), File.join(source, "_includes"))
       end
       %w[home activity page].each do |name|
@@ -144,6 +145,7 @@ class DatedContentTest < Minitest::Test
       end
       File.write(File.join(source, "_layouts/default.html"), "---\n---\n{{ content }}")
       FileUtils.cp(File.join(root, "_club_pages/index.md"), File.join(source, "index.md"))
+      FileUtils.cp(File.join(root, "_club_pages/handelser.md"), File.join(source, "handelser.md"))
       File.write(File.join(source, "schema.html"), "---\n---\n{% include training-schedule.html show_grading=true %}")
       File.write(File.join(source, "borja.html"), "---\n---\n{% include training-schedule.html %}")
       entries = [
@@ -154,6 +156,7 @@ class DatedContentTest < Minitest::Test
       ]
       entries.each_with_index do |entry, index|
         entry.data["description"] = "<script>unsafe</script>"
+        entry.data["images"] = [{ "image" => "/assets/images/example.jpg", "alt" => "Träning på mattan" }]
         File.write(File.join(source, "_activities/activity-#{index}-#{entry.data['event_date']}.md"),
                    "#{entry.data.to_yaml}---\n## Details\n\nFull activity information.")
       end
@@ -187,6 +190,16 @@ class DatedContentTest < Minitest::Test
         home = Nokogiri::HTML(File.read(File.join(source, "_site/index.html")))
         schema = Nokogiri::HTML(File.read(File.join(source, "_site/schema.html")))
         beginner = Nokogiri::HTML(File.read(File.join(source, "_site/borja.html")))
+        events = Nokogiri::HTML(File.read(File.join(source, "_site/aktiviteter/index.html")))
+        if index.zero?
+          assert_equal ["Today", "Current group – preliminär gradering", "Day 42", "Too far"], events.css(".event-summary h2").map(&:text)
+          assert_equal "/test/aktiviteter/activity-3-2027-01-09/", events.css(".event-summary h2 a").last["href"]
+        elsif index == 1
+          assert_empty events.css(".event-summary")
+          assert_includes events.text, "Det finns inga kommande händelser"
+        else
+          assert_equal 1, events.css(".event-summary").length
+        end
         assert_equal visible ? 1 : 0, home.css("#anslagstavla").length
         assert_empty home.css(".notice-board script")
         assert_empty home.css("[data-grading-date], [data-exception-date]")
@@ -231,6 +244,9 @@ class DatedContentTest < Minitest::Test
             refute_nil detail.at_css('a[href="/test/"]')
           end
           assert_equal 1, detail.css(".activity-date time").length
+          assert_equal "/test/assets/images/example.jpg", detail.at_css(".article-images img")["src"]
+          assert_equal "Träning på mattan", detail.at_css(".article-images img")["alt"]
+          refute_nil detail.at_css('a[href="/test/aktiviteter/"]')
         end
       end
     end

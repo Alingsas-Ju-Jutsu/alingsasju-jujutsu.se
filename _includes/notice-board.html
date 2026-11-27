@@ -4,6 +4,7 @@
     <div class="section-heading">
       <h2 id="notice-board-title">Anslagstavla</h2>
       <p>Aktuellt och kommande händelser i klubben.</p>
+      <p><a href="{{ '/aktiviteter/' | relative_url }}">Alla kommande händelser</a></p>
     </div>
       <div class="notice-board__posts">
         {% for entry in site.data.dated_content.board_entries %}

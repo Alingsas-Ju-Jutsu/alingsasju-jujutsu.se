@@ -10,14 +10,17 @@ module DatedContent
       schedule = site.data.fetch("groups", {})
       activities = site.collections["activities"]&.docs || []
 
-      visible_activities = activities.select do |activity|
+      upcoming_activities = activities.select do |activity|
         %w[title description].each do |field|
           if activity.data[field].to_s.strip.empty?
             raise Jekyll::Errors::FatalException, "#{activity.relative_path}: #{field} must not be empty"
           end
         end
         date = parse_date(activity.data["event_date"], "#{activity.relative_path}: event_date")
-        (today..today + 42).cover?(date)
+        date >= today
+      end
+      visible_activities = upcoming_activities.select do |activity|
+        parse_date(activity.data["event_date"], "#{activity.relative_path}: event_date") <= today + 42
       end
 
       grading_groups = schedule.fetch("groups", {}).values.select do |group|
@@ -38,15 +41,21 @@ module DatedContent
       board_entries = visible_activities.map do |activity|
         { "date" => activity.data["event_date"].to_s, "activity" => activity }
       end
+      upcoming_entries = upcoming_activities.map do |activity|
+        { "date" => activity.data["event_date"].to_s, "activity" => activity }
+      end
       grading_groups.each do |group|
         date = group.fetch("grading")["date"].to_s.strip
-        next if date.empty? || parse_date(date, "#{group['name']} grading.date") > today + 42
+        next if date.empty?
 
-        board_entries << { "date" => date, "grading_group" => group }
+        entry = { "date" => date, "grading_group" => group }
+        upcoming_entries << entry
+        board_entries << entry if parse_date(date, "#{group['name']} grading.date") <= today + 42
       end
 
       site.data["dated_content"] = {
         "board_entries" => board_entries.sort_by { |entry| entry["date"] },
+        "upcoming_entries" => upcoming_entries.sort_by { |entry| entry["date"] },
         "activities" => visible_activities.sort_by { |activity| activity.data["event_date"].to_s },
         "grading_groups" => grading_groups,
         "exceptions" => exceptions.sort_by { |exception| exception["date"].to_s }

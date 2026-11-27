@@ -1,5 +1,7 @@
 - title: Föreningen
   links:
+    - title: Kommande händelser
+      url: "/aktiviteter/"
     - title: Instruktörer
       url: "/foreningen/instruktorer/"
     - title: Ordningsregler
@@ -8,37 +10,6 @@
       url: "/foreningen/stadgar/"
     - title: Arkiv
       url: "/foreningen/arkiv/"
-      children:
-        - title: Tidigare graderingar
-          url: "/foreningen/arkiv/graderingar/"
-        - title: Äldre nyheter
-          url: "/foreningen/arkiv/nyheter/"
-        - title: Läger
-          url: "/foreningen/arkiv/lager/"
-          children:
-            - title: Alingsåslägret
-              url: "/foreningen/arkiv/lager/alingsaslagret/"
-              children:
-                - title: 2004
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2004/"
-                - title: 2005
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2005/"
-                - title: 2006
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2006/"
-                - title: 2007
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2007/"
-                - title: 2008
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2008/"
-                - title: 2010
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2010/"
-                - title: 2011
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2011/"
-                - title: 2012
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2012/"
-                - title: 2013
-                  url: "/foreningen/arkiv/lager/alingsaslagret/2013/"
-            - title: Kai out West
-              url: "/foreningen/arkiv/lager/kai-out-west/"
 - title: Träning & praktiskt
   links:
     - title: Barnträning

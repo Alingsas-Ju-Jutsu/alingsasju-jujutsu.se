@@ -111,6 +111,10 @@ content changes; preserve unrelated content and design.
   42 days ahead, sorted by event date, using Europe/Stockholm dates.
   Old activity pages remain published but leave the board. Do not invent
   activities or copy schedule values into them unless requested.
+- `/aktiviteter/` lists all upcoming activities and dated gradings, without
+  the homepage's 42-day limit. Activities can have an optional `images` list
+  with local `image` paths and descriptive `alt` text. Edit them once in
+  Pages CMS under Händelser och aktiviteter; both lists use the same source.
 - The homepage board also includes dated gradings from `_data/groups.yml`
   within the same 42-day window. Do not show a second grading section on the
   homepage. Schema keeps all upcoming grading times, including undated times.

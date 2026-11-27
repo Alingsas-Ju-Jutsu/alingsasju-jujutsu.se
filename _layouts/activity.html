@@ -3,6 +3,14 @@ layout: page
 ---
 <p class="activity-date">Händelsedatum: <time datetime="{{ page.event_date | escape }}">{{ page.event_date | escape }}</time></p>
 {{ content }}
+{% if page.images.size > 0 %}
+<div class="article-images">
+  {% for image in page.images %}
+    <img src="{{ image.image | relative_url | escape }}" alt="{{ image.alt | escape }}" loading="lazy">
+  {% endfor %}
+</div>
+{% endif %}
+<p><a href="{{ '/aktiviteter/' | relative_url }}">Alla kommande händelser</a></p>
 {% if site.data.dated_content.board_entries.size > 0 %}
 <p><a href="{{ '/#anslagstavla' | relative_url }}">Tillbaka till anslagstavlan</a></p>
 {% else %}

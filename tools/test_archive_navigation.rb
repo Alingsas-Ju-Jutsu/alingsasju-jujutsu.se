@@ -20,8 +20,7 @@ class ArchiveNavigationTest < Minitest::Test
       association = navigation.find { |group| group["title"] == "Föreningen" }
       archive = association.fetch("links").find { |link| link["title"] == "Arkiv" }
       assert_equal "/foreningen/arkiv/", archive.fetch("url")
-      assert_equal ["/foreningen/arkiv/graderingar/", "/foreningen/arkiv/nyheter/", "/foreningen/arkiv/lager/"],
-                   archive.fetch("children").map { |link| link["url"] }
+      refute archive.key?("children"), "Archive sections are reached through the overview, not a submenu"
       refute association["links"].any? { |link| %w[Graderingar Nyheter].include?(link["title"]) }
 
       check_links = lambda do |links|
@@ -61,6 +60,11 @@ class ArchiveNavigationTest < Minitest::Test
       assert_equal ["Föreningen", "Träning & praktiskt", "Om Ju-Jutsu"],
                    home.css(".site-nav > details > summary").map(&:text)
       assert_equal 1, home.css('.site-nav a[href="/foreningen/arkiv/"]').length
+      assert_empty home.css('.site-nav a[href="/foreningen/arkiv/"]').first.parent.css("details")
+      overview = Nokogiri::HTML(File.read(File.join(destination, "foreningen/arkiv/index.html")))
+      %w[graderingar nyheter lager].each do |section|
+        refute_nil overview.at_css(%(a[href="/foreningen/arkiv/#{section}/"])), section
+      end
       assert_empty home.css(".archive-notice")
       assert_empty Nokogiri::HTML(File.read(File.join(destination, "traning/schema/index.html"))).css(".archive-notice")
     end
