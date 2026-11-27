@@ -4,7 +4,7 @@
     <div class="section-heading">
       <h2 id="notice-board-title">Anslagstavla</h2>
       <p>Aktuellt och kommande händelser i klubben.</p>
-      <p><a href="{{ '/aktiviteter/' | relative_url }}">Alla kommande händelser</a></p>
+      <p><a href="{{ '/foreningen/handelser/' | relative_url }}">Alla kommande händelser</a></p>
     </div>
       <div class="notice-board__posts">
         {% for entry in site.data.dated_content.board_entries %}
@@ -18,11 +18,11 @@
             <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
             <h3>Avvikelse i träningsschemat</h3>
             <p>{{ entry.exception.reason | escape }}</p>
-            <p><a href="{{ '/traning/schema/' | relative_url }}">Se träningsschemat</a></p>
+            <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se träningsschemat</a></p>
             {% else %}
             <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
             {% include grading-time.html group=entry.grading_group show_date=false %}
-            <p><a href="{{ '/traning/schema/' | relative_url }}">Se träningsschemat</a>{% if entry.grading_group.type == "barn" %} · <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a>{% endif %}</p>
+            <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se träningsschemat</a>{% if entry.grading_group.type == "barn" %} · <a href="{{ '/traning-praktiskt/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a>{% endif %}</p>
             {% endif %}
           </article>
         {% endfor %}

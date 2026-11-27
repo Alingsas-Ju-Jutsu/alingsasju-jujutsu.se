@@ -1,7 +1,7 @@
 ---
 title: Träningsavgifter
 category: Träning & praktiskt
-permalink: "/traning/traningsavgifter/"
+permalink: "/traning-praktiskt/traningsavgifter/"
 source_date: '2026-11-03'
 source_id: '31'
 maintained_content: true

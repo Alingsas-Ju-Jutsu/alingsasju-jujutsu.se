@@ -1,8 +1,9 @@
 ---
 layout: page
 title: Grafik
+maintained_content: true
 category: Träning & praktiskt
-permalink: "/grafik/"
+permalink: "/traning-praktiskt/grafik/"
 description: Ladda ner affischer och logotyp för Alingsås Ju-Jutsuklubb i olika format och storlekar.
 ---
 

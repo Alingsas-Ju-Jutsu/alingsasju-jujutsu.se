@@ -1,7 +1,7 @@
 - title: Föreningen
   links:
     - title: Kommande händelser
-      url: "/aktiviteter/"
+      url: "/foreningen/handelser/"
     - title: Instruktörer
       url: "/foreningen/instruktorer/"
     - title: Ordningsregler
@@ -13,22 +13,22 @@
 - title: Träning & praktiskt
   links:
     - title: Barnträning
-      url: "/ju-jutsu/barntraning/"
+      url: "/traning-praktiskt/barntraning/"
     - title: Träningsavgifter
-      url: "/traning/traningsavgifter/"
+      url: "/traning-praktiskt/traningsavgifter/"
     - title: Dräkter
-      url: "/traning/drakter/"
+      url: "/traning-praktiskt/drakter/"
     - title: Schema
-      url: "/traning/schema/"
+      url: "/traning-praktiskt/schema/"
     - title: Grafik
-      url: "/grafik/"
+      url: "/traning-praktiskt/grafik/"
     - title: Kontakt
-      url: "/kontakt/"
+      url: "/traning-praktiskt/kontakt/"
 - title: Om Ju-Jutsu
   links:
     - title: Ju-Jutsu Kai
-      url: "/ju-jutsu/ju-jutsu-kai/"
+      url: "/om-ju-jutsu/ju-jutsu-kai/"
     - title: Graderingssystem för barn
-      url: "/ju-jutsu/graderingssystem-barn/"
+      url: "/om-ju-jutsu/graderingssystem-barn/"
     - title: Graderingssystem
-      url: "/ju-jutsu/graderingssystem/"
+      url: "/om-ju-jutsu/graderingssystem/"

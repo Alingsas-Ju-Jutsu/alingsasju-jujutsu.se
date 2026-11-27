@@ -15,7 +15,7 @@ permalink: pretty
 collections:
   activities:
     output: true
-    permalink: /aktiviteter/:name/
+    permalink: /foreningen/handelser/:name/
   club_pages:
     output: true
 

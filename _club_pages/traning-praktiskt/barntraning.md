@@ -1,5 +1,7 @@
 ---
 title: Barnträning
+permalink: "/traning-praktiskt/barntraning/"
+maintained_content: true
 description: Praktisk information för vårdnadshavare om barnträningen i Alingsås
   Ju-Jutsuklubb, grupper, engagemang och läger.
 ---
@@ -32,7 +34,7 @@ Vi uppskattar engagemang och välkomnar dig som vill bidra till klubben, men fö
 {% endif %}
 {% endfor %}
 
-[Se träningsschemat]({{ '/traning/schema/' | relative_url }}){: .button}
+[Se träningsschemat]({{ '/traning-praktiskt/schema/' | relative_url }}){: .button}
 
 ### Tävlingar och läger
 
@@ -43,4 +45,4 @@ Alingsås Ju-Jutsuklubb arrangerar inte tävlingar eller läger för barn, men v
 Om instruktörerna rekommenderar gradering betyder det att de känner sig trygga med att barnet klarar nästa gradering. Om de inte rekommenderar gradering beror det på att de ännu inte är säkra på det, eller på att barnet inte uppfyller något av minimikraven: att ha en gi, att terminsavgiften är betald samt att ha tränat tillräckligt länge och deltagit i tillräckligt många träningspass inför kommande gradering.
 
 Läs om bältesfärger, sho- och monsystemet samt kraven för gradering på sidan
-[Graderingssystem för barn]({{ '/ju-jutsu/graderingssystem-barn/' | relative_url }}).
+[Graderingssystem för barn]({{ '/om-ju-jutsu/graderingssystem-barn/' | relative_url }}).

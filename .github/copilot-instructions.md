@@ -79,6 +79,10 @@ content changes; preserve unrelated content and design.
 
 ## Content locations
 
+- Current pages follow the menu in `_club_pages/foreningen/`,
+  `_club_pages/traning-praktiskt/` and `_club_pages/om-ju-jutsu/`.
+  Home and Börja träna remain at the collection root. Preserve explicit
+  permalinks when moving or editing pages; source folders do not define URLs.
 - `index.md`: homepage text and YAML frontmatter. `_layouts/home.html` supplies
   the visual structure; do not copy that markup into the Markdown.
 - `_club_pages/**/*.md`: directly editable page bodies, including Markdown
@@ -111,7 +115,7 @@ content changes; preserve unrelated content and design.
   42 days ahead, sorted by event date, using Europe/Stockholm dates.
   Old activity pages remain published but leave the board. Do not invent
   activities or copy schedule values into them unless requested.
-- `/aktiviteter/` lists all upcoming activities and dated gradings, without
+- `/foreningen/handelser/` lists all upcoming activities and dated gradings, without
   the homepage's 42-day limit. Activities can have an optional `images` list
   with local `image` paths and descriptive `alt` text. Edit them once in
   Pages CMS under Kommande händelser; both lists use the same source.
@@ -157,7 +161,7 @@ content changes; preserve unrelated content and design.
 - Keep old news dated and historical events distinct from current schedules.
   Do not add visitor-facing scraping or migration notices.
 - Keep internal links local, using `relative_url`, for example
-  `[Träningsavgifter]({{ '/traning/traningsavgifter/' | relative_url }})`.
+  `[Träningsavgifter]({{ '/traning-praktiskt/traningsavgifter/' | relative_url }})`.
   Do not link back to old WordPress pages or hotlink their images.
 - Use descriptive image alt text. Do not create grading galleries without
   available photos. Do not restore the removed login page or pages listed in

@@ -1,13 +1,13 @@
 ---
 title: Graderingssystem för barn
 category: Om Ju-Jutsu
-permalink: "/ju-jutsu/graderingssystem-barn/"
+permalink: "/om-ju-jutsu/graderingssystem-barn/"
 maintained_content: true
 description: Läs om Ju-jutsu Kais sho- och monsystem för barn, bältesgrader,
   minimitider och kraven för gradering.
 ---
 
-[Läs om barnträningen och information för vårdnadshavare]({{ '/ju-jutsu/barntraning/' | relative_url }}).
+[Läs om barnträningen och information för vårdnadshavare]({{ '/traning-praktiskt/barntraning/' | relative_url }}).
 
 ## Bältesgrader
 

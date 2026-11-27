@@ -14,7 +14,7 @@ anmälan och arrangemang är historiska och kan inte användas som aktuell infor
 [Bilder och berättelser från tidigare graderingar]({{ '/foreningen/arkiv/graderingar/' | relative_url }}).
 
 För aktuella graderingstider, se [anslagstavlan på startsidan]({{ '/' | relative_url }})
-eller [Schema]({{ '/traning/schema/' | relative_url }}).
+eller [Schema]({{ '/traning-praktiskt/schema/' | relative_url }}).
 
 ## Äldre nyheter
 

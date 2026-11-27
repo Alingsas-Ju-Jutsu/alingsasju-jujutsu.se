@@ -16,6 +16,31 @@ class ArchiveNavigationTest < Minitest::Test
       ))
       Dir.chdir(root) { site.process }
       navigation = site.data.fetch("navigation")
+      folders = {
+        "Föreningen" => "foreningen",
+        "Träning & praktiskt" => "traning-praktiskt",
+        "Om Ju-Jutsu" => "om-ju-jutsu"
+      }
+      navigation.each do |group|
+        group.fetch("links").each do |link|
+          page = site.collections.fetch("club_pages").docs.find { |doc| doc.url == link["url"] }
+          refute_nil page, "Missing menu page: #{link['url']}"
+          assert page.relative_path.start_with?("_club_pages/#{folders.fetch(group['title'])}/"), page.relative_path
+          assert File.file?(page.destination(destination)), page.url
+        end
+      end
+      children = Nokogiri::HTML(File.read(File.join(destination, "traning-praktiskt/barntraning/index.html")))
+      assert_equal "Barnträning", children.at_css("h1").text
+      refute_nil children.at_css("#barngraderingar")
+      cms = YAML.load_file(File.join(root, ".pages.yml"), aliases: true)
+      page_group = cms.fetch("content").find { |entry| entry["name"] == "pages" }
+      assert_equal "group", page_group["type"]
+      page_group.fetch("items").each do |entry|
+        assert File.exist?(File.join(root, entry.fetch("path"))), entry["path"]
+        permalink = entry.fetch("fields").find { |field| field["name"] == "permalink" }
+        assert permalink["readonly"]
+        assert permalink["required"]
+      end
       refute_includes navigation.map { |group| group["title"] }, "Läger"
       association = navigation.find { |group| group["title"] == "Föreningen" }
       archive = association.fetch("links").find { |link| link["title"] == "Arkiv" }
@@ -66,7 +91,7 @@ class ArchiveNavigationTest < Minitest::Test
         refute_nil overview.at_css(%(a[href="/foreningen/arkiv/#{section}/"])), section
       end
       assert_empty home.css(".archive-notice")
-      assert_empty Nokogiri::HTML(File.read(File.join(destination, "traning/schema/index.html"))).css(".archive-notice")
+      assert_empty Nokogiri::HTML(File.read(File.join(destination, "traning-praktiskt/schema/index.html"))).css(".archive-notice")
     end
   end
 end

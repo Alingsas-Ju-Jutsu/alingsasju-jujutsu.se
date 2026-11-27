@@ -1,7 +1,8 @@
 ---
 title: Ju-Jutsu Kai
+maintained_content: true
 category: Om Ju-Jutsu
-permalink: "/ju-jutsu/ju-jutsu-kai/"
+permalink: "/om-ju-jutsu/ju-jutsu-kai/"
 source_date: '2026-11-03'
 source_id: '1674'
 description: Vad är Ju-jutsu Kai? Läs om självförsvar, träning och stilen som utövas

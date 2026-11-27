@@ -80,7 +80,7 @@ html_files.each do |file|
 end
 schedule_data = YAML.safe_load(File.read("_data/groups.yml"))
 expected_schedule = schedule_data.fetch("groups").values
-%w[_site/index.html _site/traning/schema/index.html _site/borja-trana/index.html].each do |file|
+%w[_site/index.html _site/traning-praktiskt/schema/index.html _site/borja-trana/index.html].each do |file|
   document = Nokogiri::HTML(File.read(file))
   groups = document.css(".training-schedule__group")
   errors << "Incorrect group count in #{file}" unless groups.size == expected_schedule.size
@@ -96,7 +96,7 @@ expected_schedule = schedule_data.fetch("groups").values
 end
 beginner = Nokogiri::HTML(File.read("_site/borja-trana/index.html")).at_css(".page-content__body")
 errors << "Beginner archive section still present" if beginner.at_css("details")
-errors << "Beginner page missing fee link" unless beginner.at_css('a[href="/traning/traningsavgifter/"]')
+errors << "Beginner page missing fee link" unless beginner.at_css('a[href="/traning-praktiskt/traningsavgifter/"]')
 errors << "Wave background still present" if File.read("_site/assets/css/main.css").include?("waves-inverted")
 manifest["assets"].each do |asset|
   local = Pathname.new("assets/archive/#{File.basename(asset['file'])}")

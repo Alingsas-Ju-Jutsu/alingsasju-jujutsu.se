@@ -1,7 +1,7 @@
 ---
 title: Graderingssystem
 category: Om Ju-Jutsu
-permalink: "/ju-jutsu/graderingssystem/"
+permalink: "/om-ju-jutsu/graderingssystem/"
 source_date: '2026-11-03'
 source_id: '272'
 maintained_content: true

@@ -158,7 +158,7 @@ class DatedContentTest < Minitest::Test
       end
       File.write(File.join(source, "_layouts/default.html"), "---\n---\n{{ content }}")
       FileUtils.cp(File.join(root, "_club_pages/index.md"), File.join(source, "index.md"))
-      FileUtils.cp(File.join(root, "_club_pages/handelser.md"), File.join(source, "handelser.md"))
+      FileUtils.cp(File.join(root, "_club_pages/foreningen/handelser.md"), File.join(source, "handelser.md"))
       File.write(File.join(source, "schema.html"), "---\n---\n{% include training-schedule.html show_grading=true %}")
       File.write(File.join(source, "borja.html"), "---\n---\n{% include training-schedule.html %}")
       entries = [
@@ -204,10 +204,10 @@ class DatedContentTest < Minitest::Test
         home = Nokogiri::HTML(File.read(File.join(source, "_site/index.html")))
         schema = Nokogiri::HTML(File.read(File.join(source, "_site/schema.html")))
         beginner = Nokogiri::HTML(File.read(File.join(source, "_site/borja.html")))
-        events = Nokogiri::HTML(File.read(File.join(source, "_site/aktiviteter/index.html")))
+        events = Nokogiri::HTML(File.read(File.join(source, "_site/foreningen/handelser/index.html")))
         if index.zero?
           assert_equal ["Today", "Current group – preliminär gradering", "Day 42", "Too far"], events.css(".event-summary h2").map(&:text)
-          assert_equal "/test/aktiviteter/activity-3-2027-01-09/", events.css(".event-summary h2 a").last["href"]
+          assert_equal "/test/foreningen/handelser/activity-3-2027-01-09/", events.css(".event-summary h2 a").last["href"]
         elsif index == 1
           assert_empty events.css(".event-summary")
           assert_includes events.text, "Det finns inga kommande händelser"
@@ -231,9 +231,9 @@ class DatedContentTest < Minitest::Test
           assert_operator home.to_html.index('id="anslagstavla"'), :<, home.to_html.index('class="training-schedule"')
           assert_equal ["Today", "Current group – preliminär graderingstid", "Avvikelse i träningsschemat", "Day 42"], home.css(".notice-board h3").map(&:text)
           assert_includes home.css(".notice-board").text, "Current exception"
-          assert_equal ["/test/aktiviteter/activity-1-2026-11-27/", "/test/aktiviteter/activity-2-2027-01-08/"],
+          assert_equal ["/test/foreningen/handelser/activity-1-2026-11-27/", "/test/foreningen/handelser/activity-2-2027-01-08/"],
                        home.css(".notice-board h3 a").map { |link| link["href"] }
-          assert_equal "/test/ju-jutsu/barntraning/#barngraderingar", home.at_css('.notice-board a[href*="barngraderingar"]')["href"]
+          assert_equal "/test/traning-praktiskt/barntraning/#barngraderingar", home.at_css('.notice-board a[href*="barngraderingar"]')["href"]
           assert_includes home.css(".notice-board").text, "14:00"
         elsif index == 1
           assert_empty home.css(".notice-board__post")
@@ -249,7 +249,7 @@ class DatedContentTest < Minitest::Test
 
         4.times do |activity_index|
           date = entries[activity_index].data["event_date"]
-          detail = Nokogiri::HTML(File.read(File.join(source, "_site/aktiviteter/activity-#{activity_index}-#{date}/index.html")))
+          detail = Nokogiri::HTML(File.read(File.join(source, "_site/foreningen/handelser/activity-#{activity_index}-#{date}/index.html")))
           assert_includes detail.text, "Full activity information."
           assert_equal 1, detail.css("h1").length
           if index.zero?
@@ -261,7 +261,7 @@ class DatedContentTest < Minitest::Test
           assert_equal 1, detail.css(".activity-date time").length
           assert_equal "/test/assets/images/example.jpg", detail.at_css(".article-images img")["src"]
           assert_equal "Träning på mattan", detail.at_css(".article-images img")["alt"]
-          refute_nil detail.at_css('a[href="/test/aktiviteter/"]')
+          refute_nil detail.at_css('a[href="/test/foreningen/handelser/"]')
         end
       end
       site.data["dated_content"]["board_entries"] = [
@@ -276,7 +276,7 @@ class DatedContentTest < Minitest::Test
       posts = html.css(".notice-board__post")
       assert_equal 2, posts.length
       assert_empty posts[0].css('a[href*="barngraderingar"]')
-      refute_nil posts[0].at_css('a[href="/test/traning/schema/"]')
+      refute_nil posts[0].at_css('a[href="/test/traning-praktiskt/schema/"]')
       assert_equal 1, posts[1].css('a[href*="barngraderingar"]').length
     end
   end

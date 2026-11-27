@@ -178,18 +178,45 @@ content:
 
   - name: pages
     label: Sidor
-    type: collection
-    path: _club_pages
-    format: yaml-frontmatter
-    subfolders: false
-    exclude: ["schema.md", "index.md", "grafik.md"]
-    view:
-      fields: [title]
-      primary: title
-    fields:
-      - { name: title, label: Rubrik, type: string, required: true }
-      - { name: description, label: Kort sammanfattning, type: text }
-      - { name: body, label: Text, type: rich-text }
+    type: group
+    items:
+      - name: association_pages
+        label: Föreningen
+        type: collection
+        path: _club_pages/foreningen
+        format: yaml-frontmatter
+        subfolders: false
+        fields: &page_fields
+          - { name: title, label: Rubrik, type: string, required: true }
+          - { name: description, label: Kort sammanfattning, type: text }
+          - { name: permalink, label: Webbadress, type: string, required: true, readonly: true, description: "Sidans fasta adress. Ska bevaras när innehållet redigeras." }
+          - { name: category, label: Menygrupp, type: string, hidden: true }
+          - { name: layout, label: Sidmall, type: string, hidden: true }
+          - { name: maintained_content, label: Redaktionellt innehåll, type: boolean, hidden: true, default: true }
+          - { name: source_id, label: Käll-ID, type: string, hidden: true }
+          - { name: source_date, label: Källdatum, type: string, hidden: true }
+          - { name: historical, label: Historiskt underlag, type: boolean, hidden: true }
+          - { name: body, label: Text, type: rich-text }
+      - name: training_pages
+        label: Träning & praktiskt
+        type: collection
+        path: _club_pages/traning-praktiskt
+        format: yaml-frontmatter
+        subfolders: false
+        fields: *page_fields
+      - name: jujutsu_pages
+        label: Om Ju-Jutsu
+        type: collection
+        path: _club_pages/om-ju-jutsu
+        format: yaml-frontmatter
+        subfolders: false
+        fields: *page_fields
+      - name: getting_started
+        label: Börja träna
+        type: file
+        path: _club_pages/borja-trana.md
+        format: yaml-frontmatter
+        fields: *page_fields
 
   - name: archive
     label: Arkiv – äldre innehåll

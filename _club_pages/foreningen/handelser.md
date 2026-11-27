@@ -1,7 +1,7 @@
 ---
 title: Kommande händelser
 description: Kommande händelser och graderingar hos Alingsås Ju-Jutsuklubb.
-permalink: "/aktiviteter/"
+permalink: "/foreningen/handelser/"
 category: Föreningen
 maintained_content: true
 ---

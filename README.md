@@ -168,7 +168,7 @@ Anslagstavlan visar datum, rubrik och sammanfattning och länkar till den egna
 sidan. Använd `event_date`, inte `date`: händelsedatumet är inte ett
 publiceringsdatum och framtida händelser ska gå att läsa redan nu.
 
-**Kommande händelser** på `/aktiviteter/` listar alla framtida händelser
+**Kommande händelser** på `/foreningen/handelser/` listar alla framtida händelser
 och daterade graderingar i datumordning, även längre än sex veckor framåt.
 Sidan nås från Föreningen i menyn. Varje händelse visas med datum, rubrik,
 sammanfattning och länk till hela texten. Samma händelse visas automatiskt
@@ -208,7 +208,7 @@ Vid varje bygge visas anslag vars händelsedatum är **från och med dagens
 datum till och med 42 dagar framåt**, enligt svensk tid. Närmast kommande
 händelse visas först. Anslag längre fram börjar visas när de hamnar inom
 sexveckorsgränsen. Händelsens egen sida publiceras så snart ändringen når
-`main` och finns kvar på `/aktiviteter/<filnamn>/` även när anslaget döljs.
+`main` och finns kvar på `/foreningen/handelser/<filnamn>/` även när anslaget döljs.
 För att ta bort sidan också, radera händelsen i CMS eller dess Markdown-fil.
 Anslagstavlan visar även daterade graderingstider från `_data/groups.yml`
 inom samma sexveckorsgräns, tillsammans med händelserna i datumordning.
@@ -264,7 +264,7 @@ Avgifterna på Träningsavgifter hämtas från `fees` i `_data/groups.yml`.
 Här anges terminsavgifter (inklusive vuxnas åldersintervall), familjerabatt,
 stödmedlemskap, graderingsavgifter och kostnad för ytterligare graderingspass.
 Betalningsuppgifter och betalningsvillkor finns kvar i
-`_club_pages/traningsavgifter.md`.
+`_club_pages/traning-praktiskt/traningsavgifter.md`.
 
 Schemat hämtar också ansvariga instruktörer från samma fil.
 Ange `groups: [children]` eller exempelvis `groups: [children, adults]`.
@@ -286,7 +286,7 @@ rensa då grafikens cache i GitHub Actions för att generera nya filer.
 Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
 Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
-På sidan [Grafik](/grafik/) finns förhandsvisningar och nedladdningslänkar
+På sidan [Grafik](/traning-praktiskt/grafik/) finns förhandsvisningar och nedladdningslänkar
 för båda formaten.
 
 Grafik konfigureras separat i [`_data/graphics.yml`](_data/graphics.yml) (som även kan redigeras via `.pages.yml`), under
@@ -358,11 +358,28 @@ textschemat uppdateras fortfarande med Jekylls vanliga omladdning.
 
 ## Redigera sidor
 
+Aktuella sidor är ordnade som menyn:
+
+- `_club_pages/foreningen/`: Föreningen.
+- `_club_pages/traning-praktiskt/`: Träning & praktiskt, inklusive Barnträning.
+- `_club_pages/om-ju-jutsu/`: Om Ju-Jutsu.
+- `_club_pages/archive/`: äldre innehåll, nås via Föreningen → Arkiv.
+
+Startsidan (`index.md`) och Börja träna (`borja-trana.md`) ligger kvar direkt
+i `_club_pages/`. CMS-gruppen **Sidor** har samma menyindelning.
+Adresserna följer också menygrupperna: `/foreningen/`,
+`/traning-praktiskt/` och `/om-ju-jutsu/`. Barnträning finns exempelvis på
+`/traning-praktiskt/barntraning/`, och Kommande händelser på
+`/foreningen/handelser/`. Äldre adresser omdirigeras inte.
+Sidornas `permalink` anger adressen uttryckligen oavsett källmapp.
+Webbadress och intern metadata finns med i CMS-konfigurationen så att de
+bevaras vid redigering; webbadressen visas skrivskyddad.
+
 ### Arkiv under Föreningen
 
 Menyn **Föreningen → Arkiv** samlar tidigare graderingar, äldre nyheter och
 hela lägeravdelningen, inklusive Alingsåslägrets årssidor och Kai out West.
-Arkivöversikten finns i `_club_pages/arkiv.md`. Äldre källfiler och deras
+Arkivöversikten finns i `_club_pages/foreningen/arkiv.md`. Äldre källfiler och deras
 artikelbilder ligger samlade i `_club_pages/archive/`. Arkivsidorna har
 adresser under `/foreningen/arkiv/`; tidigare adresser omdirigeras inte.
 Alla artiklar och bilder bevaras, och interna länkar pekar på arkivadresserna.

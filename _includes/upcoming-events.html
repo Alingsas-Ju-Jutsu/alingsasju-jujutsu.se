@@ -10,7 +10,7 @@
         <h2>{{ entry.grading_group.name | escape }} – {% if entry.grading_group.grading.is_preliminary %}preliminär {% endif %}gradering</h2>
         {% assign grading_time = entry.grading_group.grading.time | default: "" | strip %}
         <p>{% if grading_time != "" %}Kl. {{ grading_time | escape }}{% else %}Tid kommer snart.{% endif %}</p>
-        <p><a href="{{ '/traning/schema/' | relative_url }}">Se graderingstider i schemat</a></p>
+        <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se graderingstider i schemat</a></p>
       {% endif %}
 </article>
   {% endfor %}

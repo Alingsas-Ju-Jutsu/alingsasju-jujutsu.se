@@ -33,6 +33,12 @@ page_files.transform_values! do |name|
     "archive/alingsaslagret/#{name.delete_prefix('alingsaslagret-')}"
   elsif %w[graderingar kai-out-west].include?(name)
     "archive/#{name}"
+  elsif %w[instruktorer ordningsregler stadgar].include?(name)
+    "foreningen/#{name}"
+  elsif %w[barntraning traningsavgifter drakter schema kontakt].include?(name)
+    "traning-praktiskt/#{name}"
+  elsif %w[ju-jutsu-kai graderingssystem].include?(name)
+    "om-ju-jutsu/#{name}"
   else
     name
   end
