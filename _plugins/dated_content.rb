@@ -53,6 +53,13 @@ module DatedContent
         board_entries << entry if parse_date(date, "#{group['name']} grading.date") <= today + 42
       end
 
+      exceptions.each do |exception|
+        date = exception["date"].to_s
+        if parse_date(date, "exception.date") <= today + 28
+          board_entries << { "date" => date, "exception" => exception }
+        end
+      end
+
       site.data["dated_content"] = {
         "board_entries" => board_entries.sort_by { |entry| entry["date"] },
         "upcoming_entries" => upcoming_entries.sort_by { |entry| entry["date"] },

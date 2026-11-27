@@ -65,7 +65,7 @@ content:
         label: Avvikelser (gamla datum döljs vid nästa bygge)
         type: object
         list: true
-        description: "Varje avvikelse visas till och med sitt datum vid senaste bygget. Gamla datum döljs när webbplatsen byggs nästa gång, normalt varje måndag. Beskriv vilka grupper som berörs om det inte gäller alla."
+        description: "Varje avvikelse visas i schemat och även på startsidans anslagstavla när datumet är högst fyra veckor bort. Den visas till och med sitt datum vid senaste bygget. Gamla datum döljs vid nästa bygge, normalt varje måndag. Beskriv vilka grupper som berörs om det inte gäller alla."
         fields:
           - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD, t.ex. 2027-01-10." }
           - { name: reason, label: Orsak, type: string }

@@ -213,7 +213,10 @@ För att ta bort sidan också, radera händelsen i CMS eller dess Markdown-fil.
 Anslagstavlan visar även daterade graderingstider från `_data/groups.yml`
 inom samma sexveckorsgräns, tillsammans med händelserna i datumordning.
 Inga tider behöver skrivas in en gång till. Utan aktuella händelser eller
-graderingar döljs hela anslagstavlan, inklusive rubriken.
+graderingar eller schemaavvikelser inom respektive tidsgräns döljs hela
+anslagstavlan, inklusive rubriken. Schemaavvikelser från `_data/groups.yml`
+visas på anslagstavlan från och med dagens datum till och med **28 dagar
+framåt**. De ligger kvar även i det delade schemat utan fyraveckorsgränsen.
 Nyhetsartiklar läggs inte till automatiskt.
 
 GitHub Actions bygger och publicerar webbplatsen varje **måndag klockan

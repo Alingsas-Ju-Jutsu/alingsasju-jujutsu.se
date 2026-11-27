@@ -132,6 +132,17 @@ class DatedContentTest < Minitest::Test
       assert field["required"], field["name"]
       refute_empty field["description"], field["name"]
     end
+
+    def test_board_exceptions_include_today_and_day_28_but_not_past_or_day_29
+      exceptions = %w[2026-12-26 2026-11-26 2026-12-25 2026-11-27].map do |date|
+        { "date" => date, "reason" => "Ingen träning" }
+      end
+      result = generate(exceptions: exceptions)
+      assert_equal %w[2026-11-27 2026-12-25], result["board_entries"].map { |entry| entry["date"] }
+      assert result["board_entries"].all? { |entry| entry["exception"]["reason"] == "Ingen träning" }
+      assert_equal 3, result["exceptions"].length
+      assert_empty result["upcoming_entries"]
+    end
   end
 
   def test_real_templates_render_filtered_content_and_hide_empty_schedule_sections
@@ -216,7 +227,8 @@ class DatedContentTest < Minitest::Test
         refute_includes schema.css(".training-schedule__gradings").text, "Old group"
         if index.zero?
           assert_operator home.to_html.index('id="anslagstavla"'), :<, home.to_html.index('class="training-schedule"')
-          assert_equal ["Today", "Current group – preliminär graderingstid", "Day 42"], home.css(".notice-board h3").map(&:text)
+          assert_equal ["Today", "Current group – preliminär graderingstid", "Avvikelse i träningsschemat", "Day 42"], home.css(".notice-board h3").map(&:text)
+          assert_includes home.css(".notice-board").text, "Current exception"
           assert_equal ["/test/aktiviteter/activity-1-2026-11-27/", "/test/aktiviteter/activity-2-2027-01-08/"],
                        home.css(".notice-board h3 a").map { |link| link["href"] }
           assert_equal "/test/ju-jutsu/barntraning/#barngraderingar", home.at_css('.notice-board a[href*="barngraderingar"]')["href"]
@@ -228,8 +240,8 @@ class DatedContentTest < Minitest::Test
           refute_includes home.text, "Graderingstider"
           refute_includes home.text, "Avvikelser i träningsschemat"
         else
-          assert_equal ["Current group – preliminär graderingstid"], home.css(".notice-board h3").map(&:text)
-          assert_equal 1, home.css(".notice-board__post").length
+          assert_equal ["Current group – preliminär graderingstid", "Avvikelse i träningsschemat"], home.css(".notice-board h3").map(&:text)
+          assert_equal 2, home.css(".notice-board__post").length
         end
         next if index == 2
 

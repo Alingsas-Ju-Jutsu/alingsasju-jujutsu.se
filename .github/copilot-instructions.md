@@ -118,7 +118,9 @@ content changes; preserve unrelated content and design.
 - The homepage board also includes dated gradings from `_data/groups.yml`
   within the same 42-day window. Do not show a second grading section on the
   homepage. Schema keeps all upcoming grading times, including undated times.
-  Hide the entire board when neither activities nor gradings qualify.
+  Schedule exceptions also appear on the board from today through 28 days
+  ahead, using the shared schedule data. Hide the board only when no events,
+  gradings or exceptions qualify.
 - The site rebuilds every Monday at 03:17 UTC as well as on pushes to `main`.
   Expired information can remain until the next successful deployment.
   This does not schedule ordinary news publication or recurring time changes.
