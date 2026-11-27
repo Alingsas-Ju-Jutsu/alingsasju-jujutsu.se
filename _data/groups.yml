@@ -32,8 +32,8 @@ groups:
         start: "17.15"
         end: "18.15"
     grading:
-      date: 2026-12-19
-      time: "14:00"
+      date: "2026-12-19"
+      time: "13:00"
       is_preliminary: true
   children:
     name: Barn
@@ -47,7 +47,7 @@ groups:
         start: "18.30"
         end: "19.30"
     grading:
-      date: 2026-12-19
+      date: "2026-12-19"
       time: "15:00"
       is_preliminary: true
   adults:
@@ -62,4 +62,6 @@ groups:
         start: "19.45"
         end: "21.00"
     grading:
+      date: "2026-12-19"
+      time: "14:00"
       is_preliminary: true
