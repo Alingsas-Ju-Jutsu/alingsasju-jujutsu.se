@@ -1,0 +1,19 @@
+{% if site.data.dated_content.upcoming_entries.size > 0 %}
+  {% for entry in site.data.dated_content.upcoming_entries %}
+<article class="event-summary">
+      <p><time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time></p>
+      {% if entry.activity %}
+        <h2><a href="{{ entry.activity.url | relative_url }}">{{ entry.activity.title | escape }}</a></h2>
+        <p>{{ entry.activity.description | escape }}</p>
+        <p><a href="{{ entry.activity.url | relative_url }}">Läs mer<span class="visually-hidden"> om {{ entry.activity.title | escape }}</span></a></p>
+      {% else %}
+        <h2>{{ entry.grading_group.name | escape }} – {% if entry.grading_group.grading.is_preliminary %}preliminär {% endif %}gradering</h2>
+        {% assign grading_time = entry.grading_group.grading.time | default: "" | strip %}
+        <p>{% if grading_time != "" %}Kl. {{ grading_time | escape }}{% else %}Tid kommer snart.{% endif %}</p>
+        <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se graderingstider i schemat</a></p>
+      {% endif %}
+</article>
+  {% endfor %}
+{% else %}
+  <p>Det finns inga kommande händelser publicerade just nu.</p>
+{% endif %}

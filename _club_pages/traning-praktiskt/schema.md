@@ -1,0 +1,19 @@
+---
+title: Schema
+category: Träning & praktiskt
+permalink: "/traning-praktiskt/schema/"
+maintained_content: true
+source_id: '3065'
+description: Aktuella träningstider för knattar, barn och vuxna hos Alingsås Ju-Jutsuklubb.
+  Se terminsstart och avvikelser i träningsschemat.
+---
+
+
+## Aktuella träningstider
+
+{% include training-schedule.html show_grading=true %}
+
+
+## Ansvariga instruktörer
+
+{% include schedule-instructors.html %}

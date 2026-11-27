@@ -16,9 +16,9 @@ Ju-jutsu är en traditionell japansk självförsvarskonst med historiska rötter
 
 Är ditt barn nyfiket på ju-jutsu? Varmt välkommen att prova på hos oss! Barn får träna gratis vid tre tillfällen, för att få en bra grupp vill vi att man börjar sin träning i början av terminen. Ingen dräkt behövs för att prova på – vi rekommenderar lediga idrottskläder som är bekväma att röra sig i.
 
-Läs mer om träningen och informationen för vårdnadshavare på sidan [Barnträning](<{{ '/ju-jutsu/barntraning/' | relative_url }}>).
+Läs mer om träningen och informationen för vårdnadshavare på sidan [Barnträning](<{{ '/traning-praktiskt/barntraning/' | relative_url }}>).
 
-Har du frågor? Fråga gärna någon av instruktörerna på plats eller [kontakta oss](<{{ '/kontakt/' | relative_url }}>) innan ni kommer, så hjälper vi er.
+Har du frågor? Fråga gärna någon av instruktörerna på plats eller [kontakta oss](<{{ '/traning-praktiskt/kontakt/' | relative_url }}>) innan ni kommer, så hjälper vi er.
 
 ## För Vuxna
 
@@ -28,7 +28,7 @@ Nyfiken på att träna ju-jutsu? Det är bara att komma till ett av våra vuxenp
 
 {% include training-schedule.html %}
 
-Vill du börja träna? [Kontakta klubben](<{{ '/kontakt/' | relative_url }}>) så hjälper vi dig att hitta rätt grupp.
+Vill du börja träna? [Kontakta klubben](<{{ '/traning-praktiskt/kontakt/' | relative_url }}>) så hjälper vi dig att hitta rätt grupp.
 
 ## Här tränar vi
 
@@ -41,8 +41,8 @@ Tennisvägen 8
 ## Träningsavgifter
 
 Läs om terminsavgifter, familjerabatt och betalning på sidan
-[Träningsavgifter]({{ '/traning/traningsavgifter/' | relative_url }}).
+[Träningsavgifter]({{ '/traning-praktiskt/traningsavgifter/' | relative_url }}).
 
 ## Frågor om att börja träna?
 
-[Kontakta klubben](<{{ '/kontakt/' | relative_url }}>) så hjälper vi dig vidare.
+[Kontakta klubben](<{{ '/traning-praktiskt/kontakt/' | relative_url }}>) så hjälper vi dig vidare.

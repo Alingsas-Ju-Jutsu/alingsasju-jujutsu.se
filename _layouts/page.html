@@ -2,6 +2,9 @@
 layout: default
 ---
 {% assign article_section = page.path | split: "/" | slice: 1 | first %}
+{% if article_section == "archive" %}
+  {% assign article_section = page.path | split: "/" | slice: 2 | first %}
+{% endif %}
 {% assign is_article = false %}
 {% if article_section == "nyheter" or article_section == "graderingar" %}
   {% assign is_article = true %}
@@ -9,7 +12,7 @@ layout: default
 
 <section class="page-hero">
   <div class="page-hero__inner">
-    <p class="eyebrow">{% if is_article %}Nyheter{% else %}{{ page.category | default: "Alingsås Ju-Jutsuklubb" }}{% endif %}</p>
+    <p class="eyebrow">{% if page.archived %}Arkiv{% elsif is_article %}Nyheter{% else %}{{ page.category | default: "Alingsås Ju-Jutsuklubb" }}{% endif %}</p>
     <h1>{{ page.title }}</h1>
   </div>
 </section>
@@ -18,12 +21,24 @@ layout: default
   <nav class="breadcrumbs" aria-label="Brödsmulor">
     <a href="{{ '/' | relative_url }}">Startsida</a>
     <span aria-hidden="true">/</span>
+    {% if page.archived %}
+    <a href="{{ '/foreningen/arkiv/' | relative_url }}">Arkiv</a>
+    <span aria-hidden="true">/</span>
+    {% endif %}
     {% if is_article %}
+    {% if page.archived %}
+    <a href="{{ '/foreningen/arkiv/nyheter/' | relative_url }}">Äldre nyheter</a>
+    {% else %}
     <a href="{{ '/nyheter/' | relative_url }}">Nyheter</a>
+    {% endif %}
     <span aria-hidden="true">/</span>
     {% endif %}
     <span aria-current="page">{{ page.title }}</span>
   </nav>
+
+  {% if page.archived %}
+    <p class="archive-notice"><strong>Arkiverat innehåll.</strong> Den här sidan hör till klubbens historia. Uppgifter om datum, tider och arrangemang kan vara inaktuella. Se <a href="{{ '/' | relative_url }}">startsidan</a> för aktuell information.</p>
+  {% endif %}
 
   {% if is_article and page.date %}
     <p class="source-note">Publicerad {% include swedish-date.html date=page.date %}{% if page.author %} av {{ page.author | escape }}{% endif %}</p>

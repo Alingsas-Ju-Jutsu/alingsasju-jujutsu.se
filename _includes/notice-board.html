@@ -1,0 +1,37 @@
+{% if site.data.dated_content.board_entries.size > 0 %}
+<section class="notice-board" id="anslagstavla" aria-labelledby="notice-board-title">
+  <div class="notice-board__inner">
+    <div class="section-heading">
+      <h2 id="notice-board-title">Anslagstavla</h2>
+      <p>Aktuellt och kommande händelser i klubben.</p>
+      <p><a href="{{ '/foreningen/handelser/' | relative_url }}">Alla kommande händelser</a></p>
+    </div>
+      <div class="notice-board__posts">
+        {% for entry in site.data.dated_content.board_entries %}
+          <article class="notice-board__post">
+            {% if entry.activity %}
+            {% assign activity = entry.activity %}
+            <time datetime="{{ activity.event_date | escape }}">{{ activity.event_date | escape }}</time>
+            <h3><a href="{{ activity.url | relative_url }}">{{ activity.title | escape }}</a></h3>
+            <p>{{ activity.description | escape }}</p>
+            {% elsif entry.term_start %}
+            <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
+            <h3>Terminsstart</h3>
+            <p>Terminen startar {{ entry.date | escape }}. Se grupper och aktuella träningstider i schemat.</p>
+            <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se träningsschemat</a></p>
+            {% elsif entry.exception %}
+            <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
+            <h3>Avvikelse i träningsschemat</h3>
+            <p>{{ entry.exception.reason | escape }}</p>
+            <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se träningsschemat</a></p>
+            {% else %}
+            <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
+            {% include grading-time.html group=entry.grading_group show_date=false %}
+            <p><a href="{{ '/traning-praktiskt/schema/' | relative_url }}">Se träningsschemat</a>{% if entry.grading_group.type == "barn" %} · <a href="{{ '/traning-praktiskt/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a>{% endif %}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+  </div>
+</section>
+{% endif %}

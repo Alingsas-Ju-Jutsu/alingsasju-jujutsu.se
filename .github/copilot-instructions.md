@@ -43,7 +43,7 @@ content changes; preserve unrelated content and design.
 - Create one Markdown page in `_club_pages/nyheter/`, or
   `_club_pages/graderingar/` for grading news. New articles use their own
   `YYYY-MM-DD-slug/` folder containing one dated Markdown file and optional images;
-  copy `_mall.md` from the relevant section (news or grading).
+  copy `_templates/nyhet.md` or `_templates/gradering.md` as appropriate.
   The templates are excluded from publication. News without images is allowed;
   grading photo galleries require available photos. A text-only grading
   announcement is not a photo gallery.
@@ -66,9 +66,9 @@ content changes; preserve unrelated content and design.
   explicitly supplied for publication; never use external upload services or
   commit credentials. If an attachment cannot be retrieved, report that and
   request an accessible copy rather than silently dropping it.
-- The `/nyheter/` index automatically includes articles in both folders. For a
-  grading post, also add an appropriate local link to the Graderingar overview
-  when it belongs in that gallery list; keep `maintained_content: true` there.
+- The archived news index only lists articles in `_club_pages/archive/`.
+  New articles must not be added to archived overviews. New current overview
+  pages can be created separately when requested.
 - Do not add scheduling infrastructure or promise future automatic publication.
   For a future publication request, prepare a
   draft pull request and explain that a maintainer must merge it at the intended time.
@@ -79,6 +79,10 @@ content changes; preserve unrelated content and design.
 
 ## Content locations
 
+- Current pages follow the menu in `_club_pages/foreningen/`,
+  `_club_pages/traning-praktiskt/` and `_club_pages/om-ju-jutsu/`.
+  Home and Börja träna remain at the collection root. Preserve explicit
+  permalinks when moving or editing pages; source folders do not define URLs.
 - `index.md`: homepage text and YAML frontmatter. `_layouts/home.html` supplies
   the visual structure; do not copy that markup into the Markdown.
 - `_club_pages/**/*.md`: directly editable page bodies, including Markdown
@@ -86,15 +90,47 @@ content changes; preserve unrelated content and design.
   reuse Liquid includes for shared components.
 - `_club_pages/nyheter/`: news posts named `YYYY-MM-DD-title.md`.
 - `_club_pages/graderingar/`: grading posts with the same dated filename format.
-- `_club_pages/alingsaslagret/`: `index.md` for the camp overview and year files
+- `_club_pages/archive/alingsaslagret/`: `index.md` for the camp overview and year files
   such as `2004.md`. Preserve the Läger → Alingsåslägret → year navigation.
-- `_club_pages/nyheter.md`: the `/nyheter/` index. It automatically lists pages
-  in the news and grading folders; do not maintain a second manual list.
+- `_club_pages/archive/nyheter.md`: the `/foreningen/arkiv/nyheter/` index.
+  It automatically lists archived news and grading articles only.
 - `_data/navigation.yml`: shared menus.
+- Föreningen → Arkiv contains old grading galleries, news and all camp pages.
+  Historical source files live under `_club_pages/archive/`, and their URLs
+  under `/foreningen/arkiv/`. Preserve images and keep internal links updated.
+  The former source paths and URLs are free for future current pages.
+  `archived: true` adds the historical notice and archive breadcrumb;
+  folder defaults apply only to the archive.
+  Do not restore Läger as a top-level menu or old news as current information.
 - `_data/groups.yml`: the single source for training group names,
   ages, recurring sessions, term start and exceptions. Never duplicate current
   schedule values in page text. Keep dates and times quoted. Exceptions use
-  `YYYY-MM-DD` dates and a `reason`; they remain visible until explicitly removed.
+  `YYYY-MM-DD` dates and a `reason`. Past exceptions and dated grading times
+  are omitted at the next successful build, not hidden with JavaScript.
+- `_activities/*.md`: activity detail pages with `title`, `description`, quoted
+  ISO `event_date` and Markdown body. Use `slug-YYYY-MM-DD.md` filenames,
+  with the date last to avoid Jekyll's future-publication filtering.
+  Do not use `date` for the event date: Jekyll treats it as a publication date.
+  At build time, the homepage notice board links to events from today through
+  42 days ahead, sorted by event date, using Europe/Stockholm dates.
+  Old activity pages remain published but leave the board. Do not invent
+  activities or copy schedule values into them unless requested.
+- `/foreningen/handelser/` lists all upcoming activities and dated gradings, without
+  the homepage's 42-day limit. Activities can have an optional `images` list
+  with local `image` paths and descriptive `alt` text. Edit them once in
+  Pages CMS under Kommande händelser; both lists use the same source.
+- The homepage board also includes dated gradings from `_data/groups.yml`
+  within the same 42-day window. Do not show a second grading section on the
+  homepage. Schema keeps all upcoming grading times, including undated times.
+  Schedule exceptions also appear on the board from today through 28 days
+  ahead, using the shared schedule data. Hide the board only when no events,
+  gradings or exceptions qualify.
+- The site rebuilds every Monday at 03:17 UTC as well as on pushes to `main`.
+  Expired information can remain until the next successful deployment.
+  This does not schedule ordinary news publication or recurring time changes.
+- `term_start` has only a quoted ISO `date` (or an empty string when unknown).
+  Its fixed heading is Terminsstart. The shared start appears on the notice
+  board from 21 days before through 21 days after its date, inclusive.
 - `_layouts/`, `_includes/`, `assets/css/main.scss`: shared presentation.
   Change these only when the task needs a layout or component change.
 - `assets/`: local images and documents. Reuse existing assets where possible.
@@ -128,7 +164,7 @@ content changes; preserve unrelated content and design.
 - Keep old news dated and historical events distinct from current schedules.
   Do not add visitor-facing scraping or migration notices.
 - Keep internal links local, using `relative_url`, for example
-  `[Träningsavgifter]({{ '/traning/traningsavgifter/' | relative_url }})`.
+  `[Träningsavgifter]({{ '/traning-praktiskt/traningsavgifter/' | relative_url }})`.
   Do not link back to old WordPress pages or hotlink their images.
 - Use descriptive image alt text. Do not create grading galleries without
   available photos. Do not restore the removed login page or pages listed in

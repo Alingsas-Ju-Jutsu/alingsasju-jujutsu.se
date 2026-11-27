@@ -82,13 +82,19 @@ groups:
 
 ```yaml
 term_start:
-  title: Terminsstart
   date: "2027-01-10"
 ```
 
-Datumet visas som det är skrivet. Du kan också skriva exempelvis
-`"10 januari 2027"`. Behåll citattecknen. Med `date: ""` visas
-”Datum meddelas snart.”.
+Använd ett giltigt datum med årtal i formatet `"YYYY-MM-DD"`, eller välj
+datum i CMS. Startdatumet gäller alla grupper. Rubriken är alltid
+**Terminsstart** och ska inte anges i filen. Med `date: ""` visas
+”Datum meddelas snart.” i schemat, men inget terminsstartsanslag.
+
+Anslagstavlan visar terminsstarten från och med **21 dagar före till och
+med 21 dagar efter** startdatumet, enligt svensk tid vid senaste bygget.
+Anslaget länkar till det delade schemat med de aktuella träningstiderna.
+Veckobygget uppdaterar synligheten; ordinarie tider börjar däremot visas
+direkt när ändringen publiceras, inte först vid terminsstarten.
 
 ### Visa preliminär graderingstid
 
@@ -97,12 +103,15 @@ under sin `grading`-nyckel i [`_data/groups.yml`](_data/groups.yml). Fyll i
 `date` och `time` för den gruppen. `is_preliminary` är ett booleskt värde:
 `true` visar att tiden är preliminär och `false` visar en fastställd
 graderingstid. Skriv datum som `"YYYY-MM-DD"` och tiden inom citattecken.
-Graderingstiden döljs dagen efter datumet, enligt svensk tid, utan att
-YAML-filen behöver ändras eller webbplatsen byggas om. Detta kräver JavaScript
-och rätt inställd klocka hos besökaren. En tid utan datum döljs inte automatiskt.
+Graderingstiden döljs vid första lyckade bygget efter datumet, enligt svensk
+tid. Webbplatsen byggs automatiskt varje måndag och när ändringar publiceras.
+Gamla tider kan därför ligga kvar fram till nästa bygge. JavaScript behövs
+inte. En tid utan datum döljs inte automatiskt.
 När både datum och tid är tomma visas ingen graderingstid för gruppen.
 Rubriken ”Graderingstider” döljs när inga graderingstider återstår.
-Informationen visas på startsidan och sidan Schema, inte på Börja träna.
+Informationen visas på startsidans anslagstavla inom sex veckor före
+graderingen och på Schema utan sexveckorsgräns, inte på Börja träna.
+En graderingstid utan datum visas bara på Schema.
 
 Exempel på hur inställningarna är uppbyggda:
 
@@ -133,10 +142,10 @@ som berörs om avvikelsen inte gäller alla. Listan visas i datumordning under
 ”Avvikelser i träningsschemat”. Avvikelser är information till besökarna;
 de ändrar inte de återkommande träningstiderna automatiskt.
 
-Varje avvikelse döljs dagen efter sitt datum enligt svensk tid. Rubriken och
-listan döljs när inga avvikelser återstår. Detta kräver JavaScript och rätt
-inställd klocka hos besökaren; uppgifterna finns kvar i filen och visas utan
-JavaScript. Ta gärna bort gamla avvikelser ur filen när de inte längre behövs.
+Varje avvikelse döljs vid första lyckade bygget efter sitt datum enligt svensk
+tid. Rubriken och listan döljs när inga avvikelser återstår. Detta fungerar
+utan JavaScript; uppgifterna finns kvar i filen men tas inte med i den byggda
+sidan. Ta gärna bort gamla avvikelser ur filen när de inte längre behövs.
 För att ta bort hela avvikelselistan ersätter du den med:
 
 ```yaml
@@ -148,6 +157,93 @@ mellanslag, inte tabbar, och behåll samma indrag som i den befintliga filen.
 Sätt datum och tider inom citattecken. En framtida terminsstart eller avvikelse
 innebär inte tidsinställd publicering: allt du sparar till `main` publiceras
 vid nästa lyckade byggning.
+
+## Anslagstavla på startsidan
+
+Anslagstavlan visas direkt under startsidans huvudbild. Lägg till, redigera
+och ta bort händelser i **Kommande händelser** i Pages CMS om det
+är anslutet till kodförrådet, eller redigera Markdown-filer i
+[`_activities/`](_activities/). CMS-fälten har svenska hjälptexter.
+Redigeringen sker i GitHub eller Pages CMS, inte direkt på den publika webbplatsen.
+Spara ändringen via en gren och ett ändringsförslag till `main`; en ansvarig
+person granskar och slår ihop det för publicering.
+
+Varje händelse får en egen sida med rubrik (`title`), händelsedatum
+(`event_date`), kort sammanfattning (`description`) och en längre Markdown-text.
+Anslagstavlan visar datum, rubrik och sammanfattning och länkar till den egna
+sidan. Använd `event_date`, inte `date`: händelsedatumet är inte ett
+publiceringsdatum och framtida händelser ska gå att läsa redan nu.
+
+**Kommande händelser** på `/foreningen/handelser/` listar alla framtida händelser
+och daterade graderingar i datumordning, även längre än sex veckor framåt.
+Sidan nås från Föreningen i menyn. Varje händelse visas med datum, rubrik,
+sammanfattning och länk till hela texten. Samma händelse visas automatiskt
+på startsidans anslagstavla när den är högst sex veckor bort.
+Efter händelsedagen försvinner den från båda listorna vid nästa bygge,
+men detaljsidan finns kvar.
+
+I CMS kan du lägga till valfritt antal **Bilder** med bildbeskrivningar.
+Bilderna visas efter texten på händelsens egen sida, i vald ordning.
+Använd lokala bilder under `assets/images/` och publicera bara bilder som
+klubben får använda. I Markdown-filens metadata ser det ut så här:
+
+```yaml
+images:
+  - image: "/assets/images/händelse.jpg"
+    alt: "Beskrivning av vad bilden visar"
+```
+
+CMS namnger filerna som `rubrik-YYYY-MM-DD.md`. Låt datumet stå sist:
+Jekyll kan tolka ett datum först i filnamnet som ett framtida publiceringsdatum.
+Exempel på formatet i `_activities/exempel-2027-01-10.md`, inte en verklig
+klubbhändelse:
+
+```markdown
+---
+title: "Exempel på händelse"
+event_date: "2027-01-10"
+description: "En kort sammanfattning för anslagstavlan."
+---
+
+## Mer information
+
+Här skriver du den fullständiga informationen om händelsen.
+```
+
+Vid varje bygge visas anslag vars händelsedatum är **från och med dagens
+datum till och med 42 dagar framåt**, enligt svensk tid. Närmast kommande
+händelse visas först. Anslag längre fram börjar visas när de hamnar inom
+sexveckorsgränsen. Händelsens egen sida publiceras så snart ändringen når
+`main` och finns kvar på `/foreningen/handelser/<filnamn>/` även när anslaget döljs.
+För att ta bort sidan också, radera händelsen i CMS eller dess Markdown-fil.
+Anslagstavlan visar även daterade graderingstider från `_data/groups.yml`
+inom samma sexveckorsgräns, tillsammans med händelserna i datumordning.
+Inga tider behöver skrivas in en gång till. Utan aktuella händelser eller
+graderingar eller schemaavvikelser inom respektive tidsgräns döljs hela
+anslagstavlan, inklusive rubriken. Schemaavvikelser från `_data/groups.yml`
+visas på anslagstavlan från och med dagens datum till och med **28 dagar
+framåt**. De ligger kvar även i det delade schemat utan fyraveckorsgränsen.
+Nyhetsartiklar läggs inte till automatiskt.
+
+GitHub Actions bygger och publicerar webbplatsen varje **måndag klockan
+03.17 UTC** (04.17 svensk vintertid, 05.17 sommartid), vid ändringar på
+`main` och vid manuell start av publiceringsflödet. Schemalagda körningar
+kan försenas; informationen uppdateras efter nästa lyckade publicering.
+Ett passerat datum kan därför synas ungefär en vecka till. Detta gäller
+också graderingstider och schemaavvikelser. På Schema har graderingstiderna
+ingen sexveckorsgräns; schemaavvikelser har inte heller någon sådan gräns.
+Veckobygget ändrar inte återkommande träningstider och tidsstyr inte
+publiceringen av vanliga nyhetsartiklar.
+
+Datum för anslag, daterade graderingstider och avvikelser måste vara giltiga
+`YYYY-MM-DD`-datum. Felaktiga datum stoppar bygget med fil och fält angivna,
+så att felaktig information inte publiceras tyst.
+
+Kontrollera datumfiltrering och mallar med:
+
+```sh
+docker compose run --rm site bundle exec ruby tools/test_dated_content.rb
+```
 
 ## Uppdatera instruktörer
 
@@ -174,7 +270,7 @@ Avgifterna på Träningsavgifter hämtas från `fees` i `_data/groups.yml`.
 Här anges terminsavgifter (inklusive vuxnas åldersintervall), familjerabatt,
 stödmedlemskap, graderingsavgifter och kostnad för ytterligare graderingspass.
 Betalningsuppgifter och betalningsvillkor finns kvar i
-`_club_pages/traningsavgifter.md`.
+`_club_pages/traning-praktiskt/traningsavgifter.md`.
 
 Schemat hämtar också ansvariga instruktörer från samma fil.
 Ange `groups: [children]` eller exempelvis `groups: [children, adults]`.
@@ -196,7 +292,7 @@ rensa då grafikens cache i GitHub Actions för att generera nya filer.
 Affischen innehåller terminsstart, grupper, åldrar och ordinarie träningstider.
 Lov och andra avvikelser visas bara i webbplatsens textschema, inte på affischen.
 Ändra YAML-filen som vanligt; ingen bild behöver redigeras manuellt.
-På sidan [Grafik](/grafik/) finns förhandsvisningar och nedladdningslänkar
+På sidan [Grafik](/traning-praktiskt/grafik/) finns förhandsvisningar och nedladdningslänkar
 för båda formaten.
 
 Grafik konfigureras separat i [`_data/graphics.yml`](_data/graphics.yml) (som även kan redigeras via `.pages.yml`), under
@@ -268,6 +364,50 @@ textschemat uppdateras fortfarande med Jekylls vanliga omladdning.
 
 ## Redigera sidor
 
+Aktuella sidor är ordnade som menyn:
+
+- `_club_pages/foreningen/`: Föreningen.
+- `_club_pages/traning-praktiskt/`: Träning & praktiskt, inklusive Barnträning.
+- `_club_pages/om-ju-jutsu/`: Om Ju-Jutsu.
+- `_club_pages/archive/`: äldre innehåll, nås via Föreningen → Arkiv.
+
+Startsidan (`index.md`) och Börja träna (`borja-trana.md`) ligger kvar direkt
+i `_club_pages/`. CMS-gruppen **Sidor** har samma menyindelning.
+Adresserna följer också menygrupperna: `/foreningen/`,
+`/traning-praktiskt/` och `/om-ju-jutsu/`. Barnträning finns exempelvis på
+`/traning-praktiskt/barntraning/`, och Kommande händelser på
+`/foreningen/handelser/`. Äldre adresser omdirigeras inte.
+Sidornas `permalink` anger adressen uttryckligen oavsett källmapp.
+Webbadress och intern metadata finns med i CMS-konfigurationen så att de
+bevaras vid redigering; webbadressen visas skrivskyddad.
+
+### Arkiv under Föreningen
+
+Menyn **Föreningen → Arkiv** samlar tidigare graderingar, äldre nyheter och
+hela lägeravdelningen, inklusive Alingsåslägrets årssidor och Kai out West.
+Arkivöversikten finns i `_club_pages/foreningen/arkiv.md`. Äldre källfiler och deras
+artikelbilder ligger samlade i `_club_pages/archive/`. Arkivsidorna har
+adresser under `/foreningen/arkiv/`; tidigare adresser omdirigeras inte.
+Alla artiklar och bilder bevaras, och interna länkar pekar på arkivadresserna.
+Läger är inte längre en egen huvudmeny.
+Arkiv är en vanlig menylänk utan undermeny. Dess avdelningar nås via
+arkivöversikten, och lägerår nås via Alingsåslägrets sida.
+Arkivsidorna visar en tydlig historikmarkering och en länk tillbaka till Arkiv.
+Markeringen styrs av `archived: true` i sidans metadata eller av mappreglerna
+i `_config.yml`. Aktuella graderingstider hämtas fortfarande från schemat
+och visas på anslagstavlan och Schema, inte i graderingsarkivet.
+
+I CMS finns det äldre materialet under **Arkiv – äldre innehåll**.
+De gamla mapparna `_club_pages/nyheter/` och `_club_pages/graderingar/`
+är borttagna och kan skapas igen för nya artiklar vid behov.
+Artikelmallarna finns separat under `_templates/`. Även de tidigare
+översiktsfilerna och adresserna `/nyheter/`, `/foreningen/graderingar/` och
+`/lager/` är lediga för framtida sidor. Nya översiktssidor skapas vid behov;
+de äldre visas bara via Arkiv.
+
+Kontrollera arkivmenyn, interna länkar och historikmarkeringarna med
+`docker compose run --rm site bundle exec ruby tools/test_archive_navigation.rb`.
+
 GitHub Copilot-agenter följer
 [`.github/copilot-instructions.md`](.github/copilot-instructions.md) för
 gemensamma redigeringsregler i kodförrådet. Lägg bestående riktlinjer där.
@@ -290,12 +430,12 @@ skrivs i Markdown, inte i separata HTML-innehållsfiler. Behåll YAML-metadata
 Nyhetsartiklar finns i `_club_pages/nyheter/` och graderingsinlägg i
 `_club_pages/graderingar/`. Varje artikel har en egen `YYYY-MM-DD-title/`-mapp
 med en daterad Markdown-fil och eventuella bilder, baserade på
-publiceringsdatumet. Även äldre nyheter och graderingar använder denna struktur.
-Deras `permalink`-värden behåller befintliga
-offentliga URL:er oförändrade. Nyhets- och dokumentöversikten är `nyheter.md`
-och nås på `/nyheter/`. Alingsåslägrets sidor samlas i
-`_club_pages/alingsaslagret/`, med `index.md` för översikten och årsfiler
-som `2004.md`.
+publiceringsdatumet. Äldre artiklar har samma struktur under
+`_club_pages/archive/nyheter/` och `_club_pages/archive/graderingar/`.
+Arkivets nyhets- och dokumentöversikt är `_club_pages/archive/nyheter.md`
+på `/foreningen/arkiv/nyheter/`. Alingsåslägrets sidor samlas i
+`_club_pages/archive/alingsaslagret/`, med `index.md` för översikten och
+årsfiler som `2004.md`.
 
 ### Ny artikel med bilder i samma mapp
 
@@ -307,8 +447,8 @@ Inte heller `category` eller `maintained_content` behövs i dessa artiklar;
 nyhetskategorin hämtas från mappstrukturen.
 
 Kopiera mallen i rätt avdelning till en egen mapp:
-[`_club_pages/nyheter/_mall.md`](_club_pages/nyheter/_mall.md) eller
-[`_club_pages/graderingar/_mall.md`](_club_pages/graderingar/_mall.md).
+[`_templates/nyhet.md`](_templates/nyhet.md) eller
+[`_templates/gradering.md`](_templates/gradering.md).
 Byt namn på kopian till artikelns daterade filnamn:
 
 ```text
@@ -324,10 +464,9 @@ mapp. Fyll i rubrik, beskrivning och publiceringsdatum, samt valfri `author`.
 Adressen blir automatiskt `/nyheter/<mappnamn>/` för båda artikeltyperna.
 `permalink` är en valfri möjlighet att ange en egen adress, men utelämnas
 i våra nyhets- och graderingsartiklar samt mallarna för att undvika förvirring.
-Även äldre artiklar använder mappbaserade adresser;
-gamla `/arkiv/`-adresser omdirigeras inte. Interna länkar är uppdaterade.
-Artiklar i båda mapparna visas automatiskt på Nyheter.
-Lägg även en lokal länk på Graderingar om inlägget ska ingå i dess gallerilista.
+Arkiverade artiklar använder i stället `/foreningen/arkiv/nyheter/<mappnamn>/`.
+Arkivets nyhetsindex listar bara artiklar från arkivmapparna. Nya artiklar
+publiceras inte i arkivlistan; en ny nyhetsöversikt kan skapas separat.
 
 Bilder är valfria. Lägg JPG-, PNG- eller WebP-filer direkt i artikelns mapp
 så visas alla bilder automatiskt längst ned i artikeln, i filnamnsordning.

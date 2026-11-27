@@ -3,6 +3,52 @@ media:
   output: /assets/images
 
 content:
+  - name: activities
+    label: Kommande händelser
+    type: collection
+    path: _activities
+    format: yaml-frontmatter
+    subfolders: false
+    exclude: [".gitkeep"]
+    filename: "{primary}-{fields.event_date}.md"
+    view:
+      fields: [title, event_date]
+      primary: title
+      sort: [event_date]
+      default:
+        sort: event_date
+        order: asc
+    fields:
+      - name: title
+        label: Rubrik
+        type: string
+        required: true
+        description: "En kort och tydlig rubrik. Visas i Kommande händelser, på startsidans anslagstavla och överst på händelsens egen sida."
+      - name: event_date
+        label: Händelsedatum
+        type: date
+        required: true
+        options: { format: yyyy-MM-dd }
+        description: "Dagen händelsen äger rum, inte dagen du skriver inlägget. Alla framtida händelser listas på Kommande händelser. Startsidan visar bara de närmaste sex veckorna. Efter händelsedagen försvinner inlägget från listorna vid nästa bygge. Webbplatsen uppdateras varje måndag och vid publicering."
+      - name: description
+        label: Kort sammanfattning
+        type: text
+        required: true
+        description: "En eller två meningar för anslagstavlan och sökresultat. Besökaren klickar på rubriken för att läsa händelsens egen sida."
+      - name: body
+        label: Mer information
+        type: rich-text
+        required: true
+        description: "Den fullständiga texten på händelsens egen sida, till exempel tid, plats och hur man anmäler sig. Använd underrubriker (rubriknivå 2), listor och länkar vid behov. Sidan finns kvar när anslaget har försvunnit. Radera händelsen om även sidan ska tas bort."
+      - name: images
+        label: Bilder (valfritt)
+        type: object
+        list: true
+        description: "Lägg till en eller flera bilder. De visas efter texten på händelsens egen sida, i den ordning du väljer här."
+        fields:
+          - { name: image, label: Bild, type: image, required: true, description: "Ladda upp eller välj en bild som klubben får publicera." }
+          - { name: alt, label: Bildbeskrivning, type: string, required: true, description: "Beskriv kort vad bilden visar. Texten används av skärmläsare och när bilden inte kan visas." }
+
   - name: schedule
     label: Träningstider och avgifter
     type: file
@@ -12,15 +58,16 @@ content:
       - name: term_start
         label: Terminsstart
         type: object
+        description: "Gemensam terminsstart för alla grupper. Visas på anslagstavlan från tre veckor före till tre veckor efter datumet, vid senaste bygget."
         fields:
-          - { name: title, label: Rubrik, type: string }
-          - { name: date, label: Datum (text, t.ex. "1 januari"), type: string }
+          - { name: date, label: Startdatum, type: date, options: { format: yyyy-MM-dd }, description: "Ange datum med årtal. Lämna tomt om terminsstarten inte är bestämd. Rubriken är alltid Terminsstart. Ordinarie träningstider publiceras direkt vid sammanslagning, inte först vid startdatumet." }
       - name: exceptions
-        label: Avvikelser (visas tills de tas bort)
+        label: Avvikelser (gamla datum döljs vid nästa bygge)
         type: object
         list: true
+        description: "Varje avvikelse visas i schemat och även på startsidans anslagstavla när datumet är högst fyra veckor bort. Den visas till och med sitt datum vid senaste bygget. Gamla datum döljs vid nästa bygge, normalt varje måndag. Beskriv vilka grupper som berörs om det inte gäller alla."
         fields:
-          - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
+          - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD, t.ex. 2027-01-10." }
           - { name: reason, label: Orsak, type: string }
       - name: fees
         label: Avgifter
@@ -76,10 +123,11 @@ content:
               - name: grading
                 label: Gradering
                 type: object
+                description: "Graderingstiden visas på startsidans anslagstavla från sex veckor före datumet och på Schema utan sexveckorsgräns. Ett passerat datum döljs vid nästa bygge, normalt varje måndag. En tid utan datum visas bara på Schema. Lämna båda tomma för att inte visa någon graderingstid."
                 fields:
-                  - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
-                  - { name: time, label: Tid, type: string, description: "Format 10:00" }
-                  - { name: is_preliminary, label: Preliminärt, type: boolean }
+                  - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD. En tid utan datum döljs inte automatiskt." }
+                  - { name: time, label: Tid, type: string, description: "Format 14:00. Om bara datum fylls i visas att tiden kommer snart." }
+                  - { name: is_preliminary, label: Preliminärt, type: boolean, description: "Markera om datumet eller tiden ännu inte är fastställd." }
           - name: children
             label: Barn
             type: object
@@ -95,7 +143,6 @@ content:
     path: _club_pages/nyheter
     format: yaml-frontmatter
     subfolders: true
-    exclude: ["_mall.md"]
     filename: "{primary}/{primary}.md"
     view:
       fields: [title, date]
@@ -120,7 +167,6 @@ content:
     path: _club_pages/graderingar
     format: yaml-frontmatter
     subfolders: true
-    exclude: ["_mall.md"]
     view:
       fields: [title, date]
       primary: title
@@ -132,18 +178,78 @@ content:
 
   - name: pages
     label: Sidor
-    type: collection
-    path: _club_pages
-    format: yaml-frontmatter
-    subfolders: false
-    exclude: ["nyheter.md", "graderingar.md", "schema.md", "lager.md", "index.md", "grafik.md"]
-    view:
-      fields: [title]
-      primary: title
-    fields:
-      - { name: title, label: Rubrik, type: string, required: true }
-      - { name: description, label: Kort sammanfattning, type: text }
-      - { name: body, label: Text, type: rich-text }
+    type: group
+    items:
+      - name: association_pages
+        label: Föreningen
+        type: collection
+        path: _club_pages/foreningen
+        format: yaml-frontmatter
+        subfolders: false
+        fields: &page_fields
+          - { name: title, label: Rubrik, type: string, required: true }
+          - { name: description, label: Kort sammanfattning, type: text }
+          - { name: permalink, label: Webbadress, type: string, required: true, readonly: true, description: "Sidans fasta adress. Ska bevaras när innehållet redigeras." }
+          - { name: category, label: Menygrupp, type: string, hidden: true }
+          - { name: layout, label: Sidmall, type: string, hidden: true }
+          - { name: maintained_content, label: Redaktionellt innehåll, type: boolean, hidden: true, default: true }
+          - { name: source_id, label: Käll-ID, type: string, hidden: true }
+          - { name: source_date, label: Källdatum, type: string, hidden: true }
+          - { name: historical, label: Historiskt underlag, type: boolean, hidden: true }
+          - { name: body, label: Text, type: rich-text }
+      - name: training_pages
+        label: Träning & praktiskt
+        type: collection
+        path: _club_pages/traning-praktiskt
+        format: yaml-frontmatter
+        subfolders: false
+        fields: *page_fields
+      - name: jujutsu_pages
+        label: Om Ju-Jutsu
+        type: collection
+        path: _club_pages/om-ju-jutsu
+        format: yaml-frontmatter
+        subfolders: false
+        fields: *page_fields
+      - name: getting_started
+        label: Börja träna
+        type: file
+        path: _club_pages/borja-trana.md
+        format: yaml-frontmatter
+        fields: *page_fields
+
+  - name: archive
+    label: Arkiv – äldre innehåll
+    type: group
+    items:
+      - name: archived_news
+        label: Arkiverade nyheter
+        type: collection
+        path: _club_pages/archive/nyheter
+        format: yaml-frontmatter
+        subfolders: true
+        operations: { create: false }
+        fields: *article_fields
+      - name: archived_gradings
+        label: Arkiverade graderingar
+        type: collection
+        path: _club_pages/archive/graderingar
+        format: yaml-frontmatter
+        subfolders: true
+        operations: { create: false }
+        fields: *article_fields
+      - name: archived_pages
+        label: Arkivöversikter och läger
+        type: collection
+        path: _club_pages/archive
+        format: yaml-frontmatter
+        subfolders: true
+        exclude: ["nyheter/**", "graderingar/**"]
+        operations: { create: false }
+        fields:
+          - { name: title, label: Rubrik, type: string, required: true }
+          - { name: description, label: Kort sammanfattning, type: text }
+          - { name: body, label: Text, type: rich-text, description: "Historiskt innehåll. Nya händelser läggs till under Kommande händelser." }
 
   - name: instructors
     label: Instruktörer

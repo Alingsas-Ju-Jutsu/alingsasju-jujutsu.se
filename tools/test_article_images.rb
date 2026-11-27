@@ -16,8 +16,10 @@ class ArticleImagesIntegrationTest < Minitest::Test
       FileUtils.mkdir_p(File.join(source, "_layouts"))
       File.write(File.join(source, "_layouts/test.html"),
                  "---\n---\n{{ content }}{% include article-images.html %}")
-      %w[nyheter graderingar].each do |section|
-        folder = File.join(source, "_club_pages", section, "2026-11-12-#{section}-test")
+      sections = %w[nyheter graderingar archive/nyheter archive/graderingar]
+      sections.each do |section|
+        slug = section.tr("/", "-")
+        folder = File.join(source, "_club_pages", section, "2026-11-12-#{slug}-test")
         FileUtils.mkdir_p(folder)
         File.write(File.join(folder, "2026-11-12-test.md"), <<~MARKDOWN)
           ---
@@ -48,12 +50,15 @@ class ArticleImagesIntegrationTest < Minitest::Test
       assert site.layouts.key?("test"), site.layouts.keys.inspect
       assert_equal "test", site.collections["club_pages"].docs.first.data["layout"]
       refute_empty site.collections["club_pages"].docs.find { |d| d.data["title"] == "Test" }.data["article_images"]
-      %w[nyheter graderingar].each do |section|
-        output_folder = File.join(destination, "nyheter", "2026-11-12-#{section}-test")
+      sections.each do |section|
+        slug = section.tr("/", "-")
+        prefix = section.start_with?("archive/") ? "foreningen/arkiv/nyheter" : "nyheter"
+        article_url = "/#{prefix}/2026-11-12-#{slug}-test"
+        output_folder = File.join(destination, article_url)
         assert File.file?(File.join(output_folder, "photo.jpg"))
         html = Nokogiri::HTML(File.read(File.join(output_folder, "index.html")))
         refute_nil html.at_css("img"), html.to_html
-        assert_equal "/test/nyheter/2026-11-12-#{section}-test/photo.jpg", html.at_css("img")["src"]
+        assert_equal "/test#{article_url}/photo.jpg", html.at_css("img")["src"]
         assert_equal "Gruppbild efter graderingen", html.at_css("img")["alt"]
         assert_equal 1, html.css("img").length
         assert_operator html.to_html.index("Artikeltext."), :<, html.to_html.index("<img")
@@ -64,7 +69,7 @@ class ArticleImagesIntegrationTest < Minitest::Test
               assert image.size == (1600, 1200), image.size
         PYTHON
         assert success
-        original = File.join(source, "_club_pages", section, "2026-11-12-#{section}-test", "photo.jpg")
+        original = File.join(source, "_club_pages", section, "2026-11-12-#{slug}-test", "photo.jpg")
         assert system("python3", "-c",
                       "from PIL import Image; import sys; assert Image.open(sys.argv[1]).size == (3200,2400)",
                       original)
@@ -72,7 +77,7 @@ class ArticleImagesIntegrationTest < Minitest::Test
       assert File.file?(File.join(destination, "nyheter/text/index.html"))
       text_html = File.read(File.join(destination, "nyheter/text/index.html"))
       refute_includes text_html, "article-images"
-      assert_equal 2, Dir.glob(File.join(destination, "**/*.jpg")).length
+      assert_equal 4, Dir.glob(File.join(destination, "**/*.jpg")).length
     end
   end
 end

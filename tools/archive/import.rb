@@ -28,9 +28,17 @@ page_files = {
 }
 page_files.transform_values! do |name|
   if name == "alingsaslagret"
-    "alingsaslagret/index"
+    "archive/alingsaslagret/index"
   elsif name.start_with?("alingsaslagret-")
-    "alingsaslagret/#{name.delete_prefix('alingsaslagret-')}"
+    "archive/alingsaslagret/#{name.delete_prefix('alingsaslagret-')}"
+  elsif %w[graderingar kai-out-west].include?(name)
+    "archive/#{name}"
+  elsif %w[instruktorer ordningsregler stadgar].include?(name)
+    "foreningen/#{name}"
+  elsif %w[barntraning traningsavgifter drakter schema kontakt].include?(name)
+    "traning-praktiskt/#{name}"
+  elsif %w[ju-jutsu-kai graderingssystem].include?(name)
+    "om-ju-jutsu/#{name}"
   else
     name
   end
@@ -93,6 +101,7 @@ source_pages.each do |source|
   id = source["url"][/[?&](?:page_id|p)=(\d+)/, 1]
   # Articles now use folder-based URLs and are maintained outside the legacy import.
   next unless page_files.key?(id)
+  next if page_files[id].start_with?("archive/")
   next if excluded.include?(id)
   next if processed[id]
   processed[id] = true
