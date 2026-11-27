@@ -3,4 +3,8 @@ layout: page
 ---
 <p class="activity-date">Händelsedatum: <time datetime="{{ page.event_date | escape }}">{{ page.event_date | escape }}</time></p>
 {{ content }}
+{% if site.data.dated_content.activities.size > 0 %}
 <p><a href="{{ '/#anslagstavla' | relative_url }}">Tillbaka till anslagstavlan</a></p>
+{% else %}
+<p><a href="{{ '/' | relative_url }}">Tillbaka till startsidan</a></p>
+{% endif %}

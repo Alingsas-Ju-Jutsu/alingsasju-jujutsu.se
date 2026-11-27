@@ -169,8 +169,7 @@ class DatedContentTest < Minitest::Test
         home = Nokogiri::HTML(File.read(File.join(source, "_site/index.html")))
         schema = Nokogiri::HTML(File.read(File.join(source, "_site/schema.html")))
         beginner = Nokogiri::HTML(File.read(File.join(source, "_site/borja.html")))
-        assert_equal 1, home.css("#anslagstavla").length
-        assert_operator home.to_html.index('id="anslagstavla"'), :<, home.to_html.index('class="training-schedule"')
+        assert_equal 1 - index, home.css("#anslagstavla").length
         assert_empty home.css(".notice-board script")
         assert_empty home.css("[data-grading-date], [data-exception-date]")
         assert_empty beginner.css(".training-schedule__gradings")
@@ -185,6 +184,7 @@ class DatedContentTest < Minitest::Test
           refute_includes html.css(".training-schedule__gradings").text, "Old group"
         end
         if index.zero?
+          assert_operator home.to_html.index('id="anslagstavla"'), :<, home.to_html.index('class="training-schedule"')
           assert_equal ["Today", "Day 42"], home.css(".notice-board h3").map(&:text)
           assert_equal ["/test/aktiviteter/activity-1-2026-11-27/", "/test/aktiviteter/activity-2-2027-01-08/"],
                        home.css(".notice-board h3 a").map { |link| link["href"] }
@@ -192,7 +192,8 @@ class DatedContentTest < Minitest::Test
           assert_includes home.css(".training-schedule__grading").text, "preliminär"
         else
           assert_empty home.css(".notice-board__post")
-          assert_includes home.text, "Det finns inga aktuella anslag just nu."
+          assert_empty home.css(".notice-board")
+          refute_includes home.text, "Anslagstavla"
           refute_includes home.text, "Graderingstider"
           refute_includes home.text, "Avvikelser i träningsschemat"
         end
@@ -201,7 +202,12 @@ class DatedContentTest < Minitest::Test
           detail = Nokogiri::HTML(File.read(File.join(source, "_site/aktiviteter/activity-#{activity_index}-#{date}/index.html")))
           assert_includes detail.text, "Full activity information."
           assert_equal 1, detail.css("h1").length
-          assert_equal "/test/#anslagstavla", detail.at_css('a[href$="#anslagstavla"]')["href"]
+          if index.zero?
+            assert_equal "/test/#anslagstavla", detail.at_css('a[href$="#anslagstavla"]')["href"]
+          else
+            assert_empty detail.css('a[href$="#anslagstavla"]')
+            refute_nil detail.at_css('a[href="/test/"]')
+          end
           assert_equal 1, detail.css(".activity-date time").length
         end
       end

@@ -189,7 +189,7 @@ händelse visas först. Anslag längre fram börjar visas när de hamnar inom
 sexveckorsgränsen. Aktivitetens egen sida publiceras så snart ändringen når
 `main` och finns kvar på `/aktiviteter/<filnamn>/` även när anslaget döljs.
 För att ta bort sidan också, radera aktiviteten i CMS eller dess Markdown-fil.
-Utan aktuella aktiviteter visas ”Det finns inga aktuella anslag just nu.”.
+Utan aktuella aktiviteter döljs hela anslagstavlan, inklusive rubriken.
 Inga verkliga anslag läggs till automatiskt från nyheter eller schemat.
 
 GitHub Actions bygger och publicerar webbplatsen varje **måndag klockan
