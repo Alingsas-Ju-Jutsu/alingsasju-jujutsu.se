@@ -1,5 +1,5 @@
 term_start:
-  date: ""
+  date: "2026-08-06"
 exceptions:
   - date: 2026-11-22
     reason: Höstlov
