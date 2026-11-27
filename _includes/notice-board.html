@@ -1,4 +1,4 @@
-{% if site.data.dated_content.activities.size > 0 %}
+{% if site.data.dated_content.board_entries.size > 0 %}
 <section class="notice-board" id="anslagstavla" aria-labelledby="notice-board-title">
   <div class="notice-board__inner">
     <div class="section-heading">
@@ -6,11 +6,18 @@
       <p>Aktuellt och kommande händelser i klubben.</p>
     </div>
       <div class="notice-board__posts">
-        {% for activity in site.data.dated_content.activities %}
+        {% for entry in site.data.dated_content.board_entries %}
           <article class="notice-board__post">
+            {% if entry.activity %}
+            {% assign activity = entry.activity %}
             <time datetime="{{ activity.event_date | escape }}">{{ activity.event_date | escape }}</time>
             <h3><a href="{{ activity.url | relative_url }}">{{ activity.title | escape }}</a></h3>
             <p>{{ activity.description | escape }}</p>
+            {% else %}
+            <time datetime="{{ entry.date | escape }}">{{ entry.date | escape }}</time>
+            {% include grading-time.html group=entry.grading_group show_date=false %}
+            <p><a href="{{ '/schema/' | relative_url }}">Se träningsschemat</a> · <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">Rekommendationer inför barngradering</a></p>
+            {% endif %}
           </article>
         {% endfor %}
       </div>

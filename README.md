@@ -103,7 +103,9 @@ Gamla tider kan därför ligga kvar fram till nästa bygge. JavaScript behövs
 inte. En tid utan datum döljs inte automatiskt.
 När både datum och tid är tomma visas ingen graderingstid för gruppen.
 Rubriken ”Graderingstider” döljs när inga graderingstider återstår.
-Informationen visas på startsidan och sidan Schema, inte på Börja träna.
+Informationen visas på startsidans anslagstavla inom sex veckor före
+graderingen och på Schema utan sexveckorsgräns, inte på Börja träna.
+En graderingstid utan datum visas bara på Schema.
 
 Exempel på hur inställningarna är uppbyggda:
 
@@ -189,15 +191,19 @@ händelse visas först. Anslag längre fram börjar visas när de hamnar inom
 sexveckorsgränsen. Aktivitetens egen sida publiceras så snart ändringen når
 `main` och finns kvar på `/aktiviteter/<filnamn>/` även när anslaget döljs.
 För att ta bort sidan också, radera aktiviteten i CMS eller dess Markdown-fil.
-Utan aktuella aktiviteter döljs hela anslagstavlan, inklusive rubriken.
-Inga verkliga anslag läggs till automatiskt från nyheter eller schemat.
+Anslagstavlan visar även daterade graderingstider från `_data/groups.yml`
+inom samma sexveckorsgräns, tillsammans med aktiviteterna i datumordning.
+Inga tider behöver skrivas in en gång till. Utan aktuella aktiviteter eller
+graderingar döljs hela anslagstavlan, inklusive rubriken.
+Nyhetsartiklar läggs inte till automatiskt.
 
 GitHub Actions bygger och publicerar webbplatsen varje **måndag klockan
 03.17 UTC** (04.17 svensk vintertid, 05.17 sommartid), vid ändringar på
 `main` och vid manuell start av publiceringsflödet. Schemalagda körningar
 kan försenas; informationen uppdateras efter nästa lyckade publicering.
 Ett passerat datum kan därför synas ungefär en vecka till. Detta gäller
-också graderingstider och schemaavvikelser, men de har ingen sexveckorsgräns.
+också graderingstider och schemaavvikelser. På Schema har graderingstiderna
+ingen sexveckorsgräns; schemaavvikelser har inte heller någon sådan gräns.
 Veckobygget ändrar inte återkommande träningstider och tidsstyr inte
 publiceringen av vanliga nyhetsartiklar.
 

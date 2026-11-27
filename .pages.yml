@@ -115,7 +115,7 @@ content:
               - name: grading
                 label: Gradering
                 type: object
-                description: "Graderingstiden visas på startsidan och Schema. Ett passerat datum döljs vid nästa bygge, normalt varje måndag. Lämna både datum och tid tomma för att inte visa någon graderingstid."
+                description: "Graderingstiden visas på startsidans anslagstavla från sex veckor före datumet och på Schema utan sexveckorsgräns. Ett passerat datum döljs vid nästa bygge, normalt varje måndag. En tid utan datum visas bara på Schema. Lämna båda tomma för att inte visa någon graderingstid."
                 fields:
                   - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD. En tid utan datum döljs inte automatiskt." }
                   - { name: time, label: Tid, type: string, description: "Format 14:00. Om bara datum fylls i visas att tiden kommer snart." }

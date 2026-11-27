@@ -2,6 +2,7 @@
 layout: home
 title: Alingsås Ju-Jutsuklubb
 permalink: "/"
+maintained_content: true
 hero:
   eyebrow: Alingsås Ju-Jutsuklubb
   heading: Kampsport med självförsvarsinriktning
@@ -29,6 +30,6 @@ contact:
 
 ## Aktuella träningstider
 
-{% include training-schedule.html show_grading=true %}
+{% include training-schedule.html %}
 
 [Börja träna med oss]({{ '/borja-trana/' | relative_url }}){: .button}

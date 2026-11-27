@@ -13,18 +13,8 @@
 <h2 id="grading-times-title">Graderingstider</h2>
 <p>Se också <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">rekommendationer och minimikrav inför barngradering</a>.</p>
   {% for grading_group in site.data.dated_content.grading_groups %}
-    {% assign grading_date = grading_group.grading.date | default: "" | strip %}
-    {% assign grading_time = grading_group.grading.time | default: "" | strip %}
-    {% assign grading_is_preliminary = grading_group.grading.is_preliminary %}
 <div class="training-schedule__grading">
-  <h3>{{ grading_group.name | escape }} – {% if grading_is_preliminary %}preliminär {% endif %}graderingstid</h3>
-  <p>
-    {% if grading_date != "" %}{{ grading_date | escape }}{% endif %}
-    {% if grading_time == "" %}
-      (Tid kommer snart.)
-    {% endif %}
-    {% if grading_time != "" %}{% if grading_date != "" %} kl. {% else %}Kl. {% endif %}{{ grading_time | escape }}{% endif %}
-  </p>
+  {% include grading-time.html group=grading_group %}
 </div>
   {% endfor %}
 </section>

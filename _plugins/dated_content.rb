@@ -35,7 +35,18 @@ module DatedContent
         parse_date(exception["date"], "_data/groups.yml: exceptions[#{index}].date") >= today
       end
 
+      board_entries = visible_activities.map do |activity|
+        { "date" => activity.data["event_date"].to_s, "activity" => activity }
+      end
+      grading_groups.each do |group|
+        date = group.fetch("grading")["date"].to_s.strip
+        next if date.empty? || parse_date(date, "#{group['name']} grading.date") > today + 42
+
+        board_entries << { "date" => date, "grading_group" => group }
+      end
+
       site.data["dated_content"] = {
+        "board_entries" => board_entries.sort_by { |entry| entry["date"] },
         "activities" => visible_activities.sort_by { |activity| activity.data["event_date"].to_s },
         "grading_groups" => grading_groups,
         "exceptions" => exceptions.sort_by { |exception| exception["date"].to_s }

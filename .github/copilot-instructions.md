@@ -104,6 +104,10 @@ content changes; preserve unrelated content and design.
   42 days ahead, sorted by event date, using Europe/Stockholm dates.
   Old activity pages remain published but leave the board. Do not invent
   activities or copy schedule values into them unless requested.
+- The homepage board also includes dated gradings from `_data/groups.yml`
+  within the same 42-day window. Do not show a second grading section on the
+  homepage. Schema keeps all upcoming grading times, including undated times.
+  Hide the entire board when neither activities nor gradings qualify.
 - The site rebuilds every Monday at 03:17 UTC as well as on pushes to `main`.
   Expired information can remain until the next successful deployment.
   This does not schedule ordinary news publication or recurring time changes.

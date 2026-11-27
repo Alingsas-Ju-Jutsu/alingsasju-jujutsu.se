@@ -102,7 +102,21 @@ class DatedContentTest < Minitest::Test
   def test_absent_data_produces_empty_sections
     site = Struct.new(:data, :time, :collections).new({}, Time.iso8601("2026-11-27T12:00:00Z"), {})
     DatedContent::Generator.new.generate(site)
-    assert_equal({ "activities" => [], "grading_groups" => [], "exceptions" => [] }, site.data["dated_content"])
+    assert_equal({ "board_entries" => [], "activities" => [], "grading_groups" => [], "exceptions" => [] }, site.data["dated_content"])
+  end
+
+  def test_board_includes_gradings_without_activities_and_uses_the_same_date_window
+    groups = {}
+    %w[2026-11-26 2026-11-27 2027-01-08 2027-01-09].each do |date|
+      groups[date] = { "name" => date, "grading" => { "date" => date, "time" => "14:00" } }
+    end
+    groups["undated"] = { "grading" => { "time" => "15:00" } }
+    result = generate(groups: groups)
+    assert_empty result["activities"]
+    assert_equal %w[2026-11-27 2027-01-08], result["board_entries"].map { |entry| entry["date"] }
+    assert result["board_entries"].all? { |entry| entry["grading_group"] }
+    result = generate(groups: groups, activities: [activity("2026-12-01")])
+    assert_equal %w[2026-11-27 2026-12-01 2027-01-08], result["board_entries"].map { |entry| entry["date"] }
   end
 
   def test_cms_activity_fields_have_help_and_match_the_collection
@@ -122,14 +136,14 @@ class DatedContentTest < Minitest::Test
     Dir.mktmpdir do |source|
       root = File.expand_path("..", __dir__)
       %w[_includes _layouts _data _activities].each { |dir| FileUtils.mkdir_p(File.join(source, dir)) }
-      %w[training-schedule notice-board navigation-links article-images swedish-date].each do |name|
+      %w[training-schedule grading-time notice-board navigation-links article-images swedish-date].each do |name|
         FileUtils.cp(File.join(root, "_includes/#{name}.html"), File.join(source, "_includes"))
       end
       %w[home activity page].each do |name|
         FileUtils.cp(File.join(root, "_layouts/#{name}.html"), File.join(source, "_layouts"))
       end
       File.write(File.join(source, "_layouts/default.html"), "---\n---\n{{ content }}")
-      File.write(File.join(source, "index.html"), "---\nlayout: home\n---\n{% include training-schedule.html show_grading=true %}")
+      FileUtils.cp(File.join(root, "_club_pages/index.md"), File.join(source, "index.md"))
       File.write(File.join(source, "schema.html"), "---\n---\n{% include training-schedule.html show_grading=true %}")
       File.write(File.join(source, "borja.html"), "---\n---\n{% include training-schedule.html %}")
       entries = [
@@ -158,7 +172,11 @@ class DatedContentTest < Minitest::Test
         ]
       }.to_yaml)
       config = YAML.load_file(File.join(root, "_config.yml"))
-      ["2026-11-27T12:00:00Z", "2027-06-01T12:00:00Z"].each_with_index do |instant, index|
+      ["2026-11-27T12:00:00Z", "2027-06-01T12:00:00Z", "2026-11-27T12:00:00Z"].each_with_index do |instant, index|
+        if index == 2
+          Dir.glob(File.join(source, "_activities/*.md")).each { |path| File.delete(path) }
+        end
+        visible = index != 1
         site = Jekyll::Site.new(Jekyll.configuration(
           "source" => source, "destination" => File.join(source, "_site"),
           "config" => [], "plugins" => [], "plugins_dir" => [], "quiet" => true,
@@ -169,34 +187,38 @@ class DatedContentTest < Minitest::Test
         home = Nokogiri::HTML(File.read(File.join(source, "_site/index.html")))
         schema = Nokogiri::HTML(File.read(File.join(source, "_site/schema.html")))
         beginner = Nokogiri::HTML(File.read(File.join(source, "_site/borja.html")))
-        assert_equal 1 - index, home.css("#anslagstavla").length
+        assert_equal visible ? 1 : 0, home.css("#anslagstavla").length
         assert_empty home.css(".notice-board script")
         assert_empty home.css("[data-grading-date], [data-exception-date]")
         assert_empty beginner.css(".training-schedule__gradings")
         [home, schema, beginner].each do |html|
           assert_includes html.text, "Sunday"
           refute_includes html.text, "Old exception"
-          assert_equal 1 - index, html.css(".training-schedule__exceptions").length
+          assert_equal visible ? 1 : 0, html.css(".training-schedule__exceptions").length
         end
-        [home, schema].each do |html|
-          assert_equal 1 - index, html.css(".training-schedule__gradings").length
-          assert_equal 1 - index, html.css(".training-schedule__grading").length
-          refute_includes html.css(".training-schedule__gradings").text, "Old group"
-        end
+        assert_empty home.css(".training-schedule__gradings")
+        assert_equal visible ? 1 : 0, schema.css(".training-schedule__gradings").length
+        assert_equal visible ? 1 : 0, schema.css(".training-schedule__grading").length
+        refute_includes schema.css(".training-schedule__gradings").text, "Old group"
         if index.zero?
           assert_operator home.to_html.index('id="anslagstavla"'), :<, home.to_html.index('class="training-schedule"')
-          assert_equal ["Today", "Day 42"], home.css(".notice-board h3").map(&:text)
+          assert_equal ["Today", "Current group – preliminär graderingstid", "Day 42"], home.css(".notice-board h3").map(&:text)
           assert_equal ["/test/aktiviteter/activity-1-2026-11-27/", "/test/aktiviteter/activity-2-2027-01-08/"],
                        home.css(".notice-board h3 a").map { |link| link["href"] }
-          assert_equal "/test/ju-jutsu/barntraning/#barngraderingar", home.at_css(".training-schedule__gradings a")["href"]
-          assert_includes home.css(".training-schedule__grading").text, "preliminär"
-        else
+          assert_equal "/test/ju-jutsu/barntraning/#barngraderingar", home.at_css('.notice-board a[href*="barngraderingar"]')["href"]
+          assert_includes home.css(".notice-board").text, "14:00"
+        elsif index == 1
           assert_empty home.css(".notice-board__post")
           assert_empty home.css(".notice-board")
           refute_includes home.text, "Anslagstavla"
           refute_includes home.text, "Graderingstider"
           refute_includes home.text, "Avvikelser i träningsschemat"
+        else
+          assert_equal ["Current group – preliminär graderingstid"], home.css(".notice-board h3").map(&:text)
+          assert_equal 1, home.css(".notice-board__post").length
         end
+        next if index == 2
+
         4.times do |activity_index|
           date = entries[activity_index].data["event_date"]
           detail = Nokogiri::HTML(File.read(File.join(source, "_site/aktiviteter/activity-#{activity_index}-#{date}/index.html")))
