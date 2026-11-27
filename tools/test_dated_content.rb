@@ -178,7 +178,7 @@ class DatedContentTest < Minitest::Test
         "groups" => {
           "old" => { "name" => "Old group", "grading" => { "date" => "2026-11-26" } },
           "current" => {
-            "name" => "Current group", "sessions" => [{ "day" => "Sunday", "start" => "18.00", "end" => "19.00" }],
+            "name" => "Current group", "type" => "barn", "sessions" => [{ "day" => "Sunday", "start" => "18.00", "end" => "19.00" }],
             "grading" => { "date" => "2026-11-27", "time" => "14:00", "is_preliminary" => true }
           }
         },
@@ -188,6 +188,7 @@ class DatedContentTest < Minitest::Test
         ]
       }.to_yaml)
       config = YAML.load_file(File.join(root, "_config.yml"))
+      site = nil
       ["2026-11-27T12:00:00Z", "2027-06-01T12:00:00Z", "2026-11-27T12:00:00Z"].each_with_index do |instant, index|
         if index == 2
           Dir.glob(File.join(source, "_activities/*.md")).each { |path| File.delete(path) }
@@ -263,6 +264,20 @@ class DatedContentTest < Minitest::Test
           refute_nil detail.at_css('a[href="/test/aktiviteter/"]')
         end
       end
+      site.data["dated_content"]["board_entries"] = [
+        { "date" => "2026-12-19", "grading_group" => { "name" => "Vuxna", "type" => "vuxen", "grading" => { "time" => "14:00" } } },
+        { "date" => "2026-12-19", "grading_group" => { "name" => "Barn", "type" => "barn", "grading" => { "time" => "15:00" } } }
+      ]
+      template = Liquid::Template.parse("{% include notice-board.html %}")
+      html = Nokogiri::HTML(template.render!(
+        { "site" => site.site_payload["site"] },
+        registers: { site: site }, strict_filters: true
+      ))
+      posts = html.css(".notice-board__post")
+      assert_equal 2, posts.length
+      assert_empty posts[0].css('a[href*="barngraderingar"]')
+      refute_nil posts[0].at_css('a[href="/test/traning/schema/"]')
+      assert_equal 1, posts[1].css('a[href*="barngraderingar"]').length
     end
   end
 end
