@@ -7,6 +7,15 @@ description: Praktisk information för vårdnadshavare om barnträningen i Aling
 ---
 ## För vårdnadshavare
 
+### Terminsstart
+
+{% assign term_start_date = site.data.groups.term_start.date | default: "" | strip %}
+{% if term_start_date != "" %}
+Terminen startar {{ term_start_date | escape }}.
+{% else %}
+Datum meddelas snart.
+{% endif %}
+
 ### Trygghet
 
 Vi vill att alla barn ska känna sig trygga och ha roligt på träningen. De första gångerna är du som vårdnadshavare välkommen att vara med inne i dojon, så att ditt barn får en trygg start. Därefter har vi inte möjlighet att ha föräldrar eller andra vårdnadshavare närvarande i dojon under passen. Det ger instruktörerna arbetsro att leda träningen, ta hand om barnen och hjälpa gruppen att hitta fokus och gemenskap.
