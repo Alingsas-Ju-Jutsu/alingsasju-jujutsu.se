@@ -8,26 +8,15 @@
   {% endif %}
 </div>
 {% if include.show_grading == true %}
-  {% assign has_grading_times = false %}
-  {% for group_entry in site.data.groups.groups %}
-    {% assign grading_group = group_entry[1] %}
-    {% assign grading_date = grading_group.grading.date | default: "" | strip %}
-    {% assign grading_time = grading_group.grading.time | default: "" | strip %}
-    {% if grading_date != "" or grading_time != "" %}
-      {% assign has_grading_times = true %}
-    {% endif %}
-  {% endfor %}
-  {% if has_grading_times %}
+  {% if site.data.dated_content.grading_groups.size > 0 %}
 <section class="training-schedule__gradings" aria-labelledby="grading-times-title">
 <h2 id="grading-times-title">Graderingstider</h2>
 <p>Se också <a href="{{ '/ju-jutsu/barntraning/#barngraderingar' | relative_url }}">rekommendationer och minimikrav inför barngradering</a>.</p>
-  {% for group_entry in site.data.groups.groups %}
-    {% assign grading_group = group_entry[1] %}
+  {% for grading_group in site.data.dated_content.grading_groups %}
     {% assign grading_date = grading_group.grading.date | default: "" | strip %}
     {% assign grading_time = grading_group.grading.time | default: "" | strip %}
     {% assign grading_is_preliminary = grading_group.grading.is_preliminary %}
-    {% if grading_date != "" or grading_time != "" %}
-<div class="training-schedule__grading" data-grading-date="{{ grading_date | escape }}">
+<div class="training-schedule__grading">
   <h3>{{ grading_group.name | escape }} – {% if grading_is_preliminary %}preliminär {% endif %}graderingstid</h3>
   <p>
     {% if grading_date != "" %}{{ grading_date | escape }}{% endif %}
@@ -37,7 +26,6 @@
     {% if grading_time != "" %}{% if grading_date != "" %} kl. {% else %}Kl. {% endif %}{{ grading_time | escape }}{% endif %}
   </p>
 </div>
-    {% endif %}
   {% endfor %}
 </section>
   {% endif %}
@@ -63,13 +51,12 @@
     </div>
   {% endfor %}
 </div>
-{% if site.data.groups.exceptions.size > 0 %}
+{% if site.data.dated_content.exceptions.size > 0 %}
   <div class="training-schedule__exceptions">
     <h3>Avvikelser i träningsschemat</h3>
     <ul>
-      {% assign exceptions = site.data.groups.exceptions | sort: "date" %}
-      {% for exception in exceptions %}
-        <li data-exception-date="{{ exception.date | escape }}"><time datetime="{{ exception.date | escape }}">{{ exception.date | escape }}</time> – {{ exception.reason | escape }}</li>
+      {% for exception in site.data.dated_content.exceptions %}
+        <li><time datetime="{{ exception.date | escape }}">{{ exception.date | escape }}</time> – {{ exception.reason | escape }}</li>
       {% endfor %}
     </ul>
   </div>

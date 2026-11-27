@@ -3,6 +3,44 @@ media:
   output: /assets/images
 
 content:
+  - name: activities
+    label: Aktiviteter – anslagstavla
+    type: collection
+    path: _activities
+    format: yaml-frontmatter
+    subfolders: false
+    exclude: [".gitkeep"]
+    filename: "{primary}-{fields.event_date}.md"
+    view:
+      fields: [title, event_date]
+      primary: title
+      sort: [event_date]
+      default:
+        sort: event_date
+        order: asc
+    fields:
+      - name: title
+        label: Rubrik
+        type: string
+        required: true
+        description: "En kort och tydlig rubrik. Visas både på startsidans anslagstavla och överst på aktivitetens egen sida."
+      - name: event_date
+        label: Händelsedatum
+        type: date
+        required: true
+        options: { format: yyyy-MM-dd }
+        description: "Dagen aktiviteten äger rum, inte dagen du skriver inlägget. Anslaget visas från sex veckor före detta datum till och med händelsedagen vid senaste bygget. Webbplatsen uppdateras varje måndag och vid publicering, så gamla anslag kan synas fram till nästa bygge."
+      - name: description
+        label: Kort sammanfattning
+        type: text
+        required: true
+        description: "En eller två meningar för anslagstavlan och sökresultat. Besökaren klickar på rubriken för att läsa hela aktivitetssidan."
+      - name: body
+        label: Mer information
+        type: rich-text
+        required: true
+        description: "Den fullständiga texten på aktivitetens egen sida, till exempel tid, plats och hur man anmäler sig. Använd underrubriker (rubriknivå 2), listor och länkar vid behov. Sidan finns kvar när anslaget har försvunnit. Radera aktiviteten om även sidan ska tas bort."
+
   - name: schedule
     label: Träningstider och avgifter
     type: file
@@ -16,11 +54,12 @@ content:
           - { name: title, label: Rubrik, type: string }
           - { name: date, label: Datum (text, t.ex. "1 januari"), type: string }
       - name: exceptions
-        label: Avvikelser (visas tills de tas bort)
+        label: Avvikelser (gamla datum döljs vid nästa bygge)
         type: object
         list: true
+        description: "Varje avvikelse visas till och med sitt datum vid senaste bygget. Gamla datum döljs när webbplatsen byggs nästa gång, normalt varje måndag. Beskriv vilka grupper som berörs om det inte gäller alla."
         fields:
-          - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
+          - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD, t.ex. 2027-01-10." }
           - { name: reason, label: Orsak, type: string }
       - name: fees
         label: Avgifter
@@ -76,10 +115,11 @@ content:
               - name: grading
                 label: Gradering
                 type: object
+                description: "Graderingstiden visas på startsidan och Schema. Ett passerat datum döljs vid nästa bygge, normalt varje måndag. Lämna både datum och tid tomma för att inte visa någon graderingstid."
                 fields:
-                  - { name: date, label: Datum, type: string, description: "Format ÅÅÅÅ-MM-DD" }
-                  - { name: time, label: Tid, type: string, description: "Format 10:00" }
-                  - { name: is_preliminary, label: Preliminärt, type: boolean }
+                  - { name: date, label: Datum, type: string, description: "Ett giltigt datum i formatet ÅÅÅÅ-MM-DD. En tid utan datum döljs inte automatiskt." }
+                  - { name: time, label: Tid, type: string, description: "Format 14:00. Om bara datum fylls i visas att tiden kommer snart." }
+                  - { name: is_preliminary, label: Preliminärt, type: boolean, description: "Markera om datumet eller tiden ännu inte är fastställd." }
           - name: children
             label: Barn
             type: object

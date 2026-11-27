@@ -390,12 +390,49 @@ button:focus-visible,
 }
 
 .section-heading h2,
+.notice-board h2,
 .training-schedule h2,
 .contact h2 {
   margin: 0;
   font-size: clamp(2.2rem, 5vw, 4rem);
   letter-spacing: -0.055em;
   line-height: 1.05;
+}
+
+.notice-board__inner {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 3rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.notice-board__posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+.notice-board__post {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid $line;
+  border-top: 4px solid $accent;
+  background: white;
+  overflow-wrap: anywhere;
+}
+
+.notice-board__post time {
+  color: $muted;
+  font-variant-numeric: tabular-nums;
+}
+
+.notice-board__post h3 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.notice-board__post p {
+  margin-bottom: 0;
 }
 
 .training-schedule {

@@ -94,7 +94,19 @@ content changes; preserve unrelated content and design.
 - `_data/groups.yml`: the single source for training group names,
   ages, recurring sessions, term start and exceptions. Never duplicate current
   schedule values in page text. Keep dates and times quoted. Exceptions use
-  `YYYY-MM-DD` dates and a `reason`; they remain visible until explicitly removed.
+  `YYYY-MM-DD` dates and a `reason`. Past exceptions and dated grading times
+  are omitted at the next successful build, not hidden with JavaScript.
+- `_activities/*.md`: activity detail pages with `title`, `description`, quoted
+  ISO `event_date` and Markdown body. Use `slug-YYYY-MM-DD.md` filenames,
+  with the date last to avoid Jekyll's future-publication filtering.
+  Do not use `date` for the event date: Jekyll treats it as a publication date.
+  At build time, the homepage notice board links to events from today through
+  42 days ahead, sorted by event date, using Europe/Stockholm dates.
+  Old activity pages remain published but leave the board. Do not invent
+  activities or copy schedule values into them unless requested.
+- The site rebuilds every Monday at 03:17 UTC as well as on pushes to `main`.
+  Expired information can remain until the next successful deployment.
+  This does not schedule ordinary news publication or recurring time changes.
 - `_layouts/`, `_includes/`, `assets/css/main.scss`: shared presentation.
   Change these only when the task needs a layout or component change.
 - `assets/`: local images and documents. Reuse existing assets where possible.

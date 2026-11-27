@@ -97,9 +97,10 @@ under sin `grading`-nyckel i [`_data/groups.yml`](_data/groups.yml). Fyll i
 `date` och `time` för den gruppen. `is_preliminary` är ett booleskt värde:
 `true` visar att tiden är preliminär och `false` visar en fastställd
 graderingstid. Skriv datum som `"YYYY-MM-DD"` och tiden inom citattecken.
-Graderingstiden döljs dagen efter datumet, enligt svensk tid, utan att
-YAML-filen behöver ändras eller webbplatsen byggas om. Detta kräver JavaScript
-och rätt inställd klocka hos besökaren. En tid utan datum döljs inte automatiskt.
+Graderingstiden döljs vid första lyckade bygget efter datumet, enligt svensk
+tid. Webbplatsen byggs automatiskt varje måndag och när ändringar publiceras.
+Gamla tider kan därför ligga kvar fram till nästa bygge. JavaScript behövs
+inte. En tid utan datum döljs inte automatiskt.
 När både datum och tid är tomma visas ingen graderingstid för gruppen.
 Rubriken ”Graderingstider” döljs när inga graderingstider återstår.
 Informationen visas på startsidan och sidan Schema, inte på Börja träna.
@@ -133,10 +134,10 @@ som berörs om avvikelsen inte gäller alla. Listan visas i datumordning under
 ”Avvikelser i träningsschemat”. Avvikelser är information till besökarna;
 de ändrar inte de återkommande träningstiderna automatiskt.
 
-Varje avvikelse döljs dagen efter sitt datum enligt svensk tid. Rubriken och
-listan döljs när inga avvikelser återstår. Detta kräver JavaScript och rätt
-inställd klocka hos besökaren; uppgifterna finns kvar i filen och visas utan
-JavaScript. Ta gärna bort gamla avvikelser ur filen när de inte längre behövs.
+Varje avvikelse döljs vid första lyckade bygget efter sitt datum enligt svensk
+tid. Rubriken och listan döljs när inga avvikelser återstår. Detta fungerar
+utan JavaScript; uppgifterna finns kvar i filen men tas inte med i den byggda
+sidan. Ta gärna bort gamla avvikelser ur filen när de inte längre behövs.
 För att ta bort hela avvikelselistan ersätter du den med:
 
 ```yaml
@@ -148,6 +149,67 @@ mellanslag, inte tabbar, och behåll samma indrag som i den befintliga filen.
 Sätt datum och tider inom citattecken. En framtida terminsstart eller avvikelse
 innebär inte tidsinställd publicering: allt du sparar till `main` publiceras
 vid nästa lyckade byggning.
+
+## Anslagstavla på startsidan
+
+Anslagstavlan visas direkt under startsidans huvudbild. Lägg till, redigera
+och ta bort aktiviteter i **Aktiviteter – anslagstavla** i Pages CMS om det
+är anslutet till kodförrådet, eller redigera Markdown-filer i
+[`_activities/`](_activities/). CMS-fälten har svenska hjälptexter.
+Redigeringen sker i GitHub eller Pages CMS, inte direkt på den publika webbplatsen.
+Spara ändringen via en gren och ett ändringsförslag till `main`; en ansvarig
+person granskar och slår ihop det för publicering.
+
+Varje aktivitet får en egen sida med rubrik (`title`), händelsedatum
+(`event_date`), kort sammanfattning (`description`) och en längre Markdown-text.
+Anslagstavlan visar datum, rubrik och sammanfattning och länkar till den egna
+sidan. Använd `event_date`, inte `date`: händelsedatumet är inte ett
+publiceringsdatum och framtida aktiviteter ska gå att läsa redan nu.
+
+CMS namnger filerna som `rubrik-YYYY-MM-DD.md`. Låt datumet stå sist:
+Jekyll kan tolka ett datum först i filnamnet som ett framtida publiceringsdatum.
+Exempel på formatet i `_activities/exempel-2027-01-10.md`, inte en verklig
+klubbhändelse:
+
+```markdown
+---
+title: "Exempel på aktivitet"
+event_date: "2027-01-10"
+description: "En kort sammanfattning för anslagstavlan."
+---
+
+## Mer information
+
+Här skriver du den fullständiga informationen om aktiviteten.
+```
+
+Vid varje bygge visas anslag vars händelsedatum är **från och med dagens
+datum till och med 42 dagar framåt**, enligt svensk tid. Närmast kommande
+händelse visas först. Anslag längre fram börjar visas när de hamnar inom
+sexveckorsgränsen. Aktivitetens egen sida publiceras så snart ändringen når
+`main` och finns kvar på `/aktiviteter/<filnamn>/` även när anslaget döljs.
+För att ta bort sidan också, radera aktiviteten i CMS eller dess Markdown-fil.
+Utan aktuella aktiviteter visas ”Det finns inga aktuella anslag just nu.”.
+Inga verkliga anslag läggs till automatiskt från nyheter eller schemat.
+
+GitHub Actions bygger och publicerar webbplatsen varje **måndag klockan
+03.17 UTC** (04.17 svensk vintertid, 05.17 sommartid), vid ändringar på
+`main` och vid manuell start av publiceringsflödet. Schemalagda körningar
+kan försenas; informationen uppdateras efter nästa lyckade publicering.
+Ett passerat datum kan därför synas ungefär en vecka till. Detta gäller
+också graderingstider och schemaavvikelser, men de har ingen sexveckorsgräns.
+Veckobygget ändrar inte återkommande träningstider och tidsstyr inte
+publiceringen av vanliga nyhetsartiklar.
+
+Datum för anslag, daterade graderingstider och avvikelser måste vara giltiga
+`YYYY-MM-DD`-datum. Felaktiga datum stoppar bygget med fil och fält angivna,
+så att felaktig information inte publiceras tyst.
+
+Kontrollera datumfiltrering och mallar med:
+
+```sh
+docker compose run --rm site bundle exec ruby tools/test_dated_content.rb
+```
 
 ## Uppdatera instruktörer
 

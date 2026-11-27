@@ -13,6 +13,9 @@ markdown: kramdown
 permalink: pretty
 
 collections:
+  activities:
+    output: true
+    permalink: /aktiviteter/:name/
   club_pages:
     output: true
 
@@ -31,6 +34,12 @@ exclude:
   - _club_pages/graderingar/_mall.md
 
 defaults:
+  - scope:
+      path: ""
+      type: activities
+    values:
+      layout: activity
+      category: Aktiviteter
   - scope:
       path: ""
     values:

@@ -1,0 +1,21 @@
+<section class="notice-board" id="anslagstavla" aria-labelledby="notice-board-title">
+  <div class="notice-board__inner">
+    <div class="section-heading">
+      <h2 id="notice-board-title">Anslagstavla</h2>
+      <p>Aktuellt och kommande händelser i klubben.</p>
+    </div>
+    {% if site.data.dated_content.activities.size > 0 %}
+      <div class="notice-board__posts">
+        {% for activity in site.data.dated_content.activities %}
+          <article class="notice-board__post">
+            <time datetime="{{ activity.event_date | escape }}">{{ activity.event_date | escape }}</time>
+            <h3><a href="{{ activity.url | relative_url }}">{{ activity.title | escape }}</a></h3>
+            <p>{{ activity.description | escape }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Det finns inga aktuella anslag just nu.</p>
+    {% endif %}
+  </div>
+</section>
