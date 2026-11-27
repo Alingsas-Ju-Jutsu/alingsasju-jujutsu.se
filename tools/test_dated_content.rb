@@ -15,9 +15,9 @@ class DatedContentTest < Minitest::Test
     )
   end
 
-  def generate(activities: [], groups: {}, exceptions: [], instant: "2026-11-27T12:00:00Z")
+  def generate(activities: [], groups: {}, exceptions: [], term_start: "", instant: "2026-11-27T12:00:00Z")
     data = {
-      "groups" => { "groups" => groups, "exceptions" => exceptions }
+      "groups" => { "groups" => groups, "exceptions" => exceptions, "term_start" => { "date" => term_start } }
     }
     collections = { "activities" => Struct.new(:docs).new(activities) }
     site = Struct.new(:data, :time, :collections).new(data, Time.iso8601(instant), collections)
@@ -120,6 +120,20 @@ class DatedContentTest < Minitest::Test
     assert_equal %w[2026-11-27 2026-12-01 2027-01-08], result["board_entries"].map { |entry| entry["date"] }
   end
 
+  def test_term_start_is_shown_only_within_three_weeks_on_either_side
+    %w[2026-11-06 2026-11-27 2026-12-18].each do |date|
+      result = generate(term_start: date)
+      assert_equal [{ "date" => date, "term_start" => true }], result["board_entries"]
+    end
+    ["", nil, "2026-11-05", "2026-12-19"].each do |date|
+      assert_empty generate(term_start: date)["board_entries"]
+    end
+    ["1 januari", "2026-02-30"].each do |date|
+      error = assert_raises(Jekyll::Errors::FatalException) { generate(term_start: date) }
+      assert_includes error.message, "term_start.date"
+    end
+  end
+
   def test_cms_activity_fields_have_help_and_match_the_collection
     root = File.expand_path("..", __dir__)
     cms = YAML.load_file(File.join(root, ".pages.yml"), aliases: true)
@@ -174,7 +188,7 @@ class DatedContentTest < Minitest::Test
                    "#{entry.data.to_yaml}---\n## Details\n\nFull activity information.")
       end
       File.write(File.join(source, "_data/groups.yml"), {
-        "term_start" => { "title" => "Terminsstart", "date" => "1 januari" },
+        "term_start" => { "date" => "" },
         "groups" => {
           "old" => { "name" => "Old group", "grading" => { "date" => "2026-11-26" } },
           "current" => {
@@ -278,6 +292,13 @@ class DatedContentTest < Minitest::Test
       assert_empty posts[0].css('a[href*="barngraderingar"]')
       refute_nil posts[0].at_css('a[href="/test/traning-praktiskt/schema/"]')
       assert_equal 1, posts[1].css('a[href*="barngraderingar"]').length
+      site.data["dated_content"]["board_entries"] = [{ "date" => "2026-12-18", "term_start" => true }]
+      html = Nokogiri::HTML(template.render!(
+        { "site" => site.site_payload["site"] }, registers: { site: site }
+      ))
+      assert_equal "Terminsstart", html.at_css(".notice-board h3").text
+      assert_equal "2026-12-18", html.at_css(".notice-board time")["datetime"]
+      refute_nil html.at_css('a[href="/test/traning-praktiskt/schema/"]')
     end
   end
 end

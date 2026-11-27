@@ -82,13 +82,19 @@ groups:
 
 ```yaml
 term_start:
-  title: Terminsstart
   date: "2027-01-10"
 ```
 
-Datumet visas som det är skrivet. Du kan också skriva exempelvis
-`"10 januari 2027"`. Behåll citattecknen. Med `date: ""` visas
-”Datum meddelas snart.”.
+Använd ett giltigt datum med årtal i formatet `"YYYY-MM-DD"`, eller välj
+datum i CMS. Startdatumet gäller alla grupper. Rubriken är alltid
+**Terminsstart** och ska inte anges i filen. Med `date: ""` visas
+”Datum meddelas snart.” i schemat, men inget terminsstartsanslag.
+
+Anslagstavlan visar terminsstarten från och med **21 dagar före till och
+med 21 dagar efter** startdatumet, enligt svensk tid vid senaste bygget.
+Anslaget länkar till det delade schemat med de aktuella träningstiderna.
+Veckobygget uppdaterar synligheten; ordinarie tider börjar däremot visas
+direkt när ändringen publiceras, inte först vid terminsstarten.
 
 ### Visa preliminär graderingstid
 

@@ -369,7 +369,7 @@ def build(schedule_path, output, graphic_name="training", config_path=None, prev
         rows = []
         start = schedule["term_start"]
         date = str(start["date"]).strip() or "Datum meddelas snart."
-        rows.append((f'{start["title"]} {date}'.upper(), term_start_font_size, False))
+        rows.append((f'Terminsstart {date}'.upper(), term_start_font_size, False))
         if config["include_address"]:
             rows.extend([("", 14, False), ("TENNISVÄGEN 8 · ALINGSÅS", 23, False)])
         if config["include_website"]:

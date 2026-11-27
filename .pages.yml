@@ -58,9 +58,9 @@ content:
       - name: term_start
         label: Terminsstart
         type: object
+        description: "Gemensam terminsstart för alla grupper. Visas på anslagstavlan från tre veckor före till tre veckor efter datumet, vid senaste bygget."
         fields:
-          - { name: title, label: Rubrik, type: string }
-          - { name: date, label: Datum (text, t.ex. "1 januari"), type: string }
+          - { name: date, label: Startdatum, type: date, options: { format: yyyy-MM-dd }, description: "Ange datum med årtal. Lämna tomt om terminsstarten inte är bestämd. Rubriken är alltid Terminsstart. Ordinarie träningstider publiceras direkt vid sammanslagning, inte först vid startdatumet." }
       - name: exceptions
         label: Avvikelser (gamla datum döljs vid nästa bygge)
         type: object

@@ -128,6 +128,9 @@ content changes; preserve unrelated content and design.
 - The site rebuilds every Monday at 03:17 UTC as well as on pushes to `main`.
   Expired information can remain until the next successful deployment.
   This does not schedule ordinary news publication or recurring time changes.
+- `term_start` has only a quoted ISO `date` (or an empty string when unknown).
+  Its fixed heading is Terminsstart. The shared start appears on the notice
+  board from 21 days before through 21 days after its date, inclusive.
 - `_layouts/`, `_includes/`, `assets/css/main.scss`: shared presentation.
   Change these only when the task needs a layout or component change.
 - `assets/`: local images and documents. Reuse existing assets where possible.

@@ -60,6 +60,14 @@ module DatedContent
         end
       end
 
+      term_start_date = schedule.fetch("term_start", {})["date"].to_s.strip
+      unless term_start_date.empty?
+        date = parse_date(term_start_date, "_data/groups.yml: term_start.date")
+        if (today - 21..today + 21).cover?(date)
+          board_entries << { "date" => term_start_date, "term_start" => true }
+        end
+      end
+
       site.data["dated_content"] = {
         "board_entries" => board_entries.sort_by { |entry| entry["date"] },
         "upcoming_entries" => upcoming_entries.sort_by { |entry| entry["date"] },

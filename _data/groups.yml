@@ -1,6 +1,5 @@
 term_start:
-  title: Terminsstart
-  date: 1 januari
+  date: ""
 exceptions:
   - date: 2026-11-22
     reason: Höstlov
