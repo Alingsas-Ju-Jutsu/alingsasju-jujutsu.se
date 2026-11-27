@@ -155,35 +155,35 @@ vid nästa lyckade byggning.
 ## Anslagstavla på startsidan
 
 Anslagstavlan visas direkt under startsidans huvudbild. Lägg till, redigera
-och ta bort aktiviteter i **Händelser och aktiviteter** i Pages CMS om det
+och ta bort händelser i **Kommande händelser** i Pages CMS om det
 är anslutet till kodförrådet, eller redigera Markdown-filer i
 [`_activities/`](_activities/). CMS-fälten har svenska hjälptexter.
 Redigeringen sker i GitHub eller Pages CMS, inte direkt på den publika webbplatsen.
 Spara ändringen via en gren och ett ändringsförslag till `main`; en ansvarig
 person granskar och slår ihop det för publicering.
 
-Varje aktivitet får en egen sida med rubrik (`title`), händelsedatum
+Varje händelse får en egen sida med rubrik (`title`), händelsedatum
 (`event_date`), kort sammanfattning (`description`) och en längre Markdown-text.
 Anslagstavlan visar datum, rubrik och sammanfattning och länkar till den egna
 sidan. Använd `event_date`, inte `date`: händelsedatumet är inte ett
-publiceringsdatum och framtida aktiviteter ska gå att läsa redan nu.
+publiceringsdatum och framtida händelser ska gå att läsa redan nu.
 
-**Kommande händelser** på `/aktiviteter/` listar alla framtida aktiviteter
+**Kommande händelser** på `/aktiviteter/` listar alla framtida händelser
 och daterade graderingar i datumordning, även längre än sex veckor framåt.
-Sidan nås från Föreningen i menyn. Varje aktivitet visas med datum, rubrik,
-sammanfattning och länk till hela texten. Samma aktivitet visas automatiskt
+Sidan nås från Föreningen i menyn. Varje händelse visas med datum, rubrik,
+sammanfattning och länk till hela texten. Samma händelse visas automatiskt
 på startsidans anslagstavla när den är högst sex veckor bort.
 Efter händelsedagen försvinner den från båda listorna vid nästa bygge,
 men detaljsidan finns kvar.
 
 I CMS kan du lägga till valfritt antal **Bilder** med bildbeskrivningar.
-Bilderna visas efter texten på aktivitetens egen sida, i vald ordning.
+Bilderna visas efter texten på händelsens egen sida, i vald ordning.
 Använd lokala bilder under `assets/images/` och publicera bara bilder som
 klubben får använda. I Markdown-filens metadata ser det ut så här:
 
 ```yaml
 images:
-  - image: "/assets/images/aktivitet.jpg"
+  - image: "/assets/images/händelse.jpg"
     alt: "Beskrivning av vad bilden visar"
 ```
 
@@ -194,25 +194,25 @@ klubbhändelse:
 
 ```markdown
 ---
-title: "Exempel på aktivitet"
+title: "Exempel på händelse"
 event_date: "2027-01-10"
 description: "En kort sammanfattning för anslagstavlan."
 ---
 
 ## Mer information
 
-Här skriver du den fullständiga informationen om aktiviteten.
+Här skriver du den fullständiga informationen om händelsen.
 ```
 
 Vid varje bygge visas anslag vars händelsedatum är **från och med dagens
 datum till och med 42 dagar framåt**, enligt svensk tid. Närmast kommande
 händelse visas först. Anslag längre fram börjar visas när de hamnar inom
-sexveckorsgränsen. Aktivitetens egen sida publiceras så snart ändringen når
+sexveckorsgränsen. Händelsens egen sida publiceras så snart ändringen når
 `main` och finns kvar på `/aktiviteter/<filnamn>/` även när anslaget döljs.
-För att ta bort sidan också, radera aktiviteten i CMS eller dess Markdown-fil.
+För att ta bort sidan också, radera händelsen i CMS eller dess Markdown-fil.
 Anslagstavlan visar även daterade graderingstider från `_data/groups.yml`
-inom samma sexveckorsgräns, tillsammans med aktiviteterna i datumordning.
-Inga tider behöver skrivas in en gång till. Utan aktuella aktiviteter eller
+inom samma sexveckorsgräns, tillsammans med händelserna i datumordning.
+Inga tider behöver skrivas in en gång till. Utan aktuella händelser eller
 graderingar döljs hela anslagstavlan, inklusive rubriken.
 Nyhetsartiklar läggs inte till automatiskt.
 

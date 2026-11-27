@@ -4,7 +4,7 @@ media:
 
 content:
   - name: activities
-    label: Händelser och aktiviteter
+    label: Kommande händelser
     type: collection
     path: _activities
     format: yaml-frontmatter
@@ -23,23 +23,23 @@ content:
         label: Rubrik
         type: string
         required: true
-        description: "En kort och tydlig rubrik. Visas i Kommande händelser, på startsidans anslagstavla och överst på aktivitetens egen sida."
+        description: "En kort och tydlig rubrik. Visas i Kommande händelser, på startsidans anslagstavla och överst på händelsens egen sida."
       - name: event_date
         label: Händelsedatum
         type: date
         required: true
         options: { format: yyyy-MM-dd }
-        description: "Dagen aktiviteten äger rum, inte dagen du skriver inlägget. Alla kommande aktiviteter listas på Kommande händelser. Startsidan visar bara de närmaste sex veckorna. Efter händelsedagen försvinner aktiviteten från listorna vid nästa bygge. Webbplatsen uppdateras varje måndag och vid publicering."
+        description: "Dagen händelsen äger rum, inte dagen du skriver inlägget. Alla framtida händelser listas på Kommande händelser. Startsidan visar bara de närmaste sex veckorna. Efter händelsedagen försvinner inlägget från listorna vid nästa bygge. Webbplatsen uppdateras varje måndag och vid publicering."
       - name: description
         label: Kort sammanfattning
         type: text
         required: true
-        description: "En eller två meningar för anslagstavlan och sökresultat. Besökaren klickar på rubriken för att läsa hela aktivitetssidan."
+        description: "En eller två meningar för anslagstavlan och sökresultat. Besökaren klickar på rubriken för att läsa händelsens egen sida."
       - name: body
         label: Mer information
         type: rich-text
         required: true
-        description: "Den fullständiga texten på aktivitetens egen sida, till exempel tid, plats och hur man anmäler sig. Använd underrubriker (rubriknivå 2), listor och länkar vid behov. Sidan finns kvar när anslaget har försvunnit. Radera aktiviteten om även sidan ska tas bort."
+        description: "Den fullständiga texten på händelsens egen sida, till exempel tid, plats och hur man anmäler sig. Använd underrubriker (rubriknivå 2), listor och länkar vid behov. Sidan finns kvar när anslaget har försvunnit. Radera händelsen om även sidan ska tas bort."
       - name: images
         label: Bilder (valfritt)
         type: object
@@ -222,7 +222,7 @@ content:
         fields:
           - { name: title, label: Rubrik, type: string, required: true }
           - { name: description, label: Kort sammanfattning, type: text }
-          - { name: body, label: Text, type: rich-text, description: "Historiskt innehåll. Aktuella händelser läggs till under Händelser och aktiviteter." }
+          - { name: body, label: Text, type: rich-text, description: "Historiskt innehåll. Nya händelser läggs till under Kommande händelser." }
 
   - name: instructors
     label: Instruktörer

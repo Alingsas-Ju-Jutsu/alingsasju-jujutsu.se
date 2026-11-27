@@ -38,7 +38,7 @@ defaults:
       type: activities
     values:
       layout: activity
-      category: Aktiviteter
+      category: Kommande händelser
   - scope:
       path: ""
     values:

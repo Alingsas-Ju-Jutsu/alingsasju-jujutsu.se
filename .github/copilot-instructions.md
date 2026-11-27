@@ -114,7 +114,7 @@ content changes; preserve unrelated content and design.
 - `/aktiviteter/` lists all upcoming activities and dated gradings, without
   the homepage's 42-day limit. Activities can have an optional `images` list
   with local `image` paths and descriptive `alt` text. Edit them once in
-  Pages CMS under Händelser och aktiviteter; both lists use the same source.
+  Pages CMS under Kommande händelser; both lists use the same source.
 - The homepage board also includes dated gradings from `_data/groups.yml`
   within the same 42-day window. Do not show a second grading section on the
   homepage. Schema keeps all upcoming grading times, including undated times.

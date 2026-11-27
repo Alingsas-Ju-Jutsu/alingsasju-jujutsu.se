@@ -124,6 +124,7 @@ class DatedContentTest < Minitest::Test
     root = File.expand_path("..", __dir__)
     cms = YAML.load_file(File.join(root, ".pages.yml"), aliases: true)
     activities = cms.fetch("content").find { |entry| entry["name"] == "activities" }
+    assert_equal "Kommande händelser", activities["label"]
     assert_equal "_activities", activities["path"]
     assert_equal "{primary}-{fields.event_date}.md", activities["filename"]
     assert_equal %w[title event_date description body images], activities["fields"].map { |field| field["name"] }
