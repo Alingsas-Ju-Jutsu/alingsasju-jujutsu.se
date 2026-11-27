@@ -165,6 +165,10 @@ och ta bort händelser i **Kommande händelser** i Pages CMS om det
 är anslutet till kodförrådet, eller redigera Markdown-filer i
 [`_activities/`](_activities/). CMS-fälten har svenska hjälptexter.
 Redigeringen sker i GitHub eller Pages CMS, inte direkt på den publika webbplatsen.
+Nyhets- och graderingsartiklar kan varken skapas eller redigeras i Pages CMS.
+Arkivöversikter och lägersidor kan fortfarande redigeras under **Arkiv – äldre innehåll**.
+Använd **Kommande händelser** för nya inlägg och **Träningstider och avgifter**
+för aktuella graderingstider.
 Spara ändringen via en gren och ett ändringsförslag till `main`; en ansvarig
 person granskar och slår ihop det för publicering.
 

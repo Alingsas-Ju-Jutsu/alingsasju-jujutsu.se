@@ -137,45 +137,6 @@ content:
             type: object
             fields: *group_fields
 
-  - name: news
-    label: Nyheter
-    type: collection
-    path: _club_pages/nyheter
-    format: yaml-frontmatter
-    subfolders: true
-    filename: "{primary}/{primary}.md"
-    view:
-      fields: [title, date]
-      primary: title
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: &article_fields
-      - { name: title, label: Rubrik, type: string, required: true }
-      - { name: description, label: Kort sammanfattning, type: text, required: true }
-      - { name: date, label: Publiceringsdatum, type: date, required: true, options: { format: yyyy-MM-dd } }
-      - name: image_descriptions
-        label: Bildbeskrivningar (alt-text)
-        type: object
-        description: "Filnamn på bilden i samma mapp och dess beskrivning."
-      - { name: body, label: Text, type: rich-text }
-
-  - name: gradings
-    label: Graderingar
-    type: collection
-    path: _club_pages/graderingar
-    format: yaml-frontmatter
-    subfolders: true
-    view:
-      fields: [title, date]
-      primary: title
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *article_fields
-
   - name: pages
     label: Sidor
     type: group
@@ -222,22 +183,6 @@ content:
     label: Arkiv – äldre innehåll
     type: group
     items:
-      - name: archived_news
-        label: Arkiverade nyheter
-        type: collection
-        path: _club_pages/archive/nyheter
-        format: yaml-frontmatter
-        subfolders: true
-        operations: { create: false }
-        fields: *article_fields
-      - name: archived_gradings
-        label: Arkiverade graderingar
-        type: collection
-        path: _club_pages/archive/graderingar
-        format: yaml-frontmatter
-        subfolders: true
-        operations: { create: false }
-        fields: *article_fields
       - name: archived_pages
         label: Arkivöversikter och läger
         type: collection
